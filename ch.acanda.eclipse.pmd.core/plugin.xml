@@ -150,5 +150,19 @@
             verticalRulerPreferenceValue="true">
       </specification>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="ch.acanda.eclipse.pmd.preferences.PMDPreferencePage"
+            id="ch.acanda.eclipse.pmd.preferences.PMDPreferencePage"
+            name="PMD">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="ch.acanda.eclipse.pmd.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>
