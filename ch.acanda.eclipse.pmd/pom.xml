@@ -29,7 +29,7 @@
         <tycho-extras-version>${tycho-version}</tycho-extras-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
-        <eclipse-release>indigo</eclipse-release>
+        <eclipse-release>2019-06</eclipse-release>
         <lib-path>${basedir}/lib</lib-path>
         <mockito-version>3.3.3</mockito-version>
         <mockito-byte-buddy-version>1.10.5</mockito-byte-buddy-version>
@@ -195,7 +195,7 @@
         </profile>
 
         <profile>
-            <id>eclipse-indigo</id>
+            <id>eclipse-default</id>
             <activation>
                 <property>
                     <name>!eclipse-release</name>
@@ -203,234 +203,14 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>indigo</id>
+                    <id>2019-06</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/indigo/</url>
+                    <url>http://download.eclipse.org/releases/2019-06/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.2.1/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-juno</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>juno</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>juno</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/juno/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.3.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-kepler</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>kepler</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>kepler</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/kepler/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.3.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-luna</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>luna</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>luna</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/luna/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.3.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-mars</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>mars</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>mars</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/mars/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.3.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-neon</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>neon</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>neon</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/neon/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.3.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-oxygen</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>oxygen</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>oxygen</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/oxygen/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.6.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-photon</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>photon</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>photon</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/photon/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.7.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2018-09</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2018-09</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2018-09</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2018-09/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.7.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2018-12</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2018-12</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2018-12</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2018-12/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.7.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2019-03</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2019-03</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2019-03</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2019-03/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.7.0/</url>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/2.8.0/</url>
                 </repository>
             </repositories>
         </profile>

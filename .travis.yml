@@ -6,17 +6,6 @@ env:
   global:
     - MAVEN_OPTS="-Xmx512m"
   matrix:
-    - ECLIPSE_RELEASE="-PskipSWTBot"
-    - ECLIPSE_RELEASE="-Declipse-release=juno -PskipSWTBot"
-    - ECLIPSE_RELEASE="-Declipse-release=kepler -PskipSWTBot"
-    - ECLIPSE_RELEASE="-Declipse-release=luna"
-    - ECLIPSE_RELEASE="-Declipse-release=mars"
-    - ECLIPSE_RELEASE="-Declipse-release=neon"
-    - ECLIPSE_RELEASE="-Declipse-release=oxygen"
-    - ECLIPSE_RELEASE="-Declipse-release=photon"
-    - ECLIPSE_RELEASE="-Declipse-release=2018-09"
-    - ECLIPSE_RELEASE="-Declipse-release=2018-12"
-    - ECLIPSE_RELEASE="-Declipse-release=2019-03"
     - ECLIPSE_RELEASE="-Declipse-release=2019-06"
     - ECLIPSE_RELEASE="-Declipse-release=2019-09"
     - ECLIPSE_RELEASE="-Declipse-release=2019-12"

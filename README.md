@@ -6,7 +6,7 @@ Everytime you save your work, eclipse-pmd scans your source code and looks for p
 Where possible, eclipse-pmd offers quick fixes that automatically fix the problems. These quick fixes can be used to fix a single problem or all occurrences in your entire code base.
 
 ## How to get started
-You need Eclipse 3.7 or later and Java 7 or later to run eclipse-pmd. Please follow the instructions on [how to get started with eclipse-pmd](http://acanda.github.io/eclipse-pmd/getting-started.html) on the website.
+You need Eclipse 2019-06 or later and Java 7 or later to run eclipse-pmd. Please follow the instructions on [how to get started with eclipse-pmd](http://acanda.github.io/eclipse-pmd/getting-started.html) on the website.
 
 ## How to build and install eclipse-pmd
 Building eclipse-pmd is fairly easy. Please note, however, that building eclipse-pmd is not required if you are only interested in using it, since there is a pre-built version available in the Eclipse Marketplace.
@@ -22,7 +22,7 @@ You need the following tools:
 The first thing you need to do is to check out the source code.
 
 ```
-git clone https://github.com/acanda/eclipse-pmd.git
+git clone https://github.com/eclipse-pmd/eclipse-pmd.git
 cd eclipse-pmd
 ```
 
@@ -49,34 +49,11 @@ Once you have built the repository you can install eclipse-pmd by adding a new r
 From now on you can simply update Eclipse with `Help` > `Check for Updates` after you rebuilt eclipse-pmd.
 
 ### Testing against different Eclipse releases
-Building eclipse-pmd with `mvn clean verify` compiles and tests it against the oldest supported release of Eclipse which is Eclipse 3.7 Indigo. To ensure eclipse-pmd also works with newer releases the Eclipse release can be set with the parameter `eclipse-release`.
-
-Compile and test against Eclipse Juno: `mvn clean verify -Declipse-release=juno`
-
-Compile and test against Eclipse Kepler: `mvn clean verify -Declipse-release=kepler`
-
-Compile and test against Eclipse Luna: `mvn clean verify -Declipse-release=luna`
-
-Compile and test against Eclipse Mars: `mvn clean verify -Declipse-release=mars`
-
-Compile and test against Eclipse Neon: `mvn clean verify -Declipse-release=neon`
-
-Compile and test against Eclipse Oxygen: `mvn clean verify -Declipse-release=oxygen`
-
-Compile an test against Eclipse Photon: `mvn clean verify -Declipse-release=photon`
-
-Compile an test against Eclipse 2018-09: `mvn clean verify -Declipse-release=2018-09`
-
-Compile an test against Eclipse 2018-12: `mvn clean verify -Declipse-release=2018-12`
-
-Compile an test against Eclipse 2019-03: `mvn clean verify -Declipse-release=2019-03`
+Building eclipse-pmd with `mvn clean verify` compiles and tests it against the oldest supported release of Eclipse which is Eclipse 2019-06. To ensure eclipse-pmd also works with newer releases the Eclipse release can be set with the parameter `eclipse-release`.
 
 Compile an test against Eclipse 2019-06: `mvn clean verify -Declipse-release=2019-06`
-
 Compile an test against Eclipse 2019-09: `mvn clean verify -Declipse-release=2019-09`
-
 Compile an test against Eclipse 2019-12: `mvn clean verify -Declipse-release=2019-12`
-
 Compile an test against Eclipse 2020-03: `mvn clean verify -Declipse-release=2020-03`
 
 Regardless of the chosen release, the built plug-in will always be the same as the one built without the parameter. So there isn't any advantage in building the plug-in yourself if you are using a newer Eclipse release.
