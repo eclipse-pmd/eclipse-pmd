@@ -22,10 +22,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.MessageFormat;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IProject;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -238,7 +238,7 @@ class AddRuleSetConfigurationModel extends ViewModel {
                 referenceId = absoluteLocation.get().toString();
             } else {
                 final String msg = "The location {0} which resolves to {1} does not point to an existing file";
-                result.add(new ValidationProblem(LOCATION, Severity.ERROR, MessageFormat.format(msg, location, absoluteLocation)));
+                result.add(new ValidationProblem(LOCATION, Severity.ERROR, MessageFormat.format(msg, location, absoluteLocation.get())));
             }
         } else {
             final String msg = "The location {0} cannot be resolved";
@@ -262,7 +262,7 @@ class AddRuleSetConfigurationModel extends ViewModel {
         if (resolvedLocation.isPresent()) {
             return Optional.of(Paths.get(resolvedLocation.get()));
         }
-        return Optional.absent();
+        return Optional.empty();
     }
 
     private void validateName(final ValidationResult result) {

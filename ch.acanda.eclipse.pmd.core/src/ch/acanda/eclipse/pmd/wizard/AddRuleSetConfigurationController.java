@@ -12,6 +12,7 @@
 package ch.acanda.eclipse.pmd.wizard;
 
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
@@ -22,8 +23,6 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ISelectionStatusValidator;
-
-import com.google.common.base.Optional;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.domain.Location;
@@ -61,17 +60,11 @@ final class AddRuleSetConfigurationController {
             }
 
         } else if (model.isProjectTypeSelected()) {
-            final Optional<IResource> resource = browseContainer(shell, project);
-            if (resource.isPresent()) {
-                model.setLocation(getRelativePath(project, resource.get()));
-            }
+            browseContainer(shell, project).ifPresent(resource -> model.setLocation(getRelativePath(project, resource)));
 
         } else if (model.isWorkspaceTypeSelected()) {
-            final Optional<IResource> optionalResource = browseContainer(shell, project.getWorkspace().getRoot());
-            if (optionalResource.isPresent()) {
-                final IResource resource = optionalResource.get();
-                model.setLocation(resource.getProject().getName() + "/" + resource.getProjectRelativePath().toString());
-            }
+            browseContainer(shell, project.getWorkspace().getRoot()).ifPresent(
+                    resource -> model.setLocation(resource.getProject().getName() + "/" + resource.getProjectRelativePath().toString()));
 
         } else {
             throw new IllegalStateException();
@@ -105,7 +98,7 @@ final class AddRuleSetConfigurationController {
         if (dialog.open() == Window.OK) {
             return Optional.of((IResource) dialog.getFirstResult());
         }
-        return Optional.absent();
+        return Optional.empty();
     }
 
     private String getRelativePath(final IContainer container, final IResource resource) {

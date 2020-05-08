@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.jdt.core.JavaCore;
@@ -44,14 +45,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+
 import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 import ch.acanda.eclipse.pmd.marker.WrappingPMDMarker;
 import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
-
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 
 /**
  * Base class for testing quick fix tests based on {@link ASTQuickFix}. An extending class must provide a static method
@@ -67,10 +67,8 @@ import com.google.common.collect.Lists;
  *
  * The easiest way to implement this method is to use {@link QuickFixTestData#createTestData(InputStream)} and provide
  * an {@code InputStream} to an XML file containing all the test data. See {@link QuickFixTestData} for the format of
- * the XML file.
- *
- * See {@link ch.acanda.eclipse.pmd.java.resolution.codestyle.ExtendsObjectQuickFixTest ExtendsObjectQuickFixTest} for a
- * complete example.
+ * the XML file. See {@link ch.acanda.eclipse.pmd.java.resolution.codestyle.ExtendsObjectQuickFixTest
+ * ExtendsObjectQuickFixTest} for a complete example.
  *
  * @author Philip Graf
  * @param <T> The type of the quick fix.
@@ -91,7 +89,7 @@ public abstract class TextEditQuickFixTestCase<T extends ASTRewriteQuickFix<? ex
             final Type typeArgument = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
             final Class<T> quickFixClass = (Class<T>) typeArgument;
             final IMarker marker = mock(IMarker.class);
-            when(marker.getAttribute(eq("ruleName"), isA(String.class))).thenReturn(params.rulename.orNull());
+            when(marker.getAttribute(eq("ruleName"), isA(String.class))).thenReturn(params.rulename.orElse(null));
             final String markerText = params.source.substring(params.offset, params.offset + params.length);
             when(marker.getAttribute(eq("markerText"), isA(String.class))).thenReturn(markerText);
             return (ASTRewriteQuickFix<ASTNode>) quickFixClass.getConstructor(PMDMarker.class).newInstance(new WrappingPMDMarker(marker));

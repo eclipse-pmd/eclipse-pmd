@@ -13,6 +13,7 @@ package ch.acanda.eclipse.pmd.java.resolution.design;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -38,8 +39,6 @@ import ch.acanda.eclipse.pmd.java.resolution.Finders;
 import ch.acanda.eclipse.pmd.java.resolution.NodeFinder;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
-
-import com.google.common.base.Optional;
 
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/design.html#SingularField">SingularField</a>.
@@ -80,12 +79,11 @@ public final class SingularFieldQuickFix extends ASTQuickFix<VariableDeclaration
     protected boolean apply(final VariableDeclarationFragment node) {
         final String name = node.getName().getIdentifier();
         final AssignmentNodeFinder finder = new AssignmentNodeFinder(name);
-        final Optional<Assignment> assignment = finder.findNode(node.getParent().getParent());
-        if (assignment.isPresent()) {
-            replaceAssignment(node, assignment.get(), !finder.hasMoreThanOneAssignment());
+        return finder.findNode(node.getParent().getParent()).map(assignment -> {
+            replaceAssignment(node, assignment, !finder.hasMoreThanOneAssignment());
             updateFieldDeclaration(node);
-        }
-        return assignment.isPresent();
+            return true;
+        }).orElse(false);
     }
 
     /**
@@ -143,7 +141,7 @@ public final class SingularFieldQuickFix extends ASTQuickFix<VariableDeclaration
          * assignments are not valid search results.
          */
         private final Set<Block> shadowingBlocks = new HashSet<>();
-        private Optional<Assignment> searchResult = Optional.absent();
+        private Optional<Assignment> searchResult = Optional.empty();
         private boolean moreThanOneAssignment;
 
         AssignmentNodeFinder(final String fieldName) {

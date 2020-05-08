@@ -20,11 +20,16 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import net.sourceforge.pmd.RuleSets;
+import java.util.Optional;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.builder.LocationResolver;
@@ -37,13 +42,7 @@ import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
 import ch.acanda.eclipse.pmd.file.FileChangedListener;
 import ch.acanda.eclipse.pmd.file.FileWatcher;
 import ch.acanda.eclipse.pmd.file.Subscription;
-
-import com.google.common.base.Optional;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import net.sourceforge.pmd.RuleSets;
 
 /**
  * The rule set cache caches the PMD rule sets so they do not have to be rebuilt every time PMD is invoked.
@@ -116,7 +115,7 @@ public final class RuleSetsCache {
         try {
             fileWatcher = Optional.of(new FileWatcher());
         } catch (final IOException e) {
-            fileWatcher = Optional.absent();
+            fileWatcher = Optional.empty();
         }
         return fileWatcher;
     }

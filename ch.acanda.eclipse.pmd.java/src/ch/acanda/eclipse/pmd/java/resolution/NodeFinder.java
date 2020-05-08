@@ -11,15 +11,14 @@
 
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import org.eclipse.jdt.core.dom.ASTNode;
+import java.util.Optional;
 
-import com.google.common.base.Optional;
+import org.eclipse.jdt.core.dom.ASTNode;
 
 /**
  * Implementations of this interface are used to find a node of an AST which matches implementation specific criteria.
  *
  * @author Philip Graf
- *
  * @param R The type of the root node from which the AST will be traversed.
  * @param N The type of the node for which this finder is looking.
  */
