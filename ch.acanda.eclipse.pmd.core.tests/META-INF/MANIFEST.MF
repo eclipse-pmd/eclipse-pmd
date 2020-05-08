@@ -10,4 +10,5 @@ Bundle-ClassPath: .,
  lib/byte-buddy-1.10.5.jar,
  lib/byte-buddy-agent-1.10.5.jar,
  lib/objenesis-2.6.jar
-Require-Bundle: org.junit;bundle-version="4.8.2"
+Require-Bundle: org.junit;bundle-version="4.8.2",
+ javax.annotation

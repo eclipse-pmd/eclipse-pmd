@@ -62,7 +62,7 @@ public class GUITestCase {
     private static void openJavaPerspective(final SWTWorkbenchBot workbenchBot) {
         final SWTBotPerspective javaPerspective = workbenchBot.perspectiveById("org.eclipse.jdt.ui.JavaPerspective");
         if (!javaPerspective.isActive()) {
-            workbenchBot.menu("Window").menu("Open Perspective").menu("Java").click();
+            workbenchBot.menu("Window").menu("Perspective").menu("Open Perspective").menu("Java").click();
             workbenchBot.waitUntil(isPerspectiveActive(javaPerspective));
         }
     }

@@ -5,7 +5,8 @@ Bundle-SymbolicName: ch.acanda.eclipse.pmd.java.tests;singleton:=true
 Bundle-Version: 1.28.0.qualifier
 Bundle-Vendor: Philip Graf
 Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="1.28.0"
-Require-Bundle: org.junit;bundle-version="4.8.2"
+Require-Bundle: org.junit;bundle-version="4.8.2",
+ javax.annotation
 Bundle-ClassPath: .,
  lib/mockito-core-3.3.3.jar,
  lib/byte-buddy-1.10.5.jar,

@@ -47,6 +47,7 @@ public final class JavaProjectClient {
         newProjectDialogBot.button("Next >").click();
         newProjectDialogBot.textWithLabel("Project name:").setText(name);
         newProjectDialogBot.button("Finish").click();
+        bot.shell("New module-info.java").bot().button("Don't Create").click();
         bot.waitUntil(Conditions.shellCloses(dialog));
     }
 
