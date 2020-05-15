@@ -16,8 +16,6 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
 
 /**
  * Unit tests for {@link PMDPropertyPageController}.
- *
- * @author Philip Graf
  */
 public class PMDPropertyPageControllerTest {
 

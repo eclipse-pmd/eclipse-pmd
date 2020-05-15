@@ -24,8 +24,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href= "http://pmd.sourceforge.net/rules/java/migrating.html#ByteInstantiation" >ByteInstantiation</a>. It replaces
  * a Byte instantiation with a call to {@code Byte.valueOf(byte)}.
- *
- * @author Philip Graf
  */
 public class ByteInstantiationValueOfQuickFix extends ASTQuickFix<ClassInstanceCreation> {
 

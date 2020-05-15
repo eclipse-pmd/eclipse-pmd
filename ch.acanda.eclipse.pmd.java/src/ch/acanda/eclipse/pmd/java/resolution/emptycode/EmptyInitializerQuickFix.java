@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyInitializer" >EmptyInitializer</a>. It removes the
  * empty initializer.
- *
- * @author Philip Graf
  */
 public class EmptyInitializerQuickFix extends ASTQuickFix<Initializer> {
 

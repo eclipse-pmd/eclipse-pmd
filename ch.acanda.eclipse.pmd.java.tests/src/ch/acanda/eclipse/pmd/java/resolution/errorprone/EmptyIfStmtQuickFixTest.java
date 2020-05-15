@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.java.resolution.emptycode.EmptyIfStmtQuickFix;
 
 /**
  * Unit plug-in test for {@link EmptyIfStmtQuickFix}.
- *
- * @author Philip Graf
  */
 public class EmptyIfStmtQuickFixTest extends ASTQuickFixTestCase<EmptyIfStmtQuickFix> {
 

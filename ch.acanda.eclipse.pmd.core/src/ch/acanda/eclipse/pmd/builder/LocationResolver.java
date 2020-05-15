@@ -17,8 +17,6 @@ import ch.acanda.eclipse.pmd.domain.Location;
 
 /**
  * Utility class to resolve a {@link Location}.
- *
- * @author Philip Graf
  */
 public final class LocationResolver {
 

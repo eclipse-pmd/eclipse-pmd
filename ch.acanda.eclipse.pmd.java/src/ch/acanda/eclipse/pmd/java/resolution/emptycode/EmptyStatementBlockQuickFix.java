@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyStatementBlock" >EmptyStatementBlock</a>. It removes
  * the empty statement block.
- *
- * @author Philip Graf
  */
 public class EmptyStatementBlockQuickFix extends ASTQuickFix<Block> {
 

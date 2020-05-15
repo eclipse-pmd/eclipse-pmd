@@ -22,8 +22,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/design.html#EqualsNull">EqualsNull</a>. It
  * replaces {@code x.equals(null)} with {@code x == null}.
- *
- * @author Philip Graf
  */
 public class EqualsNullQuickFix extends ASTQuickFix<MethodInvocation> {
 

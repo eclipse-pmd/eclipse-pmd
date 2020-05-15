@@ -8,8 +8,6 @@ import org.osgi.framework.Version;
 /**
  * This property tester provides the information about the version of the current JVM. It is used to enable the
  * replacement for the PMD property page when the JVM requirements aren't fulfilled.
- *
- * @author Philip Graf
  */
 public class ProjectPropertyTester extends PropertyTester {
 

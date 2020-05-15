@@ -5,9 +5,6 @@ import java.util.List;
 
 import ch.acanda.eclipse.pmd.ui.model.ValidationProblem.Severity;
 
-/**
- * @author Philip Graf
- */
 public class ValidationResult {
 
     private final List<ValidationProblem> problems = new ArrayList<>();

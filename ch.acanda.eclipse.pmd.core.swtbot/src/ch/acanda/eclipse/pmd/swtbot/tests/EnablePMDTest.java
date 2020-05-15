@@ -14,8 +14,6 @@ import ch.acanda.eclipse.pmd.swtbot.client.JavaProjectClient;
 
 /**
  * Tests if PMD can be enabled and disabled using the PMD property dialog.
- *
- * @author Philip Graf
  */
 public final class EnablePMDTest extends GUITestCase {
 

@@ -20,8 +20,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/design.html#DefaultLabelNotLastInSwitchStmt">
  * DefaultLabelNotLastInSwitchStmt</a>. It moves the default case to the last position.
- *
- * @author Philip Graf
  */
 public class DefaultLabelNotLastInSwitchStmtQuickFix extends ASTQuickFix<SwitchStatement> {
 

@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.marker.PMDMarker;
 /**
  * Base class for a Java quick fix that uses {@code ASTRewrite} to modify the AST.
  *
- * @author Philip Graf
- *
  * @param <T> The type of AST node that will be passed to {@link #rewrite(ASTNode, ASTRewrite)}.
  */
 public abstract class ASTRewriteQuickFix<T extends ASTNode> extends JavaQuickFix<T> {

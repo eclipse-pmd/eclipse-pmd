@@ -29,8 +29,6 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 
 /**
  * Unit tests for {@link ProjectModelSerializer}.
- *
- * @author Philip Graf
  */
 public final class ProjectModelSerializerTest {
 

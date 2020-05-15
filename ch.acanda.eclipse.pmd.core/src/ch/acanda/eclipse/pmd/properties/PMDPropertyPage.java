@@ -21,8 +21,6 @@ import ch.acanda.eclipse.pmd.ui.util.SelectionAdapter;
 
 /**
  * PMD properties page for a project's property dialog.
- *
- * @author Philip Graf
  */
 public class PMDPropertyPage extends PropertyPage {
 

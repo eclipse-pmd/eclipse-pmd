@@ -6,8 +6,6 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
 
 /**
  * Provides the label and tool tip for the location column.
- *
- * @author Philip Graf
  */
 final class LocationLabelProvider extends RuleSetConfigurationLabelProvider {
 

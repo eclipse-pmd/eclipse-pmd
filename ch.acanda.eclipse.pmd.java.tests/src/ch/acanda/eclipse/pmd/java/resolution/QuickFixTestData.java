@@ -72,8 +72,6 @@ import org.xml.sax.SAXException;
  *     &lt;/test>
  * &lt;/tests>
  * </pre>
- *
- * @author Philip Graf
  */
 public class QuickFixTestData {
 

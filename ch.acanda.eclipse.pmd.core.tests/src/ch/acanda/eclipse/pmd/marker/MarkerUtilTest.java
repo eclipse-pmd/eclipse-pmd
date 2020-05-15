@@ -20,8 +20,6 @@ import org.junit.Test;
 
 /**
  * Unit tests for {@link MarkerUtil}.
- *
- * @author Philip Graf
  */
 public class MarkerUtilTest {
 

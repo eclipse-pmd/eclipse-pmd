@@ -18,9 +18,6 @@ import net.sourceforge.pmd.RuleSetReferenceId;
 import net.sourceforge.pmd.RuleSets;
 import net.sourceforge.pmd.RulesetsFactoryUtils;
 
-/**
- * @author Philip Graf
- */
 public class RuleSetsCacheLoader extends CacheLoader<String, RuleSets> {
 
     private final ProjectModelRepository repository = new ProjectModelRepository();

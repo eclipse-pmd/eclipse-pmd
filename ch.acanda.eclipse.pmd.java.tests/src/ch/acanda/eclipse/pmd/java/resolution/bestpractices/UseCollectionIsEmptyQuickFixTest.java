@@ -9,8 +9,6 @@ import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 
 /**
  * Unit plug-in test for {@link UseCollectionIsEmptyQuickFix}.
- *
- * @author Philip Graf
  */
 public class UseCollectionIsEmptyQuickFixTest extends ASTQuickFixTestCase<UseCollectionIsEmptyQuickFix> {
 

@@ -12,9 +12,6 @@ import org.eclipse.ui.internal.wizards.newresource.ResourceMessages;
 
 import ch.acanda.eclipse.pmd.swtbot.bot.PMDPropertyDialogBot;
 
-/**
- * @author Philip Graf
- */
 public final class JavaProjectClient {
 
     private JavaProjectClient() {

@@ -23,8 +23,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href=http://pmd.sourceforge.net/rules/java/migrating.html#IntegerInstantiation"
  * >IntegerInstantiation</a>. It replaces an Integer instantiation with a call to {@code Integer.valueOf(int)}.
- *
- * @author Philip Graf
  */
 public class IntegerInstantiationValueOfQuickFix extends ASTQuickFix<ClassInstanceCreation> {
 

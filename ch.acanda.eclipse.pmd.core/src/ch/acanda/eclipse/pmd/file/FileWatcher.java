@@ -20,8 +20,6 @@ import ch.acanda.eclipse.pmd.PMDPlugin;
 
 /**
  * Watches files and notifies registered listeners when they have changed.
- *
- * @author Philip Graf
  */
 public final class FileWatcher {
 

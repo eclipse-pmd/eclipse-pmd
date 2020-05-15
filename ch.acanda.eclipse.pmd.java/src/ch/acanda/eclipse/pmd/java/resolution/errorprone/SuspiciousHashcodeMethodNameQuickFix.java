@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/pmd-5.0.0/rules/java/naming.html#SuspiciousHashcodeMethodName"
  * >SuspiciousHashcodeMethodName</a>. It renames the method to {@code hashCode}.
- *
- * @author Philip Graf
  */
 public class SuspiciousHashcodeMethodNameQuickFix extends ASTQuickFix<MethodDeclaration> {
 

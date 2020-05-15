@@ -13,8 +13,6 @@ import ch.acanda.eclipse.pmd.marker.WrappingPMDMarker;
 
 /**
  * Creates resolutions for a Java PMD marker.
- *
- * @author Philip Graf
  */
 public class PMDMarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
 

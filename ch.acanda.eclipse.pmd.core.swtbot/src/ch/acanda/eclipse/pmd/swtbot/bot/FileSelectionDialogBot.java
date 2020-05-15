@@ -9,8 +9,6 @@ import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 /**
  * The {@link FileSelectionDialogBot} provides easy access to the
  * {@link ch.acanda.eclipse.pmd.ui.dialog.FileSelectionDialog FileSelectionDialog}'s widgets.
- *
- * @author Philip Graf
  */
 public final class FileSelectionDialogBot extends DialogBot {
 

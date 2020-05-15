@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptySynchronizedBlock" >EmptySynchronizedBlock</a>. It
  * removes the empty synchronized block.
- *
- * @author Philip Graf
  */
 public class EmptySynchronizedBlockQuickFix extends ASTQuickFix<SynchronizedStatement> {
 

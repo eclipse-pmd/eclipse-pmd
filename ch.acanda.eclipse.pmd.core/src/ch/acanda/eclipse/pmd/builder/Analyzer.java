@@ -27,8 +27,6 @@ import net.sourceforge.pmd.lang.ast.ParseException;
 
 /**
  * Analyzes files for coding problems, bugs and inefficient code, i.e. runs PMD.
- *
- * @author Philip Graf
  */
 public final class Analyzer {
 

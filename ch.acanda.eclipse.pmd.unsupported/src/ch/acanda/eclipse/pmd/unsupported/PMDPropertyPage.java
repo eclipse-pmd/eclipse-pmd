@@ -13,8 +13,6 @@ import org.eclipse.ui.dialogs.PropertyPage;
 
 /**
  * This property page is shown when the JVM does not meet the requirement of eclipse-pmd.
- *
- * @author Philip Graf
  */
 public class PMDPropertyPage extends PropertyPage {
 

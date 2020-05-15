@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyStatementNotInLoop" >EmptyStatementNotInLoop</a>. It
  * removes the empty statement.
- *
- * @author Philip Graf
  */
 public class EmptyStatementNotInLoopQuickFix extends ASTQuickFix<EmptyStatement> {
 

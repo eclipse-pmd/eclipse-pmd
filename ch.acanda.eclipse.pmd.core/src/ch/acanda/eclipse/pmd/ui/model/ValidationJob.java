@@ -8,8 +8,6 @@ import org.eclipse.ui.progress.UIJob;
 
 /**
  * Validates a {@link ViewModel} asynchronously.
- *
- * @author Philip Graf
  */
 final class ValidationJob extends Job {
 

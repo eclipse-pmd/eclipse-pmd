@@ -18,8 +18,6 @@ import ch.acanda.eclipse.pmd.domain.DomainModel.RemoveElementPropertyChangeEvent
 
 /**
  * Unit tests for {@link WorkspaceModel}.
- *
- * @author Philip Graf
  */
 public class WorkspaceModelTest {
 

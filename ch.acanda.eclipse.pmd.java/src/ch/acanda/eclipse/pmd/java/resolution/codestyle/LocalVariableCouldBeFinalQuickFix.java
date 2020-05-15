@@ -16,8 +16,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/optimization.html#LocalVariableCouldBeFinal">
  * LocalVariableCouldBeFinalQuickFix</a>. It adds the final modifier to the variable declaration.
- *
- * @author Philip Graf
  */
 public class LocalVariableCouldBeFinalQuickFix extends ASTQuickFix<VariableDeclarationStatement> {
 

@@ -14,8 +14,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyTryBlock" >EmptyTryBlock</a>.
  * It removes the empty try block including the catch and finally blocks.
- *
- * @author Philip Graf
  */
 public class EmptyTryBlockQuickFix extends ASTQuickFix<TryStatement> {
 

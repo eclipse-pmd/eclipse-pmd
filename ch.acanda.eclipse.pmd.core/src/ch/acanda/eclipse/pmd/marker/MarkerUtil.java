@@ -15,8 +15,6 @@ import net.sourceforge.pmd.RuleViolation;
 
 /**
  * Utility for creating, adding and removing PMD markers.
- *
- * @author Philip Graf
  */
 public final class MarkerUtil {
 

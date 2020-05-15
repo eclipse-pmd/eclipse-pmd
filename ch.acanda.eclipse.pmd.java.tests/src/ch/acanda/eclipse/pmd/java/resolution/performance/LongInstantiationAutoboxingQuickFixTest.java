@@ -9,8 +9,6 @@ import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 
 /**
  * Unit plug-in test for {@link LongInstantiationAutoboxingQuickFix}.
- *
- * @author Philip Graf
  */
 @SuppressWarnings("PMD.UseUtilityClass")
 public class LongInstantiationAutoboxingQuickFixTest extends ASTQuickFixTestCase<LongInstantiationAutoboxingQuickFix> {

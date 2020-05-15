@@ -36,8 +36,6 @@ import net.sourceforge.pmd.RulesetsFactoryUtils;
 
 /**
  * Unit tests for {@link Analyzer}.
- *
- * @author Philip Graf
  */
 public class AnalyzerTest {
 

@@ -12,8 +12,6 @@ import ch.acanda.eclipse.pmd.marker.MarkerUtil;
 
 /**
  * Project nature of projects that have PMD enabled.
- *
- * @author Philip Graf
  */
 public class PMDNature implements IProjectNature {
 

@@ -18,8 +18,6 @@ import ch.acanda.eclipse.pmd.domain.ProjectModel;
 /**
  * Repository for project models. This implementation stores the project models in configuration files named
  * {@code .eclipse-pmd} in the respective project's root folder.
- *
- * @author Philip Graf
  */
 public class ProjectModelRepository {
 

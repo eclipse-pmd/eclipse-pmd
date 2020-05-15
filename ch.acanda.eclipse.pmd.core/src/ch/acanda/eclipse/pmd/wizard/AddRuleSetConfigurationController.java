@@ -23,8 +23,6 @@ import net.sourceforge.pmd.RulesetsFactoryUtils;
 
 /**
  * Controller for the wizard to add a new rule set configuration.
- *
- * @author Philip Graf
  */
 final class AddRuleSetConfigurationController {
 

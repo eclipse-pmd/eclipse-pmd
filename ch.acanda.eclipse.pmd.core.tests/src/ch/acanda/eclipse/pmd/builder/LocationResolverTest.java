@@ -24,8 +24,6 @@ import ch.acanda.eclipse.pmd.domain.LocationContext;
 
 /**
  * Unit tests for {@code LocationResolver}.
- *
- * @author Philip Graf
  */
 public class LocationResolverTest {
 

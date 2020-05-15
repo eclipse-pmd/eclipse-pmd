@@ -6,8 +6,6 @@ import java.util.Set;
 
 /**
  * Base class for a view model.
- *
- * @author Philip Graf
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public abstract class ViewModel {

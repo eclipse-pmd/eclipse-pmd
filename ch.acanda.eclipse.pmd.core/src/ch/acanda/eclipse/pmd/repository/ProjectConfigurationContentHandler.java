@@ -22,7 +22,6 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 
 /**
  * @see ProjectModelSerializer
- * @author Philip Graf
  */
 final class ProjectConfigurationContentHandler extends DefaultHandler {
 

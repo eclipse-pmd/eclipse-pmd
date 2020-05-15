@@ -20,8 +20,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * <a href="http://pmd.sourceforge.net/rules/java/strings.html#StringToString">StringToString</a>. It removes the
  * <code>.toString()</code> from <code>"foo".toString()</code> if the expression is only a part of an statement. Removes
  * the expression completely if it is the whole statement.
- *
- * @author Philip Graf
  */
 public class StringToStringQuickFix extends ASTQuickFix<MethodInvocation> {
 

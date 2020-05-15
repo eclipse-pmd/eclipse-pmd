@@ -21,8 +21,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/design.html#UseVarargs">UseVarargs</a>. It
  * replaces {@code void foo(String[] args)} with {@code void foo(String... args)}.
- *
- * @author Philip Graf
  */
 public class UseVarargsQuickFix extends ASTQuickFix<SingleVariableDeclaration> {
 

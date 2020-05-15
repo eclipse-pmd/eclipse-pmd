@@ -9,8 +9,6 @@ import ch.acanda.eclipse.pmd.java.resolution.TextEditQuickFixTestCase;
 
 /**
  * Unit plug-in test for {@link UseUtilityClassQuickFix}.
- *
- * @author Philip Graf
  */
 public class UseUtilityClassQuickFixTest extends TextEditQuickFixTestCase<UseUtilityClassQuickFix> {
 

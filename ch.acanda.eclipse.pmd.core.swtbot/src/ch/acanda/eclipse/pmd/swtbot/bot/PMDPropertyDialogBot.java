@@ -11,8 +11,6 @@ import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 
 /**
  * The {@link PMDPropertyDialogBot} provides easy access to the {@link PMDPropertyDialog}'s widgets.
- *
- * @author Philip Graf
  */
 public class PMDPropertyDialogBot extends DialogBot {
 

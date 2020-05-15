@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.java.resolution.emptycode.EmptyStatementNotInLoopQu
 
 /**
  * Unit plug-in test for {@link EmptyStatementNotInLoopQuickFix}.
- *
- * @author Philip Graf
  */
 public class EmptyStatementNotInLoopQuickFixTest extends ASTQuickFixTestCase<EmptyStatementNotInLoopQuickFix> {
 

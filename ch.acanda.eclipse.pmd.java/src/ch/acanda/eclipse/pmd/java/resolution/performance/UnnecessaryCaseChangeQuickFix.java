@@ -23,8 +23,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * <a href="http://pmd.sourceforge.net/rules/java/strings.html#UnnecessaryCaseChange">UnnecessaryCaseChange</a>. It
  * replaces the <code>.toUpperCase().equals(...)</code> with <code>.equalsIgnoreCase(...)</code> and
  * <code>.toUpperCase().equalsIgnoreCase(...)</code> with <code>.equalsIgnoreCase(...)</code>.
- *
- * @author Philip Graf
  */
 public class UnnecessaryCaseChangeQuickFix extends ASTQuickFix<MethodInvocation> {
 

@@ -30,8 +30,6 @@ import ch.acanda.eclipse.pmd.wizard.AddRuleSetConfigurationWizard;
 
 /**
  * Controller for the PMD project property page.
- *
- * @author Philip Graf
  */
 final class PMDPropertyPageController {
 

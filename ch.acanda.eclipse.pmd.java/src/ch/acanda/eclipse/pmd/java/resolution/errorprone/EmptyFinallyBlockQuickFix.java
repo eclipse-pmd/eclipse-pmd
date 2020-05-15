@@ -21,8 +21,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyFinallyBlock" >EmptyFinallyBlock</a>. It removes the
  * empty finally block.
- *
- * @author Philip Graf
  */
 public class EmptyFinallyBlockQuickFix extends ASTQuickFix<TryStatement> {
 

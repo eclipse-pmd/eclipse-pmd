@@ -14,8 +14,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/optimizations.html#RedundantFieldInitializer">
  * RedundantFieldInitializer</a>. It removes the redundant field initializer.
- *
- * @author Philip Graf
  */
 public class RedundantFieldInitializerQuickFix extends ASTQuickFix<VariableDeclarationFragment> {
 

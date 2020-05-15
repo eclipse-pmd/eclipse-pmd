@@ -32,8 +32,6 @@ import net.sourceforge.pmd.RulesetsFactoryUtils;
 
 /**
  * View model for the wizard page to add a new file system rule set configuration.
- *
- * @author Philip Graf
  */
 class AddRuleSetConfigurationModel extends ViewModel {
 

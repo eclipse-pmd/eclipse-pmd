@@ -10,8 +10,6 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTableItem;
  * SWTBot.waitUntil(...)} and
  * {@link org.eclipse.swtbot.swt.finder.SWTBot#waitWhile(org.eclipse.swtbot.swt.finder.waits.ICondition)
  * SWTBot.waitWhile(...)}.
- *
- * @author Philip Graf
  */
 public final class Conditions {
 

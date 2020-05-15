@@ -22,8 +22,6 @@ import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 
 /**
  * Tests the PMD rule set functionality of the PMD property dialog.
- *
- * @author Philip Graf
  */
 public class AddRuleSetConfigurationModelTest {
 

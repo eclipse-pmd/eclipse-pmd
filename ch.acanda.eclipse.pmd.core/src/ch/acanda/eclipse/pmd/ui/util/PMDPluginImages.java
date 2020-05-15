@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.PMDPlugin;
 
 /**
  * Manages the resources of the PMD plug-in's images.
- *
- * @author Philip Graf
  */
 public class PMDPluginImages {
 

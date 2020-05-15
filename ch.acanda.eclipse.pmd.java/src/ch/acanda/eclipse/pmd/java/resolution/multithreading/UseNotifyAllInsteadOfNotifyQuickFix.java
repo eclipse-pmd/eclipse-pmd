@@ -18,8 +18,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule <a href=
  * "http://pmd.sourceforge.net/rules/java/design.html#UseNotifyAllInsteadOfNotify">UseNotifyAllInsteadOfNotify</a>. It
  * replaces {@code x.notify()} with {@code x.notifyAll()}.
- *
- * @author Philip Graf
  */
 public class UseNotifyAllInsteadOfNotifyQuickFix extends ASTQuickFix<MethodInvocation> {
 

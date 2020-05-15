@@ -22,8 +22,6 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
  * This function transforms a rule set configuration into an XML tag suitable as a child of the tag {@code rulesets}.
  *
  * @see ProjectModelSerializer
- *
- * @author Philip Graf
  */
 final class RuleSetConfigurationToXMLTag implements Function<RuleSetModel, String> {
 

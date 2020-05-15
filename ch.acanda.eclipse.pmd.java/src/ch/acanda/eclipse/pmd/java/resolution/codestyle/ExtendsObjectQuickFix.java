@@ -14,8 +14,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/basic.html#ExtendsObject">ExtendsObject</a>. It
  * simply removes the superclass from the type definition.
- *
- * @author Philip Graf
  */
 public class ExtendsObjectQuickFix extends ASTQuickFix<TypeDeclaration> {
 

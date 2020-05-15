@@ -18,8 +18,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/strings.html#AppendCharacterWithChar">AppendCharacterWithChar</a>. It
  * replaces <code>buffer.append("a")</code> with <code>buffer.append('a')</code>.
- *
- * @author Philip Graf
  */
 public class AppendCharacterWithCharQuickFix extends ASTQuickFix<StringLiteral> {
 

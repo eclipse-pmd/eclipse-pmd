@@ -5,8 +5,6 @@ import org.eclipse.jface.text.Position;
 
 /**
  * Static utility methods pertaining to {@link NodeFinder} instances.
- *
- * @author Philip Graf
  */
 public final class Finders {
 

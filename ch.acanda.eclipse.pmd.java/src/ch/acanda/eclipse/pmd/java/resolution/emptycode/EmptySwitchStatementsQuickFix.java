@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptySwitchStatements" >EmptySwitchStatements</a>. It
  * removes the empty switch statement.
- *
- * @author Philip Graf
  */
 public class EmptySwitchStatementsQuickFix extends ASTQuickFix<SwitchStatement> {
 

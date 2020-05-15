@@ -4,9 +4,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-/**
- * @author Philip Graf
- */
 public class DomainModel {
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);

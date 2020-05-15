@@ -10,9 +10,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-/**
- * @author Philip Graf
- */
 public class GUITestCase {
 
     private final SWTWorkbenchBot bot;

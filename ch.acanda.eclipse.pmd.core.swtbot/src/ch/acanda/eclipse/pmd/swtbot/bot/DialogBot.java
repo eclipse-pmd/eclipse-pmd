@@ -8,8 +8,6 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 
 /**
  * Provides easy access to standard widgets of a dialog, e.g. the OK or Cancel buttons.
- *
- * @author Philip Graf
  */
 public class DialogBot extends SWTBotShell {
 

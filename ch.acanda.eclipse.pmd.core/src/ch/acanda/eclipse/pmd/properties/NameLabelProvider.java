@@ -6,8 +6,6 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
 
 /**
  * Provides the label, image and tool tip for the name column.
- *
- * @author Philip Graf
  */
 final class NameLabelProvider extends RuleSetConfigurationLabelProvider {
 

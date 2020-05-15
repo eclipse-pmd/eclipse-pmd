@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.java.resolution.emptycode.EmptyWhileStmtQuickFix;
 
 /**
  * Unit plug-in test for {@link EmptyWhileStmtQuickFix}.
- *
- * @author Philip Graf
  */
 public class EmptyWhileStmtQuickFixTest extends ASTQuickFixTestCase<EmptyWhileStmtQuickFix> {
 

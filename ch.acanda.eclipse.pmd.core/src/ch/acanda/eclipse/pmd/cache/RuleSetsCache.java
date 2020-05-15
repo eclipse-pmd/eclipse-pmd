@@ -36,8 +36,6 @@ import net.sourceforge.pmd.RuleSets;
 
 /**
  * The rule set cache caches the PMD rule sets so they do not have to be rebuilt every time PMD is invoked.
- *
- * @author Philip Graf
  */
 public final class RuleSetsCache {
 

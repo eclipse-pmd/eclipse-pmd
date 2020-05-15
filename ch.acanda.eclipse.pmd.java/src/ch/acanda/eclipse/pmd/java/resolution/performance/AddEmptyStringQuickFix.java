@@ -25,8 +25,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/optimizations.html#AddEmptyString">AddEmptyString</a>. It replaces the
  * empty string in additive expressions like <code>"" + 123</code> with <code>String.valueOf(123)</code>.
- *
- * @author Philip Graf
  */
 public class AddEmptyStringQuickFix extends ASTQuickFix<InfixExpression> {
 

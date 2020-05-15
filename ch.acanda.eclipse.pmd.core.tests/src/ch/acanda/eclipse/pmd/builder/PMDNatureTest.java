@@ -17,8 +17,6 @@ import org.junit.Test;
 
 /**
  * Unit tests for {@link PMDNature}.
- *
- * @author Philip Graf
  */
 public class PMDNatureTest {
 

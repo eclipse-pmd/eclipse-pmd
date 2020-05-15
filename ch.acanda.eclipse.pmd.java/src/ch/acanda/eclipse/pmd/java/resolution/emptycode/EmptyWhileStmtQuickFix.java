@@ -14,8 +14,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyWhileStmt" >EmptyWhileStmt</a>.
  * It removes the empty while statement.
- *
- * @author Philip Graf
  */
 public class EmptyWhileStmtQuickFix extends ASTQuickFix<WhileStatement> {
 

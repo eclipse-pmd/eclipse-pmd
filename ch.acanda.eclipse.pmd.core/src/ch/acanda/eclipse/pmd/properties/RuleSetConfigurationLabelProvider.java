@@ -11,8 +11,6 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
 
 /**
  * Base class for the table's column label providers.
- *
- * @author Philip Graf
  */
 abstract class RuleSetConfigurationLabelProvider extends ColumnLabelProvider {
 

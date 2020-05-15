@@ -5,8 +5,6 @@ import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 
 /**
  * This condition tests if a perspective is checked.
- *
- * @author Philip Graf
  */
 public final class IsPerspectiveActive extends DefaultCondition {
 

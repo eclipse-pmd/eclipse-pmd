@@ -4,8 +4,6 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
 
 /**
  * Provides the label for the type column.
- *
- * @author Philip Graf
  */
 final class TypeLabelProvider extends RuleSetConfigurationLabelProvider {
 

@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.java.resolution.emptycode.EmptySwitchStatementsQuic
 
 /**
  * Unit plug-in test for {@link EmptySwitchStatementsQuickFix}.
- *
- * @author Philip Graf
  */
 public class EmptySwitchStatementsQuickFixTest extends ASTQuickFixTestCase<EmptySwitchStatementsQuickFix> {
 

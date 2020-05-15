@@ -8,8 +8,6 @@ import org.eclipse.jdt.core.dom.StructuralPropertyDescriptor;
 
 /**
  * Utilitites for manipulationg ASTs.
- *
- * @author Philip Graf
  */
 public final class ASTUtil {
 

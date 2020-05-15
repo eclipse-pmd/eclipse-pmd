@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.repository.ProjectModelRepository;
 
 /**
  * This listener watches the workspace for changes and updates the eclipse-pmd workspace model accordingly.
- *
- * @author Philip Graf
  */
 
 final class WorkspaceChangeListener implements IResourceChangeListener {

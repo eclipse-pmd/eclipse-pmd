@@ -5,8 +5,6 @@ import org.eclipse.core.runtime.CoreException;
 
 /**
  * Wrapper around an {@link IMarker} with convenience methods for accessing the attributes of a PMD marker.
- *
- * @author Philip Graf
  */
 public class WrappingPMDMarker implements PMDMarker {
 

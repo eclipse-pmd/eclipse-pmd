@@ -22,8 +22,6 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
 
 /**
  * Transforms the domain model to and from the PMD property page's view model.
- *
- * @author Philip Graf
  */
 public final class PMDPropertyPageModelTransformer {
 

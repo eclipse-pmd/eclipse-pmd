@@ -9,8 +9,6 @@ import org.junit.Test;
 
 /**
  * Unit tests for {@link ProjectPropertyTester}.
- *
- * @author Philip Graf
  */
 public class ProjectPropertyTesterTest {
 

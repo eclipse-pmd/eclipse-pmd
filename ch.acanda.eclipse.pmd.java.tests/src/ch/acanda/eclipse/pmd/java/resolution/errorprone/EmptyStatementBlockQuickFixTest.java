@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.java.resolution.emptycode.EmptyStatementBlockQuickF
 
 /**
  * Unit plug-in test for {@link EmptyStatementBlockQuickFix}.
- *
- * @author Philip Graf
  */
 public class EmptyStatementBlockQuickFixTest extends ASTQuickFixTestCase<EmptyStatementBlockQuickFix> {
 

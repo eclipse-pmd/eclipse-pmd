@@ -20,8 +20,6 @@ import com.google.common.cache.CacheLoader;
 
 /**
  * Unit tests for {@link RuleSetsCache}.
- *
- * @author Philip Graf
  */
 @SuppressWarnings("PMD.SignatureDeclareThrowsException")
 public final class RuleSetsCacheTest {

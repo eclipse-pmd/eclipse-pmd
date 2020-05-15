@@ -46,8 +46,6 @@ import net.sourceforge.pmd.lang.LanguageVersion;
 /**
  * Quick fixes usually depend on an exact location of a violation to be able to work correctly. This regression test
  * verifies that the range values of PMD violations (begin/end line, begin/end column) are as expected.
- *
- * @author Philip Graf
  */
 @RunWith(value = Parameterized.class)
 public class PMDIntegrationTest {

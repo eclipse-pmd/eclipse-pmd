@@ -22,8 +22,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/strings.html#UseIndexOfChar">UseIndexOfChar</a>. It replaces
  * <code>s.indexOf("a")</code> with <code>s.indexOf('a')</code>.
- *
- * @author Philip Graf
  */
 public class UseIndexOfCharQuickFix extends ASTQuickFix<MethodInvocation> {
 

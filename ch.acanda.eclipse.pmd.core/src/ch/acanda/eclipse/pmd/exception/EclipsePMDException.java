@@ -2,8 +2,6 @@ package ch.acanda.eclipse.pmd.exception;
 
 /**
  * {@code EclipsePMDException} is the superclass of all exceptions that can be thrown by the eclipse-pmd plugin.
- *
- * @author Philip Graf
  */
 public class EclipsePMDException extends RuntimeException {
 

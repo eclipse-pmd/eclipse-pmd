@@ -12,8 +12,6 @@ import net.sourceforge.pmd.RuleViolation;
 
 /**
  * Processes the rule violations found by a PMD analysis.
- *
- * @author Philip Graf
  */
 public class ViolationProcessor {
 

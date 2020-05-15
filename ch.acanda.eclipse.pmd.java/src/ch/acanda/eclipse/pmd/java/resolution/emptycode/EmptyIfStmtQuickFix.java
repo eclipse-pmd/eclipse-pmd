@@ -14,8 +14,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/empty.html#EmptyIfStmt" >EmptyIfStmt</a>. It
  * removes the empty if statement.
- *
- * @author Philip Graf
  */
 public class EmptyIfStmtQuickFix extends ASTQuickFix<IfStatement> {
 

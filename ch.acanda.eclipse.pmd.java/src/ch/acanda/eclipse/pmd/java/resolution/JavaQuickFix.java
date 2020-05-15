@@ -53,8 +53,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Base class for a Java quick fix.
  *
- * @author Philip Graf
- *
  * @param <T> The type of AST node that will be passed to {@link #apply(ASTNode)}.
  */
 public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerResolution {

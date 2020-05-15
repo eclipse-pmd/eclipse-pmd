@@ -22,8 +22,6 @@ import net.sourceforge.pmd.RuleSets;
 
 /**
  * Builder for PMD enabled projects.
- *
- * @author Philip Graf
  */
 public class PMDBuilder extends IncrementalProjectBuilder {
 

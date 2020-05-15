@@ -9,8 +9,6 @@ import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 
 /**
  * Unit plug-in test for {@link MethodArgumentCouldBeFinalQuickFix}.
- *
- * @author Philip Graf
  */
 public class MethodArgumentCouldBeFinalQuickFixTest extends ASTQuickFixTestCase<MethodArgumentCouldBeFinalQuickFix> {
 

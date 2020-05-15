@@ -32,8 +32,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href="http://pmd.sourceforge.net/rules/java/design.html#SingularField">SingularField</a>.
  * It replaces the field with a local variable.
- *
- * @author Philip Graf
  */
 public final class SingularFieldQuickFix extends ASTQuickFix<VariableDeclarationFragment> {
 

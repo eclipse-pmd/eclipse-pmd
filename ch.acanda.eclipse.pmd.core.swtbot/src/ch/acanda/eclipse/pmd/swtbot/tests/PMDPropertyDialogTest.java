@@ -27,8 +27,6 @@ import ch.acanda.eclipse.pmd.swtbot.client.JavaProjectClient;
 
 /**
  * Tests the PMD rule set functionality of the PMD property dialog.
- *
- * @author Philip Graf
  */
 public final class PMDPropertyDialogTest extends GUITestCase {
 

@@ -16,8 +16,6 @@ import ch.acanda.eclipse.pmd.ui.model.ViewModel;
 
 /**
  * View model for the {@link PMDPropertyPage}.
- *
- * @author Philip Graf
  */
 final class PMDPropertyPageViewModel extends ViewModel {
 

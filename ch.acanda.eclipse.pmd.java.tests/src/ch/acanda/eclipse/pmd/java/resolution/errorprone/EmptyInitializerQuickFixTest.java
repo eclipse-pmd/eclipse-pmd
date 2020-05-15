@@ -10,8 +10,6 @@ import ch.acanda.eclipse.pmd.java.resolution.emptycode.EmptyInitializerQuickFix;
 
 /**
  * Unit plug-in test for {@link EmptyInitializerQuickFix}.
- *
- * @author Philip Graf
  */
 public class EmptyInitializerQuickFixTest extends ASTQuickFixTestCase<EmptyInitializerQuickFix> {
 

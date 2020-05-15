@@ -21,8 +21,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 /**
  * Quick fix for the rule <a href=http://pmd.sourceforge.net/rules/java/migrating.html#IntegerInstantiation"
  * >IntegerInstantiation</a>. It replaces an Integer instantiation with autoboxing.
- *
- * @author Philip Graf
  */
 public class IntegerInstantiationAutoboxingQuickFix extends ASTQuickFix<ClassInstanceCreation> {
 

@@ -20,9 +20,6 @@ import org.hamcrest.Matcher;
 
 import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 
-/**
- * @author Philip Graf
- */
 public final class AddRuleSetConfigurationWizardBot extends SWTBotShell {
 
     public AddRuleSetConfigurationWizardBot(final Shell shell) throws WidgetNotFoundException {

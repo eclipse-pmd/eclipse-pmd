@@ -30,8 +30,6 @@ import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 
 /**
  * A composite containing a single checkbox table viewer showing the rule set configurations.
- *
- * @author Philip Graf
  */
 final class RuleSetConfigurationTable extends Composite {
 

@@ -23,8 +23,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/sunsecure.html#MethodReturnsInternalArray">MethodReturnsInternalArray</a>.
  * It replaces <code>return foo;</code> with <code>return foo.clone();</code>.
- *
- * @author Philip Graf
  */
 public class MethodReturnsInternalArrayQuickFix extends ASTQuickFix<ReturnStatement> {
 

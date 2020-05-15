@@ -8,8 +8,6 @@ import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 
 /**
  * Unit plug-in test for {@link SuppressWarningsQuickFix}.
- *
- * @author Philip Graf
  */
 public class SuppressWarningsQuickFixTest extends ASTQuickFixTestCase<SuppressWarningsQuickFix> {
 

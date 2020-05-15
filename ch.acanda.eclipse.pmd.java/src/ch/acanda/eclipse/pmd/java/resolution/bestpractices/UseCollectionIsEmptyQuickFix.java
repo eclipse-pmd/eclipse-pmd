@@ -22,8 +22,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/design.html#UseCollectionIsEmpty">UseCollectionIsEmpty</a>. It
  * replaces {@code x.size() == 0} with {@code x.isEmpty()}.
- *
- * @author Philip Graf
  */
 public class UseCollectionIsEmptyQuickFix extends ASTQuickFix<InfixExpression> {
 

@@ -15,8 +15,6 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for the rule
  * <a href="http://pmd.sourceforge.net/rules/java/unnecessary.html#UnnecessaryReturn">UnnecessaryReturn</a>. It removes
  * the return statement.
- *
- * @author Philip Graf
  */
 public class UnnecessaryReturnQuickFix extends ASTQuickFix<ReturnStatement> {
 

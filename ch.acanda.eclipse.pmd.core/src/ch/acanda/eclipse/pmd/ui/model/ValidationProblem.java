@@ -1,8 +1,5 @@
 package ch.acanda.eclipse.pmd.ui.model;
 
-/**
- * @author Philip Graf
- */
 public class ValidationProblem {
 
     private final String propertyName;

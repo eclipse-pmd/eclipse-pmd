@@ -9,8 +9,6 @@ import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 
 /**
  * Unit plug-in test for {@link IntegerInstantiationValueOfQuickFix}.
- *
- * @author Philip Graf
  */
 @SuppressWarnings("PMD.UseUtilityClass")
 public class IntegerInstantiationValueOfQuickFixTest extends ASTQuickFixTestCase<IntegerInstantiationValueOfQuickFix> {

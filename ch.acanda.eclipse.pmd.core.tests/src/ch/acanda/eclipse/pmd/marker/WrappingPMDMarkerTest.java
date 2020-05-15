@@ -17,8 +17,6 @@ import org.junit.Test;
 
 /**
  * Unit test for {@link WrappingPMDMarker}.
- *
- * @author Philip Graf
  */
 public class WrappingPMDMarkerTest {
 

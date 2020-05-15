@@ -16,9 +16,6 @@ import ch.acanda.eclipse.pmd.repository.ProjectModelRepository;
 import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 import net.sourceforge.pmd.lang.LanguageRegistry;
 
-/**
- * @author Philip Graf
- */
 public final class PMDPlugin extends AbstractUIPlugin {
 
     public static final String ID = "ch.acanda.eclipse.pmd.core";

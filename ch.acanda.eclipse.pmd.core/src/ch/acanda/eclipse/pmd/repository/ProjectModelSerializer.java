@@ -37,8 +37,6 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
  * </eclipse-pmd>
  * }
  * </pre>
- *
- * @author Philip Graf
  */
 public class ProjectModelSerializer {
 
