@@ -22,14 +22,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
-
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-import com.google.common.collect.ImmutableSet;
 
 import ch.acanda.eclipse.pmd.builder.LocationResolver;
 import ch.acanda.eclipse.pmd.domain.Location;
@@ -73,7 +71,7 @@ class AddRuleSetConfigurationModel extends ViewModel {
      * This property is derived from {@link #location}. If {@link #location} is valid this list contains the rules of
      * the selected rule set, otherwise it is empty. It is never {@code null}.
      */
-    private ImmutableList<Rule> rules = ImmutableList.of();
+    private List<Rule> rules = List.of();
 
     public AddRuleSetConfigurationModel(final IProject project) {
         this.project = project;
@@ -81,7 +79,11 @@ class AddRuleSetConfigurationModel extends ViewModel {
 
     @Override
     protected boolean updateDirty() {
-        return !(Strings.isNullOrEmpty(name) && Strings.isNullOrEmpty(location));
+        return !(isNullOrEmpty(name) && isNullOrEmpty(location));
+    }
+
+    private static boolean isNullOrEmpty(final String s) {
+        return s == null || s.isEmpty();
     }
 
     protected void reset() {
@@ -108,11 +110,11 @@ class AddRuleSetConfigurationModel extends ViewModel {
         setProperty(LOCATION, this.location, this.location = location);
     }
 
-    public ImmutableList<Rule> getRules() {
+    public List<Rule> getRules() {
         return rules;
     }
 
-    private void setRules(final ImmutableList<Rule> rules) {
+    private void setRules(final List<Rule> rules) {
         assert rules != null;
         setProperty(RULES, this.rules, this.rules = rules);
     }
@@ -166,8 +168,8 @@ class AddRuleSetConfigurationModel extends ViewModel {
     }
 
     @Override
-    protected ImmutableSet<String> createValidatedPropertiesSet() {
-        return ImmutableSet.of(LOCATION, NAME);
+    protected Set<String> createValidatedPropertiesSet() {
+        return Set.of(LOCATION, NAME);
     }
 
     @Override
@@ -182,7 +184,7 @@ class AddRuleSetConfigurationModel extends ViewModel {
      */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private void validateLocation(final String propertyName, final ValidationResult result) {
-        final Builder<Rule> rules = ImmutableList.builder();
+        final List<Rule> rules = new ArrayList<>();
         String ruleSetName = null;
         if (!errorIfBlank(LOCATION, location, "Please enter the location of the rule set configuration", result)) {
             RuleSet ruleSet = null;
@@ -207,7 +209,7 @@ class AddRuleSetConfigurationModel extends ViewModel {
             }
         }
         if (LOCATION.equals(propertyName)) {
-            setRules(rules.build());
+            setRules(rules);
             setName(ruleSetName == null ? "" : ruleSetName);
         }
     }

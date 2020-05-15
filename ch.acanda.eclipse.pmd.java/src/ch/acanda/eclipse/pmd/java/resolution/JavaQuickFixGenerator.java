@@ -11,12 +11,15 @@
 
 package ch.acanda.eclipse.pmd.java.resolution;
 
+import static java.util.Map.entry;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.eclipse.ui.IMarkerResolution;
 import org.osgi.framework.Version;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableListMultimap;
-import com.google.common.collect.ImmutableListMultimap.Builder;
 
 import ch.acanda.eclipse.pmd.exception.EclipsePMDException;
 import ch.acanda.eclipse.pmd.java.resolution.bestpractices.DefaultLabelNotLastInSwitchStmtQuickFix;
@@ -67,52 +70,52 @@ public final class JavaQuickFixGenerator {
     private static final Version JAVA_8 = new Version(1, 8, 0);
 
     @SuppressWarnings("unchecked")
-    private static final ImmutableListMultimap<String, Class<? extends IMarkerResolution>> QUICK_FIXES =
-            new Builder<String, Class<? extends IMarkerResolution>>()
-                    .putAll("java.best practices.DefaultLabelNotLastInSwitchStmt", DefaultLabelNotLastInSwitchStmtQuickFix.class)
-                    .putAll("java.best practices.MethodReturnsInternalArray", MethodReturnsInternalArrayQuickFix.class)
-                    .putAll("java.best practices.UseCollectionIsEmpty", UseCollectionIsEmptyQuickFix.class)
-                    .putAll("java.best practices.UseVarargs", UseVarargsQuickFix.class)
-                    .putAll("java.code style.ExtendsObject", ExtendsObjectQuickFix.class)
-                    .putAll("java.code style.LocalVariableCouldBeFinal", LocalVariableCouldBeFinalQuickFix.class)
-                    .putAll("java.code style.MethodArgumentCouldBeFinal", MethodArgumentCouldBeFinalQuickFix.class)
-                    .putAll("java.code style.UnnecessaryReturn", UnnecessaryReturnQuickFix.class)
-                    .putAll("java.design.SingularField", SingularFieldQuickFix.class)
-                    .putAll("java.design.UselessOverridingMethod", UselessOverridingMethodQuickFix.class)
-                    .putAll("java.design.UseUtilityClass", UseUtilityClassQuickFix.class)
-                    .putAll("java.error prone.EmptyFinallyBlock", EmptyFinallyBlockQuickFix.class)
-                    .putAll("java.error prone.EmptyIfStmt", EmptyIfStmtQuickFix.class)
-                    .putAll("java.error prone.EmptyInitializer", EmptyInitializerQuickFix.class)
-                    .putAll("java.error prone.EmptyStatementBlock", EmptyStatementBlockQuickFix.class)
-                    .putAll("java.error prone.EmptyStatementNotInLoop", EmptyStatementNotInLoopQuickFix.class)
-                    .putAll("java.error prone.EmptyStaticInitializer", EmptyStaticInitializerQuickFix.class)
-                    .putAll("java.error prone.EmptySwitchStatements", EmptySwitchStatementsQuickFix.class)
-                    .putAll("java.error prone.EmptySynchronizedBlock", EmptySynchronizedBlockQuickFix.class)
-                    .putAll("java.error prone.EmptyTryBlock", EmptyTryBlockQuickFix.class)
-                    .putAll("java.error prone.EmptyWhileStmt", EmptyWhileStmtQuickFix.class)
-                    .putAll("java.error prone.EqualsNull", EqualsNullQuickFix.class)
-                    .putAll("java.error prone.SuspiciousHashcodeMethodName", SuspiciousHashcodeMethodNameQuickFix.class)
-                    .putAll("java.multithreading.UseNotifyAllInsteadOfNotify", UseNotifyAllInsteadOfNotifyQuickFix.class)
-                    .putAll("java.performance.AddEmptyString", AddEmptyStringQuickFix.class)
-                    .putAll("java.performance.AppendCharacterWithChar", AppendCharacterWithCharQuickFix.class)
-                    .putAll("java.performance.ByteInstantiation",
+    private static final Map<String, List<? extends Class<? extends IMarkerResolution>>> QUICK_FIXES =
+            Map.ofEntries(
+                    entry("java.best practices.DefaultLabelNotLastInSwitchStmt", List.of(DefaultLabelNotLastInSwitchStmtQuickFix.class)),
+                    entry("java.best practices.MethodReturnsInternalArray", List.of(MethodReturnsInternalArrayQuickFix.class)),
+                    entry("java.best practices.UseCollectionIsEmpty", List.of(UseCollectionIsEmptyQuickFix.class)),
+                    entry("java.best practices.UseVarargs", List.of(UseVarargsQuickFix.class)),
+                    entry("java.code style.ExtendsObject", List.of(ExtendsObjectQuickFix.class)),
+                    entry("java.code style.LocalVariableCouldBeFinal", List.of(LocalVariableCouldBeFinalQuickFix.class)),
+                    entry("java.code style.MethodArgumentCouldBeFinal", List.of(MethodArgumentCouldBeFinalQuickFix.class)),
+                    entry("java.code style.UnnecessaryReturn", List.of(UnnecessaryReturnQuickFix.class)),
+                    entry("java.design.SingularField", List.of(SingularFieldQuickFix.class)),
+                    entry("java.design.UselessOverridingMethod", List.of(
+                            UselessOverridingMethodQuickFix.class)),
+                    entry("java.design.UseUtilityClass", List.of(UseUtilityClassQuickFix.class)),
+                    entry("java.error prone.EmptyFinallyBlock", List.of(EmptyFinallyBlockQuickFix.class)),
+                    entry("java.error prone.EmptyIfStmt", List.of(EmptyIfStmtQuickFix.class)),
+                    entry("java.error prone.EmptyInitializer", List.of(EmptyInitializerQuickFix.class)),
+                    entry("java.error prone.EmptyStatementBlock", List.of(EmptyStatementBlockQuickFix.class)),
+                    entry("java.error prone.EmptyStatementNotInLoop", List.of(EmptyStatementNotInLoopQuickFix.class)),
+                    entry("java.error prone.EmptyStaticInitializer", List.of(EmptyStaticInitializerQuickFix.class)),
+                    entry("java.error prone.EmptySwitchStatements", List.of(EmptySwitchStatementsQuickFix.class)),
+                    entry("java.error prone.EmptySynchronizedBlock", List.of(EmptySynchronizedBlockQuickFix.class)),
+                    entry("java.error prone.EmptyTryBlock", List.of(EmptyTryBlockQuickFix.class)),
+                    entry("java.error prone.EmptyWhileStmt", List.of(EmptyWhileStmtQuickFix.class)),
+                    entry("java.error prone.EqualsNull", List.of(EqualsNullQuickFix.class)),
+                    entry("java.error prone.SuspiciousHashcodeMethodName", List.of(SuspiciousHashcodeMethodNameQuickFix.class)),
+                    entry("java.multithreading.UseNotifyAllInsteadOfNotify", List.of(UseNotifyAllInsteadOfNotifyQuickFix.class)),
+                    entry("java.performance.AddEmptyString", List.of(AddEmptyStringQuickFix.class)),
+                    entry("java.performance.AppendCharacterWithChar", List.of(AppendCharacterWithCharQuickFix.class)),
+                    entry("java.performance.ByteInstantiation", List.of(
                             ByteInstantiationAutoboxingQuickFix.class,
-                            ByteInstantiationValueOfQuickFix.class)
-                    .putAll("java.performance.IntegerInstantiation",
+                            ByteInstantiationValueOfQuickFix.class)),
+                    entry("java.performance.IntegerInstantiation", List.of(
                             IntegerInstantiationAutoboxingQuickFix.class,
-                            IntegerInstantiationValueOfQuickFix.class)
-                    .putAll("java.performance.LongInstantiation",
+                            IntegerInstantiationValueOfQuickFix.class)),
+                    entry("java.performance.LongInstantiation", List.of(
                             LongInstantiationAutoboxingQuickFix.class,
-                            LongInstantiationValueOfQuickFix.class)
-                    .putAll("java.performance.RedundantFieldInitializer", RedundantFieldInitializerQuickFix.class)
-                    .putAll("java.performance.ShortInstantiation",
+                            LongInstantiationValueOfQuickFix.class)),
+                    entry("java.performance.RedundantFieldInitializer", List.of(RedundantFieldInitializerQuickFix.class)),
+                    entry("java.performance.ShortInstantiation", List.of(
                             ShortInstantiationAutoboxingQuickFix.class,
-                            ShortInstantiationValueOfQuickFix.class)
-                    .putAll("java.performance.SimplifyStartsWith", SimplifyStartsWithQuickFix.class)
-                    .putAll("java.performance.StringToString", StringToStringQuickFix.class)
-                    .putAll("java.performance.UnnecessaryCaseChange", UnnecessaryCaseChangeQuickFix.class)
-                    .putAll("java.performance.UseIndexOfChar", UseIndexOfCharQuickFix.class)
-                    .build();
+                            ShortInstantiationValueOfQuickFix.class)),
+                    entry("java.performance.SimplifyStartsWith", List.of(SimplifyStartsWithQuickFix.class)),
+                    entry("java.performance.StringToString", List.of(StringToStringQuickFix.class)),
+                    entry("java.performance.UnnecessaryCaseChange", List.of(UnnecessaryCaseChangeQuickFix.class)),
+                    entry("java.performance.UseIndexOfChar", List.of(UseIndexOfCharQuickFix.class)));
 
     public boolean hasQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
         if (context.getCompilerCompliance().compareTo(JAVA_5) >= 0) {
@@ -122,21 +125,25 @@ public final class JavaQuickFixGenerator {
         return QUICK_FIXES.containsKey(marker.getRuleId());
     }
 
-    public ImmutableList<IMarkerResolution> getQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
-        final ImmutableList.Builder<IMarkerResolution> quickFixes = ImmutableList.builder();
-        if (context.getCompilerCompliance().compareTo(JAVA_8) < 0) {
-            for (final Class<? extends IMarkerResolution> quickFixClass : QUICK_FIXES.get(marker.getRuleId())) {
-                quickFixes.add(createInstanceOf(quickFixClass, marker));
-            }
-        }
-        if (context.getCompilerCompliance().compareTo(JAVA_5) >= 0) {
-            quickFixes.add(new SuppressWarningsQuickFix(marker));
-        }
-        return quickFixes.build();
+    public List<? extends IMarkerResolution> getQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
+        return Stream.concat(getRuleQuickFixes(marker, context), getSuppressWarningsQuickFix(marker, context)).collect(Collectors.toList());
     }
 
-    private IMarkerResolution createInstanceOf(final Class<? extends IMarkerResolution> quickFixClass,
-            final PMDMarker marker) {
+    private static Stream<IMarkerResolution> getRuleQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
+        if (context.getCompilerCompliance().compareTo(JAVA_8) >= 0) {
+            return Stream.empty();
+        }
+        return QUICK_FIXES.get(marker.getRuleId()).stream().map(quickFixClass -> createInstanceOf(quickFixClass, marker));
+    }
+
+    private static Stream<IMarkerResolution> getSuppressWarningsQuickFix(final PMDMarker marker, final JavaQuickFixContext context) {
+        if (context.getCompilerCompliance().compareTo(JAVA_5) < 0) {
+            return Stream.empty();
+        }
+        return Stream.of(new SuppressWarningsQuickFix(marker));
+    }
+
+    private static IMarkerResolution createInstanceOf(final Class<? extends IMarkerResolution> quickFixClass, final PMDMarker marker) {
         try {
             return quickFixClass.getConstructor(PMDMarker.class).newInstance(marker);
         } catch (SecurityException | ReflectiveOperationException e) {

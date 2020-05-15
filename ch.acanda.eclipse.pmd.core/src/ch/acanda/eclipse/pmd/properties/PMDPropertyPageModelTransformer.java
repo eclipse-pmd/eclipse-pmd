@@ -15,7 +15,13 @@ import static ch.acanda.eclipse.pmd.domain.LocationContext.FILE_SYSTEM;
 import static ch.acanda.eclipse.pmd.domain.LocationContext.PROJECT;
 import static ch.acanda.eclipse.pmd.domain.LocationContext.REMOTE;
 import static ch.acanda.eclipse.pmd.domain.LocationContext.WORKSPACE;
-import static com.google.common.collect.Iterables.transform;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 
@@ -24,9 +30,6 @@ import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewModel;
-
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableBiMap;
 
 /**
  * Transforms the domain model to and from the PMD property page's view model.
@@ -39,20 +42,14 @@ public final class PMDPropertyPageModelTransformer {
      * Maps a location context to a label of a rule set type and vice versa. The label is used as the value shown in the
      * "Type" column of the table in the PMD property page.
      */
-    private static final ImmutableBiMap<LocationContext, String> CONTEXT_TYPE_MAP = ImmutableBiMap.of(WORKSPACE, "Workspace",
+    private static final Map<LocationContext, String> CONTEXT_TYPE_MAP = Map.of(WORKSPACE,
+            "Workspace",
             PROJECT, "Project",
             FILE_SYSTEM, "File System",
             REMOTE, "Remote");
 
-    /**
-     * Transforms a rule set view model to a rule set domain model.
-     */
-    private static final Function<RuleSetViewModel, RuleSetModel> TO_RULESETMODEL = new Function<RuleSetViewModel, RuleSetModel>() {
-        @Override
-        public RuleSetModel apply(final RuleSetViewModel viewModel) {
-            return toDomainModel(viewModel);
-        }
-    };
+    private static final Map<String, LocationContext> TYPE_CONTEXT_MAP = CONTEXT_TYPE_MAP.entrySet().stream()
+            .collect(Collectors.toMap(e -> e.getValue(), e -> e.getKey()));
 
     private PMDPropertyPageModelTransformer() {
         // hide constructor of utility class
@@ -62,13 +59,8 @@ public final class PMDPropertyPageModelTransformer {
      * Returns an iterable transforming a rule set domain model to a rule set view model on demand, i.e. the returned
      * iterable is a view on the supplied iterable.
      */
-    public static Iterable<RuleSetViewModel> toViewModels(final Iterable<RuleSetModel> domainModels, final IProject project) {
-        return transform(domainModels, new Function<RuleSetModel, RuleSetViewModel>() {
-            @Override
-            public RuleSetViewModel apply(final RuleSetModel domainModel) {
-                return toViewModel(domainModel, project);
-            }
-        });
+    public static Set<? extends RuleSetViewModel> toViewModels(final SortedSet<RuleSetModel> domainModels, final IProject project) {
+        return domainModels.stream().map(model -> toViewModel(model, project)).collect(Collectors.toSet());
     }
 
     /**
@@ -84,11 +76,10 @@ public final class PMDPropertyPageModelTransformer {
     }
 
     /**
-     * Returns an iterable transforming a rule set view model to a rule set domain model on demand, i.e. the returned
-     * iterable is a view on the supplied iterable.
+     * Returns an iterable transforming a rule set view model to a rule set domain model.
      */
-    public static Iterable<RuleSetModel> toDomainModels(final Iterable<RuleSetViewModel> viewModels) {
-        return transform(viewModels, TO_RULESETMODEL);
+    public static List<? extends RuleSetModel> toDomainModels(final Collection<? extends RuleSetViewModel> viewModels) {
+        return viewModels.stream().map(vm -> toDomainModel(vm)).collect(Collectors.toList());
     }
 
     /**
@@ -97,7 +88,8 @@ public final class PMDPropertyPageModelTransformer {
     public static RuleSetModel toDomainModel(final RuleSetViewModel viewModel) {
         final String name = viewModel.getName();
         final String path = viewModel.getLocation();
-        final LocationContext context = CONTEXT_TYPE_MAP.inverse().get(viewModel.getType());
+        final LocationContext context = TYPE_CONTEXT_MAP.get(viewModel.getType());
         return new RuleSetModel(name, new Location(path, context));
     }
+
 }

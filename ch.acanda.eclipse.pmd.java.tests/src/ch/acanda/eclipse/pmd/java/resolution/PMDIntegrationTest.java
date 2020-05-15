@@ -11,7 +11,7 @@
 
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,10 +36,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.osgi.framework.Version;
-
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 
 import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 import ch.acanda.eclipse.pmd.marker.MarkerUtil;
@@ -66,8 +63,8 @@ import net.sourceforge.pmd.lang.LanguageVersion;
 @RunWith(value = Parameterized.class)
 public class PMDIntegrationTest {
 
-    private static final ImmutableCollection<String> TEST_DATA_XML = ImmutableList.of(
-            "bestpractices/DefaultLabelNotLastInSwitchStmt.xml",
+    private static final List<String> TEST_DATA_XML = List
+            .of("bestpractices/DefaultLabelNotLastInSwitchStmt.xml",
             "bestpractices/MethodReturnsInternalArray.xml",
             "bestpractices/UseCollectionIsEmpty.xml",
             "bestpractices/UseVarargs.xml",
@@ -116,29 +113,26 @@ public class PMDIntegrationTest {
     }
 
     @Parameters
-    public static Collection<Object[]> getTestData() {
-        final Builder<Object[]> testData = ImmutableList.builder();
+    public static List<Object[]> getTestData() {
         for (final String tests : TEST_DATA_XML) {
             try (InputStream stream = QuickFixTestData.class.getResourceAsStream(tests)) {
                 assertNotNull("Test data file " + tests + " not found.", stream);
                 final Collection<TestParameters> data = QuickFixTestData.createTestData(stream);
-                for (final TestParameters params : data) {
-                    testData.add(new Object[] { tests, params });
-                }
+                return data.stream().map(params -> new Object[] { tests, params }).collect(toList());
             } catch (final IOException e) {
                 fail(e.getMessage());
             }
         }
-        return testData.build();
+        return List.of();
     }
 
     @Test
     public void violationRangeAndRuleId() throws IOException, RuleSetNotFoundException, PMDException {
-        checkState(params.language.isPresent(), "%s: language is missing", testDataXml);
-        checkState(params.pmdReferenceId.isPresent(), "%s: pmdReferenceId is missing", testDataXml);
+        assertTrue(testDataXml + ": language is missing", params.language.isPresent());
+        assertTrue(testDataXml + ": pmdReferenceId is missing", params.pmdReferenceId.isPresent());
 
         final Matcher languageMatcher = Pattern.compile("(.*)\\s+(\\d+[\\.\\d]+)").matcher(params.language.get());
-        checkState(languageMatcher.matches(), "%s: language must be formated '<terse-name> <version>'", testDataXml);
+        assertTrue(testDataXml + ": language must be formated '<terse-name> <version>'", languageMatcher.matches());
 
         final Language language = LanguageRegistry.findLanguageByTerseName(languageMatcher.group(1));
         if (language == null) {

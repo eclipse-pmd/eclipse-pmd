@@ -29,15 +29,12 @@ import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.Position;
 
+import ch.acanda.eclipse.pmd.java.resolution.ASTRewriteQuickFix;
 import ch.acanda.eclipse.pmd.java.resolution.ASTUtil;
 import ch.acanda.eclipse.pmd.java.resolution.Finders;
 import ch.acanda.eclipse.pmd.java.resolution.NodeFinder;
-import ch.acanda.eclipse.pmd.java.resolution.ASTRewriteQuickFix;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * Quick fix for the rule
@@ -84,8 +81,9 @@ public final class UseUtilityClassQuickFix extends ASTRewriteQuickFix<TypeDeclar
 
     private void addFinalIfNecessary(final TypeDeclaration typeDeclaration, final ASTRewrite rewrite) {
         @SuppressWarnings("unchecked")
-        final List<IExtendedModifier> modifiers = typeDeclaration.modifiers();
-        if (!Iterables.any(modifiers, isFinal())) {
+        final boolean containsFinal = typeDeclaration.modifiers().stream()
+                .anyMatch(mod -> ((IExtendedModifier) mod).isModifier() && ((Modifier) mod).isFinal());
+        if (!containsFinal) {
             final ListRewrite modifierRewrite = rewrite.getListRewrite(typeDeclaration, TypeDeclaration.MODIFIERS2_PROPERTY);
             final Modifier modifier = (Modifier) typeDeclaration.getAST().createInstance(Modifier.class);
             modifier.setKeyword(ModifierKeyword.FINAL_KEYWORD);
@@ -115,15 +113,6 @@ public final class UseUtilityClassQuickFix extends ASTRewriteQuickFix<TypeDeclar
         final int position = findConstructorPosition(typeDeclaration);
         final ListRewrite bodyDeclarationRewrite = rewrite.getListRewrite(typeDeclaration, TypeDeclaration.BODY_DECLARATIONS_PROPERTY);
         bodyDeclarationRewrite.insertAt(constructor, position, null);
-    }
-
-    private Predicate<? super IExtendedModifier> isFinal() {
-        return new Predicate<IExtendedModifier>() {
-            @Override
-            public boolean apply(final IExtendedModifier modifier) {
-                return modifier.isModifier() && ((Modifier) modifier).isFinal();
-            }
-        };
     }
 
     /**

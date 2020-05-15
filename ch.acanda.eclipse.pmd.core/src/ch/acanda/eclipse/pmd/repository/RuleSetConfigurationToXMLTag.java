@@ -22,12 +22,12 @@ import static ch.acanda.eclipse.pmd.repository.ProjectModelSerializer.TAG_NAME_R
 import static com.google.common.base.Strings.nullToEmpty;
 
 import java.util.Locale;
+import java.util.function.Function;
 
-import ch.acanda.eclipse.pmd.domain.RuleSetModel;
-
-import com.google.common.base.Function;
 import com.google.common.escape.Escaper;
 import com.google.common.xml.XmlEscapers;
+
+import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 
 /**
  * This function transforms a rule set configuration into an XML tag suitable as a child of the tag {@code rulesets}.
@@ -68,4 +68,5 @@ final class RuleSetConfigurationToXMLTag implements Function<RuleSetModel, Strin
         }
         return value;
     }
+
 }

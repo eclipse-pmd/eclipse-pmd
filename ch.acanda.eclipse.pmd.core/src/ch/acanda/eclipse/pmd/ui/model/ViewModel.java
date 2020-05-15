@@ -13,8 +13,7 @@ package ch.acanda.eclipse.pmd.ui.model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
-import com.google.common.collect.ImmutableSet;
+import java.util.Set;
 
 /**
  * Base class for a view model.
@@ -28,7 +27,7 @@ public abstract class ViewModel {
     public static final String VALID_PROPERTY = "valid";
 
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    private ImmutableSet<String> validatedProperties;
+    private Set<String> validatedProperties;
     private boolean isDirty;
     private boolean isValid;
     private ValidationResult validationResult;
@@ -88,7 +87,7 @@ public abstract class ViewModel {
      *
      * @return An immutable set of the names of validated properties.
      */
-    protected abstract ImmutableSet<String> createValidatedPropertiesSet();
+    protected abstract Set<String> createValidatedPropertiesSet();
 
     public boolean isValid() {
         return isValid;

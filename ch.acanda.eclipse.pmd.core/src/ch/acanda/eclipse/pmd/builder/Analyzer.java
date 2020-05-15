@@ -13,17 +13,16 @@ package ch.acanda.eclipse.pmd.builder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.xml.sax.SAXParseException;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import net.sourceforge.pmd.PMD;
@@ -44,16 +43,9 @@ import net.sourceforge.pmd.lang.ast.ParseException;
  */
 public final class Analyzer {
 
-    private static final ImmutableMap<String, Language> LANGUAGES;
-    static {
-        final Map<String, Language> languages = new HashMap<>();
-        for (final Language language : LanguageRegistry.getLanguages()) {
-            for (final String extension : language.getExtensions()) {
-                languages.put(extension, language);
-            }
-        }
-        LANGUAGES = ImmutableMap.copyOf(languages);
-    }
+    private static final Map<String, Language> LANGUAGES = LanguageRegistry.getLanguages().stream()
+            .flatMap(language -> language.getExtensions().stream().map(extension -> Map.entry(extension, language)))
+            .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 
     /**
      * Analyzes a single file.
@@ -78,7 +70,7 @@ public final class Analyzer {
                         context.setLanguageVersion(language.getDefaultVersion());
                         context.setIgnoreExceptions(false);
                         new SourceCodeProcessor(configuration).processSourceCode(reader, ruleSets, context);
-                        return ImmutableList.copyOf(context.getReport().iterator());
+                        return () -> context.getReport().iterator();
                     }
                 }
             }
@@ -91,7 +83,7 @@ public final class Analyzer {
                 PMDPlugin.getDefault().warn("Could not run PMD on file " + file.getRawLocation(), e);
             }
         }
-        return ImmutableList.<RuleViolation>of();
+        return List.of();
     }
 
     private void annotateFile(final IFile file, final ViolationProcessor violationProcessor, final Iterable<RuleViolation> violations) {

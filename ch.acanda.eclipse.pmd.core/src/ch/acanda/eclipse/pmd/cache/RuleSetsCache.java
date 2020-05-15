@@ -20,6 +20,10 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.core.resources.IProject;
@@ -28,8 +32,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.builder.LocationResolver;
@@ -37,7 +39,6 @@ import ch.acanda.eclipse.pmd.domain.DomainModel.AddElementPropertyChangeEvent;
 import ch.acanda.eclipse.pmd.domain.DomainModel.RemoveElementPropertyChangeEvent;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
-import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
 import ch.acanda.eclipse.pmd.file.FileChangedListener;
 import ch.acanda.eclipse.pmd.file.FileWatcher;
@@ -60,7 +61,7 @@ public final class RuleSetsCache {
 
     private final Optional<FileWatcher> fileWatcher;
 
-    private final Multimap<String, Subscription> subscriptions = HashMultimap.create();
+    private final Map<String, List<Subscription>> subscriptions = new HashMap<>();
 
     public RuleSetsCache(final CacheLoader<String, RuleSets> loader, final WorkspaceModel workspaceModel) {
         // by expiring the rule sets we make sure to notice changes in remote configurations
@@ -79,29 +80,27 @@ public final class RuleSetsCache {
         if (fileWatcher.isPresent() && projectModel.isPMDEnabled()) {
             final FileChangedListener listener = new RuleSetFileListener(projectModel);
             final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectModel.getProjectName());
+            projectModel.getRuleSets().stream()
+                    .filter(rs -> rs.getLocation().getContext() != LocationContext.REMOTE)
+                    .flatMap(rs -> LocationResolver.resolveIfExists(rs.getLocation(), project).stream())
+                    .forEach(location -> startWatchingRuleSetFile(projectModel.getProjectName(), Paths.get(location), listener));
+        }
+    }
 
-            for (final RuleSetModel ruleSetModel : projectModel.getRuleSets()) {
-                if (ruleSetModel.getLocation().getContext() != LocationContext.REMOTE) {
-                    final Optional<String> resolvedLocation = LocationResolver.resolveIfExists(ruleSetModel.getLocation(), project);
-                    if (resolvedLocation.isPresent()) {
-                        final Path file = Paths.get(resolvedLocation.get());
-                        try {
-                            final Subscription subscription = fileWatcher.get().subscribe(file, listener);
-                            subscriptions.put(projectModel.getProjectName(), subscription);
-                        } catch (final IOException e) {
-                            final String msg = "Cannot watch rule set file %s. "
-                                    + "Changes to this file will not be picked up for up to an hour.";
-                            PMDPlugin.getDefault().warn(String.format(msg, file.toAbsolutePath()), e);
-                        }
-                    }
-                }
-            }
+    private void startWatchingRuleSetFile(final String projectName, final Path file, final FileChangedListener listener) {
+        try {
+            final Subscription subscription = fileWatcher.get().subscribe(file, listener);
+            subscriptions.computeIfAbsent(projectName, name -> new ArrayList<>()).add(subscription);
+        } catch (final IOException e) {
+            final String msg = "Cannot watch rule set file %s. Changes to this file will not be picked up for up to an hour.";
+            PMDPlugin.getDefault().warn(String.format(msg, file.toAbsolutePath()), e);
         }
     }
 
     private void stopWatchingRuleSetFiles(final ProjectModel projectModel) {
-        for (final Subscription subscription : subscriptions.removeAll(projectModel.getProjectName())) {
-            subscription.cancel();
+        final List<Subscription> list = subscriptions.remove(projectModel.getProjectName());
+        if (list != null) {
+            list.forEach(Subscription::cancel);
         }
     }
 

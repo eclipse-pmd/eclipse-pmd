@@ -11,21 +11,18 @@
 
 package ch.acanda.eclipse.pmd.repository;
 
-import static com.google.common.collect.Iterables.transform;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.function.Function;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
-
-import com.google.common.base.Function;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
@@ -86,9 +83,7 @@ public class ProjectModelSerializer {
         writer.format("  <%s %s=\"%b\" />\n", TAG_NAME_ANALYSIS, ATTRIBUTE_NAME_ENABLED, model.isPMDEnabled());
         if (!model.getRuleSets().isEmpty()) {
             writer.format("  <%s>\n", TAG_NAME_RULESETS);
-            for (final String tag : transform(model.getRuleSets(), TO_XML_TAGS)) {
-                writer.append("    ").append(tag).append('\n');
-            }
+            model.getRuleSets().stream().map(TO_XML_TAGS).forEachOrdered(tag -> writer.append("    ").append(tag).append('\n'));
             writer.format("  </%s>\n", TAG_NAME_RULESETS);
         }
         writer.format("</%s>", TAG_NAME_ECLIPSE_PMD);

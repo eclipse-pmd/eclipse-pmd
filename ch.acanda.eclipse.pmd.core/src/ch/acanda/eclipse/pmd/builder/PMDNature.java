@@ -11,15 +11,13 @@
 
 package ch.acanda.eclipse.pmd.builder;
 
-import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
-
-import com.google.common.collect.Lists;
 
 import ch.acanda.eclipse.pmd.marker.MarkerUtil;
 
@@ -87,9 +85,7 @@ public class PMDNature implements IProjectNature {
     public static void addTo(final IProject project) throws CoreException {
         if (!project.hasNature(ID)) {
             final IProjectDescription description = project.getDescription();
-            final ArrayList<String> natureIds = Lists.newArrayList(description.getNatureIds());
-            natureIds.add(ID);
-            description.setNatureIds(natureIds.toArray(new String[0]));
+            description.setNatureIds(Stream.concat(Stream.of(description.getNatureIds()), Stream.of(ID)).toArray(String[]::new));
             project.setDescription(description, null);
             MarkerUtil.removeAllMarkers(project);
         }
@@ -101,9 +97,7 @@ public class PMDNature implements IProjectNature {
     public static void removeFrom(final IProject project) throws CoreException {
         if (project.hasNature(ID)) {
             final IProjectDescription description = project.getDescription();
-            final ArrayList<String> natureIds = Lists.newArrayList(description.getNatureIds());
-            natureIds.remove(ID);
-            description.setNatureIds(natureIds.toArray(new String[0]));
+            description.setNatureIds(Stream.of(description.getNatureIds()).filter(id -> !ID.equals(id)).toArray(String[]::new));
             project.setDescription(description, null);
             MarkerUtil.removeAllMarkers(project);
         }

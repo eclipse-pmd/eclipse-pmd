@@ -14,15 +14,15 @@ package ch.acanda.eclipse.pmd.properties;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.eclipse.core.resources.IProject;
 import org.junit.Test;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.collect.Iterables;
-
-import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewModel;
 
 /**
@@ -66,28 +66,23 @@ public class PMDPropertyPageControllerTest {
     private static PMDPropertyPageViewModel createModel(final PMDPropertyPageController controller, final int from, final int to) {
         final PMDPropertyPageViewModel model = controller.getModel();
         final IProject project = mock(IProject.class);
-        model.setInitialState(true, ImmutableSortedSet.<RuleSetModel>of(), project);
-        final ImmutableList<RuleSetViewModel> ruleSets = createRuleSets();
+        model.setInitialState(true, Collections.emptySortedSet(), project);
+        final List<? extends RuleSetViewModel> ruleSets = createRuleSets();
         model.setRuleSets(ruleSets);
-        model.setActiveRuleSets(ruleSets.subList(0, 2));
+        model.setActiveRuleSets(Set.copyOf(ruleSets.subList(0, 2)));
         model.setSelectedRuleSets(ruleSets.subList(from, to));
         return model;
     }
 
     /**
-     * Returns a string representation of the provided rule sets iterable containing its element's names.
+     * Returns a string representation of the provided rule set containing its element's names.
      */
-    private static String toNameString(final Iterable<RuleSetViewModel> ruleSets) {
-        return Iterables.toString(Iterables.transform(ruleSets, new Function<RuleSetViewModel, String>() {
-            @Override
-            public String apply(final RuleSetViewModel ruleSet) {
-                return ruleSet.getName();
-            }
-        }));
+    private static String toNameString(final Collection<? extends RuleSetViewModel> ruleSets) {
+        return ruleSets.stream().map(RuleSetViewModel::getName).sorted().collect(Collectors.joining(", ", "[", "]"));
     }
 
-    private static ImmutableList<RuleSetViewModel> createRuleSets() {
-        return ImmutableList.of(new RuleSetViewModel("A", "A-Type", "A-Location", true, "A-LocationToolTip"),
+    private static List<? extends RuleSetViewModel> createRuleSets() {
+        return List.of(new RuleSetViewModel("A", "A-Type", "A-Location", true, "A-LocationToolTip"),
                 new RuleSetViewModel("B", "B-Type", "B-Location", false, "B-LocationToolTip"),
                 new RuleSetViewModel("C", "C-Type", "C-Location", true, "C-LocationToolTip"),
                 new RuleSetViewModel("D", "D-Type", "D-Location", false, "D-LocationToolTip"));

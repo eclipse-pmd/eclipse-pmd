@@ -11,8 +11,6 @@
 
 package ch.acanda.eclipse.pmd.repository;
 
-import static com.google.common.collect.Iterables.filter;
-import static com.google.common.collect.Iterables.getOnlyElement;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -22,6 +20,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
@@ -32,8 +32,6 @@ import javax.xml.validation.Validator;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import com.google.common.base.Predicate;
 
 import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
@@ -209,26 +207,16 @@ public final class ProjectModelSerializerTest {
 
     /**
      * Extracts a rule set model from a project model depending on its location context. This method also verifies that
-     * only one rule set model with the provided location context exists ({@code getOnlyElement(...)} throws an
-     * {@code IllegalArgumentException} if there is more than one model with the provided location context).
+     * only one rule set model with the provided location context exists and throws an {@code NoSuchElementException} if
+     * there is more than one model with the provided location context).
      */
     private RuleSetModel extractRuleSetModel(final ProjectModel model, final LocationContext context) {
-        return getOnlyElement(filter(model.getRuleSets(), new LocationContextFilter(context)));
-    }
-
-    private static final class LocationContextFilter implements Predicate<RuleSetModel> {
-
-        private final LocationContext context;
-
-        public LocationContextFilter(final LocationContext context) {
-            this.context = context;
-        }
-
-        @Override
-        public boolean apply(final RuleSetModel model) {
-            return model.getLocation().getContext() == context;
-        }
-
+        final List<RuleSetModel> models =
+                model.getRuleSets().stream()
+                        .filter(rs -> rs.getLocation().getContext() == context)
+                        .collect(Collectors.toList());
+        assertEquals("There should be exactly one model matching the context " + context, 1, models.size());
+        return models.get(0);
     }
 
 }

@@ -19,9 +19,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -29,9 +30,6 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTableItem;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.google.common.io.Files;
-import com.google.common.io.Resources;
 
 import ch.acanda.eclipse.pmd.swtbot.bot.AddRuleSetConfigurationWizardBot;
 import ch.acanda.eclipse.pmd.swtbot.bot.FileSelectionDialogBot;
@@ -55,26 +53,29 @@ public final class PMDPropertyDialogTest extends GUITestCase {
     private static final String REMOTE_RULE_SET_NAME = "PMD Rules (Remote)";
     private static final Path PMD_XML = Paths.get("pmd.xml");
 
-    private static File rules;
+    private static Path rules;
 
     @BeforeClass
     public static void createJavaProjects() throws IOException {
         JavaProjectClient.createJavaProject(PROJECT_NAME_1);
 
-        final String content = Resources.toString(PMDPropertyDialogTest.class.getResource(RULE_SET_FILE), StandardCharsets.UTF_8);
+        final String content;
+        try (InputStream in = PMDPropertyDialogTest.class.getResourceAsStream(RULE_SET_FILE)) {
+            content = new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        }
         JavaProjectClient.createFileInProject(PROJECT_NAME_1, PMD_XML, content);
 
         JavaProjectClient.createJavaProject(PROJECT_NAME_2);
 
-        rules = File.createTempFile(PMDPropertyDialogTest.class.getSimpleName() + "-", ".xml");
-        Files.asCharSink(rules, StandardCharsets.UTF_8).write(content);
+        rules = Files.createTempFile(PMDPropertyDialogTest.class.getSimpleName() + "-", ".xml");
+        Files.writeString(rules, content);
     }
 
     @AfterClass
-    public static void deleteJavaProjects() {
+    public static void deleteJavaProjects() throws IOException {
         JavaProjectClient.deleteJavaProject(PROJECT_NAME_1);
         JavaProjectClient.deleteJavaProject(PROJECT_NAME_2);
-        rules.delete();
+        Files.deleteIfExists(rules);
     }
 
     @Test
@@ -113,7 +114,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.waitUntilFinishIsDisabled("The finish button should be disabled as long as the name and location are missing");
         assertTrue("The browse button should be visible for a file system rule set", wizard.isBrowseButtonVisible());
 
-        wizard.location().setText(rules.getAbsolutePath());
+        wizard.location().setText(rules.toAbsolutePath().toString());
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         final String[] expectedNames = new String[] { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
@@ -133,7 +134,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         assertTrue("The added rule set should be activated", dialog.ruleSets().getTableItem(0).isChecked());
         assertEquals("Name of the rule set", FILE_SYSTEM_RULE_SET_NAME, dialog.ruleSets().cell(0, "Name"));
         assertEquals("Type of the rule set", "File System", dialog.ruleSets().cell(0, "Type"));
-        assertEquals("Location of the rule set", rules.getAbsolutePath(), dialog.ruleSets().cell(0, "Location"));
+        assertEquals("Location of the rule set", rules.toAbsolutePath().toString(), dialog.ruleSets().cell(0, "Location"));
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -149,7 +150,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         assertFalse("The available rule set should not be activated", dialog.ruleSets().getTableItem(0).isChecked());
         assertEquals("Name of the rule set", FILE_SYSTEM_RULE_SET_NAME, dialog.ruleSets().cell(0, "Name"));
         assertEquals("Type of the rule set", "File System", dialog.ruleSets().cell(0, "Type"));
-        assertEquals("Location of the rule set", rules.getAbsolutePath(), dialog.ruleSets().cell(0, "Location"));
+        assertEquals("Location of the rule set", rules.toAbsolutePath().toString(), dialog.ruleSets().cell(0, "Location"));
 
         dialog.ruleSets().getTableItem(0).check();
         dialog.ok().click();
@@ -273,7 +274,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
         assertFalse("The browse button should not be visible for a remote rule set", wizard.isBrowseButtonVisible());
 
-        final String uri = rules.toURI().toString();
+        final String uri = rules.toUri().toString();
         wizard.location().setText(uri);
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());

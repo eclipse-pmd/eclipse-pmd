@@ -14,8 +14,6 @@ package ch.acanda.eclipse.pmd.marker;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 
-import com.google.common.base.Preconditions;
-
 /**
  * Wrapper around an {@link IMarker} with convenience methods for accessing the attributes of a PMD marker.
  *
@@ -34,7 +32,9 @@ public class WrappingPMDMarker implements PMDMarker {
     private final IMarker marker;
 
     public WrappingPMDMarker(final IMarker marker) {
-        Preconditions.checkArgument(marker != null);
+        if (marker == null) {
+            throw new IllegalArgumentException("Arugment marker must not be null.");
+        }
         this.marker = marker;
     }
 

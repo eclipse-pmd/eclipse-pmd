@@ -14,19 +14,16 @@ package ch.acanda.eclipse.pmd.properties;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toViewModels;
 import static com.google.common.collect.Iterables.elementsEqual;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.eclipse.core.resources.IProject;
 
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 import ch.acanda.eclipse.pmd.ui.model.ViewModel;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSortedSet;
 
 /**
  * View model for the {@link PMDPropertyPage}.
@@ -41,21 +38,21 @@ final class PMDPropertyPageViewModel extends ViewModel {
     /**
      * All available rule sets of the entire workspace.
      */
-    private ImmutableList<RuleSetViewModel> ruleSets = ImmutableList.of();
+    private List<? extends RuleSetViewModel> ruleSets = List.of();
 
     /**
      * The rule sets currently selected.
      */
-    private ImmutableList<RuleSetViewModel> selectedRuleSets = ImmutableList.of();
+    private List<? extends RuleSetViewModel> selectedRuleSets = List.of();
 
     /**
      * The rule sets currently activated, i.e. with a checked checkbox.
      */
-    private ImmutableSet<RuleSetViewModel> activeRuleSets = ImmutableSet.of();
+    private Set<? extends RuleSetViewModel> activeRuleSets = Set.of();
 
     private boolean isPMDEnabled;
     private boolean initialIsPMDEnabled;
-    private Iterable<RuleSetViewModel> initialActiveRuleSets;
+    private Iterable<? extends RuleSetViewModel> initialActiveRuleSets;
 
     public boolean isPMDEnabled() {
         return isPMDEnabled;
@@ -65,19 +62,19 @@ final class PMDPropertyPageViewModel extends ViewModel {
         setProperty("PMDEnabled", this.isPMDEnabled, this.isPMDEnabled = isPMDEnabled);
     }
 
-    public ImmutableList<RuleSetViewModel> getRuleSets() {
+    public List<? extends RuleSetViewModel> getRuleSets() {
         return ruleSets;
     }
 
-    public void setRuleSets(final ImmutableList<RuleSetViewModel> ruleSets) {
-        setProperty(RULE_SETS, this.ruleSets, this.ruleSets = ruleSets);
+    public void setRuleSets(final List<? extends RuleSetViewModel> ruleSets) {
+        setProperty(RULE_SETS, this.ruleSets, this.ruleSets = List.copyOf(ruleSets));
     }
 
     /**
      * Sets the initial state, i.e. the state of the view model before any changes were made. This state is used by
      * {@link #updateDirty()} so it must be set before any properties of the view model are changed.
      */
-    public void setInitialState(final boolean isPmdEnabled, final ImmutableSortedSet<RuleSetModel> ruleSets, final IProject project) {
+    public void setInitialState(final boolean isPmdEnabled, final SortedSet<RuleSetModel> ruleSets, final IProject project) {
         initialIsPMDEnabled = isPMDEnabled;
         initialActiveRuleSets = toViewModels(ruleSets, project);
     }
@@ -90,15 +87,14 @@ final class PMDPropertyPageViewModel extends ViewModel {
     }
 
     public void addRuleSet(final RuleSetViewModel viewModel) {
-        final Builder<RuleSetViewModel> newConfigurations = ImmutableList.builder();
-        newConfigurations.addAll(ruleSets);
+        final List<RuleSetViewModel> newConfigurations = new ArrayList<>(ruleSets);
         newConfigurations.add(viewModel);
-        setRuleSets(newConfigurations.build());
+        setRuleSets(newConfigurations);
     }
 
     @Override
-    protected ImmutableSet<String> createValidatedPropertiesSet() {
-        return ImmutableSet.of();
+    protected Set<String> createValidatedPropertiesSet() {
+        return Set.of();
     }
 
     @Override
@@ -106,23 +102,19 @@ final class PMDPropertyPageViewModel extends ViewModel {
         // nothing to validate
     }
 
-    public void setSelectedRuleSets(final List<RuleSetViewModel> ruleSets) {
-        setProperty("selectedRuleSets", selectedRuleSets, selectedRuleSets = ImmutableList.copyOf(ruleSets));
+    public void setSelectedRuleSets(final List<? extends RuleSetViewModel> ruleSets) {
+        setProperty("selectedRuleSets", selectedRuleSets, selectedRuleSets = List.copyOf(ruleSets));
     }
 
-    public List<RuleSetViewModel> getSelectedRuleSets() {
+    public List<? extends RuleSetViewModel> getSelectedRuleSets() {
         return selectedRuleSets;
     }
 
-    public void setActiveRuleSets(final Iterable<RuleSetViewModel> ruleSets) {
-        setProperty(ACTIVE_RULE_SETS, activeRuleSets, activeRuleSets = ImmutableSet.copyOf(ruleSets));
+    public void setActiveRuleSets(final Set<? extends RuleSetViewModel> ruleSets) {
+        setProperty(ACTIVE_RULE_SETS, activeRuleSets, activeRuleSets = Set.copyOf(ruleSets));
     }
 
-    public void setActiveRuleSets(final Set<RuleSetViewModel> ruleSets) {
-        setProperty(ACTIVE_RULE_SETS, activeRuleSets, activeRuleSets = ImmutableSet.copyOf(ruleSets));
-    }
-
-    public Set<RuleSetViewModel> getActiveRuleSets() {
+    public Set<? extends RuleSetViewModel> getActiveRuleSets() {
         return activeRuleSets;
     }
 

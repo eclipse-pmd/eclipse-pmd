@@ -11,6 +11,7 @@
 
 package ch.acanda.eclipse.pmd.java.resolution;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -44,9 +45,6 @@ import org.eclipse.text.edits.MalformedTreeException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 
 import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
@@ -99,7 +97,7 @@ public abstract class TextEditQuickFixTestCase<T extends ASTRewriteQuickFix<? ex
     }
 
     public static List<Object[]> createTestData(final InputStream testCase) {
-        return Lists.transform(QuickFixTestData.createTestData(testCase), params -> new Object[] { params });
+        return QuickFixTestData.createTestData(testCase).stream().map(params -> new Object[] { params }).collect(toList());
     }
 
     @Test
@@ -132,7 +130,7 @@ public abstract class TextEditQuickFixTestCase<T extends ASTRewriteQuickFix<? ex
         final ASTParser astParser = ASTParser.newParser(AST.JLS4);
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);
         astParser.setSource(document.get().toCharArray());
-        astParser.setCompilerOptions(ImmutableMap.<String, String>builder().put(JavaCore.COMPILER_SOURCE, "1.7").build());
+        astParser.setCompilerOptions(Map.of(JavaCore.COMPILER_SOURCE, "1.7"));
         final CompilationUnit ast = (CompilationUnit) astParser.createAST(null);
         ast.recordModifications();
         return ast;

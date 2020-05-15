@@ -19,6 +19,9 @@ import static ch.acanda.eclipse.pmd.repository.ProjectModelSerializer.ATTRIBUTE_
 import static ch.acanda.eclipse.pmd.repository.ProjectModelSerializer.ATTRIBUTE_VALUE_REMOTE;
 import static ch.acanda.eclipse.pmd.repository.ProjectModelSerializer.ATTRIBUTE_VALUE_WORKSPACE;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -28,23 +31,19 @@ import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
-
 /**
  * @see ProjectModelSerializer
- *
  * @author Philip Graf
  */
 final class ProjectConfigurationContentHandler extends DefaultHandler {
 
     private boolean isPMDEnabled;
-    private final Builder<RuleSetModel> builder = ImmutableSet.builder();
+    private final Set<RuleSetModel> ruleSets = new HashSet<>();
 
     public ProjectModel getProjectModel(final String projectName) {
         final ProjectModel model = new ProjectModel(projectName);
         model.setPMDEnabled(isPMDEnabled);
-        model.setRuleSets(builder.build());
+        model.setRuleSets(ruleSets);
         return model;
     }
 
@@ -57,7 +56,7 @@ final class ProjectConfigurationContentHandler extends DefaultHandler {
                 break;
 
             case ProjectModelSerializer.TAG_NAME_RULESET:
-                builder.add(createRuleSet(attributes));
+                ruleSets.add(createRuleSet(attributes));
                 break;
 
             default:

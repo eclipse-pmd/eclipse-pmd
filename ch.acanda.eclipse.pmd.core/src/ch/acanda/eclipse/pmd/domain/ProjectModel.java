@@ -13,23 +13,25 @@ package ch.acanda.eclipse.pmd.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Collections;
 import java.util.Comparator;
-
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.collect.ImmutableSortedSet.Builder;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class ProjectModel extends DomainModel {
 
     public static final String RULESETS_PROPERTY = "ruleSets";
     public static final String PMDENABLED_PROPERTY = "isPMDEnabled";
 
-    public static final RuleSetComparator RULE_SET_COMPARATOR = new RuleSetComparator();
+    public static final Comparator<RuleSetModel> RULE_SET_COMPARATOR =
+            Comparator.comparing((final RuleSetModel rs) -> rs.getLocation().getContext())
+                    .thenComparing(RuleSetModel::getName)
+                    .thenComparing(rs -> rs.getLocation().getPath());
 
     private final String projectName;
 
     private boolean isPMDEnabled;
-    private ImmutableSortedSet<RuleSetModel> ruleSets = ImmutableSortedSet.<RuleSetModel>of();
+    private SortedSet<RuleSetModel> ruleSets = Collections.emptySortedSet();
 
     /**
      * Creates a new project model without any rule sets and where PMD is disabled.
@@ -52,27 +54,14 @@ public class ProjectModel extends DomainModel {
         return isPMDEnabled;
     }
 
-    public void setRuleSets(final Iterable<RuleSetModel> ruleSets) {
-        final Builder<RuleSetModel> builder = ImmutableSortedSet.orderedBy(RULE_SET_COMPARATOR);
-        builder.addAll(ruleSets);
-        setProperty(RULESETS_PROPERTY, this.ruleSets, this.ruleSets = builder.build());
+    public void setRuleSets(final Iterable<? extends RuleSetModel> ruleSets) {
+        final TreeSet<RuleSetModel> set = new TreeSet<RuleSetModel>(RULE_SET_COMPARATOR);
+        ruleSets.forEach(set::add);
+        setProperty(RULESETS_PROPERTY, this.ruleSets, this.ruleSets = set);
     }
 
-    public ImmutableSortedSet<RuleSetModel> getRuleSets() {
+    public SortedSet<RuleSetModel> getRuleSets() {
         return ruleSets;
-    }
-
-    private final static class RuleSetComparator implements Comparator<RuleSetModel> {
-
-        @Override
-        public int compare(final RuleSetModel ruleSet1, final RuleSetModel ruleSet2) {
-            return ComparisonChain.start()
-                    .compare(ruleSet1.getLocation().getContext(), ruleSet2.getLocation().getContext())
-                    .compare(ruleSet1.getName(), ruleSet2.getName())
-                    .compare(ruleSet1.getLocation().getPath(), ruleSet2.getLocation().getPath())
-                    .result();
-        }
-
     }
 
 }

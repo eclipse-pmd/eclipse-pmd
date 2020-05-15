@@ -22,11 +22,10 @@ import java.nio.file.Path;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 
@@ -42,33 +41,30 @@ public final class FileWatcher {
     /**
      * Maps an absolute directory path to its watch key.
      */
-    private final Map<Path, WatchKey> watchKeys;
+    private final Map<Path, WatchKey> watchKeys = new HashMap<>();
 
     /**
      * Maps an absolute file path to its listeners.
      */
-    private final Multimap<Path, FileChangedListener> listeners;
+    private final Map<Path, List<FileChangedListener>> listeners = new HashMap<>();
 
     /**
      * Maps an absolute directory path to its absolute file paths that are being watched.
      */
-    private final Multimap<Path, Path> watchedFiles;
+    private final Map<Path, List<Path>> watchedFiles = new HashMap<>();
 
     private WatcherThread watcherThread;
 
     public FileWatcher() throws IOException {
         watchService = FileSystems.getDefault().newWatchService();
-        watchKeys = new HashMap<>();
-        listeners = HashMultimap.create();
-        watchedFiles = HashMultimap.create();
     }
 
     public Subscription subscribe(final Path file, final FileChangedListener listener) throws IOException {
         final Path absoluteFile = file.toAbsolutePath();
-        listeners.put(absoluteFile, listener);
+        listeners.computeIfAbsent(absoluteFile, f -> new ArrayList<>()).add(listener);
 
         final Path absoluteDirectory = file.getParent();
-        watchedFiles.put(absoluteDirectory, absoluteFile);
+        watchedFiles.computeIfAbsent(absoluteDirectory, d -> new ArrayList<>()).add(absoluteFile);
 
         if (!watchKeys.containsKey(absoluteDirectory)) {
             final WatchKey watchKey = absoluteDirectory.register(watchService, ENTRY_MODIFY, ENTRY_DELETE);
@@ -81,12 +77,23 @@ public final class FileWatcher {
         return new Subscription() {
             @Override
             public void cancel() {
-                listeners.remove(absoluteFile, listener);
-                watchedFiles.remove(absoluteDirectory, absoluteFile);
-                if (!watchedFiles.containsKey(absoluteDirectory)) {
+                removeFrom(listeners, absoluteFile, listener);
+                removeFrom(watchedFiles, absoluteDirectory, absoluteFile);
+                if (!watchedFiles.containsKey(absoluteFile)) {
+                    watchedFiles.remove(absoluteDirectory);
                     watchKeys.remove(absoluteDirectory);
                     if (watchKeys.isEmpty()) {
                         stopWatcher();
+                    }
+                }
+            }
+
+            private <K, V> void removeFrom(final Map<K, List<V>> map, final K key, final V value) {
+                final List<V> list = map.get(key);
+                if (list != null) {
+                    list.remove(value);
+                    if (list.isEmpty()) {
+                        map.remove(key);
                     }
                 }
             }

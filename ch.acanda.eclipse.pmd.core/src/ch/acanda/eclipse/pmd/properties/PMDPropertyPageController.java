@@ -14,11 +14,14 @@ package ch.acanda.eclipse.pmd.properties;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toDomainModels;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toViewModel;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toViewModels;
-import static com.google.common.base.Predicates.in;
-import static com.google.common.base.Predicates.not;
-import static com.google.common.collect.Iterables.filter;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.function.Predicate;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -35,11 +38,6 @@ import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
 import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewModel;
 import ch.acanda.eclipse.pmd.repository.ProjectModelRepository;
 import ch.acanda.eclipse.pmd.wizard.AddRuleSetConfigurationWizard;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSortedSet;
 
 /**
  * Controller for the PMD project property page.
@@ -66,17 +64,17 @@ final class PMDPropertyPageController {
 
         projectModel = workspaceModel.getOrCreateProject(project.getName());
         model.setInitialState(projectModel.isPMDEnabled(), projectModel.getRuleSets(), project);
-        final ImmutableSortedSet.Builder<RuleSetModel> ruleSetBuilder = ImmutableSortedSet.orderedBy(ProjectModel.RULE_SET_COMPARATOR);
+        final TreeSet<RuleSetModel> ruleSetBuilder = new TreeSet<>(ProjectModel.RULE_SET_COMPARATOR);
         for (final ProjectModel projectModel : workspaceModel.getProjects()) {
             ruleSetBuilder.addAll(projectModel.getRuleSets());
         }
-        model.setRuleSets(ImmutableList.copyOf(toViewModels(ruleSetBuilder.build(), project)));
+        model.setRuleSets(List.copyOf(toViewModels(ruleSetBuilder, project)));
         reset();
     }
 
     public void reset() {
-        model.setActiveRuleSets(ImmutableSet.copyOf(toViewModels(projectModel.getRuleSets(), project)));
-        model.setSelectedRuleSets(ImmutableList.<RuleSetViewModel>of());
+        model.setActiveRuleSets(Set.copyOf(toViewModels(projectModel.getRuleSets(), project)));
+        model.setSelectedRuleSets(List.of());
         model.setPMDEnabled(projectModel.isPMDEnabled());
     }
 
@@ -117,10 +115,10 @@ final class PMDPropertyPageController {
     }
 
     public void removeSelectedConfigurations() {
-        final Predicate<RuleSetViewModel> notInSelection = not(in(model.getSelectedRuleSets()));
-        model.setRuleSets(ImmutableList.copyOf(filter(model.getRuleSets(), notInSelection)));
-        model.setActiveRuleSets(filter(model.getActiveRuleSets(), notInSelection));
-        model.setSelectedRuleSets(ImmutableList.<RuleSetViewModel>of());
+        final Predicate<RuleSetViewModel> notInSelection = m -> !model.getSelectedRuleSets().contains(m);
+        model.setRuleSets(model.getRuleSets().stream().filter(notInSelection).collect(toList()));
+        model.setActiveRuleSets(model.getActiveRuleSets().stream().filter(notInSelection).collect(toSet()));
+        model.setSelectedRuleSets(List.of());
     }
 
 }

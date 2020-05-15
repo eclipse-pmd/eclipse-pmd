@@ -12,10 +12,10 @@
 package ch.acanda.eclipse.pmd.domain;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
-
-import com.google.common.collect.ImmutableSet;
+import java.util.Set;
 
 public class WorkspaceModel extends DomainModel {
 
@@ -23,8 +23,8 @@ public class WorkspaceModel extends DomainModel {
 
     private final Map<String, ProjectModel> projects = new HashMap<>();
 
-    public ImmutableSet<ProjectModel> getProjects() {
-        return ImmutableSet.copyOf(projects.values());
+    public Set<ProjectModel> getProjects() {
+        return new HashSet<>(projects.values());
     }
 
     /**

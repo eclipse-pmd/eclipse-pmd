@@ -12,6 +12,7 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
 import static java.text.MessageFormat.format;
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -45,9 +46,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
-
 import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 import ch.acanda.eclipse.pmd.marker.WrappingPMDMarker;
@@ -67,10 +65,8 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  *
  * The easiest way to implement this method is to use {@link QuickFixTestData#createTestData(InputStream)} and provide
  * an {@code InputStream} to an XML file containing all the test data. See {@link QuickFixTestData} for the format of
- * the XML file.
- *
- * See {@link ch.acanda.eclipse.pmd.java.resolution.codestyle.ExtendsObjectQuickFixTest ExtendsObjectQuickFixTest} for a
- * complete example.
+ * the XML file. See {@link ch.acanda.eclipse.pmd.java.resolution.codestyle.ExtendsObjectQuickFixTest
+ * ExtendsObjectQuickFixTest} for a complete example.
  *
  * @author Philip Graf
  * @param <T> The type of the quick fix.
@@ -103,7 +99,7 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
     }
 
     public static List<Object[]> createTestData(final InputStream testCase) {
-        return Lists.transform(QuickFixTestData.createTestData(testCase), params -> new Object[] { params });
+        return QuickFixTestData.createTestData(testCase).stream().map(params -> new Object[] { params }).collect(toList());
     }
 
     @Test
@@ -138,11 +134,10 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         final String name = last(params.pmdReferenceId.orElse("QuickFixTest").split("/"));
         astParser.setUnitName(format("{0}.java", name));
         final String version = last(params.language.orElse("java 1.7").split("\\s+"));
-        astParser.setCompilerOptions(ImmutableMap.<String, String>builder()
-                .put(JavaCore.COMPILER_SOURCE, version)
-                .put(JavaCore.COMPILER_COMPLIANCE, version)
-                .put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, version)
-                .build());
+        astParser.setCompilerOptions(Map.of(
+                JavaCore.COMPILER_SOURCE, version,
+                JavaCore.COMPILER_COMPLIANCE, version,
+                JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, version));
         final CompilationUnit ast = (CompilationUnit) astParser.createAST(null);
         ast.recordModifications();
         return ast;
