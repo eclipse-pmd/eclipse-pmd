@@ -5,7 +5,7 @@
       version="1.28.0.qualifier"
       provider-name="Philip Graf">
 
-   <description url="http://acanda.github.com/eclipse-pmd/">
+   <description url="https://eclipse-pmd.github.io">
       Provides the core functionality of eclipse-pmd:
       - Set up and configure PMD
       - Marks PMD violations in the editors

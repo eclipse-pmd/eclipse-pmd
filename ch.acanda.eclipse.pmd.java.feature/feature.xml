@@ -7,7 +7,7 @@
       license-feature="ch.acanda.eclipse.pmd.core.feature"
       license-feature-version="1.28.0.qualifier">
 
-   <description url="http://acanda.github.com/eclipse-pmd/">
+   <description url="https://eclipse-pmd.github.io">
       Provides additional functionality for Java related PMD violations:
       - Quick fixes for PMD violations
    </description>
