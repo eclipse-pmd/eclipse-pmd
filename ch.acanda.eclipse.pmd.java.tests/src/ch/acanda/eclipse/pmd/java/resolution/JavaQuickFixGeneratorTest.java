@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 import org.eclipse.ui.IMarkerResolution;
 import org.junit.Before;
@@ -16,7 +16,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.osgi.framework.Version;
 
-import ch.acanda.eclipse.pmd.java.resolution.codestyle.ExtendsObjectQuickFix;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 
 @RunWith(value = Parameterized.class)
@@ -31,23 +30,21 @@ public class JavaQuickFixGeneratorTest {
 
     @SafeVarargs
     @SuppressWarnings("PMD.ArrayIsStoredDirectly")
-    public JavaQuickFixGeneratorTest(final String ruleId, final int javaVersion,
+    public JavaQuickFixGeneratorTest(final String ruleId,
+            final String javaVersion,
             final Class<? extends IMarkerResolution>... expectedQuickFixClasses) {
         this.ruleId = ruleId;
-        this.javaVersion = "1." + javaVersion + ".0";
+        this.javaVersion = javaVersion;
         this.expectedQuickFixClasses = expectedQuickFixClasses;
     }
 
     @Parameters
     public static Collection<Object[]> getTestData() {
-        return List.of(
-                createTestData("java.code style.ExtendsObject", 4, ExtendsObjectQuickFix.class),
-                createTestData("java.code style.ExtendsObject", 8, SuppressWarningsQuickFix.class),
-                createTestData("java.code style.ExtendsObject", 5, ExtendsObjectQuickFix.class, SuppressWarningsQuickFix.class));
+        return Collections.singletonList(createTestData("java.code style.ExtendsObject", "11", SuppressWarningsQuickFix.class));
     }
 
     @SafeVarargs
-    private static Object[] createTestData(final String ruleId, final int javaVersion,
+    private static Object[] createTestData(final String ruleId, final String javaVersion,
             final Class<? extends IMarkerResolution>... classes) {
         return new Object[] { ruleId, javaVersion, classes };
     }
