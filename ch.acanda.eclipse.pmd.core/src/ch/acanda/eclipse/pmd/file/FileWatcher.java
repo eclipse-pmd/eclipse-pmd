@@ -113,20 +113,27 @@ public final class FileWatcher {
                     if (watchKey.isValid()) {
                         final Path directory = (Path) watchKey.watchable();
                         for (final WatchEvent<?> event : watchKey.pollEvents()) {
-                            if (event.kind() != OVERFLOW) {
-                                final String filename = event.context().toString();
-                                final Path file = directory.resolve(filename);
-                                PMDPlugin.getDefault().info(event.kind() + ": " + file);
-                                for (final FileChangedListener listener : listeners.get(file)) {
-                                    listener.fileChanged(file);
-                                }
-                            }
+                            handleEvent(event, directory);
                         }
                     }
                     watchKey.reset();
                 }
             } catch (final InterruptedException | ClosedWatchServiceException e) {
                 PMDPlugin.getDefault().info(getName() + " stopped");
+            }
+        }
+
+        private void handleEvent(final WatchEvent<?> event, final Path directory) {
+            if (event.kind() != OVERFLOW) {
+                final String filename = event.context().toString();
+                final Path file = directory.resolve(filename);
+                PMDPlugin.getDefault().info(event.kind() + ": " + file);
+                final List<FileChangedListener> fileListeners = listeners.get(file);
+                if (fileListeners != null) {
+                    for (final FileChangedListener listener : fileListeners) {
+                        listener.fileChanged(file);
+                    }
+                }
             }
         }
 
