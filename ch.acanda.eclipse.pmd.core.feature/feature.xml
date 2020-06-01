@@ -332,12 +332,6 @@ in the Eclipse Public License, v. 2.0 are satisfied:
          unpack="false"/>
 
    <plugin
-         id="ch.acanda.eclipse.pmd.lib"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
          id="ch.acanda.eclipse.pmd.unsupported"
          download-size="0"
          install-size="0"

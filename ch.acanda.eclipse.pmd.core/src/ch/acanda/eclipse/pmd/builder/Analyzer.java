@@ -100,7 +100,7 @@ public final class Analyzer {
 
     private boolean isIncorrectSyntaxCause(final PMDException e) {
         final Throwable cause = e.getCause();
-        // syntax of a Java or JSP file is incorrect
+        // syntax of a Java, JSP or Apex file is incorrect
         return cause instanceof ParseException
                 // syntax of an XML file is incorrect
                 || cause instanceof SAXParseException;

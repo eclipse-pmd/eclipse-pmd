@@ -1,5 +1,6 @@
 package ch.acanda.eclipse.pmd.builder;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.same;
@@ -186,6 +187,23 @@ public class AnalyzerTest {
     }
 
     /**
+     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze Apex files.
+     */
+    @Test
+    public void analyzeApex() {
+        final String content = "public class apex { }";
+        analyze(content, "UTF-8", "cls", "category/apex/codestyle.xml/ClassNamingConventions", "ClassNamingConventions");
+    }
+
+    /**
+     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all Apex rules.
+     */
+    @Test
+    public void analyzeApexAllRules() throws IOException {
+        analyze("/** @description Hello Apex */ public class Apex { }", "UTF-8", "cls", getAllRuleSetRefIds("apex"));
+    }
+
+    /**
      * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} doesn't throw a NullPointerException
      * when the file to analyze does not have a file extension.
      */
@@ -288,7 +306,9 @@ public class AnalyzerTest {
     }
 
     private String getAllRuleSetRefIds(final String language) throws IOException {
-        try (InputStream in = PMD.class.getResourceAsStream("/category/" + language + "/categories.properties")) {
+        final String categories = "/category/" + language + "/categories.properties";
+        try (InputStream in = PMD.class.getResourceAsStream(categories)) {
+            assertNotNull("Resource " + categories + " not found", in);
             final Properties properties = new Properties();
             properties.load(in);
             return properties.getProperty("rulesets.filenames");

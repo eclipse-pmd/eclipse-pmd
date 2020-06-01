@@ -35,7 +35,6 @@
     <modules>
         <module>../ch.acanda.eclipse.pmd.repository</module>
         <module>../ch.acanda.eclipse.pmd.target</module>
-        <module>../ch.acanda.eclipse.pmd.lib</module>
         <module>../ch.acanda.eclipse.pmd.core</module>
         <module>../ch.acanda.eclipse.pmd.java</module>
         <module>../ch.acanda.eclipse.pmd.unsupported</module>
