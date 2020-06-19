@@ -21,7 +21,6 @@
         <tycho-extras-version>${tycho-version}</tycho-extras-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
-        <eclipse-release>2019-09</eclipse-release>
         <lib-path>${basedir}/lib</lib-path>
         <mockito-version>3.3.3</mockito-version>
         <mockito-byte-buddy-version>1.10.5</mockito-byte-buddy-version>
