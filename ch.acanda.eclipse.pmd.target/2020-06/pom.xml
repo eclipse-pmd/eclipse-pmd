@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>ch.acanda.eclipse.pmd</groupId>
-    <artifactId>2019-06</artifactId>
+    <artifactId>2020-06</artifactId>
     <packaging>eclipse-target-definition</packaging>
-    <name>eclipse-pmd target definition for Eclipse 2019-6</name>
+    <name>eclipse-pmd target definition for Eclipse 2020-06</name>
 
     <build>
         <plugins>
@@ -28,7 +28,7 @@
                         </goals>
                         <configuration>
                             <targetFiles>
-                                <param>2019-06.target</param>
+                                <param>2020-06.target</param>
                             </targetFiles>
                             <failOnError>true</failOnError>
                         </configuration>

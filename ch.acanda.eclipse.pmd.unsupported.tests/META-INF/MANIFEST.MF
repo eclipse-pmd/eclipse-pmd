@@ -6,4 +6,4 @@ Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Philip Graf
 Fragment-Host: ch.acanda.eclipse.pmd.unsupported
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: org.junit;bundle-version="4.8.2"
+Require-Bundle: org.junit;bundle-version="4.12.0"

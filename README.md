@@ -6,7 +6,7 @@ Everytime you save your work, eclipse-pmd scans your source code and looks for p
 Where possible, eclipse-pmd offers quick fixes that automatically fix the problems. These quick fixes can be used to fix a single problem or all occurrences in your entire code base.
 
 ## How to get started
-You need Eclipse 2019-06 or later and Java 7 or later to run eclipse-pmd. Please follow the instructions on [how to get started with eclipse-pmd](http://acanda.github.io/eclipse-pmd/getting-started.html) on the website.
+You need Eclipse 2019-09 or later and Java 11 or later to run eclipse-pmd. Please follow the instructions on [how to get started with eclipse-pmd](https://eclipse-pmd.github.io/getting-started.html) on the website.
 
 ## How to build and install eclipse-pmd
 Building eclipse-pmd is fairly easy. Please note, however, that building eclipse-pmd is not required if you are only interested in using it, since there is a pre-built version available in the Eclipse Marketplace.
@@ -14,7 +14,7 @@ Building eclipse-pmd is fairly easy. Please note, however, that building eclipse
 ### Requirements
 You need the following tools:
 
-* JDK 8
+* JDK 11
 * Maven 3
 * Git
 
@@ -51,9 +51,9 @@ From now on you can simply update Eclipse with `Help` > `Check for Updates` afte
 ### Testing against different Eclipse releases
 Building eclipse-pmd with `mvn clean verify` compiles and tests it against the oldest supported release of Eclipse which is Eclipse 2019-06. To ensure eclipse-pmd also works with newer releases the Eclipse release can be set with the parameter `eclipse-release`.
 
-Compile an test against Eclipse 2019-06: `mvn clean verify -Declipse-release=2019-06`
 Compile an test against Eclipse 2019-09: `mvn clean verify -Declipse-release=2019-09`
 Compile an test against Eclipse 2019-12: `mvn clean verify -Declipse-release=2019-12`
 Compile an test against Eclipse 2020-03: `mvn clean verify -Declipse-release=2020-03`
+Compile an test against Eclipse 2020-06: `mvn clean verify -Declipse-release=2020-06`
 
 Regardless of the chosen release, the built plug-in will always be the same as the one built without the parameter. So there isn't any advantage in building the plug-in yourself if you are using a newer Eclipse release.
