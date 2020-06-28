@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eclipse-pmd Core
 Bundle-SymbolicName: ch.acanda.eclipse.pmd.core;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 2.1.0.qualifier
 Bundle-Vendor: Philip Graf
 Require-Bundle: org.eclipse.core.resources;bundle-version="3.13.500",
  org.eclipse.core.runtime;bundle-version="3.16.0",
@@ -21,16 +21,16 @@ Bundle-ClassPath: .,
  lib/xercesImpl-2.12.0.jar,
  lib/saxon-9.1.0.8-dom.jar,
  lib/saxon-9.1.0.8.jar,
- lib/pmd-apex-6.24.0.jar,
- lib/pmd-apex-jorje-6.24.0-lib.jar,
- lib/pmd-core-6.24.0.jar,
- lib/pmd-java-6.24.0.jar,
- lib/pmd-javascript-6.24.0.jar,
- lib/pmd-jsp-6.24.0.jar,
- lib/pmd-modelica-6.24.0.jar,
- lib/pmd-plsql-6.24.0.jar,
- lib/pmd-vm-6.24.0.jar,
- lib/pmd-xml-6.24.0.jar,
+ lib/pmd-apex-6.25.0.jar,
+ lib/pmd-apex-jorje-6.25.0-lib.jar,
+ lib/pmd-core-6.25.0.jar,
+ lib/pmd-java-6.25.0.jar,
+ lib/pmd-javascript-6.25.0.jar,
+ lib/pmd-jsp-6.25.0.jar,
+ lib/pmd-modelica-6.25.0.jar,
+ lib/pmd-plsql-6.25.0.jar,
+ lib/pmd-vm-6.25.0.jar,
+ lib/pmd-xml-6.25.0.jar,
  lib/antlr-runtime-3.5.2.jar
 Bundle-Activator: ch.acanda.eclipse.pmd.PMDPlugin
 Bundle-ActivationPolicy: lazy
