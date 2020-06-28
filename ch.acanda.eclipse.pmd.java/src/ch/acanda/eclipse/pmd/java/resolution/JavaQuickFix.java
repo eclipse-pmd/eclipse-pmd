@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaCore;
@@ -149,7 +149,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      *            by this quick fix.
      */
     protected void fixMarkersInFile(final IFile file, final List<IMarker> markers, final IProgressMonitor monitor) {
-        monitor.subTask(file.getFullPath().toOSString());
+        final SubMonitor subMonitor = SubMonitor.convert(monitor, file.getFullPath().toOSString(), 100);
 
         final Optional<ICompilationUnit> optionalCompilationUnit = getCompilationUnit(file);
 
@@ -170,17 +170,16 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
             final IDocument document = textFileBuffer.getDocument();
             final IAnnotationModel annotationModel = textFileBuffer.getAnnotationModel();
 
-            final ASTParser astParser = ASTParser.newParser(AST.JLS4);
+            final ASTParser astParser = ASTParser.newParser(AST.JLS12);
             astParser.setKind(ASTParser.K_COMPILATION_UNIT);
             astParser.setResolveBindings(needsTypeResolution());
             astParser.setSource(compilationUnit);
 
-            final SubProgressMonitor parserMonitor = new SubProgressMonitor(monitor, 100);
-            final CompilationUnit ast = (CompilationUnit) astParser.createAST(parserMonitor);
-            parserMonitor.done();
+            final CompilationUnit ast = (CompilationUnit) astParser.createAST(subMonitor.split(5));
 
             startFixingMarkers(ast);
 
+            final SubMonitor markerMonitor = subMonitor.split(90).setWorkRemaining(markers.size());
             final Map<?, ?> options = compilationUnit.getJavaProject().getOptions(true);
             for (final IMarker marker : markers) {
                 try {
@@ -196,7 +195,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
                         }
                     }
                 } finally {
-                    monitor.worked(100);
+                    markerMonitor.split(1);
                 }
             }
 
@@ -204,12 +203,9 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
 
             // commit changes to underlying file if it is not opened in an editor
             if (!isEditorOpen(file)) {
-                final SubProgressMonitor commitMonitor = new SubProgressMonitor(monitor, 100);
-                textFileBuffer.commit(commitMonitor, false);
-                commitMonitor.done();
-            } else {
-                monitor.worked(100);
+                textFileBuffer.commit(subMonitor.split(5), false);
             }
+            subMonitor.setWorkRemaining(0);
 
         } catch (CoreException | MalformedTreeException | BadLocationException e) {
             // TODO: log error
