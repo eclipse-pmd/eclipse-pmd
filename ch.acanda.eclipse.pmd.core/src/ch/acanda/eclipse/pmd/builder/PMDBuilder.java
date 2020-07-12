@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCache;
@@ -28,6 +29,14 @@ public class PMDBuilder extends IncrementalProjectBuilder {
     public static final String ID = "ch.acanda.eclipse.pmd.builder.PMDBuilder";
 
     private static final RuleSetsCache CACHE = new RuleSetsCache(new RuleSetsCacheLoader(), PMDPlugin.getDefault().getWorkspaceModel());
+
+    /**
+     * Allows to build projects concurrently.
+     */
+    @Override
+    public ISchedulingRule getRule(final int kind, final Map<String, String> args) {
+        return getProject();
+    }
 
     @Override
     @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
