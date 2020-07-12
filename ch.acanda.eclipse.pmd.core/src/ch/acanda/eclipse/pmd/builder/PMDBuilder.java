@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCache;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCacheLoader;
+import ch.acanda.eclipse.pmd.marker.MarkerUtil;
 import net.sourceforge.pmd.RuleSets;
 
 /**
@@ -39,11 +40,10 @@ public class PMDBuilder extends IncrementalProjectBuilder {
     }
 
     @Override
-    @SuppressWarnings("PMD.ReturnEmptyArrayRatherThanNull")
-    protected IProject[] build(final int kind, @SuppressWarnings("rawtypes") final Map args, final IProgressMonitor monitor)
+    protected IProject[] build(final int kind, final Map<String, String> args, final IProgressMonitor monitor)
             throws CoreException {
         final IProgressMonitor subMonitor = SubMonitor.convert(monitor);
-        if (kind == FULL_BUILD) {
+        if (kind == FULL_BUILD || kind == CLEAN_BUILD) {
             fullBuild(subMonitor);
         } else {
             final IResourceDelta delta = getDelta(getProject());
@@ -53,7 +53,7 @@ public class PMDBuilder extends IncrementalProjectBuilder {
                 incrementalBuild(delta, subMonitor);
             }
         }
-        return null;
+        return new IProject[] { getProject() };
     }
 
     protected void fullBuild(final IProgressMonitor monitor) {
@@ -66,6 +66,13 @@ public class PMDBuilder extends IncrementalProjectBuilder {
 
     protected void incrementalBuild(final IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
         delta.accept(new DeltaVisitor(monitor));
+    }
+
+    @Override
+    protected void clean(final IProgressMonitor monitor) throws CoreException {
+        final SubMonitor submonitor = SubMonitor.convert(monitor, "Deleting PMD markers", 1);
+        MarkerUtil.removeAllMarkers(getProject());
+        submonitor.setWorkRemaining(0);
     }
 
     void analyze(final IResource resource, final boolean includeMembers, final IProgressMonitor monitor) throws CoreException {

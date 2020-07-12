@@ -36,6 +36,7 @@ public final class MarkerUtil {
      * Removes all PMD markers from a file.
      */
     public static void removeAllMarkers(final IFile file) throws CoreException {
+        // This also deletes markers of type LONG_MARKER_TYPE as they are a subtype of MARKER_TYPE.
         file.deleteMarkers(MARKER_TYPE, true, IResource.DEPTH_ZERO);
     }
 
@@ -43,6 +44,7 @@ public final class MarkerUtil {
      * Removes all PMD markers from a project and all the files it contains.
      */
     public static void removeAllMarkers(final IProject project) throws CoreException {
+        // This also deletes markers of type LONG_MARKER_TYPE as they are a subtype of MARKER_TYPE.
         project.deleteMarkers(MARKER_TYPE, true, IResource.DEPTH_INFINITE);
     }
 
