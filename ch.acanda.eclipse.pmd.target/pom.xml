@@ -25,19 +25,7 @@
                 </property>
             </activation>
             <modules>
-                <module>2019-09</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>eclipse-2019-09</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2019-09</value>
-                </property>
-            </activation>
-            <modules>
-                <module>2019-09</module>
+                <module>2019-12</module>
             </modules>
         </profile>
         <profile>
@@ -74,6 +62,18 @@
             </activation>
             <modules>
                 <module>2020-06</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>eclipse-2020-09</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2020-09</value>
+                </property>
+            </activation>
+            <modules>
+                <module>2020-09</module>
             </modules>
         </profile>
     </profiles>

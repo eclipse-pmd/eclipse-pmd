@@ -189,31 +189,9 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2019-09</id>
+                    <id>2019-12</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2019-09/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/2.8.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2019-09</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2019-09</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2019-09</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2019-09/</url>
+                    <url>http://download.eclipse.org/releases/2019-12/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
@@ -280,6 +258,28 @@
                     <id>2020-06</id>
                     <layout>p2</layout>
                     <url>http://download.eclipse.org/releases/2020-06/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/2.8.0/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>eclipse-2020-09</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2020-09</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2020-06</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2020-09/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>

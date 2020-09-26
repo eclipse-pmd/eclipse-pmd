@@ -13,7 +13,7 @@
 
     <properties>
         <pmd-version>6.27.0</pmd-version>
-        <eclipse-release>2019-09</eclipse-release>
+        <eclipse-release>2019-12</eclipse-release>
         <java.version>11</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
     </properties>
