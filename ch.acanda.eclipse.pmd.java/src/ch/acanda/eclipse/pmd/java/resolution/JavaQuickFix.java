@@ -1,5 +1,6 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import org.eclipse.core.filebuffers.ITextFileBufferManager;
 import org.eclipse.core.filebuffers.LocationKind;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -24,6 +26,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -149,13 +152,14 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      *            by this quick fix.
      */
     protected void fixMarkersInFile(final IFile file, final List<IMarker> markers, final IProgressMonitor monitor) {
-        final SubMonitor subMonitor = SubMonitor.convert(monitor, file.getFullPath().toOSString(), 100);
 
         final Optional<ICompilationUnit> optionalCompilationUnit = getCompilationUnit(file);
 
         if (!optionalCompilationUnit.isPresent()) {
             return;
         }
+
+        final SubMonitor subMonitor = SubMonitor.convert(monitor, file.getFullPath().toOSString(), 100);
 
         final ICompilationUnit compilationUnit = optionalCompilationUnit.get();
         ITextFileBufferManager bufferManager = null;
@@ -170,7 +174,8 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
             final IDocument document = textFileBuffer.getDocument();
             final IAnnotationModel annotationModel = textFileBuffer.getAnnotationModel();
 
-            final ASTParser astParser = ASTParser.newParser(AST.JLS12);
+
+            final ASTParser astParser = ASTParser.newParser(getApiLevel(file));
             astParser.setKind(ASTParser.K_COMPILATION_UNIT);
             astParser.setResolveBindings(needsTypeResolution());
             astParser.setSource(compilationUnit);
@@ -221,6 +226,30 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
                 }
             }
         }
+    }
+
+    private int getApiLevel(final IFile file) {
+        // try to infer API level from compiler source settings in project
+        final IProject project = file.getProject();
+        if (project instanceof IJavaProject) {
+            final IJavaProject javaProject = (IJavaProject) project;
+            if (javaProject.getOption(JavaCore.COMPILER_SOURCE, false) != null) {
+                return AST.newAST(javaProject.getOptions(false)).apiLevel();
+            }
+        }
+
+        // try to read the private field AST.JLS_Latest which holds the latest API level supported by the current
+        // Eclipse release
+        try {
+            final Field jlsLatest = AST.class.getDeclaredField("JLS_Latest");
+            jlsLatest.setAccessible(true);
+            return jlsLatest.getInt(null);
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+            // failed to read the field
+        }
+
+        // use the latest API level supported by the oldest supported Eclipse release
+        return AST.JLS13;
     }
 
     /**
