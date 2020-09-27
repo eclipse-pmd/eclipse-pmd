@@ -66,7 +66,9 @@ import org.xml.sax.SAXException;
  *
  *             &lt;!-- The expected description of the quick fix. The description is optional.
  *                  If no description is provided the test verifies only that the description is not {@code null}. -->
- *             &lt;description>Removes &amp;lt;b>extends Object&amp;lt;/b> from the type declaration of Example&lt;/description>
+ *             &lt;description>
+ *               Removes &amp;lt;b>extends Object&amp;lt;/b> from the type declaration of Example
+ *             &lt;/description>
  *
  *         &lt;/expected>
  *     &lt;/test>
@@ -84,7 +86,7 @@ public class QuickFixTestData {
             final Optional<String> pmdReferenceId = getOptionalValue(doc, "pmdReferenceId");
             final Optional<String> language = getOptionalValue(doc, "language");
             final NodeList tests = doc.getElementsByTagName("test");
-            for (int i = 0, size = tests.getLength(); i < size; i++) {
+            for (int i = 0; i < tests.getLength(); i++) {
                 data.add(getParameters(pmdReferenceId, language, (Element) tests.item(i)));
             }
         } catch (final ParserConfigurationException | SAXException | IOException e) {

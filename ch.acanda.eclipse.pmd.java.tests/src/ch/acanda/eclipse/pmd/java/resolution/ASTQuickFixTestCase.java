@@ -59,7 +59,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * @param <T> The type of the quick fix.
  */
 @RunWith(value = Parameterized.class)
-@SuppressWarnings({ "PMD.CommentSize", "PMD.AbstractClassWithoutAbstractMethod" })
+@SuppressWarnings({ "PMD.AbstractClassWithoutAbstractMethod", "PMD.ExcessiveImports" })
 public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNode>> {
 
     private final TestParameters params;

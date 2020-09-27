@@ -181,30 +181,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
             astParser.setSource(compilationUnit);
 
             final CompilationUnit ast = (CompilationUnit) astParser.createAST(subMonitor.split(5));
-
-            startFixingMarkers(ast);
-
-            final SubMonitor markerMonitor = subMonitor.split(90).setWorkRemaining(markers.size());
-            final Map<?, ?> options = compilationUnit.getJavaProject().getOptions(true);
-            for (final IMarker marker : markers) {
-                try {
-                    final MarkerAnnotation annotation = getMarkerAnnotation(annotationModel, marker);
-                    // if the annotation is null it means that is was deleted by a previous quick fix
-                    if (annotation != null) {
-                        final Optional<T> node = getNodeFinder(annotationModel.getPosition(annotation)).findNode(ast);
-                        if (node.isPresent()) {
-                            final boolean isSuccessful = fixMarker(node.get(), document, options);
-                            if (isSuccessful) {
-                                marker.delete();
-                            }
-                        }
-                    }
-                } finally {
-                    markerMonitor.split(1);
-                }
-            }
-
-            finishFixingMarkers(ast, document, options);
+            fixMarkers(markers, subMonitor, compilationUnit, document, annotationModel, ast);
 
             // commit changes to underlying file if it is not opened in an editor
             if (!isEditorOpen(file)) {
@@ -226,6 +203,34 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
                 }
             }
         }
+    }
+
+    private void fixMarkers(final List<IMarker> markers, final SubMonitor subMonitor, final ICompilationUnit compilationUnit,
+            final IDocument document, final IAnnotationModel annotationModel, final CompilationUnit ast)
+            throws CoreException, BadLocationException {
+        startFixingMarkers(ast);
+
+        final SubMonitor markerMonitor = subMonitor.split(90).setWorkRemaining(markers.size());
+        final Map<?, ?> options = compilationUnit.getJavaProject().getOptions(true);
+        for (final IMarker marker : markers) {
+            try {
+                final MarkerAnnotation annotation = getMarkerAnnotation(annotationModel, marker);
+                // if the annotation is null it means that is was deleted by a previous quick fix
+                if (annotation != null) {
+                    final Optional<T> node = getNodeFinder(annotationModel.getPosition(annotation)).findNode(ast);
+                    if (node.isPresent()) {
+                        final boolean isSuccessful = fixMarker(node.get(), document, options);
+                        if (isSuccessful) {
+                            marker.delete();
+                        }
+                    }
+                }
+            } finally {
+                markerMonitor.split(1);
+            }
+        }
+
+        finishFixingMarkers(ast, document, options);
     }
 
     private int getApiLevel(final IFile file) {

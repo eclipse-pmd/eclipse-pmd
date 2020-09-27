@@ -17,6 +17,8 @@ public class ProjectPropertyTester extends PropertyTester {
      */
     private static final Pattern JAVA_VERSION_SEPARATORS = Pattern.compile("[_-]");
 
+    @Override
+    @SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
     public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue) {
         if ("javaVersionLessThan".equals(property)) {
             return isJavaVersionLessThan(args[0].toString());
@@ -36,7 +38,7 @@ public class ProjectPropertyTester extends PropertyTester {
             final Version actual = new Version(convert(System.getProperty("java.version", "0")));
             final Version upperBound = new Version(convert(version));
             return actual.compareTo(upperBound) < 0;
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             return false;
         }
     }

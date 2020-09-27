@@ -38,6 +38,7 @@ import net.sourceforge.pmd.RulesetsFactoryUtils;
 /**
  * Unit tests for {@link Analyzer}.
  */
+@SuppressWarnings("PMD.ExcessiveImports")
 public class AnalyzerTest {
 
     /**
