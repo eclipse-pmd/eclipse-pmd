@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="3.13.600",
  org.eclipse.swt;bundle-version="3.113.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.osgi.framework
+Automatic-Module-Name: ch.acanda.eclipse.pmd.unsupported

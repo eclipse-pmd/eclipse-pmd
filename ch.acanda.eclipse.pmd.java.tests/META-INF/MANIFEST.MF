@@ -7,8 +7,10 @@ Bundle-Vendor: Philip Graf
 Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="2.4.0"
 Require-Bundle: org.junit;bundle-version="4.12.0",
  javax.annotation;bundle-version="1.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ClassPath: .,
  lib/mockito-core-3.3.3.jar,
  lib/byte-buddy-1.10.5.jar,
  lib/byte-buddy-agent-1.10.5.jar,
  lib/objenesis-2.6.jar
+Automatic-Module-Name: ch.acanda.eclipse.pmd.java.tests
