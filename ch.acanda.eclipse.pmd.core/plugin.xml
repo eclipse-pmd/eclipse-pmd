@@ -150,11 +150,5 @@
             name="PMD">
       </page>
    </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="ch.acanda.eclipse.pmd.preferences.PreferenceInitializer">
-      </initializer>
-   </extension>
 
 </plugin>
