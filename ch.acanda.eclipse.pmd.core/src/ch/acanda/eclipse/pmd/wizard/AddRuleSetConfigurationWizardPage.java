@@ -4,15 +4,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeanProperties;
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.databinding.beans.typed.BeanProperties;
+import org.eclipse.core.databinding.beans.typed.PojoProperties;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.databinding.swt.SWTObservables;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
+import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -138,27 +136,32 @@ public class AddRuleSetConfigurationWizardPage extends WizardPage implements Rul
 
     private DataBindingContext initDataBindings() {
         final DataBindingContext bindingContext = new DataBindingContext();
-        //
-        final IObservableValue locationView = SWTObservables.observeDelayedValue(200, SWTObservables.observeText(location, SWT.Modify));
-        final IObservableValue locationModel = BeansObservables.observeValue(controller.getModel(), "location");
-        bindingContext.bindValue(locationView, locationModel, null, null);
-        //
-        final ObservableListContentProvider rulesContentProvider = new ObservableListContentProvider();
-        final IObservableMap ruleNamesModel = PojoObservables.observeMap(rulesContentProvider.getKnownElements(), Rule.class, "name");
+        final AddRuleSetConfigurationModel model = controller.getModel();
+
+        final ISWTObservableValue<String> locationView = WidgetProperties.text(SWT.Modify).observeDelayed(100, location);
+        final IObservableValue<String> locationModel =
+                BeanProperties.value(AddRuleSetConfigurationModel.class, "location", String.class).observe(model);
+        bindingContext.bindValue(locationView, locationModel);
+
+        final ObservableListContentProvider<Rule> rulesContentProvider = new ObservableListContentProvider<>();
+        final IObservableMap<Rule, String> ruleNamesModel =
+                PojoProperties.value(Rule.class, "name", String.class).observeDetail(rulesContentProvider.getKnownElements());
         tableViewer.setLabelProvider(new ObservableMapLabelProvider(ruleNamesModel));
         tableViewer.setContentProvider(rulesContentProvider);
-        //
-        final IObservableList rulesModel = BeansObservables.observeList(Realm.getDefault(), controller.getModel(), "rules");
+        final IObservableList<Rule> rulesModel =
+                BeanProperties.list(AddRuleSetConfigurationModel.class, "rules", Rule.class).observe(model);
         tableViewer.setInput(rulesModel);
-        //
-        final IObservableValue nameView = SWTObservables.observeDelayedValue(100, SWTObservables.observeText(name, SWT.Modify));
-        final IObservableValue nameModel = BeansObservables.observeValue(controller.getModel(), "name");
-        bindingContext.bindValue(nameView, nameModel, null, null);
-        //
-        final IObservableValue browseVisibleView = WidgetProperties.visible().observe(browse);
-        final IObservableValue browseEnabledModel = BeanProperties.value("browseEnabled").observe(controller.getModel());
-        bindingContext.bindValue(browseVisibleView, browseEnabledModel, null, null);
-        //
+
+        final ISWTObservableValue<String> nameView = WidgetProperties.text(SWT.Modify).observeDelayed(100, name);
+        final IObservableValue<String> nameModel =
+                BeanProperties.value(AddRuleSetConfigurationModel.class, "name", String.class).observe(model);
+        bindingContext.bindValue(nameView, nameModel);
+
+        final ISWTObservableValue<Boolean> browseVisibleView = WidgetProperties.visible().observe(browse);
+        final IObservableValue<Boolean> browseEnabledModel =
+                BeanProperties.value(AddRuleSetConfigurationModel.class, "browseEnabled", boolean.class).observe(model);
+        bindingContext.bindValue(browseVisibleView, browseEnabledModel);
+
         return bindingContext;
     }
 }

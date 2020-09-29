@@ -1,11 +1,12 @@
 package ch.acanda.eclipse.pmd.properties;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.beans.typed.BeanProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
+import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -31,7 +32,7 @@ public class PMDPropertyPage extends PropertyPage {
     @Override
     public void setElement(final IAdaptable element) {
         super.setElement(element);
-        controller.init((IProject) element.getAdapter(IProject.class));
+        controller.init(element.getAdapter(IProject.class));
     }
 
     @Override
@@ -105,14 +106,16 @@ public class PMDPropertyPage extends PropertyPage {
 
     private DataBindingContext initDataBindings() {
         final DataBindingContext bindingContext = new DataBindingContext();
-        //
-        final IObservableValue pmdEnabledView = SWTObservables.observeSelection(enablePMDCheckbox);
-        final IObservableValue pmdEnabledModel = BeansObservables.observeValue(controller.getModel(), "PMDEnabled");
-        bindingContext.bindValue(pmdEnabledView, pmdEnabledModel, null, null);
-        //
-        final IObservableValue addEnabledView = SWTObservables.observeEnabled(addRuleSet);
-        bindingContext.bindValue(addEnabledView, pmdEnabledModel, null, null);
-        //
+
+        final ISWTObservableValue<Boolean> pmdEnabledView = WidgetProperties.buttonSelection().observe(enablePMDCheckbox);
+        final IObservableValue<Boolean> pmdEnabledModel =
+                BeanProperties.value(PMDPropertyPageViewModel.class, "PMDEnabled", boolean.class).observe(controller.getModel());
+        bindingContext.bindValue(pmdEnabledView, pmdEnabledModel);
+
+        final ISWTObservableValue<Boolean> addEnabledView = WidgetProperties.enabled().observe(addRuleSet);
+        bindingContext.bindValue(addEnabledView, pmdEnabledModel);
+
         return bindingContext;
     }
+
 }

@@ -4,20 +4,23 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.databinding.beans.typed.BeanProperties;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
+import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
+import org.eclipse.jface.databinding.viewers.IViewerObservableList;
+import org.eclipse.jface.databinding.viewers.IViewerObservableSet;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.jface.databinding.viewers.ViewersObservables;
+import org.eclipse.jface.databinding.viewers.typed.ViewerProperties;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -76,24 +79,25 @@ final class RuleSetConfigurationTable extends Composite {
 
     private void initDataBindings() {
         final DataBindingContext bindingContext = new DataBindingContext();
-        //
-        final ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
-        tableViewer.setContentProvider(listContentProvider);
-        //
-        final IObservableList ruleSetsObserveList = BeansObservables.observeList(Realm.getDefault(), model, "ruleSets");
-        tableViewer.setInput(ruleSetsObserveList);
-        //
-        final IObservableValue tableObserveEnabledObserveWidget = SWTObservables.observeEnabled(table);
-        final IObservableValue modelPMDEnabledObserveValue = BeansObservables.observeValue(model, "PMDEnabled");
-        bindingContext.bindValue(tableObserveEnabledObserveWidget, modelPMDEnabledObserveValue, null, null);
-        //
-        final IObservableList tableViewerObserveMultiSelection = ViewersObservables.observeMultiSelection(tableViewer);
-        final IObservableList selectedRuleSetsObserveList = BeansObservables.observeList(Realm.getDefault(), model, "selectedRuleSets");
-        bindingContext.bindList(tableViewerObserveMultiSelection, selectedRuleSetsObserveList, null, null);
-        //
-        final IObservableSet activeRuleSetsView = ViewersObservables.observeCheckedElements(tableViewer, RuleSetViewModel.class);
-        final IObservableSet activeRuleSetsModel = BeansObservables.observeSet(Realm.getDefault(), model, "activeRuleSets");
-        bindingContext.bindSet(activeRuleSetsView, activeRuleSetsModel, null, null);
+        tableViewer.setContentProvider(new ObservableListContentProvider<PMDPropertyPageViewModel>());
+        tableViewer.setInput(BeanProperties.list(PMDPropertyPageViewModel.class, "ruleSets", RuleSetViewModel.class).observe(model));
+
+        final ISWTObservableValue<Boolean> enabledView = WidgetProperties.enabled().observe(table);
+        final IObservableValue<Boolean> enbaledModel =
+                BeanProperties.value(PMDPropertyPageViewModel.class, "PMDEnabled", boolean.class).observe(model);
+        bindingContext.bindValue(enabledView, enbaledModel);
+
+        final IViewerObservableList<RuleSetViewModel> selectionView =
+                ViewerProperties.multipleSelection(RuleSetViewModel.class).observe(tableViewer);
+        final IObservableList<RuleSetViewModel> selectionModel =
+                BeanProperties.list(PMDPropertyPageViewModel.class, "selectedRuleSets", RuleSetViewModel.class).observe(model);
+        bindingContext.bindList(selectionView, selectionModel);
+
+        final IViewerObservableSet<RuleSetViewModel> activeView =
+                ViewerProperties.checkedElements(RuleSetViewModel.class).observe((Viewer) tableViewer);
+        final IObservableSet<RuleSetViewModel> activeModel =
+                BeanProperties.set(PMDPropertyPageViewModel.class, "activeRuleSets", RuleSetViewModel.class).observe(model);
+        bindingContext.bindSet(activeView, activeModel);
     }
 
     private void initListeners() {
