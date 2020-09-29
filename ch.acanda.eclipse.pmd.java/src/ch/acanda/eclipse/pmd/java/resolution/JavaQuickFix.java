@@ -1,34 +1,23 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.eclipse.core.filebuffers.FileBuffers;
-import org.eclipse.core.filebuffers.ITextFileBuffer;
-import org.eclipse.core.filebuffers.ITextFileBufferManager;
-import org.eclipse.core.filebuffers.LocationKind;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -40,13 +29,6 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.text.edits.MalformedTreeException;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 
@@ -58,6 +40,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  *
  * @param <T> The type of AST node that will be passed to {@link #apply(ASTNode)}.
  */
+@SuppressWarnings("PMD.ExcessiveImports")
 public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerResolution {
 
     private static final IMarker[] NO_OTHER_MARKERS = new IMarker[0];
@@ -87,17 +70,9 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
     public IMarker[] findOtherMarkers(final IMarker[] markers) {
         final IMarker[] result;
         if (markers.length > 1) {
-            final List<IMarker> otherMarkers = new ArrayList<>(markers.length);
-            for (final IMarker other : markers) {
-                if (marker.isOtherWithSameRuleId(other)) {
-                    otherMarkers.add(other);
-                }
-            }
-            if (otherMarkers.isEmpty()) {
-                result = NO_OTHER_MARKERS;
-            } else {
-                result = otherMarkers.toArray(new IMarker[0]);
-            }
+            return Stream.of(markers)
+                    .filter(marker::isOtherWithSameRuleId)
+                    .toArray(IMarker[]::new);
         } else {
             result = NO_OTHER_MARKERS;
         }
@@ -109,7 +84,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
         final Map<IFile, List<IMarker>> map = createMarkerMap(markers);
         monitor.beginTask(getLabel(), (map.keySet().size() * 2 + markers.length) * 100);
         try {
-            for (final Entry<IFile, List<IMarker>> entry : map.entrySet()) {
+            for (final Map.Entry<IFile, List<IMarker>> entry : map.entrySet()) {
                 fixMarkersInFile(entry.getKey(), entry.getValue(), monitor);
             }
         } finally {
@@ -121,27 +96,19 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      * @return A map grouping the markers by their file.
      */
     private Map<IFile, List<IMarker>> createMarkerMap(final IMarker... markers) {
-        final Map<IFile, List<IMarker>> markerMap = new HashMap<>();
-        for (final IMarker marker : markers) {
-            final IResource resource = marker.getResource();
-            if (resource instanceof IFile && resource.isAccessible()) {
-                final IFile key = (IFile) resource;
-                List<IMarker> value = markerMap.get(key);
-                if (value == null) {
-                    value = new ArrayList<IMarker>();
-                    markerMap.put(key, value);
-                }
-                value.add(marker);
-            }
-        }
-        return markerMap;
+        return Stream.of(markers)
+                .filter(marker -> {
+                    final IResource resource = marker.getResource();
+                    return resource instanceof IFile && resource.isAccessible();
+                })
+                .collect(Collectors.groupingBy(marker -> (IFile) marker.getResource()));
     }
 
     @Override
     public void run(final IMarker marker) {
         final IResource resource = marker.getResource();
         if (resource instanceof IFile && resource.isAccessible()) {
-            fixMarkersInFile((IFile) resource, Arrays.asList(marker), new NullProgressMonitor());
+            fixMarkersInFile((IFile) resource, Arrays.asList(marker), null);
         }
     }
 
@@ -149,7 +116,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      * Fixes all provided markers in a file.
      *
      * @param markers The markers to fix. There is at least one marker in this collection and all markers can be fixed
-     *            by this quick fix.
+     *     by this quick fix.
      */
     protected void fixMarkersInFile(final IFile file, final List<IMarker> markers, final IProgressMonitor monitor) {
 
@@ -162,56 +129,29 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
         final SubMonitor subMonitor = SubMonitor.convert(monitor, file.getFullPath().toOSString(), 100);
 
         final ICompilationUnit compilationUnit = optionalCompilationUnit.get();
-        ITextFileBufferManager bufferManager = null;
-        final IPath path = compilationUnit.getPath();
 
-        try {
-            bufferManager = FileBuffers.getTextFileBufferManager();
-            bufferManager.connect(path, LocationKind.IFILE, null);
-
-            final ITextFileBuffer textFileBuffer = bufferManager.getTextFileBuffer(path, LocationKind.IFILE);
-
-            final IDocument document = textFileBuffer.getDocument();
-            final IAnnotationModel annotationModel = textFileBuffer.getAnnotationModel();
-
-
-            final ASTParser astParser = ASTParser.newParser(getApiLevel(file));
-            astParser.setKind(ASTParser.K_COMPILATION_UNIT);
-            astParser.setResolveBindings(needsTypeResolution());
-            astParser.setSource(compilationUnit);
-
-            final CompilationUnit ast = (CompilationUnit) astParser.createAST(subMonitor.split(5));
-            fixMarkers(markers, subMonitor, compilationUnit, document, annotationModel, ast);
-
-            // commit changes to underlying file if it is not opened in an editor
-            if (!isEditorOpen(file)) {
-                textFileBuffer.commit(subMonitor.split(5), false);
-            }
-            subMonitor.setWorkRemaining(0);
+        try (FileBuffer buffer = new FileBuffer(file)) {
+            final CompilationUnit ast = buffer.getAst(needsTypeResolution(), compilationUnit, subMonitor.split(5));
+            fixMarkers(markers, subMonitor.split(95), compilationUnit, buffer, ast);
 
         } catch (CoreException | MalformedTreeException | BadLocationException e) {
             // TODO: log error
             // PMDPlugin.getDefault().error("Error processing quickfix", e);
 
         } finally {
-            if (bufferManager != null) {
-                try {
-                    bufferManager.disconnect(path, LocationKind.IFILE, null);
-                } catch (final CoreException e) {
-                    // TODO: log error
-                    // PMDPlugin.getDefault().error("Error processing quickfix", e);
-                }
-            }
+            subMonitor.setWorkRemaining(0);
         }
     }
 
-    private void fixMarkers(final List<IMarker> markers, final SubMonitor subMonitor, final ICompilationUnit compilationUnit,
-            final IDocument document, final IAnnotationModel annotationModel, final CompilationUnit ast)
+    private void fixMarkers(final List<IMarker> markers, final IProgressMonitor monitor, final ICompilationUnit compilationUnit,
+            final FileBuffer buffer, final CompilationUnit ast)
             throws CoreException, BadLocationException {
         startFixingMarkers(ast);
 
-        final SubMonitor markerMonitor = subMonitor.split(90).setWorkRemaining(markers.size());
+        final SubMonitor markerMonitor = SubMonitor.convert(monitor, markers.size());
         final Map<?, ?> options = compilationUnit.getJavaProject().getOptions(true);
+        final IDocument document = buffer.getDocument();
+        final IAnnotationModel annotationModel = buffer.getAnnotationModel();
         for (final IMarker marker : markers) {
             try {
                 final MarkerAnnotation annotation = getMarkerAnnotation(annotationModel, marker);
@@ -226,35 +166,11 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
                     }
                 }
             } finally {
-                markerMonitor.split(1);
+                markerMonitor.worked(1);
             }
         }
 
         finishFixingMarkers(ast, document, options);
-    }
-
-    private int getApiLevel(final IFile file) {
-        // try to infer API level from compiler source settings in project
-        final IProject project = file.getProject();
-        if (project instanceof IJavaProject) {
-            final IJavaProject javaProject = (IJavaProject) project;
-            if (javaProject.getOption(JavaCore.COMPILER_SOURCE, false) != null) {
-                return AST.newAST(javaProject.getOptions(false)).apiLevel();
-            }
-        }
-
-        // try to read the private field AST.JLS_Latest which holds the latest API level supported by the current
-        // Eclipse release
-        try {
-            final Field jlsLatest = AST.class.getDeclaredField("JLS_Latest");
-            jlsLatest.setAccessible(true);
-            return jlsLatest.getInt(null);
-        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-            // failed to read the field
-        }
-
-        // use the latest API level supported by the oldest supported Eclipse release
-        return AST.JLS13;
     }
 
     /**
@@ -283,10 +199,10 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      * @param document The document representing the Java file.
      * @param options The project's Java options.
      * @return {@code true} iff the quick fix was applied successfully, i.e. the PMD problem was resolved. If
-     *         {@code false} is returned then the AST must not have been modified in any way.
+     * {@code false} is returned then the AST must not have been modified in any way.
      * @throws CoreException Thrown when the AST has already been modified but the fix could not have been successfully
-     *             applied. Throwing this exception will abort all quick fixes for this file. Any already successfully
-     *             applied quick fixes will not be committed.
+     *     applied. Throwing this exception will abort all quick fixes for this file. Any already successfully applied
+     *     quick fixes will not be committed.
      */
     protected abstract boolean fixMarker(final T node, final IDocument document, final Map<?, ?> options) throws CoreException;
 
@@ -297,7 +213,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      * @param document The document representing the Java file.
      * @param options The project's Java options.
      * @throws BadLocationException Thrown when the fixing cannot be finished properly. The already applied quick fixes
-     *             will not be committed.
+     *     will not be committed.
      */
     protected abstract void finishFixingMarkers(final CompilationUnit ast, final IDocument document, final Map<?, ?> options)
             throws BadLocationException;
@@ -321,14 +237,6 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
         return (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
-    // /**
-    // * Applies the quick fix to the provided node. The marker's range lies within the node's range and the node's type
-    // * is the same as the one returned by {@link #getNodeType()}.
-    // *
-    // * @return {@code true} iff the quick fix was applied successfully, i.e. the PMD problem was resolved.
-    // */
-    // protected abstract boolean apply(final T node);
-
     private Optional<ICompilationUnit> getCompilationUnit(final IFile file) {
         final IJavaElement element = JavaCore.create(file);
         return element instanceof ICompilationUnit ? Optional.of((ICompilationUnit) element) : Optional.<ICompilationUnit>empty();
@@ -346,28 +254,6 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
             }
         }
         return null;
-    }
-
-    /**
-     * @return {@code true} iff an editor for the provided file is open. The editor must not necessarily be visible or
-     *         even belong to the active window or perspective.
-     */
-    private boolean isEditorOpen(final IFile file) {
-        for (final IWorkbenchWindow window : PlatformUI.getWorkbench().getWorkbenchWindows()) {
-            for (final IWorkbenchPage page : window.getPages()) {
-                for (final IEditorReference reference : page.getEditorReferences()) {
-                    try {
-                        final IEditorInput input = reference.getEditorInput();
-                        if (input instanceof IFileEditorInput && file.equals(((IFileEditorInput) input).getFile())) {
-                            return true;
-                        }
-                    } catch (final PartInitException e) {
-                        // cannot get editor input -> ignore
-                    }
-                }
-            }
-        }
-        return false;
     }
 
 }

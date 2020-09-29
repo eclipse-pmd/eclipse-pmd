@@ -113,14 +113,14 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
     }
 
     private CompilationUnit createAST(final org.eclipse.jface.text.Document document, final ASTQuickFix<ASTNode> quickFix) {
-        final ASTParser astParser = ASTParser.newParser(AST.JLS4);
+        final ASTParser astParser = ASTParser.newParser(AST.JLS13);
         astParser.setSource(document.get().toCharArray());
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);
         astParser.setResolveBindings(quickFix.needsTypeResolution());
         astParser.setEnvironment(new String[0], new String[0], new String[0], true);
         final String name = last(params.pmdReferenceId.orElse("QuickFixTest").split("/"));
         astParser.setUnitName(format("{0}.java", name));
-        final String version = last(params.language.orElse("java 1.7").split("\\s+"));
+        final String version = last(params.language.orElse("java 11").split("\\s+"));
         astParser.setCompilerOptions(Map.of(
                 JavaCore.COMPILER_SOURCE, version,
                 JavaCore.COMPILER_COMPLIANCE, version,
