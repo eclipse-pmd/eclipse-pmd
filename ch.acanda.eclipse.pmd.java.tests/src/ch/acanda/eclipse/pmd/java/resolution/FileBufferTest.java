@@ -31,13 +31,11 @@ public class FileBufferTest {
         final ITextFileBuffer buffer = mock(ITextFileBuffer.class);
         final IFile file = mock(IFile.class);
         final ResourceMarkerAnnotationModel annotationModel = new ResourceMarkerAnnotationModel(file);
-        final FileBuffer fileBuffer = createFileBuffer(document, buffer, file, annotationModel, false);
 
-        assertEquals("File buffer document", document, fileBuffer.getDocument());
-        assertEquals("File buffer annotation model", annotationModel, fileBuffer.getAnnotationModel());
-
-        fileBuffer.close();
-
+        try (FileBuffer fileBuffer = createFileBuffer(document, buffer, file, annotationModel, false)) {
+            assertEquals("File buffer document", document, fileBuffer.getDocument());
+            assertEquals("File buffer annotation model", annotationModel, fileBuffer.getAnnotationModel());
+        }
         verify(buffer).commit(null, false);
     }
 
@@ -47,13 +45,11 @@ public class FileBufferTest {
         final ITextFileBuffer buffer = mock(ITextFileBuffer.class);
         final IFile file = mock(IFile.class);
         final ResourceMarkerAnnotationModel annotationModel = new ResourceMarkerAnnotationModel(file);
-        final FileBuffer fileBuffer = createFileBuffer(document, buffer, file, annotationModel, true);
 
-        assertEquals("File buffer document", document, fileBuffer.getDocument());
-        assertEquals("File buffer annotation model", annotationModel, fileBuffer.getAnnotationModel());
-
-        fileBuffer.close();
-
+        try (FileBuffer fileBuffer = createFileBuffer(document, buffer, file, annotationModel, true)) {
+            assertEquals("File buffer document", document, fileBuffer.getDocument());
+            assertEquals("File buffer annotation model", annotationModel, fileBuffer.getAnnotationModel());
+        }
         verify(buffer, never()).commit(null, false);
     }
 

@@ -12,10 +12,11 @@ import org.eclipse.ui.internal.wizards.newresource.ResourceMessages;
 
 import ch.acanda.eclipse.pmd.swtbot.bot.PMDPropertyDialogBot;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class JavaProjectClient {
 
     private JavaProjectClient() {
-        // hide contructor of utility class
+        // hide constructor of utility class
     }
 
     /**
@@ -78,10 +79,10 @@ public final class JavaProjectClient {
         final SWTWorkbenchBot bot = new SWTWorkbenchBot();
         bot.menu("File").menu("New").menu("File").click();
         final SWTBotShell dialog = bot.shell(ResourceMessages.FileResource_shellTitle);
-        if (relativePath.getParent() != null) {
-            dialog.bot().text(0).setText(projectName + "/" + relativePath.getParent().toString());
-        } else {
+        if (relativePath.getParent() == null) {
             dialog.bot().text(0).setText(projectName);
+        } else {
+            dialog.bot().text(0).setText(projectName + "/" + relativePath.getParent().toString());
         }
         dialog.bot().text(1).setText(relativePath.getFileName().toString());
         dialog.bot().button("Finish").click();

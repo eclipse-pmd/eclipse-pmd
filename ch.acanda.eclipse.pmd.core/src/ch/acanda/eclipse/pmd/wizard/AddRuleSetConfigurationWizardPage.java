@@ -3,8 +3,6 @@ package ch.acanda.eclipse.pmd.wizard;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import net.sourceforge.pmd.Rule;
-
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -38,8 +36,11 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 import ch.acanda.eclipse.pmd.ui.util.SelectionAdapter;
+import net.sourceforge.pmd.Rule;
 
+@SuppressWarnings("PMD.ExcessiveImports")
 public class AddRuleSetConfigurationWizardPage extends WizardPage implements RuleSetWizardPage {
+
     private final AddRuleSetConfigurationController controller;
 
     private Text location;
@@ -138,28 +139,25 @@ public class AddRuleSetConfigurationWizardPage extends WizardPage implements Rul
     private DataBindingContext initDataBindings() {
         final DataBindingContext bindingContext = new DataBindingContext();
         //
-        final IObservableValue locationObserveText = SWTObservables.observeDelayedValue(200,
-                SWTObservables.observeText(location, SWT.Modify));
-        final IObservableValue locationObserveValue = BeansObservables.observeValue(controller.getModel(), "location");
-        bindingContext.bindValue(locationObserveText, locationObserveValue, null, null);
+        final IObservableValue locationView = SWTObservables.observeDelayedValue(200, SWTObservables.observeText(location, SWT.Modify));
+        final IObservableValue locationModel = BeansObservables.observeValue(controller.getModel(), "location");
+        bindingContext.bindValue(locationView, locationModel, null, null);
         //
         final ObservableListContentProvider rulesContentProvider = new ObservableListContentProvider();
-        final IObservableMap rulesObserveMap = PojoObservables.observeMap(rulesContentProvider.getKnownElements(), Rule.class, "name");
-        tableViewer.setLabelProvider(new ObservableMapLabelProvider(rulesObserveMap));
+        final IObservableMap ruleNamesModel = PojoObservables.observeMap(rulesContentProvider.getKnownElements(), Rule.class, "name");
+        tableViewer.setLabelProvider(new ObservableMapLabelProvider(ruleNamesModel));
         tableViewer.setContentProvider(rulesContentProvider);
         //
-        final IObservableList rulesObserveList = BeansObservables.observeList(Realm.getDefault(), controller.getModel(), "rules");
-        tableViewer.setInput(rulesObserveList);
+        final IObservableList rulesModel = BeansObservables.observeList(Realm.getDefault(), controller.getModel(), "rules");
+        tableViewer.setInput(rulesModel);
         //
-        final IObservableValue nameObserveTextObserveWidget = SWTObservables.observeDelayedValue(100,
-                SWTObservables.observeText(name, SWT.Modify));
-        final IObservableValue controllergetModelNameObserveValue = BeansObservables.observeValue(controller.getModel(), "name");
-        bindingContext.bindValue(nameObserveTextObserveWidget, controllergetModelNameObserveValue, null, null);
+        final IObservableValue nameView = SWTObservables.observeDelayedValue(100, SWTObservables.observeText(name, SWT.Modify));
+        final IObservableValue nameModel = BeansObservables.observeValue(controller.getModel(), "name");
+        bindingContext.bindValue(nameView, nameModel, null, null);
         //
-        final IObservableValue observeVisibleBrowseObserveWidget = WidgetProperties.visible().observe(browse);
-        final IObservableValue browseEnabledControllergetModelObserveValue = BeanProperties.value("browseEnabled").observe(
-                controller.getModel());
-        bindingContext.bindValue(observeVisibleBrowseObserveWidget, browseEnabledControllergetModelObserveValue, null, null);
+        final IObservableValue browseVisibleView = WidgetProperties.visible().observe(browse);
+        final IObservableValue browseEnabledModel = BeanProperties.value("browseEnabled").observe(controller.getModel());
+        bindingContext.bindValue(browseVisibleView, browseEnabledModel, null, null);
         //
         return bindingContext;
     }

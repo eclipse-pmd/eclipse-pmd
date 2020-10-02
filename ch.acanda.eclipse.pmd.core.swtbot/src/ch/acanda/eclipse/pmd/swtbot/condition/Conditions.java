@@ -22,6 +22,7 @@ public final class Conditions {
      *
      * @see IsChecked
      */
+    @SuppressWarnings("PMD.LinguisticNaming")
     public static ICondition isChecked(final SWTBotTableItem tableItem) {
         return new IsChecked(tableItem);
     }
@@ -31,6 +32,7 @@ public final class Conditions {
      *
      * @see IsPerspectiveActive
      */
+    @SuppressWarnings("PMD.LinguisticNaming")
     public static ICondition isPerspectiveActive(final SWTBotPerspective perspective) {
         return new IsPerspectiveActive(perspective);
     }

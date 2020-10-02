@@ -77,6 +77,10 @@ import org.xml.sax.SAXException;
  */
 public class QuickFixTestData {
 
+    private QuickFixTestData() {
+        // hide constructor of utility class
+    }
+
     public static List<TestParameters> createTestData(final InputStream testCase) {
         final List<TestParameters> data = new ArrayList<>();
         try {

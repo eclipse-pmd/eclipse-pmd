@@ -44,7 +44,7 @@ public class ProjectModel extends DomainModel {
     }
 
     public void setRuleSets(final Iterable<? extends RuleSetModel> ruleSets) {
-        final TreeSet<RuleSetModel> set = new TreeSet<RuleSetModel>(RULE_SET_COMPARATOR);
+        final TreeSet<RuleSetModel> set = new TreeSet<>(RULE_SET_COMPARATOR);
         ruleSets.forEach(set::add);
         setProperty(RULESETS_PROPERTY, this.ruleSets, this.ruleSets = set);
     }

@@ -20,7 +20,7 @@ public class GUITestCase {
 
     @BeforeClass
     public static void initSWTBotPreferencesAndOpenJavaPerspective() {
-        SWTBotPreferences.TIMEOUT = 10000;
+        SWTBotPreferences.TIMEOUT = 10_000;
         final SWTWorkbenchBot workbenchBot = new SWTWorkbenchBot();
         closeWelcomeView(workbenchBot);
         openJavaPerspective(workbenchBot);

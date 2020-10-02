@@ -34,7 +34,7 @@ public final class PMDPlugin extends AbstractUIPlugin {
     }
 
     @Override
-    @SuppressWarnings("PMD.SignatureDeclareThrowsException")
+    @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "PMD.NullAssignment" })
     public void stop(final BundleContext context) throws Exception {
         PMDPluginImages.dispose();
         plugin = null;

@@ -99,7 +99,7 @@ public class WorkspaceModelTest {
      * project model does not exist.
      */
     @Test
-    public void getProjectReturnsOptionalAbsentWhenProjectModelDoesNotExist() {
+    public void returnsAbsentWhenProjectModelDoesNotExist() {
         final WorkspaceModel model = new WorkspaceModel();
 
         final Optional<ProjectModel> actual = model.getProject("Foo");
@@ -112,7 +112,7 @@ public class WorkspaceModelTest {
      * Verifies that {@link WorkspaceModel#getProject(String)} returns the requested project model.
      */
     @Test
-    public void getProjectReturnsRequestedProjectModel() {
+    public void returnsRequestedProjectModel() {
         final WorkspaceModel model = new WorkspaceModel();
         final ProjectModel expected = new ProjectModel("Foo");
         model.add(expected);
@@ -129,7 +129,7 @@ public class WorkspaceModelTest {
      * project model does not yet exist.
      */
     @Test
-    public void getOrCreateProjectReturnsOptionalAbsentWhenProjectModelDoesNotExist() {
+    public void returnsOptionalAbsentWhenProjectModelDoesNotExist() {
         final WorkspaceModel model = new WorkspaceModel();
 
         final ProjectModel actual = model.getOrCreateProject("Foo");
@@ -144,7 +144,7 @@ public class WorkspaceModelTest {
      * already exists.
      */
     @Test
-    public void getOrCreateProjectReturnsRequestedProjectModel() {
+    public void returnsRequestedProjectModelWhenProjectModelExists() {
         final WorkspaceModel model = new WorkspaceModel();
         final ProjectModel expected = new ProjectModel("Foo");
         model.add(expected);

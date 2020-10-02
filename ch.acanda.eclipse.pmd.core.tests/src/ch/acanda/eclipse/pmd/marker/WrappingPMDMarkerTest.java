@@ -82,7 +82,7 @@ public class WrappingPMDMarkerTest {
      * Verifies that {@link WrappingPMDMarker#getRuleId()} gets the rule id from the wrapped marker.
      */
     @Test
-    public void getRuleId() throws CoreException {
+    public void shouldReturnExpectedRuleId() throws CoreException {
         final IMarker marker = mock(IMarker.class);
         final String expected = "Rule E";
         when(marker.getAttribute(eq(RULE_ID), isNull())).thenReturn(expected);
@@ -109,7 +109,7 @@ public class WrappingPMDMarkerTest {
      * marker.
      */
     @Test
-    public void getViolationClassName() throws CoreException {
+    public void shouldReturnExpectedViolationClassName() throws CoreException {
         final IMarker marker = mock(IMarker.class);
         final String expected = "ViolationClassName";
         when(marker.getAttribute(eq("violationClassName"), anyString())).thenReturn(expected);

@@ -18,6 +18,8 @@ import net.sourceforge.pmd.RuleViolation;
  */
 public final class MarkerUtil {
 
+    private static final char TAB = '\t';
+
     /*
      * The tab size is used to calculate the correct start and end character for the marker. {@link
      * RuleViolation#getBeginColumn()} and {@link RuleViolation#getEndColumn()} count a tabulator character as {@code
@@ -119,7 +121,7 @@ public final class MarkerUtil {
         while (pmdCharCounter < pmdCharOffset) {
             if (absoluteOffset < content.length()) {
                 final char c = content.charAt(absoluteOffset);
-                if (c == '\t') {
+                if (c == TAB) {
                     pmdCharCounter = (pmdCharCounter / PMD_TAB_SIZE + 1) * PMD_TAB_SIZE;
                 } else {
                     pmdCharCounter++;

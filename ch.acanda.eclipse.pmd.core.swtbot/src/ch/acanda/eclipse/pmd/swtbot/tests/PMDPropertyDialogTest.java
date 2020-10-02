@@ -87,6 +87,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         dialog.bot().waitUntil(shellCloses(dialog));
     }
 
+    @SuppressWarnings("PMD.DetachedTestCase")
     public void addFileSystemRuleSetInFirstProject() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
         assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
@@ -103,7 +104,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
         wizard.location().setText(rules.toAbsolutePath().toString());
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
-        final String[] expectedNames = new String[] { "ExtendsObject", "BooleanInstantiation" };
+        final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
         assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
         assertArrayEquals("Rules of the PMD ", expectedNames, actualNames);
@@ -178,7 +179,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
-        final String[] expectedNames = new String[] { "ExtendsObject", "BooleanInstantiation" };
+        final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
         assertArrayEquals("Rules of the PMD rule set", expectedNames, actualNames);
         wizard.waitUntilFinishIsEnabled("The finish button should be enabled if both a name and a location are available");
@@ -222,7 +223,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.location().setText(projectRelativePath);
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
-        final String[] expectedNames = new String[] { "ExtendsObject", "BooleanInstantiation" };
+        @SuppressWarnings("PMD.UseShortArrayInitializer")
+        final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
         assertArrayEquals("Rules of the PMD rule set", expectedNames, actualNames);
         assertTrue("The finish button should be enabled if both a name and a location with a valid rule set is available",
@@ -265,7 +267,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.location().setText(uri);
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
-        final String[] expectedNames = new String[] { "ExtendsObject", "BooleanInstantiation" };
+        final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
         assertArrayEquals("Rules of the PMD rule set", expectedNames, actualNames);
         wizard.waitUntilFinishIsEnabled("The finish button should be enabled if both a name and a location are available");

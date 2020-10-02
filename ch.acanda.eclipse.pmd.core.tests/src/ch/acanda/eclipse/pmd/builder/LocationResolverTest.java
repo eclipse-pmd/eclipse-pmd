@@ -27,13 +27,15 @@ import ch.acanda.eclipse.pmd.domain.LocationContext;
  */
 public class LocationResolverTest {
 
+    private static final String XML = ".xml";
+
     /**
      * Verifies that {@link LocationResolver#resolveIfExists(Location, IProject)} resolves the loacation in a file
      * system context correctly.
      */
     @Test
     public void resolveIfExistsFileSystemLocation() throws IOException {
-        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), ".xml");
+        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), XML);
         try {
             final Location location = new Location(ruleSetFile.toString(), LocationContext.FILE_SYSTEM);
             final IProject project = mock(IProject.class);
@@ -82,7 +84,7 @@ public class LocationResolverTest {
      */
     @Test
     public void resolveIfExistsRemoteLocation() throws IOException {
-        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), ".xml");
+        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), XML);
         try {
             final Location location = new Location(ruleSetFile.toUri().toString(), LocationContext.REMOTE);
             final IProject project = mock(IProject.class);
@@ -131,7 +133,7 @@ public class LocationResolverTest {
      */
     @Test
     public void resolveIfExistsProjectLocation() throws URISyntaxException, IOException {
-        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), ".xml");
+        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), XML);
         try {
             final Location location = new Location(ruleSetFile.getFileName().toString(), LocationContext.PROJECT);
             final IProject project = mock(IProject.class);
@@ -183,7 +185,7 @@ public class LocationResolverTest {
      */
     @Test
     public void resolveIfExistsWorkspaceLocation() throws URISyntaxException, IOException {
-        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), ".xml");
+        final Path ruleSetFile = Files.createTempFile(LocationResolverTest.class.getSimpleName(), XML);
         try {
             final Location location = new Location("project/" + ruleSetFile.getFileName().toString(), LocationContext.WORKSPACE);
             final IProject project = mock(IProject.class);
