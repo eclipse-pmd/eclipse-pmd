@@ -47,15 +47,15 @@ public final class FileWatcher {
     }
 
     public Subscription subscribe(final Path file, final FileChangedListener listener) throws IOException {
-        final Path absoluteFile = file.toAbsolutePath();
-        listeners.computeIfAbsent(absoluteFile, f -> new ArrayList<>()).add(listener);
+        final Path canonicalFile = file.toRealPath();
+        listeners.computeIfAbsent(canonicalFile, f -> new ArrayList<>()).add(listener);
 
-        final Path absoluteDirectory = file.getParent();
-        watchedFiles.computeIfAbsent(absoluteDirectory, d -> new ArrayList<>()).add(absoluteFile);
+        final Path canonicalDirectory = canonicalFile.getParent();
+        watchedFiles.computeIfAbsent(canonicalDirectory, d -> new ArrayList<>()).add(canonicalFile);
 
-        if (!watchKeys.containsKey(absoluteDirectory)) {
-            final WatchKey watchKey = absoluteDirectory.register(watchService, ENTRY_MODIFY, ENTRY_DELETE);
-            watchKeys.put(absoluteDirectory, watchKey);
+        if (!watchKeys.containsKey(canonicalDirectory)) {
+            final WatchKey watchKey = canonicalDirectory.register(watchService, ENTRY_MODIFY, ENTRY_DELETE);
+            watchKeys.put(canonicalDirectory, watchKey);
             if (watchKeys.size() == 1) {
                 startWatcher();
             }
@@ -64,11 +64,11 @@ public final class FileWatcher {
         return new Subscription() {
             @Override
             public void cancel() {
-                removeFrom(listeners, absoluteFile, listener);
-                removeFrom(watchedFiles, absoluteDirectory, absoluteFile);
-                if (!watchedFiles.containsKey(absoluteFile)) {
-                    watchedFiles.remove(absoluteDirectory);
-                    watchKeys.remove(absoluteDirectory);
+                removeFrom(listeners, canonicalFile, listener);
+                removeFrom(watchedFiles, canonicalDirectory, canonicalFile);
+                if (!watchedFiles.containsKey(canonicalFile)) {
+                    watchedFiles.remove(canonicalDirectory);
+                    watchKeys.remove(canonicalDirectory);
                     if (watchKeys.isEmpty()) {
                         stopWatcher();
                     }
@@ -92,6 +92,7 @@ public final class FileWatcher {
         watcherThread.start();
     }
 
+    @SuppressWarnings("PMD.NullAssignment")
     private void stopWatcher() {
         if (watcherThread != null) {
             watcherThread.interrupt();
