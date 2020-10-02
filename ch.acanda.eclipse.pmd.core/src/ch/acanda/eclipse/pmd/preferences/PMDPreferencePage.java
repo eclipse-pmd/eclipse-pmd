@@ -40,6 +40,7 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
     }
 
     @Override
+    @SuppressWarnings({ "PMD.NcssCount", "PMD.ExcessiveMethodLength" })
     protected Control createContents(final Composite parent) {
         final Composite composite = new Composite(parent, SWT.NONE);
         final GridLayout layout = new GridLayout(2, false);
@@ -122,11 +123,11 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
         step6.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
         step6.setText("6.");
 
-        final Label step6Lagel = new Label(composite, SWT.WRAP);
+        final Label step6Label = new Label(composite, SWT.WRAP);
         final GridData step6LabelData = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
         step6LabelData.widthHint = WRAP_TO_PARENT_WITH;
-        step6Lagel.setLayoutData(step6LabelData);
-        step6Lagel.setText("Close the property dialog. Your project will now be analysed by PMD.");
+        step6Label.setLayoutData(step6LabelData);
+        step6Label.setText("Close the property dialog. Your project will now be analysed by PMD.");
 
         final Link sponsorLink = new Link(composite, SWT.WRAP);
         final GridData sponsorLinkData = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);

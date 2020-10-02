@@ -50,10 +50,8 @@ public final class ASTUtil {
      */
     @SuppressWarnings("unchecked")
     public static <T extends ASTNode> List<T> copy(final List<T> nodes) {
-        if (nodes == null || nodes.isEmpty()) {
-            return nodes;
-        }
-        return ASTNode.copySubtrees(nodes.get(0).getAST(), nodes);
+        final boolean isEmpty = nodes == null || nodes.isEmpty();
+        return isEmpty ? nodes : ASTNode.copySubtrees(nodes.get(0).getAST(), nodes);
     }
 
     /**

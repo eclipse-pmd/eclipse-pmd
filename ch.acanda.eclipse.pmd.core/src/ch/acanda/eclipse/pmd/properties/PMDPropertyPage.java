@@ -106,12 +106,12 @@ public class PMDPropertyPage extends PropertyPage {
     private DataBindingContext initDataBindings() {
         final DataBindingContext bindingContext = new DataBindingContext();
         //
-        final IObservableValue btnEnablePmdForObserveSelectionObserveWidget = SWTObservables.observeSelection(enablePMDCheckbox);
-        final IObservableValue modelPMDEnabledObserveValue = BeansObservables.observeValue(controller.getModel(), "PMDEnabled");
-        bindingContext.bindValue(btnEnablePmdForObserveSelectionObserveWidget, modelPMDEnabledObserveValue, null, null);
+        final IObservableValue pmdEnabledView = SWTObservables.observeSelection(enablePMDCheckbox);
+        final IObservableValue pmdEnabledModel = BeansObservables.observeValue(controller.getModel(), "PMDEnabled");
+        bindingContext.bindValue(pmdEnabledView, pmdEnabledModel, null, null);
         //
-        final IObservableValue addObserveEnabledObserveWidget = SWTObservables.observeEnabled(addRuleSet);
-        bindingContext.bindValue(addObserveEnabledObserveWidget, modelPMDEnabledObserveValue, null, null);
+        final IObservableValue addEnabledView = SWTObservables.observeEnabled(addRuleSet);
+        bindingContext.bindValue(addEnabledView, pmdEnabledModel, null, null);
         //
         return bindingContext;
     }

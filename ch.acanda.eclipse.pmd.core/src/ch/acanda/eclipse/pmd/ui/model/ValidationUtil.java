@@ -12,7 +12,7 @@ public final class ValidationUtil {
      * @return {@code true} if a validation error was added to the validation result.
      */
     public static boolean errorIfBlank(final String propertyName, final String value, final String message, final ValidationResult result) {
-        if (value == null || value.trim().length() == 0) {
+        if (value == null || value.isBlank()) {
             result.add(new ValidationProblem(propertyName, ValidationProblem.Severity.ERROR, message));
             return true;
         }

@@ -31,6 +31,7 @@ public class SelectConfigurationTypeWizardPage extends WizardPage {
     }
 
     @Override
+    @SuppressWarnings("PMD.NcssCount")
     public void createControl(final Composite parent) {
         final Composite container = new Composite(parent, SWT.NULL);
         container.setLayout(new GridLayout(2, false));
@@ -124,12 +125,11 @@ public class SelectConfigurationTypeWizardPage extends WizardPage {
         final IObservableValue fileSystemTypeModel = BeanProperties.value("fileSystemTypeSelected").observe(controller.getModel());
         bindingContext.bindValue(fileSystemTypeView, fileSystemTypeModel, null, null);
         //
-        final IObservableValue observeSelectionRemoteRadioButtonObserveWidget = WidgetProperties.selection().observe(remoteRadioButton);
-        final IObservableValue remoteTypeSelectedControllergetModelObserveValue = BeanProperties.value("remoteTypeSelected").observe(
-                controller.getModel());
-        bindingContext.bindValue(observeSelectionRemoteRadioButtonObserveWidget, remoteTypeSelectedControllergetModelObserveValue, null,
-                null);
+        final IObservableValue reomteTypeView = WidgetProperties.selection().observe(remoteRadioButton);
+        final IObservableValue remoteTypeModel = BeanProperties.value("remoteTypeSelected").observe(controller.getModel());
+        bindingContext.bindValue(reomteTypeView, remoteTypeModel, null, null);
         //
         return bindingContext;
     }
+
 }

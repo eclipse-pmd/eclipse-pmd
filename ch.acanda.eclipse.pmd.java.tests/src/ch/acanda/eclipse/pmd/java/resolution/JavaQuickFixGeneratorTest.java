@@ -18,7 +18,7 @@ import org.osgi.framework.Version;
 
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 
-@RunWith(value = Parameterized.class)
+@RunWith(Parameterized.class)
 public class JavaQuickFixGeneratorTest {
 
     private final String ruleId;

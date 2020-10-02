@@ -66,6 +66,7 @@ public final class AddRuleSetConfigurationWizardBot extends SWTBotShell {
         bot().waitWhile(isFinishEnabled(failureMessage));
     }
 
+    @SuppressWarnings("PMD.LinguisticNaming")
     private ICondition isFinishEnabled(final String failureMessage) {
         return new DefaultCondition() {
             @Override

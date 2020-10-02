@@ -41,6 +41,7 @@ class NodeWithinPositionNodeFinder<R extends ASTNode, N extends ASTNode> extends
     }
 
     @Override
+    @SuppressWarnings("PMD.NullAssignment")
     public Optional<N> findNode(final R ast) {
         node = null;
         ast.accept(this);

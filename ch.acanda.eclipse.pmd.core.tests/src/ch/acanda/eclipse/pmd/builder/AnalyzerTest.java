@@ -1,5 +1,6 @@
 package ch.acanda.eclipse.pmd.builder;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -46,7 +48,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeJava() {
-        analyze("class A extends Object {}", "UTF-8", "java", "rulesets/java/basic.xml/ExtendsObject", "ExtendsObject");
+        analyze("class A extends Object {}", UTF_8, "java", "rulesets/java/basic.xml/ExtendsObject", "ExtendsObject");
     }
 
     /**
@@ -66,7 +68,7 @@ public class AnalyzerTest {
                 + "    /* */\n"
                 + "  }\n"
                 + "}\n";
-        analyze(content, "UTF-8", "java", getAllRuleSetRefIds("java"));
+        analyze(content, UTF_8, "java", getAllRuleSetRefIds("java"));
     }
 
     /**
@@ -74,7 +76,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeXML() {
-        analyze("<cdata><![CDATA[[bar]]></cdata>", "UTF-8", "xml", "rulesets/xml/basic.xml/MistypedCDATASection", "MistypedCDATASection");
+        analyze("<cdata><![CDATA[[bar]]></cdata>", UTF_8, "xml", "rulesets/xml/basic.xml/MistypedCDATASection", "MistypedCDATASection");
     }
 
     /**
@@ -82,7 +84,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeXMLAllRules() throws IOException {
-        analyze("<a/>", "UTF-8", "xml", getAllRuleSetRefIds("xml"));
+        analyze("<a/>", UTF_8, "xml", getAllRuleSetRefIds("xml"));
     }
 
     /**
@@ -90,7 +92,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeJSP() {
-        analyze("<jsp:forward page='a.jsp'/>", "UTF-8", "jsp", "rulesets/jsp/basic.xml/NoJspForward", "NoJspForward");
+        analyze("<jsp:forward page='a.jsp'/>", UTF_8, "jsp", "rulesets/jsp/basic.xml/NoJspForward", "NoJspForward");
     }
 
     /**
@@ -98,7 +100,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeJSPAllRules() throws IOException {
-        analyze("<%@ page contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>", "UTF-8", "jsp", getAllRuleSetRefIds("jsp"));
+        analyze("<%@ page contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>", UTF_8, "jsp", getAllRuleSetRefIds("jsp"));
     }
 
     /**
@@ -106,7 +108,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeModelica() {
-        analyze("model A\nend B;", "UTF-8", "mo",
+        analyze("model A\nend B;", UTF_8, "mo",
                 "category/modelica/bestpractices.xml/ClassStartNameEqualsEndName",
                 "ClassStartNameEqualsEndName");
     }
@@ -116,7 +118,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeModelicaAllRules() throws IOException {
-        analyze("model A\nend A;", "UTF-8", "mo", getAllRuleSetRefIds("modelica"));
+        analyze("model A\nend A;", UTF_8, "mo", getAllRuleSetRefIds("modelica"));
     }
 
     /**
@@ -124,7 +126,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeXSL() {
-        analyze("<variable name=\"var\" select=\"//item/descendant::child\"/>", "UTF-8", "xsl",
+        analyze("<variable name=\"var\" select=\"//item/descendant::child\"/>", UTF_8, "xsl",
                 "rulesets/xsl/xpath.xml/AvoidAxisNavigation", "AvoidAxisNavigation");
     }
 
@@ -133,7 +135,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeXSLAllRules() throws IOException {
-        analyze("<a/>", "UTF-8", "xsl", getAllRuleSetRefIds("xsl"));
+        analyze("<a/>", UTF_8, "xsl", getAllRuleSetRefIds("xsl"));
     }
 
     /**
@@ -141,7 +143,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeEcmascript() {
-        analyze("var z = 1.12345678901234567", "UTF-8", "js",
+        analyze("var z = 1.12345678901234567", UTF_8, "js",
                 "rulesets/ecmascript/basic.xml/InnaccurateNumericLiteral", "InnaccurateNumericLiteral");
     }
 
@@ -150,7 +152,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeEcmascriptAllRules() throws IOException {
-        analyze("var i = 0", "UTF-8", "js", getAllRuleSetRefIds("ecmascript"));
+        analyze("var i = 0", UTF_8, "js", getAllRuleSetRefIds("ecmascript"));
     }
 
     /**
@@ -158,7 +160,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeVelocity() {
-        analyze("<script type=\"text/javascript\">$s</script>", "UTF-8", "vm", "rulesets/vm/basic.xml/NoInlineJavaScript",
+        analyze("<script type=\"text/javascript\">$s</script>", UTF_8, "vm", "rulesets/vm/basic.xml/NoInlineJavaScript",
                 "NoInlineJavaScript");
     }
 
@@ -167,7 +169,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeVelocityAllRules() throws IOException {
-        analyze("<a/>", "UTF-8", "vm", getAllRuleSetRefIds("vm"));
+        analyze("<a/>", UTF_8, "vm", getAllRuleSetRefIds("vm"));
     }
 
     /**
@@ -176,7 +178,7 @@ public class AnalyzerTest {
     @Test
     public void analyzePLSQL() {
         final String content = "select * from a";
-        analyze(content, "UTF-8", "sql", "category/plsql/codestyle.xml/CodeFormat", "CodeFormat");
+        analyze(content, UTF_8, "sql", "category/plsql/codestyle.xml/CodeFormat", "CodeFormat");
     }
 
     /**
@@ -184,7 +186,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzePLSQLAllRules() throws IOException {
-        analyze("select *\n  from a", "UTF-8", "sql", getAllRuleSetRefIds("plsql"));
+        analyze("select *\n  from a", UTF_8, "sql", getAllRuleSetRefIds("plsql"));
     }
 
     /**
@@ -193,7 +195,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeApex() {
         final String content = "public class apex { }";
-        analyze(content, "UTF-8", "cls", "category/apex/codestyle.xml/ClassNamingConventions", "ClassNamingConventions");
+        analyze(content, UTF_8, "cls", "category/apex/codestyle.xml/ClassNamingConventions", "ClassNamingConventions");
     }
 
     /**
@@ -201,7 +203,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeApexAllRules() throws IOException {
-        analyze("/** @description Hello Apex */ public class Apex { }", "UTF-8", "cls", getAllRuleSetRefIds("apex"));
+        analyze("/** @description Hello Apex */ public class Apex { }", UTF_8, "cls", getAllRuleSetRefIds("apex"));
     }
 
     /**
@@ -210,7 +212,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeFileWithoutExtension() {
-        analyze("Hello World", "UTF-8", null, "rulesets/java/basic.xml/ExtendsObject");
+        analyze("Hello World", UTF_8, null, "rulesets/java/basic.xml/ExtendsObject");
     }
 
     /**
@@ -219,7 +221,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeClassFile() {
-        analyze("", "UTF-8", "class", "rulesets/java/basic.xml/ExtendsObject");
+        analyze("", UTF_8, "class", "rulesets/java/basic.xml/ExtendsObject");
     }
 
     /**
@@ -227,7 +229,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeDerivedFile() throws UnsupportedEncodingException, CoreException {
-        final IFile file = mockFile("class A extends Object {}", "UTF-8", "java", true, true);
+        final IFile file = mockFile("class A extends Object {}", UTF_8, "java", true, true);
         analyze(file, "rulesets/java/basic.xml/ExtendsObject");
     }
 
@@ -236,7 +238,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeInaccessibleFile() throws UnsupportedEncodingException, CoreException {
-        final IFile file = mockFile("", "UTF-8", "java", false, false);
+        final IFile file = mockFile("", UTF_8, "java", false, false);
         analyze(file, "rulesets/java/basic.xml/ExtendsObject");
     }
 
@@ -246,7 +248,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzePMDBug1076() throws UnsupportedEncodingException, CoreException {
-        final IFile file = mockFile("class Foo { void bar(int a, int b) { } }", "UTF-8", "java", false, true);
+        final IFile file = mockFile("class Foo { void bar(int a, int b) { } }", UTF_8, "java", false, true);
         analyze(file, "rulesets/java/optimizations.xml/MethodArgumentCouldBeFinal",
                 "MethodArgumentCouldBeFinal", "MethodArgumentCouldBeFinal");
     }
@@ -255,7 +257,7 @@ public class AnalyzerTest {
      * Prepares the arguments, calls {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor), and verifies that it
      * invokes {@link ViolationProcessor#annotate(IFile, Iterable) with the correct rule violations.
      */
-    public void analyze(final String content, final String charset, final String fileExtension, final String ruleSetRefId,
+    private void analyze(final String content, final Charset charset, final String fileExtension, final String ruleSetRefId,
             final String... violatedRules) {
         try {
             final IFile file = mockFile(content, charset, fileExtension, false, true);
@@ -292,13 +294,13 @@ public class AnalyzerTest {
         }
     }
 
-    private IFile mockFile(final String content, final String charset, final String fileExtension, final boolean isDerived,
+    private IFile mockFile(final String content, final Charset charset, final String fileExtension, final boolean isDerived,
             final boolean isAccessible) throws CoreException, UnsupportedEncodingException {
         final IFile file = mock(IFile.class);
         when(file.isDerived(IResource.CHECK_ANCESTORS)).thenReturn(isDerived);
         when(file.isAccessible()).thenReturn(isAccessible);
         when(file.getFileExtension()).thenReturn(fileExtension);
-        when(file.getCharset()).thenReturn(charset);
+        when(file.getCharset()).thenReturn(charset.name());
         when(file.getContents()).thenReturn(new ByteArrayInputStream(content.getBytes(charset)));
         final IPath path = mock(IPath.class);
         when(file.getRawLocation()).thenReturn(path);
