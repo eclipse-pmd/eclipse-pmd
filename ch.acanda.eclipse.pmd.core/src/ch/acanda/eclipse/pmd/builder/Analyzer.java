@@ -42,11 +42,11 @@ public final class Analyzer {
      * @param violationProcessor The processor that processes the violated rules.
      */
     public void analyze(final IFile file, final RuleSets ruleSets, final ViolationProcessor violationProcessor) {
-        final Iterable<RuleViolation> violations = runPMD(file, ruleSets);
+        final List<RuleViolation> violations = runPMD(file, ruleSets);
         annotateFile(file, violationProcessor, violations);
     }
 
-    private Iterable<RuleViolation> runPMD(final IFile file, final RuleSets ruleSets) {
+    private List<RuleViolation> runPMD(final IFile file, final RuleSets ruleSets) {
         try {
             if (isValidFile(file, ruleSets)) {
                 final Language language = LANGUAGES.get(file.getFileExtension().toLowerCase(Locale.ROOT));
@@ -57,7 +57,7 @@ public final class Analyzer {
                         context.setLanguageVersion(language.getDefaultVersion());
                         context.setIgnoreExceptions(false);
                         new SourceCodeProcessor(configuration).processSourceCode(reader, ruleSets, context);
-                        return () -> context.getReport().iterator();
+                        return context.getReport().getViolations();
                     }
                 }
             }
@@ -73,7 +73,7 @@ public final class Analyzer {
         return List.of();
     }
 
-    private void annotateFile(final IFile file, final ViolationProcessor violationProcessor, final Iterable<RuleViolation> violations) {
+    private void annotateFile(final IFile file, final ViolationProcessor violationProcessor, final List<RuleViolation> violations) {
         try {
             violationProcessor.annotate(file, violations);
         } catch (CoreException | IOException e) {

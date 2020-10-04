@@ -7,6 +7,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ResourceLocator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -130,7 +131,7 @@ public final class PMDPlugin extends AbstractUIPlugin {
      * @return The image descriptor, or <code>null</code> if no image could be found.
      */
     public static ImageDescriptor getImageDescriptor(final String path) {
-        return imageDescriptorFromPlugin(ID, path);
+        return ResourceLocator.imageDescriptorFromBundle(ID, path).orElse(null);
     }
 
 }
