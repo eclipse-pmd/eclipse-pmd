@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -318,11 +317,11 @@ public class AnalyzerTest {
         }
     }
 
-    private Iterable<RuleViolation> violations(final String... ruleNames) {
+    private List<RuleViolation> violations(final String... ruleNames) {
         return argThat(new RuleViolationIteratorMatcher(ruleNames));
     }
 
-    private static class RuleViolationIteratorMatcher implements ArgumentMatcher<Iterable<RuleViolation>> {
+    private static class RuleViolationIteratorMatcher implements ArgumentMatcher<List<RuleViolation>> {
 
         private final Iterable<String> expectedRuleNames;
 
@@ -331,8 +330,8 @@ public class AnalyzerTest {
         }
 
         @Override
-        public boolean matches(final Iterable<RuleViolation> violations) {
-            return StreamSupport.stream(violations.spliterator(), false)
+        public boolean matches(final List<RuleViolation> violations) {
+            return violations.stream()
                     .flatMap(violation -> Optional.ofNullable(violation.getRule()).map(Rule::getName).stream())
                     .collect(Collectors.toList())
                     .equals(expectedRuleNames);

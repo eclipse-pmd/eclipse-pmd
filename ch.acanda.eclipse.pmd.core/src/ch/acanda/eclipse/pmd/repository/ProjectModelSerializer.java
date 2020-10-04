@@ -8,10 +8,12 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
@@ -81,10 +83,12 @@ public class ProjectModelSerializer {
 
         final ProjectConfigurationContentHandler contentHandler = new ProjectConfigurationContentHandler();
         try {
-            final XMLReader reader = XMLReaderFactory.createXMLReader();
+            final SAXParserFactory factory = SAXParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            final XMLReader reader = factory.newSAXParser().getXMLReader();
             reader.setContentHandler(contentHandler);
             reader.parse(new InputSource(configurationStream));
-        } catch (final SAXException e) {
+        } catch (final SAXException | ParserConfigurationException e) {
             PMDPlugin.getDefault().error("Cannot read eclipse-pmd project configuration", e);
         }
 
