@@ -7,9 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import net.sourceforge.pmd.Rule;
-import net.sourceforge.pmd.RuleViolation;
-import net.sourceforge.pmd.lang.java.JavaLanguageModule;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -17,6 +14,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.junit.Test;
+
+import net.sourceforge.pmd.Rule;
+import net.sourceforge.pmd.RuleViolation;
+import net.sourceforge.pmd.lang.java.JavaLanguageModule;
 
 /**
  * Unit tests for {@link MarkerUtil}.
@@ -93,9 +94,9 @@ public class MarkerUtilTest {
         final RuleViolation violation = mock(RuleViolation.class);
         when(violation.getDescription()).thenReturn("message");
         when(violation.getBeginLine()).thenReturn(1);
-        when(violation.getBeginColumn()).thenReturn(25);
+        when(violation.getBeginColumn()).thenReturn(19);
         when(violation.getEndLine()).thenReturn(1);
-        when(violation.getEndColumn()).thenReturn(30);
+        when(violation.getEndColumn()).thenReturn(24);
         when(violation.getClassName()).thenReturn("ClassName");
         final Rule rule = mock(Rule.class);
         when(rule.getLanguage()).thenReturn(new JavaLanguageModule());

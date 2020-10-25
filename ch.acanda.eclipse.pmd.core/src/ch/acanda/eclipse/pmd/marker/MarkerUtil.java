@@ -18,15 +18,6 @@ import net.sourceforge.pmd.RuleViolation;
  */
 public final class MarkerUtil {
 
-    private static final char TAB = '\t';
-
-    /*
-     * The tab size is used to calculate the correct start and end character for the marker. {@link
-     * RuleViolation#getBeginColumn()} and {@link RuleViolation#getEndColumn()} count a tabulator character as {@code
-     * JavaCharStream.tabSize} characters, while the marker counts a tabulator as one character.
-     */
-    private static final int PMD_TAB_SIZE = 8;
-
     private static final String MARKER_TYPE = "ch.acanda.eclipse.pmd.core.pmdMarker";
     private static final String LONG_MARKER_TYPE = "ch.acanda.eclipse.pmd.core.pmdLongMarker";
 
@@ -120,12 +111,7 @@ public final class MarkerUtil {
         int absoluteOffset = lineOffset;
         while (pmdCharCounter < pmdCharOffset) {
             if (absoluteOffset < content.length()) {
-                final char c = content.charAt(absoluteOffset);
-                if (c == TAB) {
-                    pmdCharCounter = (pmdCharCounter / PMD_TAB_SIZE + 1) * PMD_TAB_SIZE;
-                } else {
-                    pmdCharCounter++;
-                }
+                pmdCharCounter++;
             } else {
                 break;
             }
