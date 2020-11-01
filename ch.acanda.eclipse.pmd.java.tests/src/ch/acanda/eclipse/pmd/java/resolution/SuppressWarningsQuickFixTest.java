@@ -2,20 +2,11 @@ package ch.acanda.eclipse.pmd.java.resolution;
 
 import java.util.Collection;
 
-import org.junit.runners.Parameterized.Parameters;
-
-import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
-
 /**
  * Unit plug-in test for {@link SuppressWarningsQuickFix}.
  */
 public class SuppressWarningsQuickFixTest extends ASTQuickFixTestCase<SuppressWarningsQuickFix> {
 
-    public SuppressWarningsQuickFixTest(final TestParameters parameters) {
-        super(parameters);
-    }
-
-    @Parameters
     public static Collection<Object[]> getTestData() {
         return createTestData(SuppressWarningsQuickFixTest.class.getResourceAsStream("SuppressWarnings.xml"));
     }

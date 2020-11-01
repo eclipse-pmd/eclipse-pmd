@@ -1,8 +1,8 @@
 package ch.acanda.eclipse.pmd.marker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for {@link WrappingPMDMarker}.
@@ -35,7 +35,7 @@ public class WrappingPMDMarkerTest {
         final IMarker other = mock(IMarker.class);
         when(other.getAttribute(eq(RULE_ID), isA(String.class))).thenReturn(ruleId);
         final boolean actual = pmdMarker.isOtherWithSameRuleId(other);
-        assertTrue("The marker must not be the same instance as the other marker", actual);
+        assertTrue(actual, "The marker must not be the same instance as the other marker");
     }
 
     /**
@@ -48,7 +48,7 @@ public class WrappingPMDMarkerTest {
         final WrappingPMDMarker pmdMarker = new WrappingPMDMarker(marker);
         final IMarker other = marker;
         final boolean actual = pmdMarker.isOtherWithSameRuleId(other);
-        assertFalse("The marker must not be the same instance as the other marker", actual);
+        assertFalse(actual, "The marker must not be the same instance as the other marker");
     }
 
     /**
@@ -63,7 +63,7 @@ public class WrappingPMDMarkerTest {
         final IMarker other = mock(IMarker.class);
         when(other.getAttribute(eq(RULE_ID), isA(String.class))).thenReturn("Rule C");
         final boolean actual = pmdMarker.isOtherWithSameRuleId(other);
-        assertFalse("The marker must not be the same instance as the other marker", actual);
+        assertFalse(actual, "The marker must not be the same instance as the other marker");
     }
 
     /**
@@ -88,7 +88,7 @@ public class WrappingPMDMarkerTest {
         when(marker.getAttribute(eq(RULE_ID), isNull())).thenReturn(expected);
         final WrappingPMDMarker pmdMarker = new WrappingPMDMarker(marker);
         final String actual = pmdMarker.getRuleId();
-        assertEquals("The rule id should be read from the wrapped marker", expected, actual);
+        assertEquals(expected, actual, "The rule id should be read from the wrapped marker");
     }
 
     /**
@@ -115,7 +115,7 @@ public class WrappingPMDMarkerTest {
         when(marker.getAttribute(eq("violationClassName"), anyString())).thenReturn(expected);
         final PMDMarker pmdMarker = new WrappingPMDMarker(marker);
         final String actual = pmdMarker.getViolationClassName();
-        assertEquals("The rule id should be read from the wrapped marker", expected, actual);
+        assertEquals(expected, actual, "The rule id should be read from the wrapped marker");
     }
 
     /**

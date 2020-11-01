@@ -1,22 +1,21 @@
 package ch.acanda.eclipse.pmd.cache;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 
-import net.sourceforge.pmd.RuleSets;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import com.google.common.cache.CacheLoader;
 
 import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
-
-import com.google.common.cache.CacheLoader;
+import net.sourceforge.pmd.RuleSets;
 
 /**
  * Unit tests for {@link RuleSetsCache}.
@@ -41,7 +40,7 @@ public final class RuleSetsCacheTest {
 
         final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
-        assertSame("First cache access should return rule sets from loader", RULE_SETS_FOO_1, actualRuleSets);
+        assertSame(RULE_SETS_FOO_1, actualRuleSets, "First cache access should return rule sets from loader");
     }
 
     /**
@@ -54,7 +53,7 @@ public final class RuleSetsCacheTest {
         cache.getRuleSets(PROJECT_NAME_1);
         final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
-        assertSame("Second cache access should return cached rule sets", RULE_SETS_FOO_1, actualRuleSets);
+        assertSame(RULE_SETS_FOO_1, actualRuleSets, "Second cache access should return cached rule sets");
     }
 
     /**
@@ -71,7 +70,7 @@ public final class RuleSetsCacheTest {
 
         final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
-        assertSame("Second cache access should reload rule sets", RULE_SETS_FOO_2, actualRuleSets);
+        assertSame(RULE_SETS_FOO_2, actualRuleSets, "Second cache access should reload rule sets");
     }
 
     /**
@@ -89,7 +88,7 @@ public final class RuleSetsCacheTest {
 
         final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_2);
 
-        assertSame("Second cache access should reload rule sets", RULE_SETS_BAR_2, actualRuleSets);
+        assertSame(RULE_SETS_BAR_2, actualRuleSets, "Second cache access should reload rule sets");
     }
 
     /**
@@ -106,7 +105,7 @@ public final class RuleSetsCacheTest {
 
         final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
-        assertSame("Second cache access should reload rule sets", RULE_SETS_FOO_2, actualRuleSets);
+        assertSame(RULE_SETS_FOO_2, actualRuleSets, "Second cache access should reload rule sets");
     }
 
     private CacheLoader<String, RuleSets> getCacheLoaderMock() throws Exception {

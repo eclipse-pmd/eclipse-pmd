@@ -1,7 +1,8 @@
 package ch.acanda.eclipse.pmd.swtbot.tests;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.net.URL;
 import java.util.Enumeration;
@@ -9,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotLabel;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
@@ -22,8 +23,8 @@ public class PMDPreferencesTest extends GUITestCase {
         final PMDPreferenceDialogBot bot = PMDPreferenceDialogBot.open();
         final SWTBotLabel pmdVersionLabel = bot.bot().labelWithId(SWTBotID.PMD_VERSION.name());
         final String expectedVersion = getPmdVersion();
-        assertTrue("\"" + pmdVersionLabel.getText() + "\" should contain " + expectedVersion,
-                pmdVersionLabel.getText().contains(expectedVersion));
+        assertTrue(pmdVersionLabel.getText().contains(expectedVersion),
+                "\"" + pmdVersionLabel.getText() + "\" should contain " + expectedVersion);
         bot.close();
     }
 

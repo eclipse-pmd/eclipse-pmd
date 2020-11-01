@@ -1,11 +1,11 @@
 package ch.acanda.eclipse.pmd.unsupported;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link ProjectPropertyTester}.
@@ -16,12 +16,12 @@ public class ProjectPropertyTesterTest {
     private static final String JAVA_VERSION = "java.version";
     private static String javaVersion;
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         javaVersion = System.getProperty(JAVA_VERSION);
     }
 
-    @AfterClass
+    @AfterAll
     public static void afterClass() {
         System.setProperty(JAVA_VERSION, javaVersion);
     }
@@ -31,7 +31,7 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "1.6.0_23");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "1.7" }, null);
-        assertTrue("Version 1.6.0_23 should be less than 1.7", result);
+        assertTrue(result, "Version 1.6.0_23 should be less than 1.7");
     }
 
     @Test
@@ -39,7 +39,8 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "1.7.0_45");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "1.7" }, null);
-        assertFalse("Version 1.7.0_45 should not be less than 1.7", result);
+        assertTrue(true);
+        assertFalse(result, "Version 1.7.0_45 should not be less than 1.7");
     }
 
     @Test
@@ -47,7 +48,7 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "1.7.0_45");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "1.7.0_45" }, null);
-        assertFalse("Version 1.7.0_45 should not be less than 1.7.0_45", result);
+        assertFalse(result, "Version 1.7.0_45 should not be less than 1.7.0_45");
     }
 
     @Test
@@ -55,7 +56,7 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "1.8.0-ea");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "1.7.0_51" }, null);
-        assertFalse("Version 1.7.0_51 should not be less than 1.8.0-ea", result);
+        assertFalse(result, "Version 1.7.0_51 should not be less than 1.8.0-ea");
     }
 
     @Test
@@ -63,7 +64,7 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "x.y.z");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "1.7.0_51" }, null);
-        assertFalse("The tester should return false as the JVM version is invalid", result);
+        assertFalse(result, "The tester should return false as the JVM version is invalid");
     }
 
     @Test
@@ -71,6 +72,6 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "1.7.0_51");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "x.y.z" }, null);
-        assertFalse("The tester should return false as the argument version is invalid", result);
+        assertFalse(result, "The tester should return false as the argument version is invalid");
     }
 }

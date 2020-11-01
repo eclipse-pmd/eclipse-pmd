@@ -3,10 +3,10 @@ package ch.acanda.eclipse.pmd.swtbot.tests;
 import static ch.acanda.eclipse.pmd.swtbot.condition.Conditions.isChecked;
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.shellCloses;
 import static org.eclipse.swtbot.swt.finder.waits.Conditions.tableHasRows;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +16,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTableItem;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import ch.acanda.eclipse.pmd.swtbot.bot.AddRuleSetConfigurationWizardBot;
 import ch.acanda.eclipse.pmd.swtbot.bot.FileSelectionDialogBot;
@@ -42,7 +42,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private static Path rules;
 
-    @BeforeClass
+    @BeforeAll
     public static void createJavaProjects() throws IOException {
         JavaProjectClient.createJavaProject(PROJECT_NAME_1);
 
@@ -58,7 +58,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         Files.writeString(rules, content);
     }
 
-    @AfterClass
+    @AfterAll
     public static void deleteJavaProjects() throws IOException {
         JavaProjectClient.deleteJavaProject(PROJECT_NAME_1);
         JavaProjectClient.deleteJavaProject(PROJECT_NAME_2);
@@ -79,9 +79,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void enablePMD() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertFalse("PMD should be disabled by default", dialog.enablePMD().isChecked());
-        assertFalse("The button to add a new rule set should be disabled as long as PMD is disabled",
-                dialog.addRuleSet().isEnabled());
+        assertFalse(dialog.enablePMD().isChecked(), "PMD should be disabled by default");
+        assertFalse(dialog.addRuleSet().isEnabled(), "The button to add a new rule set should be disabled as long as PMD is disabled");
         dialog.enablePMD().select();
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -90,8 +89,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
     @SuppressWarnings("PMD.DetachedTestCase")
     public void addFileSystemRuleSetInFirstProject() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
-        assertTrue("The button to add a new rule set should be enabled when PMD is enabled", dialog.addRuleSet().isEnabled());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
+        assertTrue(dialog.addRuleSet().isEnabled(), "The button to add a new rule set should be enabled when PMD is enabled");
 
         dialog.addRuleSet().click();
         final AddRuleSetConfigurationWizardBot wizard = AddRuleSetConfigurationWizardBot.getActive();
@@ -100,14 +99,14 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.filesystem().click();
         wizard.next().click();
         wizard.waitUntilFinishIsDisabled("The finish button should be disabled as long as the name and location are missing");
-        assertTrue("The browse button should be visible for a file system rule set", wizard.isBrowseButtonVisible());
+        assertTrue(wizard.isBrowseButtonVisible(), "The browse button should be visible for a file system rule set");
 
         wizard.location().setText(rules.toAbsolutePath().toString());
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
-        assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
-        assertArrayEquals("Rules of the PMD ", expectedNames, actualNames);
+        assertEquals(TEST_RULE_SET_NAME, wizard.name().getText(), "The name of the ruleset should be loaded into the name text field");
+        assertArrayEquals(expectedNames, actualNames, "Rules of the PMD ");
         wizard.waitUntilFinishIsEnabled("The finish button should be enabled if both a name and a location is available");
 
         wizard.name().setText("");
@@ -119,10 +118,10 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.finish().click();
         wizard.bot().waitUntil(shellCloses(wizard));
         dialog.bot().waitUntil(tableHasRows(dialog.ruleSets(), 1));
-        assertTrue("The added rule set should be activated", dialog.ruleSets().getTableItem(0).isChecked());
-        assertEquals("Name of the rule set", FILE_SYSTEM_RULE_SET_NAME, dialog.ruleSets().cell(0, "Name"));
-        assertEquals("Type of the rule set", "File System", dialog.ruleSets().cell(0, "Type"));
-        assertEquals("Location of the rule set", rules.toAbsolutePath().toString(), dialog.ruleSets().cell(0, "Location"));
+        assertTrue(dialog.ruleSets().getTableItem(0).isChecked(), "The added rule set should be activated");
+        assertEquals(FILE_SYSTEM_RULE_SET_NAME, dialog.ruleSets().cell(0, "Name"), "Name of the rule set");
+        assertEquals("File System", dialog.ruleSets().cell(0, "Type"), "Type of the rule set");
+        assertEquals(rules.toAbsolutePath().toString(), dialog.ruleSets().cell(0, "Location"), "Location of the rule set");
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -130,23 +129,22 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void activateTheSameFileSystemRuleSetInSecondProject() {
         PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_2);
-        assertFalse("PMD should be disabled by default", dialog.enablePMD().isChecked());
+        assertFalse(dialog.enablePMD().isChecked(), "PMD should be disabled by default");
 
         dialog.enablePMD().select();
-        assertEquals("The previously added rule set should als be available in the second project",
-                1, dialog.ruleSets().rowCount());
-        assertFalse("The available rule set should not be activated", dialog.ruleSets().getTableItem(0).isChecked());
-        assertEquals("Name of the rule set", FILE_SYSTEM_RULE_SET_NAME, dialog.ruleSets().cell(0, "Name"));
-        assertEquals("Type of the rule set", "File System", dialog.ruleSets().cell(0, "Type"));
-        assertEquals("Location of the rule set", rules.toAbsolutePath().toString(), dialog.ruleSets().cell(0, "Location"));
+        assertEquals(1, dialog.ruleSets().rowCount(), "The previously added rule set should als be available in the second project");
+        assertFalse(dialog.ruleSets().getTableItem(0).isChecked(), "The available rule set should not be activated");
+        assertEquals(FILE_SYSTEM_RULE_SET_NAME, dialog.ruleSets().cell(0, "Name"), "Name of the rule set");
+        assertEquals("File System", dialog.ruleSets().cell(0, "Type"), "Type of the rule set");
+        assertEquals(rules.toAbsolutePath().toString(), dialog.ruleSets().cell(0, "Location"), "Location of the rule set");
 
         dialog.ruleSets().getTableItem(0).check();
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
 
         dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_2);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
-        assertTrue("The rule set should be activated", dialog.ruleSets().getTableItem(0).isChecked());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
+        assertTrue(dialog.ruleSets().getTableItem(0).isChecked(), "The rule set should be activated");
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -154,8 +152,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void addWorkspaceRuleSetInFirstProject() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
-        assertTrue("The button to add a new rule set should be enabled when PMD is enabled", dialog.addRuleSet().isEnabled());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
+        assertTrue(dialog.addRuleSet().isEnabled(), "The button to add a new rule set should be enabled when PMD is enabled");
 
         dialog.enablePMD().select();
         dialog.addRuleSet().click();
@@ -166,7 +164,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.next().click();
         wizard.waitUntilFinishIsDisabled("The finish button should be disabled as long as the name is missing");
 
-        assertTrue("The browse button should be visible for a workspace rule set", wizard.isBrowseButtonVisible());
+        assertTrue(wizard.isBrowseButtonVisible(), "The browse button should be visible for a workspace rule set");
 
         wizard.browse().click();
         final FileSelectionDialogBot fileSelectionDialog = FileSelectionDialogBot.getActive();
@@ -174,14 +172,14 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         fileSelectionDialog.ok().click();
         fileSelectionDialog.waitUntilClosed();
         final String workspaceRelativePath = PROJECT_NAME_1 + '/' + PMD_XML;
-        assertEquals("The location should contain the project name and the path to the rule set file",
-                wizard.location().getText(), workspaceRelativePath);
+        assertEquals(wizard.location().getText(), workspaceRelativePath,
+                "The location should contain the project name and the path to the rule set file");
 
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
-        assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
+        assertEquals(TEST_RULE_SET_NAME, wizard.name().getText(), "The name of the ruleset should be loaded into the name text field");
         final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
-        assertArrayEquals("Rules of the PMD rule set", expectedNames, actualNames);
+        assertArrayEquals(expectedNames, actualNames, "Rules of the PMD rule set");
         wizard.waitUntilFinishIsEnabled("The finish button should be enabled if both a name and a location are available");
 
         wizard.name().setText("");
@@ -193,10 +191,10 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.finish().click();
         wizard.bot().waitUntil(shellCloses(wizard));
         dialog.bot().waitUntil(tableHasRows(dialog.ruleSets(), 2));
-        assertTrue("The added rule set should be activated", dialog.ruleSets().getTableItem(1).isChecked());
-        assertEquals("Name of the rule set", WORKSPACE_RULE_SET_NAME, dialog.ruleSets().cell(1, "Name"));
-        assertEquals("Type of the rule set", "Workspace", dialog.ruleSets().cell(1, "Type"));
-        assertEquals("Location of the rule set", workspaceRelativePath, dialog.ruleSets().cell(1, "Location"));
+        assertTrue(dialog.ruleSets().getTableItem(1).isChecked(), "The added rule set should be activated");
+        assertEquals(WORKSPACE_RULE_SET_NAME, dialog.ruleSets().cell(1, "Name"), "Name of the rule set");
+        assertEquals("Workspace", dialog.ruleSets().cell(1, "Type"), "Type of the rule set");
+        assertEquals(workspaceRelativePath, dialog.ruleSets().cell(1, "Location"), "Location of the rule set");
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -204,31 +202,31 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void addProjectRuleSetInFirstProject() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
-        assertTrue("The button to add a new rule set should be enabled when PMD is enabled", dialog.addRuleSet().isEnabled());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
+        assertTrue(dialog.addRuleSet().isEnabled(), "The button to add a new rule set should be enabled when PMD is enabled");
 
         dialog.enablePMD().select();
         dialog.addRuleSet().click();
         final AddRuleSetConfigurationWizardBot wizard = AddRuleSetConfigurationWizardBot.getActive();
 
-        assertFalse("The finish button should be disabled as long as the name is missing", wizard.finish().isEnabled());
+        assertFalse(wizard.finish().isEnabled(), "The finish button should be disabled as long as the name is missing");
 
         wizard.project().click();
         wizard.next().click();
-        assertFalse("The finish button should be disabled as long as the name is missing", wizard.finish().isEnabled());
+        assertFalse(wizard.finish().isEnabled(), "The finish button should be disabled as long as the name is missing");
 
-        assertTrue("The browse button should be visible for a project rule set", wizard.isBrowseButtonVisible());
+        assertTrue(wizard.isBrowseButtonVisible(), "The browse button should be visible for a project rule set");
 
         final String projectRelativePath = PMD_XML.toString();
         wizard.location().setText(projectRelativePath);
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
-        assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
+        assertEquals(TEST_RULE_SET_NAME, wizard.name().getText(), "The name of the ruleset should be loaded into the name text field");
         @SuppressWarnings("PMD.UseShortArrayInitializer")
         final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
-        assertArrayEquals("Rules of the PMD rule set", expectedNames, actualNames);
-        assertTrue("The finish button should be enabled if both a name and a location with a valid rule set is available",
-                wizard.finish().isEnabled());
+        assertArrayEquals(expectedNames, actualNames, "Rules of the PMD rule set");
+        assertTrue(wizard.finish().isEnabled(),
+                "The finish button should be enabled if both a name and a location with a valid rule set is available");
 
         wizard.name().setText("");
         wizard.waitUntilFinishIsDisabled("The finish button should be disabled if the name is not available");
@@ -239,10 +237,10 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.finish().click();
         wizard.bot().waitUntil(shellCloses(wizard));
         dialog.bot().waitUntil(tableHasRows(dialog.ruleSets(), 3));
-        assertTrue("The added rule set should be activated", dialog.ruleSets().getTableItem(2).isChecked());
-        assertEquals("Name of the rule set", PROJECT_RULE_SET_NAME, dialog.ruleSets().cell(2, "Name"));
-        assertEquals("Type of the rule set", "Project", dialog.ruleSets().cell(2, "Type"));
-        assertEquals("Location of the rule set", projectRelativePath, dialog.ruleSets().cell(2, "Location"));
+        assertTrue(dialog.ruleSets().getTableItem(2).isChecked(), "The added rule set should be activated");
+        assertEquals(PROJECT_RULE_SET_NAME, dialog.ruleSets().cell(2, "Name"), "Name of the rule set");
+        assertEquals("Project", dialog.ruleSets().cell(2, "Type"), "Type of the rule set");
+        assertEquals(projectRelativePath, dialog.ruleSets().cell(2, "Location"), "Location of the rule set");
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -250,8 +248,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void addRemoteRuleSetInFirstProject() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
-        assertTrue("The button to add a new rule set should be enabled when PMD is enabled", dialog.addRuleSet().isEnabled());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
+        assertTrue(dialog.addRuleSet().isEnabled(), "The button to add a new rule set should be enabled when PMD is enabled");
 
         dialog.addRuleSet().click();
         final AddRuleSetConfigurationWizardBot wizard = AddRuleSetConfigurationWizardBot.getActive();
@@ -261,15 +259,15 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.next().click();
         wizard.waitUntilFinishIsDisabled("The finish button should be disabled as long as the name is missing");
 
-        assertFalse("The browse button should not be visible for a remote rule set", wizard.isBrowseButtonVisible());
+        assertFalse(wizard.isBrowseButtonVisible(), "The browse button should not be visible for a remote rule set");
 
         final String uri = rules.toUri().toString();
         wizard.location().setText(uri);
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
-        assertEquals("The name of the ruleset should be loaded into the name text field", TEST_RULE_SET_NAME, wizard.name().getText());
+        assertEquals(TEST_RULE_SET_NAME, wizard.name().getText(), "The name of the ruleset should be loaded into the name text field");
         final String[] expectedNames = { "ExtendsObject", "BooleanInstantiation" };
         final String[] actualNames = wizard.ruleNames();
-        assertArrayEquals("Rules of the PMD rule set", expectedNames, actualNames);
+        assertArrayEquals(expectedNames, actualNames, "Rules of the PMD rule set");
         wizard.waitUntilFinishIsEnabled("The finish button should be enabled if both a name and a location are available");
 
         wizard.name().setText("");
@@ -281,10 +279,10 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.finish().click();
         wizard.bot().waitUntil(shellCloses(wizard));
         dialog.bot().waitUntil(tableHasRows(dialog.ruleSets(), 4));
-        assertTrue("The added rule set should be activated", dialog.ruleSets().getTableItem(3).isChecked());
-        assertEquals("Name of the rule set", REMOTE_RULE_SET_NAME, dialog.ruleSets().cell(3, "Name"));
-        assertEquals("Type of the rule set", "Remote", dialog.ruleSets().cell(3, "Type"));
-        assertEquals("Location of the rule set", uri, dialog.ruleSets().cell(3, "Location"));
+        assertTrue(dialog.ruleSets().getTableItem(3).isChecked(), "The added rule set should be activated");
+        assertEquals(REMOTE_RULE_SET_NAME, dialog.ruleSets().cell(3, "Name"), "Name of the rule set");
+        assertEquals("Remote", dialog.ruleSets().cell(3, "Type"), "Type of the rule set");
+        assertEquals(uri, dialog.ruleSets().cell(3, "Location"), "Location of the rule set");
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -292,7 +290,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void deactivateWorkspaceRuleSet() {
         PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
 
         final SWTBotTableItem workspaceTableItem = dialog.ruleSets().getTableItem(WORKSPACE_RULE_SET_NAME);
         workspaceTableItem.uncheck();
@@ -302,8 +300,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         dialog.bot().waitUntil(shellCloses(dialog));
 
         dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertEquals("The deactivated rule set should not be in the table anymore since it is not used by any other project",
-                3, dialog.ruleSets().rowCount());
+        assertEquals(3, dialog.ruleSets().rowCount(),
+                "The deactivated rule set should not be in the table anymore since it is not used by any other project");
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));
@@ -311,7 +309,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
 
     private void deactivateFileSystemRuleSet() {
         PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertTrue("PMD should be enabled", dialog.enablePMD().isChecked());
+        assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
 
         final SWTBotTableItem fileSystemTableItem = dialog.ruleSets().getTableItem(FILE_SYSTEM_RULE_SET_NAME);
         fileSystemTableItem.uncheck();
@@ -321,8 +319,8 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         dialog.bot().waitUntil(shellCloses(dialog));
 
         dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
-        assertFalse("The deactivated rule set should still be in the table since it is used by project " + PROJECT_NAME_2,
-                dialog.ruleSets().getTableItem(FILE_SYSTEM_RULE_SET_NAME).isChecked());
+        assertFalse(dialog.ruleSets().getTableItem(FILE_SYSTEM_RULE_SET_NAME).isChecked(),
+                "The deactivated rule set should still be in the table since it is used by project " + PROJECT_NAME_2);
 
         dialog.ok().click();
         dialog.bot().waitUntil(shellCloses(dialog));

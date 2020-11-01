@@ -1,9 +1,9 @@
 package ch.acanda.eclipse.pmd.repository;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import ch.acanda.eclipse.pmd.domain.Location;
@@ -44,7 +44,7 @@ public final class ProjectModelSerializerTest {
         final String actual = new ProjectModelSerializer().serialize(projectModel);
 
         final String expected = createXmlConfiguration();
-        assertEquals("Serialized project model", expected, actual);
+        assertEquals(expected, actual, "Serialized project model");
         assertValid(actual);
     }
 
@@ -60,7 +60,7 @@ public final class ProjectModelSerializerTest {
         final String actual = new ProjectModelSerializer().serialize(projectModel);
 
         final String expected = createXmlConfigurationWithoutRuleSets();
-        assertEquals("Serialized project model", expected, actual);
+        assertEquals(expected, actual, "Serialized project model");
         assertValid(actual);
     }
 
@@ -114,9 +114,9 @@ public final class ProjectModelSerializerTest {
 
         final ProjectModel projectModel = new ProjectModelSerializer().deserialize(stream, "TestProjectName");
 
-        assertEquals("Project name", "TestProjectName", projectModel.getProjectName());
-        assertTrue("PMD should be enabled", projectModel.isPMDEnabled());
-        assertEquals("Number of rule sets", 4, projectModel.getRuleSets().size());
+        assertEquals("TestProjectName", projectModel.getProjectName(), "Project name");
+        assertTrue(projectModel.isPMDEnabled(), "PMD should be enabled");
+        assertEquals(4, projectModel.getRuleSets().size(), "Number of rule sets");
     }
 
     /**
@@ -129,9 +129,9 @@ public final class ProjectModelSerializerTest {
 
         final ProjectModel projectModel = new ProjectModelSerializer().deserialize(stream, "TestProjectName");
 
-        assertEquals("Project name", "TestProjectName", projectModel.getProjectName());
-        assertFalse("PMD should be disabled", projectModel.isPMDEnabled());
-        assertEquals("Number of rule sets", 0, projectModel.getRuleSets().size());
+        assertEquals("TestProjectName", projectModel.getProjectName(), "Project name");
+        assertFalse(projectModel.isPMDEnabled(), "PMD should be disabled");
+        assertEquals(0, projectModel.getRuleSets().size(), "Number of rule sets");
     }
 
     /**
@@ -188,8 +188,8 @@ public final class ProjectModelSerializerTest {
 
     private void assertRuleSetModel(final ProjectModel projectModel, final LocationContext context, final String name, final String path) {
         final RuleSetModel remoteRuleSet = extractRuleSetModel(projectModel, context);
-        assertEquals("Name of the " + context + " rule set", name, remoteRuleSet.getName());
-        assertEquals("Path of the " + context + " rule set", path, remoteRuleSet.getLocation().getPath());
+        assertEquals(name, remoteRuleSet.getName(), "Name of the " + context + " rule set");
+        assertEquals(path, remoteRuleSet.getLocation().getPath(), "Path of the " + context + " rule set");
     }
 
     /**
@@ -202,7 +202,7 @@ public final class ProjectModelSerializerTest {
                 model.getRuleSets().stream()
                         .filter(rs -> rs.getLocation().getContext() == context)
                         .collect(Collectors.toList());
-        assertEquals("There should be exactly one model matching the context " + context, 1, models.size());
+        assertEquals(1, models.size(), "There should be exactly one model matching the context " + context);
         return models.get(0);
     }
 

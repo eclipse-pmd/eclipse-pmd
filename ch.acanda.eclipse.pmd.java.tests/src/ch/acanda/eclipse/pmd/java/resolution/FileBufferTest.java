@@ -21,7 +21,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FileBufferTest {
 

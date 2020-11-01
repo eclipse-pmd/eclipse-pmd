@@ -1,7 +1,7 @@
 package ch.acanda.eclipse.pmd.builder;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.same;
@@ -25,7 +25,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatcher;
 
 import net.sourceforge.pmd.PMD;
@@ -310,7 +310,7 @@ public class AnalyzerTest {
     private String getAllRuleSetRefIds(final String language) throws IOException {
         final String categories = "/category/" + language + "/categories.properties";
         try (InputStream in = PMD.class.getResourceAsStream(categories)) {
-            assertNotNull("Resource " + categories + " not found", in);
+            assertNotNull(in, "Resource " + categories + " not found");
             final Properties properties = new Properties();
             properties.load(in);
             return properties.getProperty("rulesets.filenames");

@@ -30,9 +30,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Position;
 import org.eclipse.text.edits.TextEdit;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import ch.acanda.eclipse.pmd.java.resolution.QuickFixTestData.TestParameters;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
@@ -57,18 +56,11 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * ExtendsObjectQuickFixTest} for a complete example.
  * @param <T> The type of the quick fix.
  */
-@RunWith(Parameterized.class)
 @SuppressWarnings({ "PMD.AbstractClassWithoutAbstractMethod", "PMD.ExcessiveImports" })
 public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNode>> {
 
-    private final TestParameters params;
-
-    public ASTQuickFixTestCase(final TestParameters parameters) {
-        params = parameters;
-    }
-
     @SuppressWarnings("unchecked")
-    private ASTQuickFix<ASTNode> getQuickFix() {
+    private ASTQuickFix<ASTNode> getQuickFix(final TestParameters params) {
         try {
             final Type typeArgument = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
             final Class<T> quickFixClass = (Class<T>) typeArgument;
@@ -88,11 +80,12 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         return QuickFixTestData.createTestData(testCase).stream().map(params -> new Object[] { params }).collect(toList());
     }
 
-    @Test
-    public void apply() throws BadLocationException {
-        final ASTQuickFix<ASTNode> quickFix = getQuickFix();
+    @ParameterizedTest
+    @MethodSource("getTestData")
+    public void apply(final TestParameters params) throws BadLocationException {
+        final ASTQuickFix<ASTNode> quickFix = getQuickFix(params);
         final org.eclipse.jface.text.Document document = new org.eclipse.jface.text.Document(params.source);
-        final CompilationUnit ast = createAST(document, quickFix);
+        final CompilationUnit ast = createAST(document, quickFix, params);
         final ASTNode node = findNode(params, ast, quickFix);
 
         quickFix.apply(node);
@@ -111,7 +104,8 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         return node.get();
     }
 
-    private CompilationUnit createAST(final org.eclipse.jface.text.Document document, final ASTQuickFix<ASTNode> quickFix) {
+    private CompilationUnit createAST(final org.eclipse.jface.text.Document document, final ASTQuickFix<ASTNode> quickFix,
+            final TestParameters params) {
         final ASTParser astParser = ASTParser.newParser(AST.JLS13);
         astParser.setSource(document.get().toCharArray());
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);
@@ -158,9 +152,10 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         return options;
     }
 
-    @Test
-    public void shouldReturnExpectedIcon() throws IllegalAccessException, NoSuchFieldException {
-        final ImageDescriptor imageDescriptor = getQuickFix().getImageDescriptor();
+    @ParameterizedTest
+    @MethodSource("getTestData")
+    public void shouldReturnExpectedIcon(final TestParameters params) throws IllegalAccessException, NoSuchFieldException {
+        final ImageDescriptor imageDescriptor = getQuickFix(params).getImageDescriptor();
         if (params.expectedImage.isPresent()) {
             final Field field = PMDPluginImages.class.getDeclaredField(params.expectedImage.get());
             assertEquals("Quick fix image descriptor in test " + params.name, field.get(null), imageDescriptor);
@@ -169,9 +164,10 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         }
     }
 
-    @Test
-    public void shouldReturnExpectedLabel() {
-        final String label = getQuickFix().getLabel();
+    @ParameterizedTest
+    @MethodSource("getTestData")
+    public void shouldReturnExpectedLabel(final TestParameters params) {
+        final String label = getQuickFix(params).getLabel();
         if (params.expectedLabel.isPresent()) {
             assertEquals("Quick fix label in test " + params.name, params.expectedLabel.get(), label);
         } else {
@@ -179,9 +175,10 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         }
     }
 
-    @Test
-    public void shouldReturnExpectedDescription() {
-        final String description = getQuickFix().getDescription();
+    @ParameterizedTest
+    @MethodSource("getTestData")
+    public void shouldReturnExpectedDescription(final TestParameters params) {
+        final String description = getQuickFix(params).getDescription();
         if (params.expectedDescription.isPresent()) {
             assertEquals("Quick fix description in test " + params.name, params.expectedDescription.get(), description);
         } else {

@@ -1,6 +1,6 @@
 package ch.acanda.eclipse.pmd.properties;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewModel;
 
@@ -29,9 +29,9 @@ public class PMDPropertyPageControllerTest {
 
         controller.removeSelectedConfigurations();
 
-        assertEquals("ruleSets", "[A, D]", toNameString(model.getRuleSets()));
-        assertEquals("activeRuleSets", "[A]", toNameString(model.getActiveRuleSets()));
-        assertEquals("selectedRuleSets", "[]", toNameString(model.getSelectedRuleSets()));
+        assertEquals("[A, D]", toNameString(model.getRuleSets()), "ruleSets");
+        assertEquals("[A]", toNameString(model.getActiveRuleSets()), "activeRuleSets");
+        assertEquals("[]", toNameString(model.getSelectedRuleSets()), "selectedRuleSets");
     }
 
     /**
@@ -45,9 +45,9 @@ public class PMDPropertyPageControllerTest {
 
         controller.removeSelectedConfigurations();
 
-        assertEquals("ruleSets", "[A, B, C, D]", toNameString(model.getRuleSets()));
-        assertEquals("activeRuleSets", "[A, B]", toNameString(model.getActiveRuleSets()));
-        assertEquals("selectedRuleSets", "[]", toNameString(model.getSelectedRuleSets()));
+        assertEquals("[A, B, C, D]", toNameString(model.getRuleSets()), "ruleSets");
+        assertEquals("[A, B]", toNameString(model.getActiveRuleSets()), "activeRuleSets");
+        assertEquals("[]", toNameString(model.getSelectedRuleSets()), "selectedRuleSets");
     }
 
     private static PMDPropertyPageViewModel createModel(final PMDPropertyPageController controller, final int from, final int to) {

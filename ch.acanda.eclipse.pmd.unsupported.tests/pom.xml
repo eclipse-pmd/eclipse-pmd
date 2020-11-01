@@ -21,9 +21,6 @@
                 <artifactId>tycho-surefire-plugin</artifactId>
                 <version>${tycho-version}</version>
                 <configuration>
-                    <!-- the methods in ProjectPropertyTesterTest cannot be run in parallel -->
-                    <parallel>classes</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
                     <argLine>${os-jvm-flags}</argLine>
                 </configuration>
             </plugin>

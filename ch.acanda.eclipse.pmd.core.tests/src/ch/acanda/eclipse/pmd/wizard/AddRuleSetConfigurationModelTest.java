@@ -1,6 +1,6 @@
 package ch.acanda.eclipse.pmd.wizard;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -14,9 +14,8 @@ import java.nio.file.StandardCopyOption;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 
@@ -25,16 +24,13 @@ import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
  */
 public class AddRuleSetConfigurationModelTest {
 
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
-
     /**
      * Verifies that a rule set configuration in a project outside of the workspace does not produce an error in the
      * "Add Rule Set Configuration" wizard.
      */
     @Test
-    public void validateWorkspaceConfigurationWithProjectOutsideWorkspace() throws IOException {
-        final Path ruleSetFile = createRuleSetFile();
+    public void validateWorkspaceConfigurationWithProjectOutsideWorkspace(@TempDir final Path folder) throws IOException {
+        final Path ruleSetFile = createRuleSetFile(folder);
 
         final IProject project = mock(IProject.class);
         final IWorkspace workspace = mock(IWorkspace.class);
@@ -59,8 +55,8 @@ public class AddRuleSetConfigurationModelTest {
         }
     }
 
-    public Path createRuleSetFile() throws IOException {
-        final Path ruleSetFile = folder.newFile("AddRuleSetConfigurationModelTest.xml").toPath();
+    public Path createRuleSetFile(final Path folder) throws IOException {
+        final Path ruleSetFile = folder.resolve("AddRuleSetConfigurationModelTest.xml");
         try (InputStream in = AddRuleSetConfigurationModelTest.class.getResourceAsStream("AddRuleSetConfigurationModelTest.xml")) {
             Files.copy(in, ruleSetFile, StandardCopyOption.REPLACE_EXISTING);
         }

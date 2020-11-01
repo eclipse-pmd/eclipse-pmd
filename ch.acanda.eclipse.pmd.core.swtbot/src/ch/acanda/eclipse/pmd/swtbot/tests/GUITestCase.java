@@ -6,9 +6,9 @@ import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotPerspective;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 
 public class GUITestCase {
 
@@ -18,7 +18,7 @@ public class GUITestCase {
         bot = new SWTWorkbenchBot();
     }
 
-    @BeforeClass
+    @BeforeAll
     public static void initSWTBotPreferencesAndOpenJavaPerspective() {
         SWTBotPreferences.TIMEOUT = 10_000;
         final SWTWorkbenchBot workbenchBot = new SWTWorkbenchBot();
@@ -26,13 +26,13 @@ public class GUITestCase {
         openJavaPerspective(workbenchBot);
     }
 
-    @AfterClass
+    @AfterAll
     public static void resetWorkbench() {
         final SWTWorkbenchBot workbenchBot = new SWTWorkbenchBot();
         workbenchBot.resetWorkbench();
     }
 
-    @After
+    @AfterEach
     public void closeAllDialogs() {
         bot.closeAllShells();
     }

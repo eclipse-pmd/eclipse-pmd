@@ -1,6 +1,6 @@
 package ch.acanda.eclipse.pmd.marker;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -13,7 +13,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import net.sourceforge.pmd.Rule;
 import net.sourceforge.pmd.RuleViolation;
@@ -70,7 +70,7 @@ public class MarkerUtilTest {
 
         final IMarker actual = MarkerUtil.addMarker(file, "class A extends Object {}", violation);
 
-        assertNotNull("The method must always return a marker", actual);
+        assertNotNull(actual, "The method must always return a marker");
         verify(file).createMarker(MARKER_TYPE);
         verify(actual).setAttribute(IMarker.MESSAGE, "message");
         verify(actual).setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -106,7 +106,7 @@ public class MarkerUtilTest {
 
         final IMarker actual = MarkerUtil.addMarker(file, "class ABC extends\tObject {}", violation);
 
-        assertNotNull("The method must always return a marker", actual);
+        assertNotNull(actual, "The method must always return a marker");
         verify(file).createMarker(MARKER_TYPE);
         verify(actual).setAttribute(IMarker.MESSAGE, "message");
         verify(actual).setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -142,7 +142,7 @@ public class MarkerUtilTest {
 
         final IMarker actual = MarkerUtil.addMarker(file, "class A extends Object {}", violation);
 
-        assertNotNull("The method must always return a marker", actual);
+        assertNotNull(actual, "The method must always return a marker");
         verify(file).createMarker(MARKER_TYPE);
         verify(actual).setAttribute(IMarker.MESSAGE, "message");
         verify(actual).setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -179,7 +179,7 @@ public class MarkerUtilTest {
 
         final IMarker actual = MarkerUtil.addMarker(file, "class A extends Object {\n}", violation);
 
-        assertNotNull("The method must always return a marker", actual);
+        assertNotNull(actual, "The method must always return a marker");
         verify(file).createMarker(LONG_MARKER_TYPE);
         verify(actual).setAttribute(IMarker.MESSAGE, "message");
         verify(actual).setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -216,7 +216,7 @@ public class MarkerUtilTest {
 
         final IMarker actual = MarkerUtil.addMarker(file, "class A extends Object { }", violation);
 
-        assertNotNull("The method must always return a marker", actual);
+        assertNotNull(actual, "The method must always return a marker");
         verify(file).createMarker(MARKER_TYPE);
         verify(actual).setAttribute(IMarker.MESSAGE, "message");
         verify(actual).setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
@@ -227,4 +227,5 @@ public class MarkerUtilTest {
         verify(actual).setAttribute("violationClassName", "ClassName");
         verify(actual).setAttribute("markerText", "Object");
     }
+
 }

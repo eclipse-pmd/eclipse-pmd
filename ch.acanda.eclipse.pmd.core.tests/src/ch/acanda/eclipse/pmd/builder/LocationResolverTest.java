@@ -1,8 +1,8 @@
 package ch.acanda.eclipse.pmd.builder;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
@@ -42,9 +42,9 @@ public class LocationResolverTest {
 
             final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-            assertTrue("A valid file system location should resolve", result.isPresent());
-            assertEquals("The resolved location in a file system context should be the provided location",
-                    ruleSetFile.toString(), result.get());
+            assertTrue(result.isPresent(), "A valid file system location should resolve");
+            assertEquals(ruleSetFile.toString(), result.get(),
+                    "The resolved location in a file system context should be the provided location");
         } finally {
             Files.deleteIfExists(ruleSetFile);
         }
@@ -61,7 +61,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -75,7 +75,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -91,9 +91,9 @@ public class LocationResolverTest {
 
             final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-            assertTrue("A valid remote location should resolve", result.isPresent());
-            assertEquals("The resolved location in a remote context should be the provided location",
-                    ruleSetFile.toUri().toString(), result.get());
+            assertTrue(result.isPresent(), "A valid remote location should resolve");
+            assertEquals(ruleSetFile.toUri().toString(), result.get(),
+                    "The resolved location in a remote context should be the provided location");
         } finally {
             Files.deleteIfExists(ruleSetFile);
         }
@@ -110,7 +110,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -124,7 +124,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -141,9 +141,9 @@ public class LocationResolverTest {
 
             final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-            assertTrue("A valid project location should resolve", result.isPresent());
-            assertEquals("The resolved location in a project context should be the provided location appended to the project location",
-                    ruleSetFile.toString(), result.get());
+            assertTrue(result.isPresent(), "A valid project location should resolve");
+            assertEquals(ruleSetFile.toString(), result.get(),
+                    "The resolved location in a project context should be the provided location appended to the project location");
         } finally {
             Files.deleteIfExists(ruleSetFile);
         }
@@ -161,7 +161,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -176,7 +176,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -198,9 +198,9 @@ public class LocationResolverTest {
 
             final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-            assertTrue("A valid workspace location should resolve", result.isPresent());
-            assertEquals("The resolved location in a workspace context should be the provided location appended to the workspace location",
-                    ruleSetFile.toString(), result.get());
+            assertTrue(result.isPresent(), "A valid workspace location should resolve");
+            assertEquals(ruleSetFile.toString(), result.get(),
+                    "The resolved location in a workspace context should be the provided location appended to the workspace location");
         } finally {
             Files.deleteIfExists(ruleSetFile);
         }
@@ -217,7 +217,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -231,7 +231,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -245,7 +245,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -259,7 +259,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -273,7 +273,7 @@ public class LocationResolverTest {
 
         final Optional<String> result = LocationResolver.resolveIfExists(location, project);
 
-        assertFalse("The location should not resolve", result.isPresent());
+        assertFalse(result.isPresent(), "The location should not resolve");
     }
 
     /**
@@ -287,8 +287,8 @@ public class LocationResolverTest {
 
         final String result = LocationResolver.resolve(location, project);
 
-        assertEquals("The resolved location should be the project's path with the location's path appended",
-                Paths.get("/workspace", "project", "path", "pmd.xml"), Paths.get(result));
+        assertEquals(Paths.get("/workspace", "project", "path", "pmd.xml"), Paths.get(result),
+                "The resolved location should be the project's path with the location's path appended");
     }
 
     private static IProject createProject(final String name, final URI uri) {
@@ -314,8 +314,8 @@ public class LocationResolverTest {
 
         final String result = LocationResolver.resolve(location, project);
 
-        assertEquals("The resolved location should be the project's path with the location's path appended",
-                Paths.get("/workspace", "project", "path", "pmd.xml"), Paths.get(result));
+        assertEquals(Paths.get("/workspace", "project", "path", "pmd.xml"), Paths.get(result),
+                "The resolved location should be the project's path with the location's path appended");
     }
 
     /**
@@ -329,7 +329,7 @@ public class LocationResolverTest {
 
         final String result = LocationResolver.resolve(location, project);
 
-        assertEquals("The resolved location should just be the path", "/some/path/pmd.xml", result);
+        assertEquals("/some/path/pmd.xml", result, "The resolved location should just be the path");
     }
 
     /**
@@ -343,6 +343,6 @@ public class LocationResolverTest {
 
         final String result = LocationResolver.resolve(location, project);
 
-        assertEquals("The resolved location should be the URL", "http://example.org/pmd.xml", result);
+        assertEquals("http://example.org/pmd.xml", result, "The resolved location should be the URL");
     }
 }

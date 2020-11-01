@@ -1,17 +1,18 @@
 package ch.acanda.eclipse.pmd.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.acanda.eclipse.pmd.domain.DomainModel.AddElementPropertyChangeEvent;
 import ch.acanda.eclipse.pmd.domain.DomainModel.RemoveElementPropertyChangeEvent;
@@ -27,8 +28,8 @@ public class WorkspaceModelTest {
      */
     @Test
     public void whenThereAreNoProjectsSetProjectsReturnsAnEmptySet() {
-        assertTrue("When there areen't any projects, getProjects() should return an empty set",
-                new WorkspaceModel().getProjects().isEmpty());
+        assertTrue(new WorkspaceModel().getProjects().isEmpty(),
+                "When there areen't any projects, getProjects() should return an empty set");
     }
 
     /**
@@ -43,16 +44,16 @@ public class WorkspaceModelTest {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 eventFired[0] = true;
-                assertTrue("The event should be an AddElementPropertyChangeEvent", event instanceof AddElementPropertyChangeEvent);
-                assertSame("Event's added element", element, ((AddElementPropertyChangeEvent) event).getAddedElement());
-                assertNull("Event's old value should be null", event.getOldValue());
-                assertSame("Event's new value should be the added element", element, event.getNewValue());
+                assertTrue(event instanceof AddElementPropertyChangeEvent, "The event should be an AddElementPropertyChangeEvent");
+                assertSame(element, ((AddElementPropertyChangeEvent) event).getAddedElement(), "Event's added element");
+                assertNull(event.getOldValue(), "Event's old value should be null");
+                assertSame(element, event.getNewValue(), "Event's new value should be the added element");
             }
         });
 
         model.add(element);
 
-        assertTrue("An event should be fired when adding a project model", eventFired[0]);
+        assertTrue(eventFired[0], "An event should be fired when adding a project model");
     }
 
     /**
@@ -68,16 +69,16 @@ public class WorkspaceModelTest {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 eventFired[0] = true;
-                assertTrue("The event should be an RemoveElementPropertyChangeEvent", event instanceof RemoveElementPropertyChangeEvent);
-                assertSame("Event's added element", element, ((RemoveElementPropertyChangeEvent) event).getRemovedElement());
-                assertSame("Event's old value should be the removed element", element, event.getOldValue());
-                assertNull("Event's new value should be null", event.getNewValue());
+                assertTrue(event instanceof RemoveElementPropertyChangeEvent, "The event should be an RemoveElementPropertyChangeEvent");
+                assertSame(element, ((RemoveElementPropertyChangeEvent) event).getRemovedElement(), "Event's added element");
+                assertSame(element, event.getOldValue(), "Event's old value should be the removed element");
+                assertNull(event.getNewValue(), "Event's new value should be null");
             }
         });
 
         model.remove(element.getProjectName());
 
-        assertTrue("An event should be fired when removing a project model", eventFired[0]);
+        assertTrue(eventFired[0], "An event should be fired when removing a project model");
     }
 
     /**
@@ -91,7 +92,7 @@ public class WorkspaceModelTest {
 
         model.remove("Bar");
 
-        assertFalse("An event should not be fired when removing an inexistent project model", eventFired[0]);
+        assertFalse(eventFired[0], "An event should not be fired when removing an inexistent project model");
     }
 
     /**
@@ -104,8 +105,8 @@ public class WorkspaceModelTest {
 
         final Optional<ProjectModel> actual = model.getProject("Foo");
 
-        assertNotNull("WorkspaceModel.getProject(...) must never return null", actual);
-        assertFalse("The project model should not be present", actual.isPresent());
+        assertNotNull(actual, "WorkspaceModel.getProject(...) must never return null");
+        assertFalse(actual.isPresent(), "The project model should not be present");
     }
 
     /**
@@ -119,9 +120,9 @@ public class WorkspaceModelTest {
 
         final Optional<ProjectModel> actual = model.getProject(expected.getProjectName());
 
-        assertNotNull("WorkspaceModel.getProject(...) must never return null", actual);
-        assertTrue("The project model should be present", actual.isPresent());
-        assertSame("WorkspaceModel.getProject(...) should return the requested project model", expected, actual.get());
+        assertNotNull(actual, "WorkspaceModel.getProject(...) must never return null");
+        assertTrue(actual.isPresent(), "The project model should be present");
+        assertSame(expected, actual.get(), "WorkspaceModel.getProject(...) should return the requested project model");
     }
 
     /**
@@ -134,9 +135,9 @@ public class WorkspaceModelTest {
 
         final ProjectModel actual = model.getOrCreateProject("Foo");
 
-        assertNotNull("WorkspaceModel.getOrCreateProject(...) must never return null", actual);
-        assertEquals("Project model name", "Foo", actual.getProjectName());
-        assertSame("WorkspaceModel.getOrCreateProject(...) should add the created project model", actual, model.getProject("Foo").get());
+        assertNotNull(actual, "WorkspaceModel.getOrCreateProject(...) must never return null");
+        assertEquals("Foo", actual.getProjectName(), "Project model name");
+        assertSame(model.getProject("Foo").get(), actual, "WorkspaceModel.getOrCreateProject(...) should add the created project model");
     }
 
     /**
@@ -151,8 +152,8 @@ public class WorkspaceModelTest {
 
         final ProjectModel actual = model.getOrCreateProject(expected.getProjectName());
 
-        assertNotNull("WorkspaceModel.getOrCreateProject(...) must never return null", actual);
-        assertSame("WorkspaceModel.getOrCreateProject(...) should return the requested project model", expected, actual);
+        assertNotNull(actual, "WorkspaceModel.getOrCreateProject(...) must never return null");
+        assertSame(actual, expected, "WorkspaceModel.getOrCreateProject(...) should return the requested project model");
     }
 
 }
