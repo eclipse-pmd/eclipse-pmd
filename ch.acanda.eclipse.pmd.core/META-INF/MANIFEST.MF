@@ -29,6 +29,7 @@ Bundle-ClassPath: .,
  lib/pmd-jsp-6.30.0.jar,
  lib/pmd-modelica-6.30.0.jar,
  lib/pmd-plsql-6.30.0.jar,
+ lib/pmd-visualforce-6.30.0.jar,
  lib/pmd-vm-6.30.0.jar,
  lib/pmd-xml-6.30.0.jar,
  lib/antlr-runtime-3.5.2.jar

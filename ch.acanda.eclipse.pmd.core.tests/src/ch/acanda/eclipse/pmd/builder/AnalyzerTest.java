@@ -155,6 +155,23 @@ public class AnalyzerTest {
     }
 
     /**
+     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze VisualForce files.
+     */
+    @Test
+    public void analyzeVisualForce() {
+        analyze("<apex:outputText value=\"Potential XSS is {! here }\" escape=\"false\" />", UTF_8, "page",
+                "category/vf/security.xml/VfUnescapeEl", "VfUnescapeEl");
+    }
+
+    /**
+     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all VisualForce rules.
+     */
+    @Test
+    public void analyzeVisualForceAllRules() throws IOException {
+        analyze("<a/>", UTF_8, "page", getAllRuleSetRefIds("vf"));
+    }
+
+    /**
      * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze Velocity files.
      */
     @Test
