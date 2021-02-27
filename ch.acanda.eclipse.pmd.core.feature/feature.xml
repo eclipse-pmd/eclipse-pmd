@@ -2,7 +2,7 @@
 <feature
       id="ch.acanda.eclipse.pmd.core.feature"
       label="eclipse-pmd Core (Mandatory)"
-      version="2.7.0.qualifier"
+      version="2.8.0.qualifier"
       provider-name="Philip Graf">
 
    <description url="https://eclipse-pmd.github.io">
