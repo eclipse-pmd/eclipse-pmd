@@ -171,7 +171,7 @@
                                 <artifactItem>
                                     <groupId>org.ow2.asm</groupId>
                                     <artifactId>asm</artifactId>
-                                    <version>9.0-beta</version>
+                                    <version>9.1</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.mozilla</groupId>
