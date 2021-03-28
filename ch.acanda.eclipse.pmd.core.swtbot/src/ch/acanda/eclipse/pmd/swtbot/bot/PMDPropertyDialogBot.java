@@ -2,7 +2,6 @@ package ch.acanda.eclipse.pmd.swtbot.bot;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
@@ -21,7 +20,7 @@ public class PMDPropertyDialogBot extends DialogBot {
         OK_LABEL = OK_KEY.equals(label) ? "OK" : label;
     }
 
-    public PMDPropertyDialogBot(final Shell shell) throws WidgetNotFoundException {
+    public PMDPropertyDialogBot(final Shell shell) {
         super(shell);
     }
 

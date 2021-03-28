@@ -31,7 +31,7 @@ public class JavaQuickFixGeneratorTest {
     public void testGetQuickFixes() {
         final String ruleId = "java.code style.ExtendsObject";
         final String javaVersion = "11";
-        final Class<?>[] expectedQuickFixClasses = new Class[] { SuppressWarningsQuickFix.class };
+        final Class<?>[] expectedQuickFixClasses = { SuppressWarningsQuickFix.class };
         final PMDMarker marker = mock(PMDMarker.class);
         when(marker.getRuleId()).thenReturn(ruleId);
         final JavaQuickFixContext context = new JavaQuickFixContext(new Version(javaVersion));

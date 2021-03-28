@@ -78,7 +78,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>3.14.0</version>
                     <dependencies>
                         <dependency>
                             <groupId>net.sourceforge.pmd</groupId>
@@ -166,7 +166,6 @@
                         <ruleset>${root-dir}/ch.acanda.eclipse.pmd/pmd.xml</ruleset>
                     </rulesets>
                     <printFailingErrors>true</printFailingErrors>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>

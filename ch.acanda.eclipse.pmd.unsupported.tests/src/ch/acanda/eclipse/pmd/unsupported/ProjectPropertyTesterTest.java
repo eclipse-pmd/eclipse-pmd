@@ -39,7 +39,6 @@ public class ProjectPropertyTesterTest {
         System.setProperty(JAVA_VERSION, "1.7.0_45");
         final ProjectPropertyTester tester = new ProjectPropertyTester();
         final boolean result = tester.test(null, JAVA_VERSION_LESS_THAN, new String[] { "1.7" }, null);
-        assertTrue(true);
         assertFalse(result, "Version 1.7.0_45 should not be less than 1.7");
     }
 

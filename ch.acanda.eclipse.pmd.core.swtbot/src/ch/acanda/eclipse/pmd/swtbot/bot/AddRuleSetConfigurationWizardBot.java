@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.swtbot.swt.finder.waits.ICondition;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
@@ -22,7 +21,7 @@ import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 
 public final class AddRuleSetConfigurationWizardBot extends SWTBotShell {
 
-    public AddRuleSetConfigurationWizardBot(final Shell shell) throws WidgetNotFoundException {
+    public AddRuleSetConfigurationWizardBot(final Shell shell) {
         super(shell);
     }
 

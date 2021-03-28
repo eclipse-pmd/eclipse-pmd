@@ -2,11 +2,10 @@ package ch.acanda.eclipse.pmd.swtbot.bot;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 
 public final class PMDPreferenceDialogBot extends DialogBot {
 
-    private PMDPreferenceDialogBot(final Shell shell) throws WidgetNotFoundException {
+    private PMDPreferenceDialogBot(final Shell shell) {
         super(shell);
     }
 

@@ -1,7 +1,6 @@
 package ch.acanda.eclipse.pmd.swtbot.bot;
 
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
@@ -11,7 +10,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
  */
 public class DialogBot extends SWTBotShell {
 
-    public DialogBot(final Shell shell) throws WidgetNotFoundException {
+    public DialogBot(final Shell shell) {
         super(shell);
     }
 
