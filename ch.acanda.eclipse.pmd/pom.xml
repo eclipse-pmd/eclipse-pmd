@@ -10,7 +10,7 @@
         <relativePath>../eclipse-pmd</relativePath>
     </parent>
 
-    <artifactId>parent</artifactId>
+    <artifactId>ch.acanda.eclipse.pmd</artifactId>
     <packaging>pom</packaging>
     <name>eclipse-pmd plug-in</name>
     <url>https://eclipse-pmd.github.io</url>
