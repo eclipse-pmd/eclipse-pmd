@@ -1,5 +1,6 @@
 package ch.acanda.eclipse.pmd.builder;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -20,7 +21,7 @@ import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCache;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCacheLoader;
 import ch.acanda.eclipse.pmd.marker.MarkerUtil;
-import net.sourceforge.pmd.RuleSets;
+import net.sourceforge.pmd.RuleSet;
 
 /**
  * Builder for PMD enabled projects.
@@ -77,8 +78,8 @@ public class PMDBuilder extends IncrementalProjectBuilder {
 
     void analyze(final IResource resource, final boolean includeMembers, final IProgressMonitor monitor) throws CoreException {
         if (resource instanceof IFile) {
-            monitor.setTaskName("PMD analyzing file: " + ((IFile) resource).getName());
-            final RuleSets ruleSets = CACHE.getRuleSets(resource.getProject().getName());
+            monitor.setTaskName("PMD analyzing file: " + ((IFile) resource).getProjectRelativePath().toOSString());
+            final List<RuleSet> ruleSets = CACHE.getRuleSets(resource.getProject().getName());
             new Analyzer().analyze((IFile) resource, ruleSets, new ViolationProcessor());
 
         } else if (resource instanceof IFolder && includeMembers) {

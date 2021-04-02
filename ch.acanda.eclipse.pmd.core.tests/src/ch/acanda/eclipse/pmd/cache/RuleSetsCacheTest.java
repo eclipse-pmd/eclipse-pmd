@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,12 @@ import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
-import net.sourceforge.pmd.RuleSets;
+import net.sourceforge.pmd.Rule;
+import net.sourceforge.pmd.RuleSet;
+import net.sourceforge.pmd.lang.apex.rule.design.ExcessiveClassLengthRule;
+import net.sourceforge.pmd.lang.apex.rule.design.ExcessivePublicCountRule;
+import net.sourceforge.pmd.lang.java.rule.design.ExcessiveImportsRule;
+import net.sourceforge.pmd.lang.java.rule.design.ExcessiveMethodLengthRule;
 
 /**
  * Unit tests for {@link RuleSetsCache}.
@@ -26,10 +32,10 @@ public final class RuleSetsCacheTest {
     private static final String PROJECT_NAME_1 = "Foo";
     private static final String PROJECT_NAME_2 = "Bar";
 
-    private static final RuleSets RULE_SETS_FOO_1 = new TestRuleSets("RULE_SETS_FOO_1");
-    private static final RuleSets RULE_SETS_FOO_2 = new TestRuleSets("RULE_SETS_FOO_2");
-    private static final RuleSets RULE_SETS_BAR_1 = new TestRuleSets("RULE_SETS_BAR_1");
-    private static final RuleSets RULE_SETS_BAR_2 = new TestRuleSets("RULE_SETS_BAR_2");
+    private static final List<RuleSet> RULE_SETS_FOO_1 = createRuleSets(new ExcessiveClassLengthRule());
+    private static final List<RuleSet> RULE_SETS_FOO_2 = createRuleSets(new ExcessiveMethodLengthRule());
+    private static final List<RuleSet> RULE_SETS_BAR_1 = createRuleSets(new ExcessiveImportsRule());
+    private static final List<RuleSet> RULE_SETS_BAR_2 = createRuleSets(new ExcessivePublicCountRule());
 
     /**
      * Verifies that the first cache access loads the rule sets from the cache loader.
@@ -38,7 +44,7 @@ public final class RuleSetsCacheTest {
     public void firstGetLoadsFromCache() throws Exception {
         final RuleSetsCache cache = new RuleSetsCache(getCacheLoaderMock(), getWorkspaceModel());
 
-        final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
+        final List<RuleSet> actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
         assertSame(RULE_SETS_FOO_1, actualRuleSets, "First cache access should return rule sets from loader");
     }
@@ -51,7 +57,7 @@ public final class RuleSetsCacheTest {
         final RuleSetsCache cache = new RuleSetsCache(getCacheLoaderMock(), getWorkspaceModel());
 
         cache.getRuleSets(PROJECT_NAME_1);
-        final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
+        final List<RuleSet> actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
         assertSame(RULE_SETS_FOO_1, actualRuleSets, "Second cache access should return cached rule sets");
     }
@@ -68,7 +74,7 @@ public final class RuleSetsCacheTest {
         final RuleSetModel ruleSetModel = new RuleSetModel("abc", new Location("path", LocationContext.WORKSPACE));
         workspaceModel.getOrCreateProject(PROJECT_NAME_1).setRuleSets(Arrays.asList(ruleSetModel));
 
-        final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
+        final List<RuleSet> actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
         assertSame(RULE_SETS_FOO_2, actualRuleSets, "Second cache access should reload rule sets");
     }
@@ -86,7 +92,7 @@ public final class RuleSetsCacheTest {
         final RuleSetModel ruleSetModel = new RuleSetModel("abc", new Location("path", LocationContext.WORKSPACE));
         workspaceModel.getOrCreateProject(PROJECT_NAME_2).setRuleSets(Arrays.asList(ruleSetModel));
 
-        final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_2);
+        final List<RuleSet> actualRuleSets = cache.getRuleSets(PROJECT_NAME_2);
 
         assertSame(RULE_SETS_BAR_2, actualRuleSets, "Second cache access should reload rule sets");
     }
@@ -103,14 +109,14 @@ public final class RuleSetsCacheTest {
         workspaceModel.remove(PROJECT_NAME_1);
         workspaceModel.add(new ProjectModel(PROJECT_NAME_1));
 
-        final RuleSets actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
+        final List<RuleSet> actualRuleSets = cache.getRuleSets(PROJECT_NAME_1);
 
         assertSame(RULE_SETS_FOO_2, actualRuleSets, "Second cache access should reload rule sets");
     }
 
-    private CacheLoader<String, RuleSets> getCacheLoaderMock() throws Exception {
+    private CacheLoader<String, List<RuleSet>> getCacheLoaderMock() throws Exception {
         @SuppressWarnings("unchecked")
-        final CacheLoader<String, RuleSets> loader = mock(CacheLoader.class);
+        final CacheLoader<String, List<RuleSet>> loader = mock(CacheLoader.class);
         when(loader.load(PROJECT_NAME_1)).thenReturn(RULE_SETS_FOO_1, RULE_SETS_FOO_2);
         when(loader.load(PROJECT_NAME_2)).thenReturn(RULE_SETS_BAR_1, RULE_SETS_BAR_2);
         return loader;
@@ -122,18 +128,7 @@ public final class RuleSetsCacheTest {
         return workspaceModel;
     }
 
-    private static final class TestRuleSets extends RuleSets {
-
-        private final String name;
-
-        public TestRuleSets(final String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-
+    private static List<RuleSet> createRuleSets(final Rule rule) {
+        return List.of(RuleSet.forSingleRule(rule));
     }
 }

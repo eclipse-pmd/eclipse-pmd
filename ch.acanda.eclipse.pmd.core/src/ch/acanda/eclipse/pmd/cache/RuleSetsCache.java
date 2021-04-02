@@ -32,7 +32,7 @@ import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
 import ch.acanda.eclipse.pmd.file.FileChangedListener;
 import ch.acanda.eclipse.pmd.file.FileWatcher;
 import ch.acanda.eclipse.pmd.file.Subscription;
-import net.sourceforge.pmd.RuleSets;
+import net.sourceforge.pmd.RuleSet;
 
 /**
  * The rule set cache caches the PMD rule sets so they do not have to be rebuilt every time PMD is invoked.
@@ -42,7 +42,7 @@ public final class RuleSetsCache {
     /**
      * Maps a project name to the project's rule sets.
      */
-    private final LoadingCache<String, RuleSets> cache;
+    private final LoadingCache<String, List<RuleSet>> cache;
 
     private final ProjectModelListener projectModelListener = new ProjectModelListener();
 
@@ -50,7 +50,7 @@ public final class RuleSetsCache {
 
     private final Map<String, List<Subscription>> subscriptions = new HashMap<>();
 
-    public RuleSetsCache(final CacheLoader<String, RuleSets> loader, final WorkspaceModel workspaceModel) {
+    public RuleSetsCache(final CacheLoader<String, List<RuleSet>> loader, final WorkspaceModel workspaceModel) {
         // by expiring the rule sets we make sure to notice changes in remote configurations
         cache = CacheBuilder.newBuilder().expireAfterWrite(1, HOURS).build(loader);
 
@@ -113,7 +113,7 @@ public final class RuleSetsCache {
      * @param projectName The name of the project.
      * @return The PMD rule sets of the project.
      */
-    public RuleSets getRuleSets(final String projectName) {
+    public List<RuleSet> getRuleSets(final String projectName) {
         return cache.getUnchecked(projectName);
     }
 

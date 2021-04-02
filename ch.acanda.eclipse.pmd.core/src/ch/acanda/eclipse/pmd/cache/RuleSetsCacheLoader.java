@@ -13,32 +13,31 @@ import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.builder.LocationResolver;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
 import ch.acanda.eclipse.pmd.repository.ProjectModelRepository;
-import net.sourceforge.pmd.RuleSetNotFoundException;
-import net.sourceforge.pmd.RuleSetReferenceId;
-import net.sourceforge.pmd.RuleSets;
-import net.sourceforge.pmd.RulesetsFactoryUtils;
+import net.sourceforge.pmd.RuleSet;
+import net.sourceforge.pmd.RuleSetLoadException;
+import net.sourceforge.pmd.RuleSetLoader;
 
-public class RuleSetsCacheLoader extends CacheLoader<String, RuleSets> {
+public class RuleSetsCacheLoader extends CacheLoader<String, List<RuleSet>> {
 
     private final ProjectModelRepository repository = new ProjectModelRepository();
 
     @Override
-    public RuleSets load(final String projectName) {
+    public List<RuleSet> load(final String projectName) {
         PMDPlugin.getDefault().info("RuleSetsCache: loading rule sets for project " + projectName);
         try {
+            final RuleSetLoader loader = new RuleSetLoader();
             final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
             final ProjectModel projectModel = repository.load(projectName).orElseGet(() -> new ProjectModel(projectName));
-            final List<RuleSetReferenceId> ruleSetIds = projectModel
+            return projectModel
                     .getRuleSets()
                     .stream()
                     .map(model -> LocationResolver.resolveIfExists(model.getLocation(), project))
                     .flatMap(Optional::stream)
-                    .map(RuleSetReferenceId::new)
+                    .map(location -> loader.loadFromResource(location))
                     .collect(Collectors.toList());
-            return RulesetsFactoryUtils.defaultFactory().createRuleSets(ruleSetIds);
-        } catch (final RuleSetNotFoundException e) {
+        } catch (final RuleSetLoadException e) {
             PMDPlugin.getDefault().error("Cannot load rule sets for project " + projectName, e);
-            return new RuleSets();
+            return List.of();
         }
     }
 

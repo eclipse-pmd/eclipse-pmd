@@ -27,8 +27,7 @@ import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 import ch.acanda.eclipse.pmd.ui.model.ViewModel;
 import net.sourceforge.pmd.Rule;
 import net.sourceforge.pmd.RuleSet;
-import net.sourceforge.pmd.RuleSetNotFoundException;
-import net.sourceforge.pmd.RulesetsFactoryUtils;
+import net.sourceforge.pmd.RuleSetLoader;
 
 /**
  * View model for the wizard page to add a new file system rule set configuration.
@@ -183,11 +182,11 @@ class AddRuleSetConfigurationModel extends ViewModel {
                     referenceId = validateLocalLocation(result);
                 }
                 if (referenceId != null) {
-                    ruleSet = RulesetsFactoryUtils.defaultFactory().createRuleSet(referenceId);
+                    ruleSet = new RuleSetLoader().loadFromResource(referenceId);
                     ruleSetName = ruleSet.getName();
                     rules.addAll(ruleSet.getRules());
                 }
-            } catch (final RuleSetNotFoundException | RuntimeException e) {
+            } catch (final RuntimeException e) {
                 // the rule set location is invalid - the validation problem will be added below
             }
             if (ruleSet == null || ruleSet.getRules().isEmpty()) {

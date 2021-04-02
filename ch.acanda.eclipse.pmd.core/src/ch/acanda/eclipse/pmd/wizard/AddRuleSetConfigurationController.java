@@ -18,8 +18,8 @@ import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.ui.dialog.FileSelectionDialog;
-import net.sourceforge.pmd.RuleSetNotFoundException;
-import net.sourceforge.pmd.RulesetsFactoryUtils;
+import net.sourceforge.pmd.RuleSetLoadException;
+import net.sourceforge.pmd.RuleSetLoader;
 
 /**
  * Controller for the wizard to add a new rule set configuration.
@@ -69,8 +69,8 @@ final class AddRuleSetConfigurationController {
                     final IResource resource = (IResource) selection[0];
                     final String configuration = resource.getLocation().toOSString();
                     try {
-                        RulesetsFactoryUtils.defaultFactory().createRuleSet(configuration);
-                    } catch (final RuleSetNotFoundException | IllegalArgumentException e) {
+                        new RuleSetLoader().loadFromResource(configuration);
+                    } catch (final RuleSetLoadException | IllegalArgumentException e) {
                         // the rule set location is invalid
                         result = new Status(IStatus.WARNING, PMDPlugin.ID, resource.getName()
                                 + " is not a valid PMD rule set configuration");

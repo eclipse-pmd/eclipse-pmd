@@ -1,12 +1,12 @@
 package ch.acanda.eclipse.pmd.builder;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.stream.Collectors.joining;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -31,10 +32,9 @@ import org.mockito.ArgumentMatcher;
 import net.sourceforge.pmd.PMD;
 import net.sourceforge.pmd.Rule;
 import net.sourceforge.pmd.RuleContext;
-import net.sourceforge.pmd.RuleSetNotFoundException;
-import net.sourceforge.pmd.RuleSets;
+import net.sourceforge.pmd.RuleSet;
+import net.sourceforge.pmd.RuleSetLoader;
 import net.sourceforge.pmd.RuleViolation;
-import net.sourceforge.pmd.RulesetsFactoryUtils;
 
 /**
  * Unit tests for {@link Analyzer}.
@@ -43,7 +43,7 @@ import net.sourceforge.pmd.RulesetsFactoryUtils;
 public class AnalyzerTest {
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze Java files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze Java files.
      */
     @Test
     public void analyzeJava() {
@@ -51,7 +51,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all Java rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all Java rules.
      */
     @Test
     public void analyzeJavaAllRules() throws IOException {
@@ -71,7 +71,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze xml files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze xml files.
      */
     @Test
     public void analyzeXML() {
@@ -79,7 +79,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all xml rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all xml rules.
      */
     @Test
     public void analyzeXMLAllRules() throws IOException {
@@ -87,7 +87,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze jsp files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze jsp files.
      */
     @Test
     public void analyzeJSP() {
@@ -95,7 +95,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all jsp rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all jsp rules.
      */
     @Test
     public void analyzeJSPAllRules() throws IOException {
@@ -103,7 +103,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze modelica files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze modelica files.
      */
     @Test
     public void analyzeModelica() {
@@ -113,7 +113,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all modelica rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all modelica rules.
      */
     @Test
     public void analyzeModelicaAllRules() throws IOException {
@@ -121,7 +121,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze xsl files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze xsl files.
      */
     @Test
     public void analyzeXSL() {
@@ -130,7 +130,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all jsp rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all jsp rules.
      */
     @Test
     public void analyzeXSLAllRules() throws IOException {
@@ -138,7 +138,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze Ecmascript files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze Ecmascript files.
      */
     @Test
     public void analyzeEcmascript() {
@@ -147,7 +147,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all ecmascript rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all ecmascript rules.
      */
     @Test
     public void analyzeEcmascriptAllRules() throws IOException {
@@ -155,7 +155,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze VisualForce files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze VisualForce files.
      */
     @Test
     public void analyzeVisualForce() {
@@ -164,7 +164,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all VisualForce rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all VisualForce rules.
      */
     @Test
     public void analyzeVisualForceAllRules() throws IOException {
@@ -172,7 +172,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze Velocity files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze Velocity files.
      */
     @Test
     public void analyzeVelocity() {
@@ -181,7 +181,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all Velocity rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all Velocity rules.
      */
     @Test
     public void analyzeVelocityAllRules() throws IOException {
@@ -189,7 +189,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze PLSQL files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze PLSQL files.
      */
     @Test
     public void analyzePLSQL() {
@@ -198,7 +198,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all PLSQL rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all PLSQL rules.
      */
     @Test
     public void analyzePLSQLAllRules() throws IOException {
@@ -206,7 +206,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can analyze Apex files.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze Apex files.
      */
     @Test
     public void analyzeApex() {
@@ -215,7 +215,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} can run all Apex rules.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all Apex rules.
      */
     @Test
     public void analyzeApexAllRules() throws IOException {
@@ -223,8 +223,8 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} doesn't throw a NullPointerException
-     * when the file to analyze does not have a file extension.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} doesn't throw a
+     * NullPointerException when the file to analyze does not have a file extension.
      */
     @Test
     public void analyzeFileWithoutExtension() {
@@ -232,8 +232,8 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} doesn't throw a NullPointerException
-     * when trying to analyze a class file.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} doesn't throw a
+     * NullPointerException when trying to analyze a class file.
      */
     @Test
     public void analyzeClassFile() {
@@ -241,7 +241,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} doesn't analyze a derived file.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} doesn't analyze a derived file.
      */
     @Test
     public void analyzeDerivedFile() throws UnsupportedEncodingException, CoreException {
@@ -250,7 +250,8 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} doesn't analyze an inaccessible file.
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} doesn't analyze an inaccessible
+     * file.
      */
     @Test
     public void analyzeInaccessibleFile() throws UnsupportedEncodingException, CoreException {
@@ -259,7 +260,7 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor)} works around PMD's
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} works around PMD's
      * <a href="http://sourceforge.net/p/pmd/bugs/1076/">bug #1076</a> and reports two violations instead of only one.
      */
     @Test
@@ -270,8 +271,8 @@ public class AnalyzerTest {
     }
 
     /**
-     * Prepares the arguments, calls {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor), and verifies that it
-     * invokes {@link ViolationProcessor#annotate(IFile, Iterable) with the correct rule violations.
+     * Prepares the arguments, calls {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor), and verifies
+     * that it invokes {@link ViolationProcessor#annotate(IFile, Iterable) with the correct rule violations.
      */
     private void analyze(final String content, final Charset charset, final String fileExtension, final String ruleSetRefId,
             final String... violatedRules) {
@@ -284,27 +285,21 @@ public class AnalyzerTest {
     }
 
     /**
-     * Prepares the arguments, calls {@link Analyzer#analyze(IFile, RuleSets, ViolationProcessor), and verifies that it
-     * invokes {@link ViolationProcessor#annotate(IFile, Iterable) with the correct rule violations and that it invokes
-     * {@link RuleSets#start(RuleContext)} as well as {@link RuleSets#end(RuleContext)} if the file is valid.
+     * Prepares the arguments, calls {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor), and verifies
+     * that it invokes {@link ViolationProcessor#annotate(IFile, Iterable) with the correct rule violations and that it
+     * invokes {@link RuleSet#start(RuleContext)} as well as {@link RuleSet#end(RuleContext)} if the file is valid.
      */
     public void analyze(final IFile file, final String ruleSetRefId, final String... violatedRules) {
         try {
             final ViolationProcessor violationProcessor = mock(ViolationProcessor.class);
-            final RuleSets ruleSets = spy(RulesetsFactoryUtils.defaultFactory().createRuleSets(ruleSetRefId));
+            final List<RuleSet> ruleSets = Stream.of(ruleSetRefId.split(","))
+                    .map(id -> new RuleSetLoader().loadFromResource(id))
+                    .collect(Collectors.toList());
+            assertFalse(ruleSets.stream().flatMap(rs -> rs.getRules().stream()).findAny().isEmpty(), "There should be rules");
+
             new Analyzer().analyze(file, ruleSets, violationProcessor);
 
             verify(violationProcessor).annotate(same(file), violations(violatedRules));
-
-            final boolean isValidFile = violatedRules.length > 0;
-            if (isValidFile) {
-                verify(ruleSets).start(any(RuleContext.class));
-                verify(ruleSets).end(any(RuleContext.class));
-            }
-
-        } catch (final RuleSetNotFoundException e) {
-            throw new AssertionError("Failed to create rule sets", e);
-
         } catch (CoreException | IOException e) {
             throw new AssertionError("Failed to annotate file", e);
         }
@@ -318,9 +313,12 @@ public class AnalyzerTest {
         when(file.getFileExtension()).thenReturn(fileExtension);
         when(file.getCharset()).thenReturn(charset.name());
         when(file.getContents()).thenReturn(new ByteArrayInputStream(content.getBytes(charset)));
-        final IPath path = mock(IPath.class);
-        when(file.getRawLocation()).thenReturn(path);
-        when(path.toFile()).thenReturn(new File("test." + fileExtension));
+        final IPath rlPath = mock(IPath.class);
+        when(file.getRawLocation()).thenReturn(rlPath);
+        when(rlPath.toFile()).thenReturn(new File("test." + fileExtension));
+        final IPath prPath = mock(IPath.class);
+        when(file.getProjectRelativePath()).thenReturn(prPath);
+        when(prPath.toOSString()).thenReturn("/test." + fileExtension);
         return file;
     }
 
@@ -330,7 +328,10 @@ public class AnalyzerTest {
             assertNotNull(in, "Resource " + categories + " not found");
             final Properties properties = new Properties();
             properties.load(in);
-            return properties.getProperty("rulesets.filenames");
+            final String refIds = properties.getProperty("rulesets.filenames");
+            assertNotNull(refIds, "Failed to get rule set references for language " + language);
+            assertFalse(refIds.isBlank(), "Rule set references for language " + language + " are blank");
+            return refIds;
         }
     }
 
@@ -340,7 +341,7 @@ public class AnalyzerTest {
 
     private static class RuleViolationIteratorMatcher implements ArgumentMatcher<List<RuleViolation>> {
 
-        private final Iterable<String> expectedRuleNames;
+        private final List<String> expectedRuleNames;
 
         public RuleViolationIteratorMatcher(final String... ruleNames) {
             expectedRuleNames = List.of(ruleNames);
@@ -354,5 +355,11 @@ public class AnalyzerTest {
                     .equals(expectedRuleNames);
         }
 
+        @Override
+        public String toString() {
+            return expectedRuleNames.stream().collect(joining(", ", "[", "]"));
+        }
+
     }
+
 }
