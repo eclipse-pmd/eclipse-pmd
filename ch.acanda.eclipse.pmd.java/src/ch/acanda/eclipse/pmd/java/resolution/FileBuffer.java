@@ -95,6 +95,7 @@ class FileBuffer implements AutoCloseable {
         bufferManager.disconnect(file.getFullPath(), LocationKind.IFILE, null);
     }
 
+    @SuppressWarnings("PMD.CognitiveComplexity")
     private boolean isOpen(final IFile file) {
         for (final IWorkbenchWindow window : workbench.getWorkbenchWindows()) {
             for (final IWorkbenchPage page : window.getPages()) {

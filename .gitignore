@@ -1,5 +1,9 @@
 ### Eclipse ###
 workspace/
+bin/
+
+### Maven ###
+target/
 
 ### MacOS ###
 **/.DS_Store

@@ -153,6 +153,7 @@ final class PMDPropertyPageViewModel extends ViewModel {
         }
 
         @Override
+        @SuppressWarnings("PMD.CognitiveComplexity")
         public boolean equals(final Object obj) {
             if (this == obj) {
                 return true;
