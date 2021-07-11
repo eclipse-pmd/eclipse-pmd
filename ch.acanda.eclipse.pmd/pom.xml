@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -20,6 +21,7 @@
         <tycho-extras-version>${tycho-version}</tycho-extras-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
+        <tycho.testArgLine /> <!-- JaCoCo sets this property when its profile is enabled -->
         <lib-path>${project.basedir}/lib</lib-path>
         <root-dir>${project.basedir}/..</root-dir>
         <mockito-version>3.8.0</mockito-version>
@@ -321,6 +323,38 @@
                     <url>http://download.eclipse.org/technology/swtbot/releases/2.8.0/</url>
                 </repository>
             </repositories>
+        </profile>
+
+        <profile>
+            <id>jacoco</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jacoco</groupId>
+                            <artifactId>jacoco-maven-plugin</artifactId>
+                            <version>0.8.7</version>
+                            <executions>
+                                <execution>
+                                    <id>prepare</id>
+                                    <goals>
+                                        <goal>prepare-agent</goal>
+                                    </goals>
+                                </execution>
+                                <execution>
+                                    <id>report</id>
+                                    <goals>
+                                        <goal>report</goal>
+                                    </goals>
+                                    <configuration>
+                                        <formats>XML</formats>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
         </profile>
 
     </profiles>

@@ -35,4 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: xvfb-run --auto-servernum mvn -f eclipse-pmd/pom.xml -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: xvfb-run --auto-servernum mvn -f eclipse-pmd/pom.xml -B -X -Pjacoco verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar

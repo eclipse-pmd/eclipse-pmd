@@ -79,11 +79,27 @@
                 <artifactId>tycho-surefire-plugin</artifactId>
                 <version>${tycho-version}</version>
                 <configuration>
-                    <argLine>${os-jvm-flags}</argLine>
+                    <argLine>${os-jvm-flags} ${tycho.testArgLine}</argLine>
                 </configuration>
             </plugin>
 
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>jacoco</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <configuration>
+                            <outputDirectory>../ch.acanda.eclipse.pmd.core/target/site/jacoco/</outputDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

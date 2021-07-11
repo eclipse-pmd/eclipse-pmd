@@ -17,7 +17,7 @@
         <java.version>11</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <sonar.projectKey>eclipse-pmd_eclipse-pmd</sonar.projectKey>
-        <sonar.moduleKey>${artifactId}</sonar.moduleKey>
+        <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
         <sonar.organization>eclipse-pmd</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.test.inclusions>**/*.tests/**,**/*.swtbot/**</sonar.test.inclusions>
