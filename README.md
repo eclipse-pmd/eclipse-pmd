@@ -51,9 +51,9 @@ From now on you can simply update Eclipse with `Help` > `Check for Updates` afte
 ### Testing against different Eclipse releases
 Building eclipse-pmd with `mvn clean verify` compiles and tests it against the oldest supported release of Eclipse which is Eclipse 2019-12. To ensure eclipse-pmd also works with newer releases the Eclipse release can be set with the parameter `eclipse-release`.
 
-Compile and test against Eclipse 2019-12: `mvn clean verify -Declipse-release=2019-12`
-Compile and test against Eclipse 2020-03: `mvn clean verify -Declipse-release=2020-03`
-Compile and test against Eclipse 2020-06: `mvn clean verify -Declipse-release=2020-06`
-Compile and test against Eclipse 2020-09: `mvn clean verify -Declipse-release=2020-09`
+Compile and test against Eclipse 2019-12: `mvn clean verify -Declipse-release=2019-12`  
+Compile and test against Eclipse 2020-03: `mvn clean verify -Declipse-release=2020-03`  
+Compile and test against Eclipse 2020-06: `mvn clean verify -Declipse-release=2020-06`  
+Compile and test against Eclipse 2020-09: `mvn clean verify -Declipse-release=2020-09`  
 
 Regardless of the chosen release, the built plug-in will always be the same as the one built without the parameter. So there isn't any advantage in building the plug-in yourself if you are using a newer Eclipse release.
