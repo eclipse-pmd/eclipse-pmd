@@ -1,6 +1,6 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -141,7 +141,7 @@ public class QuickFixTestData {
     }
 
     private static String getValue(final NodeList elements) {
-        assertFalse(elements.getLength() == 0);
+        assertNotEquals(elements.getLength(), 0);
         return elements.item(0).getFirstChild().getNodeValue().trim();
     }
 
