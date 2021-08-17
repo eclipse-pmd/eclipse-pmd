@@ -128,7 +128,6 @@ public final class FileWatcher {
             if (!OVERFLOW.equals(event.kind())) {
                 final String filename = event.context().toString();
                 final Path file = directory.resolve(filename);
-                PMDPlugin.getDefault().info(event.kind() + ": " + file);
                 final List<FileChangedListener> fileListeners = listeners.get(file);
                 if (fileListeners != null) {
                     for (final FileChangedListener listener : fileListeners) {
