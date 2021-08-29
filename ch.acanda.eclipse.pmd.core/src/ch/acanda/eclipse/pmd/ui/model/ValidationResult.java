@@ -43,7 +43,7 @@ public class ValidationResult {
         final int prime = 31;
         int result = 1;
         result = prime * result + (hasErrors ? 1231 : 1237);
-        result = prime * result + (problems == null ? 0 : problems.hashCode());
+        result = prime * result + problems.hashCode();
         return result;
     }
 
@@ -62,14 +62,7 @@ public class ValidationResult {
         if (hasErrors != other.hasErrors) {
             return false;
         }
-        if (problems == null) {
-            if (other.problems != null) {
-                return false;
-            }
-        } else if (!problems.equals(other.problems)) {
-            return false;
-        }
-        return true;
+        return !problems.equals(other.problems);
     }
 
 }
