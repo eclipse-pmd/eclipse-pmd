@@ -17,7 +17,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Platform;
 
+import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.builder.LocationResolver;
 import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
@@ -205,7 +207,8 @@ class AddRuleSetConfigurationModel extends ViewModel {
         try {
             final URI uri = new URI(location);
             try (InputStream stream = uri.toURL().openStream()) {
-                final Path tempFile = Files.createTempFile("eclipse-pmd-remote-", ".xml");
+                final Path pluginDir = Platform.getStateLocation(PMDPlugin.getDefault().getBundle()).toFile().toPath();
+                final Path tempFile = Files.createTempFile(pluginDir, "eclipse-pmd-remote-", ".xml");
                 Files.copy(stream, tempFile, StandardCopyOption.REPLACE_EXISTING);
                 tempFile.toFile().deleteOnExit();
                 referenceId = tempFile.toString();

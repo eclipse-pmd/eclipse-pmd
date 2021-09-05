@@ -85,6 +85,7 @@ public class ProjectModelSerializer {
         try {
             final SAXParserFactory factory = SAXParserFactory.newInstance();
             factory.setNamespaceAware(true);
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             final XMLReader reader = factory.newSAXParser().getXMLReader();
             reader.setContentHandler(contentHandler);
             reader.parse(new InputSource(configurationStream));
