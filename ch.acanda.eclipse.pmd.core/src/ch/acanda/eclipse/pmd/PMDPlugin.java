@@ -26,7 +26,7 @@ public final class PMDPlugin extends AbstractUIPlugin {
     private WorkspaceModel workspaceModel;
 
     @Override
-    @SuppressWarnings("PMD.SignatureDeclareThrowsException")
+    @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "java:S2696" })
     public void start(final BundleContext context) throws Exception {
         super.start(context);
         plugin = this;
@@ -35,7 +35,7 @@ public final class PMDPlugin extends AbstractUIPlugin {
     }
 
     @Override
-    @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "PMD.NullAssignment" })
+    @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "PMD.NullAssignment", "java:S2696" })
     public void stop(final BundleContext context) throws Exception {
         PMDPluginImages.dispose();
         plugin = null;

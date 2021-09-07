@@ -91,19 +91,14 @@ public final class RuleSetsCache {
         }
     }
 
-    private void resetFileWatcher(final ProjectModel projectModel) {
-        stopWatchingRuleSetFiles(projectModel);
-        startWatchingRuleSetFiles(projectModel);
-    }
-
     private Optional<FileWatcher> createFileWatcher() {
-        Optional<FileWatcher> fileWatcher;
+        Optional<FileWatcher> optionalFileWatcher;
         try {
-            fileWatcher = Optional.of(new FileWatcher());
+            optionalFileWatcher = Optional.of(new FileWatcher());
         } catch (final IOException e) {
-            fileWatcher = Optional.empty();
+            optionalFileWatcher = Optional.empty();
         }
-        return fileWatcher;
+        return optionalFileWatcher;
     }
 
     /**
@@ -156,12 +151,19 @@ public final class RuleSetsCache {
      * its rule set is rebuilt based on the new model data the next time it is used.
      */
     private final class ProjectModelListener implements PropertyChangeListener {
+
         @Override
         public void propertyChange(final PropertyChangeEvent event) {
             final ProjectModel projectModel = (ProjectModel) event.getSource();
             invalidate(projectModel.getProjectName());
             resetFileWatcher(projectModel);
         }
+
+        private void resetFileWatcher(final ProjectModel projectModel) {
+            stopWatchingRuleSetFiles(projectModel);
+            startWatchingRuleSetFiles(projectModel);
+        }
+
     }
 
     /**

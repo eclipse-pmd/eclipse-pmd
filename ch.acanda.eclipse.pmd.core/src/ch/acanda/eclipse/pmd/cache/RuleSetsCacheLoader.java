@@ -33,7 +33,7 @@ public class RuleSetsCacheLoader extends CacheLoader<String, List<RuleSet>> {
                     .stream()
                     .map(model -> LocationResolver.resolveIfExists(model.getLocation(), project))
                     .flatMap(Optional::stream)
-                    .map(location -> loader.loadFromResource(location))
+                    .map(loader::loadFromResource)
                     .collect(Collectors.toList());
         } catch (final RuleSetLoadException e) {
             PMDPlugin.getDefault().error("Cannot load rule sets for project " + projectName, e);

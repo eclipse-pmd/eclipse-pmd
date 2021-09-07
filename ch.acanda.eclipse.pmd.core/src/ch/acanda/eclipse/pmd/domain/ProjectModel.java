@@ -35,6 +35,7 @@ public class ProjectModel extends DomainModel {
         return projectName;
     }
 
+    @SuppressWarnings("java:S1121")
     public void setPMDEnabled(final boolean isPMDEnabled) {
         setProperty(PMDENABLED_PROPERTY, this.isPMDEnabled, this.isPMDEnabled = isPMDEnabled);
     }
@@ -43,6 +44,7 @@ public class ProjectModel extends DomainModel {
         return isPMDEnabled;
     }
 
+    @SuppressWarnings("java:S1121")
     public void setRuleSets(final Iterable<? extends RuleSetModel> ruleSets) {
         final TreeSet<RuleSetModel> set = new TreeSet<>(RULE_SET_COMPARATOR);
         ruleSets.forEach(set::add);
