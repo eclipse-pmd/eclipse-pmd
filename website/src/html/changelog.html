@@ -15,21 +15,24 @@
     M.Sidenav.init(document.querySelectorAll('.sidenav'));
     M.Materialbox.init(document.querySelectorAll('.materialboxed'));
     M.Modal.init(document.querySelectorAll('#pmd-release-notes'), {
-      onOpenEnd : function(modal, source) {
-        modal.querySelector('#pmd-release-notes-version').innerHTML = source.dataset.url.match(/\d+(\.\d+)+/)[0];
-        var request = new XMLHttpRequest();
+      onOpenStart : function(modal, source) {
+        const versionNode = document.createTextNode(source.dataset.url.match(/\d+(\.\d+)+/)[0]);
+        modal.querySelector('#pmd-release-notes-version').replaceChildren(versionNode);
+        const request = new XMLHttpRequest();
         request.open('GET', source.dataset.url, true);
         request.onreadystatechange = function() {
-          if (request.readyState === 4 && request.status === 200) {
-            var content = request.responseText;
+          if (this.readyState === 4 && this.status === 200) {
+            const content = this.responseText;
             if (source.dataset.url.endsWith('.md')) {
-              content = new showdown.Converter().makeHtml(content);
+              const html = new showdown.Converter().makeHtml(content);
+              modal.querySelector('#pmd-release-notes-content').innerHTML = html;
             } else {
-              content = '<pre>' + content + '</pre>';
+              const preNode = document.createElement('pre');
+              preNode.append(document.createTextNode(content));
+              modal.querySelector('#pmd-release-notes-content').replaceChildren(preNode);
             }
-            modal.querySelector('#pmd-release-notes-content').innerHTML = content;
           }
-        }
+        };
         request.send();
       }
     });
