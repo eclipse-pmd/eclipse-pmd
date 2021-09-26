@@ -25,55 +25,55 @@
                 </property>
             </activation>
             <modules>
-                <module>2019-12</module>
+                <module>2020-12</module>
             </modules>
         </profile>
         <profile>
-            <id>eclipse-2019-12</id>
+            <id>eclipse-2020-12</id>
             <activation>
                 <property>
                     <name>eclipse-release</name>
-                    <value>2019-12</value>
+                    <value>2020-12</value>
                 </property>
             </activation>
             <modules>
-                <module>2019-12</module>
+                <module>2020-12</module>
             </modules>
         </profile>
         <profile>
-            <id>eclipse-2020-03</id>
+            <id>eclipse-2021-03</id>
             <activation>
                 <property>
                     <name>eclipse-release</name>
-                    <value>2020-03</value>
+                    <value>2021-03</value>
                 </property>
             </activation>
             <modules>
-                <module>2020-03</module>
+                <module>2021-03</module>
             </modules>
         </profile>
         <profile>
-            <id>eclipse-2020-06</id>
+            <id>eclipse-2021-06</id>
             <activation>
                 <property>
                     <name>eclipse-release</name>
-                    <value>2020-06</value>
+                    <value>2021-06</value>
                 </property>
             </activation>
             <modules>
-                <module>2020-06</module>
+                <module>2021-06</module>
             </modules>
         </profile>
         <profile>
-            <id>eclipse-2020-09</id>
+            <id>eclipse-2021-09</id>
             <activation>
                 <property>
                     <name>eclipse-release</name>
-                    <value>2020-09</value>
+                    <value>2021-09</value>
                 </property>
             </activation>
             <modules>
-                <module>2020-09</module>
+                <module>2021-09</module>
             </modules>
         </profile>
     </profiles>

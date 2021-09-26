@@ -4,14 +4,14 @@ Bundle-Name: eclipse-pmd Core
 Bundle-SymbolicName: ch.acanda.eclipse.pmd.core;singleton:=true
 Bundle-Version: 2.14.0.qualifier
 Bundle-Vendor: Philip Graf
-Require-Bundle: org.eclipse.core.resources;bundle-version="3.13.600",
- org.eclipse.core.runtime;bundle-version="3.17.0",
- org.eclipse.ui;bundle-version="3.115.0",
- org.eclipse.jface.text;bundle-version="3.16.100",
- org.eclipse.core.databinding;bundle-version="1.7.700",
- org.eclipse.core.databinding.beans;bundle-version="1.6.0",
- org.eclipse.jface.databinding;bundle-version="1.9.200",
- org.eclipse.core.databinding.property;bundle-version="1.7.200"
+Require-Bundle: org.eclipse.core.resources;bundle-version="3.13.900",
+ org.eclipse.core.runtime;bundle-version="3.20.0",
+ org.eclipse.ui;bundle-version="3.118.100",
+ org.eclipse.jface.text;bundle-version="3.16.500",
+ org.eclipse.core.databinding;bundle-version="1.10.100",
+ org.eclipse.core.databinding.beans;bundle-version="1.7.100",
+ org.eclipse.jface.databinding;bundle-version="1.12.100",
+ org.eclipse.core.databinding.property;bundle-version="1.8.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ClassPath: .,
  lib/asm-9.1.jar,

@@ -84,7 +84,7 @@ class FileBuffer implements AutoCloseable {
         }
 
         // use the latest API level supported by the oldest supported Eclipse release
-        return AST.JLS13;
+        return AST.JLS15;
     }
 
     @Override

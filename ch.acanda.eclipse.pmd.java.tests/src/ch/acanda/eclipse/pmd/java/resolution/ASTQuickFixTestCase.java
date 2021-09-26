@@ -106,7 +106,7 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
 
     private CompilationUnit createAST(final org.eclipse.jface.text.Document document, final ASTQuickFix<ASTNode> quickFix,
             final TestParameters params) {
-        final ASTParser astParser = ASTParser.newParser(AST.JLS13);
+        final ASTParser astParser = ASTParser.newParser(AST.JLS15);
         astParser.setSource(document.get().toCharArray());
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);
         astParser.setResolveBindings(quickFix.needsTypeResolution());
@@ -144,11 +144,7 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_ASSIGNMENT_OPERATOR, JavaCore.DO_NOT_INSERT);
         options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ANNOTATION, JavaCore.INSERT);
         options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_SPACE_AFTER_COMMA_IN_ARRAY_INITIALIZER, JavaCore.DO_NOT_INSERT);
-        options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_ANNOTATION_ON_LOCAL_VARIABLE, JavaCore.DO_NOT_INSERT);
-        options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_ANNOTATION_ON_METHOD, JavaCore.DO_NOT_INSERT);
-        options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_ANNOTATION_ON_PACKAGE, JavaCore.DO_NOT_INSERT);
         options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_ANNOTATION_ON_PARAMETER, JavaCore.DO_NOT_INSERT);
-        options.put(DefaultCodeFormatterConstants.FORMATTER_INSERT_NEW_LINE_AFTER_ANNOTATION_ON_TYPE, JavaCore.DO_NOT_INSERT);
         return options;
     }
 

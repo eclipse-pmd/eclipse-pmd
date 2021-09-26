@@ -1,10 +1,10 @@
 ### Eclipse ###
 workspace/
 bin/
+.metadata/
 
 ### Maven ###
 target/
 
 ### MacOS ###
 **/.DS_Store
-.metadata/

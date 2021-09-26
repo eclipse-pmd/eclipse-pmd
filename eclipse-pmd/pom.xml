@@ -13,7 +13,7 @@
 
     <properties>
         <pmd-version>6.39.0</pmd-version>
-        <eclipse-release>2019-12</eclipse-release>
+        <eclipse-release>2020-12</eclipse-release>
         <java.version>11</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <sonar.projectKey>eclipse-pmd_eclipse-pmd</sonar.projectKey>
@@ -64,7 +64,7 @@
             <name>Philip Graf</name>
             <roles>
                 <role>Founder</role>
-                <role>Developer</role>
+                <role>Maintainer</role>
             </roles>
         </developer>
         <developer>
@@ -94,8 +94,8 @@
 
     <licenses>
         <license>
-            <name>Eclipse Public License - v 1.0</name>
-            <url>http://www.eclipse.org/legal/epl-v10.html</url>
+            <name>Eclipse Public License - v 2.0</name>
+            <url>https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>

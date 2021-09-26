@@ -16,7 +16,8 @@ public class LocalVariableCouldBeFinal {
             <source>
 public class LocalVariableCouldBeFinal {
     public void foo() {
-        @SuppressWarnings("PMD.LocalVariableCouldBeFinal") int a = 0;
+        @SuppressWarnings("PMD.LocalVariableCouldBeFinal")
+        int a = 0;
     }
 }
             </source>
@@ -39,7 +40,8 @@ public class RedundantFieldInitializer {
         <expected>
             <source>
 public class RedundantFieldInitializer {
-    @SuppressWarnings("PMD.RedundantFieldInitializer") boolean b = false;
+    @SuppressWarnings("PMD.RedundantFieldInitializer")
+    boolean b = false;
 }
             </source>
             <image>QUICKFIX_ADD</image>
@@ -64,7 +66,8 @@ class Example {
         <expected>
             <source>
 class Example {
-    @SuppressWarnings("PMD.EmptyIfStmt") void foo() {
+    @SuppressWarnings("PMD.EmptyIfStmt")
+    void foo() {
         if (1 != 2) {
         }
     }
@@ -81,7 +84,7 @@ class Example {
         <setup>
             <source>
 public class SuspiciousHashcodeMethodName {
-    
+
     public <marker>int hashcode() {
         int hashcode = 0;
         Object o = new Object() {
@@ -99,8 +102,9 @@ public class SuspiciousHashcodeMethodName {
         <expected>
             <source>
 public class SuspiciousHashcodeMethodName {
-    
-    @SuppressWarnings("PMD.SuspiciousHashcodeMethodName") public int hashcode() {
+
+    @SuppressWarnings("PMD.SuspiciousHashcodeMethodName")
+    public int hashcode() {
         int hashcode = 0;
         Object o = new Object() {
             public int hashcode() {
@@ -129,7 +133,8 @@ public class SimplifyStartsWith extends <marker>Object</marker> {
         </setup>
         <expected>
             <source>
-@SuppressWarnings("PMD.ExtendsObject") public class SimplifyStartsWith extends Object {
+@SuppressWarnings("PMD.ExtendsObject")
+public class SimplifyStartsWith extends Object {
 }
             </source>
             <image>QUICKFIX_ADD</image>
@@ -153,7 +158,8 @@ public class Bar {
             <source>
 import foo.Foo;
 
-@SuppressWarnings("PMD.ExcessiveImports") public class Bar {
+@SuppressWarnings("PMD.ExcessiveImports")
+public class Bar {
 }
             </source>
             <image>QUICKFIX_ADD</image>
@@ -177,7 +183,8 @@ public enum Bar {
             <source>
 import foo.Foo;
 
-@SuppressWarnings("PMD.ExcessiveImports") public enum Bar {
+@SuppressWarnings("PMD.ExcessiveImports")
+public enum Bar {
 }
             </source>
             <image>QUICKFIX_ADD</image>
@@ -201,7 +208,8 @@ public @interface Bar {
             <source>
 import foo.Foo;
 
-@SuppressWarnings("PMD.ExcessiveImports") public @interface Bar {
+@SuppressWarnings("PMD.ExcessiveImports")
+public @interface Bar {
 }
             </source>
             <image>QUICKFIX_ADD</image>
