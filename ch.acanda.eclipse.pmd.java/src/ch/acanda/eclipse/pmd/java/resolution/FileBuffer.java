@@ -62,6 +62,7 @@ class FileBuffer implements AutoCloseable {
         return (CompilationUnit) astParser.createAST(monitor);
     }
 
+    @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     private int getApiLevel(final IFile file) {
         // try to infer API level from compiler source settings in project
         final IProject project = file.getProject();
