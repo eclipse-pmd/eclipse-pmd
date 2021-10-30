@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
 
-    <!-- last updated for PMD 6.39.0 -->
+    <!-- last updated for PMD 6.40.0 -->
 
     <description>PMD rules for eclipse-pmd</description>
 
@@ -28,11 +28,6 @@
     <rule ref="category/java/codestyle.xml/LongVariable">
         <properties>
             <property name="minimum" value="32" />
-        </properties>
-    </rule>
-    <rule ref="category/java/codestyle.xml/ClassNamingConventions">
-        <properties>
-            <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]+" />
         </properties>
     </rule>
 
