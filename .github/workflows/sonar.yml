@@ -29,10 +29,10 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Install XVFB
-        run: sudo apt-get install xvfb
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: xvfb-run --auto-servernum mvn -f eclipse-pmd/pom.xml -B -X -Pjacoco verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' mvn -f eclipse-pmd/pom.xml -B -X -Pjacoco verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
