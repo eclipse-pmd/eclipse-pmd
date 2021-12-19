@@ -57,3 +57,12 @@ Compile and test against Eclipse 2021-09: `mvn clean verify -Declipse-release=20
 Compile and test against Eclipse 2021-12: `mvn clean verify -Declipse-release=2021-12`  
 
 Regardless of the chosen release, the built plug-in will always be the same as the one built without the parameter. So there isn't any advantage in building the plug-in yourself if you are using a newer Eclipse release.
+
+## Build Status
+
+[![GitHub Actions Build Status](https://github.com/eclipse-pmd/eclipse-pmd/actions/workflows/sonar.yml/badge.svg)](https://github.com/eclipse-pmd/eclipse-pmd/actions/workflows/sonar.yml)
+[![Sonar Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eclipse-pmd_eclipse-pmd&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=eclipse-pmd_eclipse-pmd)
+[![Sonar Security Rating](https://sonarcloud.io/api/project_badges/measure?project=eclipse-pmd_eclipse-pmd&metric=security_rating)](https://sonarcloud.io/component_measures?id=eclipse-pmd_eclipse-pmd&metric=Security&view=list)
+[![Sonar Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=eclipse-pmd_eclipse-pmd&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=eclipse-pmd_eclipse-pmd&metric=Reliability&view=list)
+[![Sonar Vulnerabilites](https://sonarcloud.io/api/project_badges/measure?project=eclipse-pmd_eclipse-pmd&metric=vulnerabilities)](https://sonarcloud.io/project/issues?id=eclipse-pmd_eclipse-pmd&resolved=false&types=VULNERABILITY)
+[![Sonar Bugs](https://sonarcloud.io/api/project_badges/measure?project=eclipse-pmd_eclipse-pmd&metric=bugs)](https://sonarcloud.io/project/issues?id=eclipse-pmd_eclipse-pmd&resolved=false&types=BUG)

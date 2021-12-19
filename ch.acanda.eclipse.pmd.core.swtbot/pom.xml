@@ -54,14 +54,12 @@
     </build>
 
     <profiles>
-
         <profile>
             <id>skipSWTBot</id>
             <properties>
                 <maven.test.skip>true</maven.test.skip>
             </properties>
         </profile>
-
         <profile>
             <id>jacoco</id>
             <build>
@@ -69,14 +67,10 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <configuration>
-                            <outputDirectory>../ch.acanda.eclipse.pmd.core/target/site/jacoco-it/</outputDirectory>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 
 </project>

@@ -94,12 +94,10 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <configuration>
-                            <outputDirectory>../ch.acanda.eclipse.pmd.core/target/site/jacoco/</outputDirectory>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
+
 </project>

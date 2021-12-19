@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ch.acanda.eclipse.pmd</groupId>
+        <artifactId>eclipse-pmd</artifactId>
+        <version>2.17.0-SNAPSHOT</version>
+        <relativePath>../eclipse-pmd</relativePath>
+    </parent>
+
+    <artifactId>reports</artifactId>
+    <packaging>pom</packaging>
+    <name>eclipse-pmd reports</name>
+    <description>Aggregates JaCoCo reports for the Sonar analysis</description>
+
+    <profiles>
+        <profile>
+            <id>jacoco</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.7</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>report-aggregate</goal>
+                                </goals>
+                                <configuration>
+                                    <formats>XML</formats>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <dependencies>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.core</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.core.tests</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.core.swtbot</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.java</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.java.tests</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.unsupported</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>ch.acanda.eclipse.pmd</groupId>
+                    <artifactId>ch.acanda.eclipse.pmd.unsupported.tests</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+
+        </profile>
+    </profiles>
+
+</project>
