@@ -17,17 +17,17 @@
     <url>https://eclipse-pmd.github.io</url>
 
     <properties>
-        <tycho-version>2.4.0</tycho-version>
+        <tycho-version>2.5.0</tycho-version>
         <tycho-extras-version>${tycho-version}</tycho-extras-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
         <tycho.testArgLine /> <!-- JaCoCo sets this property when its profile is enabled -->
         <lib-path>${project.basedir}/lib</lib-path>
         <root-dir>${project.basedir}/..</root-dir>
-        <mockito-version>3.8.0</mockito-version>
-        <mockito-byte-buddy-version>1.10.20</mockito-byte-buddy-version>
-        <mockito-objenesis-version>3.1</mockito-objenesis-version>
-        <guava-version>28.2-jre</guava-version>
+        <mockito-version>4.2.0</mockito-version>
+        <mockito-byte-buddy-version>1.12.5</mockito-byte-buddy-version>
+        <mockito-objenesis-version>3.2</mockito-objenesis-version>
+        <guava-version>31.0.1-jre</guava-version>
         <guava-failureaccess-version>1.0.1</guava-failureaccess-version>
     </properties>
 

@@ -10,8 +10,8 @@ Require-Bundle: org.junit;bundle-version="4.13.0",
  org.junit.jupiter.params;bundle-version="5.7.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ClassPath: .,
- lib/mockito-core-3.8.0.jar,
- lib/byte-buddy-1.10.20.jar,
- lib/byte-buddy-agent-1.10.20.jar,
- lib/objenesis-3.1.jar
+ lib/mockito-core-4.2.0.jar,
+ lib/byte-buddy-1.12.5.jar,
+ lib/byte-buddy-agent-1.12.5.jar,
+ lib/objenesis-3.2.jar
 Automatic-Module-Name: ch.acanda.eclipse.pmd.java.tests
