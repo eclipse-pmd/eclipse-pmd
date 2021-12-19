@@ -43,6 +43,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
     private static Path rules;
 
     @BeforeAll
+    @SuppressWarnings("java:S5443")
     public static void createJavaProjects() throws IOException {
         JavaProjectClient.createJavaProject(PROJECT_NAME_1);
 

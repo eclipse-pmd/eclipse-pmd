@@ -25,6 +25,7 @@ import ch.acanda.eclipse.pmd.domain.LocationContext;
 /**
  * Unit tests for {@code LocationResolver}.
  */
+@SuppressWarnings("java:S5443")
 public class LocationResolverTest {
 
     private static final String XML = ".xml";

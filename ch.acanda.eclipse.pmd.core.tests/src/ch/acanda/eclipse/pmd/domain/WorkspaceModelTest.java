@@ -122,7 +122,7 @@ public class WorkspaceModelTest {
 
         assertNotNull(actual, "WorkspaceModel.getProject(...) must never return null");
         assertTrue(actual.isPresent(), "The project model should be present");
-        assertSame(expected, actual.get(), "WorkspaceModel.getProject(...) should return the requested project model");
+        assertSame(expected, actual.orElseThrow(), "WorkspaceModel.getProject(...) should return the requested project model");
     }
 
     /**
@@ -137,7 +137,8 @@ public class WorkspaceModelTest {
 
         assertNotNull(actual, "WorkspaceModel.getOrCreateProject(...) must never return null");
         assertEquals("Foo", actual.getProjectName(), "Project model name");
-        assertSame(model.getProject("Foo").get(), actual, "WorkspaceModel.getOrCreateProject(...) should add the created project model");
+        assertSame(model.getProject("Foo").orElseThrow(), actual,
+                "WorkspaceModel.getOrCreateProject(...) should add the created project model");
     }
 
     /**

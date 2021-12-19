@@ -114,6 +114,7 @@ public final class RuleSetsCacheTest {
         assertSame(RULE_SETS_FOO_2, actualRuleSets, "Second cache access should reload rule sets");
     }
 
+    @SuppressWarnings("java:S112")
     private CacheLoader<String, List<RuleSet>> getCacheLoaderMock() throws Exception {
         @SuppressWarnings("unchecked")
         final CacheLoader<String, List<RuleSet>> loader = mock(CacheLoader.class);
