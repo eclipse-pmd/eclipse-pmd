@@ -85,6 +85,7 @@ public class QuickFixTestData {
         final List<TestParameters> data = new ArrayList<>();
         try {
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             final DocumentBuilder docBuilder = factory.newDocumentBuilder();
             final Document doc = docBuilder.parse(testCase);
             final Optional<String> pmdReferenceId = getOptionalValue(doc, "pmdReferenceId");

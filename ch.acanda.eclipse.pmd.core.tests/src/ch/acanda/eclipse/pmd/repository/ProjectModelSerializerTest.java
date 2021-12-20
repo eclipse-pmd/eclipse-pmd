@@ -95,8 +95,10 @@ public final class ProjectModelSerializerTest {
                 new RuleSetModel("Remote Rule Set", new Location("http://example.org/pmd.xml", LocationContext.REMOTE)));
     }
 
+    @SuppressWarnings("java:S2755" /* false positive */)
     private void assertValid(final String actual) throws SAXException, IOException {
         final SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        schemaFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         final Source schemaSource = new StreamSource(ProjectModelSerializerTest.class.getResourceAsStream("eclipse-pmd-0.8.xsd"));
         final Schema schema = schemaFactory.newSchema(schemaSource);
         final Validator validator = schema.newValidator();
