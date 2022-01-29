@@ -14,6 +14,6 @@ public interface NodeFinder<R extends ASTNode, N extends ASTNode> {
     /**
      * @return A node from the provided AST if a matching node could be found.
      */
-    Optional<N> findNode(final R ast);
+    Optional<N> findNode(R ast);
 
 }

@@ -42,6 +42,6 @@ public abstract class ASTQuickFix<T extends ASTNode> extends JavaQuickFix<T> {
      *
      * @return {@code true} iff the quick fix was applied successfully, i.e. the PMD problem was resolved.
      */
-    protected abstract boolean apply(final T node);
+    protected abstract boolean apply(T node);
 
 }

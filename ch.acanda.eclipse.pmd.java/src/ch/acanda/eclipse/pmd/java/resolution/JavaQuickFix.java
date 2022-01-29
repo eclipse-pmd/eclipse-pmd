@@ -189,7 +189,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      * Prepares the quick fix for fixing the markers. This method is guaranteed to be invoked before
      * {@link #fixMarker(ASTNode, IDocument, Map)} and {@link #finishFixingMarkers(CompilationUnit, IDocument, Map).
      */
-    protected abstract void startFixingMarkers(final CompilationUnit ast);
+    protected abstract void startFixingMarkers(CompilationUnit ast);
 
     /**
      * Fixes a single marker. The marker is already resolve to its corresponding node in the AST. This method is
@@ -204,7 +204,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      *     applied. Throwing this exception will abort all quick fixes for this file. Any already successfully applied
      *     quick fixes will not be committed.
      */
-    protected abstract boolean fixMarker(final T node, final IDocument document, final Map<?, ?> options) throws CoreException;
+    protected abstract boolean fixMarker(T node, IDocument document, Map<?, ?> options) throws CoreException;
 
     /**
      * Finishes fixing the markers. After this method the document should have its final form before being committed.
@@ -215,14 +215,14 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      * @throws BadLocationException Thrown when the fixing cannot be finished properly. The already applied quick fixes
      *     will not be committed.
      */
-    protected abstract void finishFixingMarkers(final CompilationUnit ast, final IDocument document, final Map<?, ?> options)
+    protected abstract void finishFixingMarkers(CompilationUnit ast, IDocument document, Map<?, ?> options)
             throws BadLocationException;
 
     /**
      * @param position The position of the marker.
      * @return The node finder that will be used to search for the node which will be passed to the quick fix.
      */
-    protected abstract NodeFinder<CompilationUnit, T> getNodeFinder(final Position position);
+    protected abstract NodeFinder<CompilationUnit, T> getNodeFinder(Position position);
 
     /**
      * Returns the type of the AST node that will be used to find the node that will be used as an argument when

@@ -171,12 +171,12 @@
                                 <artifactItem>
                                     <groupId>org.ow2.asm</groupId>
                                     <artifactId>asm</artifactId>
-                                    <version>9.1</version>
+                                    <version>9.2</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.mozilla</groupId>
                                     <artifactId>rhino</artifactId>
-                                    <version>1.7.13</version>
+                                    <version>1.7.14</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>commons-io</groupId>
