@@ -25,19 +25,7 @@
                 </property>
             </activation>
             <modules>
-                <module>2021-03</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>eclipse-2021-03</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2021-03</value>
-                </property>
-            </activation>
-            <modules>
-                <module>2021-03</module>
+                <module>2021-06</module>
             </modules>
         </profile>
         <profile>
@@ -74,6 +62,18 @@
             </activation>
             <modules>
                 <module>2021-12</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>eclipse-2022-03</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2022-03</value>
+                </property>
+            </activation>
+            <modules>
+                <module>2022-03</module>
             </modules>
         </profile>
     </profiles>
