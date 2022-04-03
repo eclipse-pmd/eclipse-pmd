@@ -8,19 +8,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.IOUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
-import net.sourceforge.pmd.PMD;
 import net.sourceforge.pmd.PMDConfiguration;
-import net.sourceforge.pmd.Report;
+import net.sourceforge.pmd.PmdAnalysis;
 import net.sourceforge.pmd.RuleSet;
 import net.sourceforge.pmd.RuleViolation;
 import net.sourceforge.pmd.lang.Language;
 import net.sourceforge.pmd.lang.LanguageRegistry;
-import net.sourceforge.pmd.util.datasource.internal.AbstractDataSource;
 
 /**
  * Analyzes files for coding problems, bugs and inefficient code, i.e. runs PMD.
@@ -51,11 +50,15 @@ public final class Analyzer {
                 if (isValidLanguage(language)) {
                     final PMDConfiguration configuration = new PMDConfiguration();
                     configuration.setDefaultLanguageVersion(language.getDefaultVersion());
-                    final Report report = PMD.processFiles(configuration, ruleSets, List.of(new IFileDataSource(file)), List.of());
-                    return report.getViolations();
+                    configuration.setIgnoreIncrementalAnalysis(true);
+                    try (PmdAnalysis analysis = PmdAnalysis.create(configuration); InputStream in = file.getContents()) {
+                        analysis.addRuleSets(ruleSets);
+                        analysis.files().addSourceFile(IOUtils.toString(in, file.getCharset()), file.getProjectRelativePath().toOSString());
+                        return analysis.performAnalysisAndCollectReport().getViolations();
+                    }
                 }
             }
-        } catch (final RuntimeException e) {
+        } catch (final RuntimeException | CoreException | IOException e) {
             PMDPlugin.getDefault().warn("Could not run PMD on file " + file.getRawLocation(), e);
         }
         return List.of();
@@ -84,30 +87,6 @@ public final class Analyzer {
         return language != null
                 && language.getDefaultVersion() != null
                 && language.getDefaultVersion().getLanguageVersionHandler() != null;
-    }
-
-    private static class IFileDataSource extends AbstractDataSource {
-
-        private final IFile file;
-
-        public IFileDataSource(final IFile file) {
-            this.file = file;
-        }
-
-        @Override
-        public InputStream getInputStream() throws IOException {
-            try {
-                return file.getContents();
-            } catch (final CoreException e) {
-                throw new IOException(e);
-            }
-        }
-
-        @Override
-        public String getNiceFileName(final boolean shortNames, final String inputFileName) {
-            return shortNames ? file.getName() : file.getProjectRelativePath().toOSString();
-        }
-
     }
 
 }
