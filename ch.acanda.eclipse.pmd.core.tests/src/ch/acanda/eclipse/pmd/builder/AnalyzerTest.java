@@ -47,7 +47,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeJava() {
-        analyze("class A extends Object {}", UTF_8, "java", "rulesets/java/basic.xml/ExtendsObject", "ExtendsObject");
+        analyze("class A extends Object {}", UTF_8, "java", "category/java/codestyle.xml/ExtendsObject", "ExtendsObject");
     }
 
     /**
@@ -75,7 +75,8 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeXML() {
-        analyze("<cdata><![CDATA[[bar]]></cdata>", UTF_8, "xml", "rulesets/xml/basic.xml/MistypedCDATASection", "MistypedCDATASection");
+        analyze("<cdata><![CDATA[[bar]]></cdata>", UTF_8, "xml", "category/xml/errorprone.xml/MistypedCDATASection",
+                "MistypedCDATASection");
     }
 
     /**
@@ -91,7 +92,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeJSP() {
-        analyze("<jsp:forward page='a.jsp'/>", UTF_8, "jsp", "rulesets/jsp/basic.xml/NoJspForward", "NoJspForward");
+        analyze("<jsp:forward page='a.jsp'/>", UTF_8, "jsp", "category/jsp/bestpractices.xml/NoJspForward", "NoJspForward");
     }
 
     /**
@@ -126,7 +127,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeXSL() {
         analyze("<variable name=\"var\" select=\"//item/descendant::child\"/>", UTF_8, "xsl",
-                "rulesets/xsl/xpath.xml/AvoidAxisNavigation", "AvoidAxisNavigation");
+                "category/xsl/performance.xml/AvoidAxisNavigation", "AvoidAxisNavigation");
     }
 
     /**
@@ -143,7 +144,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeEcmascript() {
         analyze("var z = 1.12345678901234567", UTF_8, "js",
-                "rulesets/ecmascript/basic.xml/InnaccurateNumericLiteral", "InnaccurateNumericLiteral");
+                "category/ecmascript/errorprone.xml/InnaccurateNumericLiteral", "InnaccurateNumericLiteral");
     }
 
     /**
@@ -176,7 +177,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeVelocity() {
-        analyze("<script type=\"text/javascript\">$s</script>", UTF_8, "vm", "rulesets/vm/basic.xml/NoInlineJavaScript",
+        analyze("<script type=\"text/javascript\">$s</script>", UTF_8, "vm", "category/vm/design.xml/NoInlineJavaScript",
                 "NoInlineJavaScript");
     }
 
@@ -228,7 +229,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeFileWithoutExtension() {
-        analyze("Hello World", UTF_8, null, "rulesets/java/basic.xml/ExtendsObject");
+        analyze("Hello World", UTF_8, null, "category/java/codestyle.xml/ExtendsObject");
     }
 
     /**
@@ -237,7 +238,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeClassFile() {
-        analyze("", UTF_8, "class", "rulesets/java/basic.xml/ExtendsObject");
+        analyze("", UTF_8, "class", "category/java/codestyle.xml/ExtendsObject");
     }
 
     /**
@@ -246,7 +247,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeDerivedFile() throws UnsupportedEncodingException, CoreException {
         final IFile file = mockFile("class A extends Object {}", UTF_8, "java", true, true);
-        analyze(file, "rulesets/java/basic.xml/ExtendsObject");
+        analyze(file, "category/java/codestyle.xml/ExtendsObject");
     }
 
     /**
@@ -256,7 +257,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeInaccessibleFile() throws UnsupportedEncodingException, CoreException {
         final IFile file = mockFile("", UTF_8, "java", false, false);
-        analyze(file, "rulesets/java/basic.xml/ExtendsObject");
+        analyze(file, "category/java/codestyle.xml/ExtendsObject");
     }
 
     /**
@@ -266,7 +267,7 @@ public class AnalyzerTest {
     @Test
     public void analyzePMDBug1076() throws UnsupportedEncodingException, CoreException {
         final IFile file = mockFile("class Foo { void bar(int a, int b) { } }", UTF_8, "java", false, true);
-        analyze(file, "rulesets/java/optimizations.xml/MethodArgumentCouldBeFinal",
+        analyze(file, "category/java/codestyle.xml/MethodArgumentCouldBeFinal",
                 "MethodArgumentCouldBeFinal", "MethodArgumentCouldBeFinal");
     }
 
