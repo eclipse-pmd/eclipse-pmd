@@ -75,7 +75,7 @@ import org.xml.sax.SAXException;
  * &lt;/tests>
  * </pre>
  */
-public class QuickFixTestData {
+public final class QuickFixTestData {
 
     private QuickFixTestData() {
         // hide constructor of utility class

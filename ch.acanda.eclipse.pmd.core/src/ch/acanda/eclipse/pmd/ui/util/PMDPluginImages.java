@@ -11,7 +11,7 @@ import ch.acanda.eclipse.pmd.PMDPlugin;
 /**
  * Manages the resources of the PMD plug-in's images.
  */
-public class PMDPluginImages {
+public final class PMDPluginImages {
 
     public static final ImageDescriptor QUICKFIX_ADD = PMDPlugin.getImageDescriptor("icons/quickfix_add.gif");
     public static final ImageDescriptor QUICKFIX_REMOVE = PMDPlugin.getImageDescriptor("icons/quickfix_remove.gif");
