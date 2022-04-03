@@ -5,6 +5,6 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
     <description>PMD rules!</description>
-    <rule ref="rulesets/java/basic.xml/ExtendsObject" />
-    <rule ref="rulesets/java/basic.xml/BooleanInstantiation" />
+    <rule ref="category/java/codestyle.xml/ExtendsObject" />
+    <rule ref="category/java/performance.xml/BooleanInstantiation" />
 </ruleset>
