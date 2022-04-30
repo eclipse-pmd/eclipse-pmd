@@ -12,7 +12,7 @@
     <url>https://eclipse-pmd.github.io</url>
 
     <properties>
-        <pmd-version>6.44.0</pmd-version>
+        <pmd-version>6.45.0</pmd-version>
         <eclipse-release>2021-06</eclipse-release>
         <java.version>11</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>

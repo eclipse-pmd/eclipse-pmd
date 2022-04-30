@@ -224,6 +224,28 @@ public class AnalyzerTest {
     }
 
     /**
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze HTML files.
+     */
+    @Test
+    public void analyzeHtml() {
+        analyze("<img src=\"house.jpeg\">", UTF_8, "html", "category/html/bestpractices.xml/UseAltAttributeForImages",
+                "UseAltAttributeForImages");
+    }
+
+    /**
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all HTML rules.
+     */
+    @Test
+    public void analyzeHtmlAllRules() throws IOException {
+        final String content = "<html>\n"
+                + "<body>\n"
+                + "  <h1>Hi</h1>\n"
+                + "</body>\n"
+                + "</html>\n";
+        analyze(content, UTF_8, "html", getAllRuleSetRefIds("html"));
+    }
+
+    /**
      * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} doesn't throw a
      * NullPointerException when the file to analyze does not have a file extension.
      */

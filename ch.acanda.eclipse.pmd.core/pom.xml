@@ -82,6 +82,17 @@
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>net.sourceforge.pmd</groupId>
+                                    <artifactId>pmd-html</artifactId>
+                                    <version>${pmd-version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>net.sourceforge.pmd</groupId>
+                                    <artifactId>pmd-html</artifactId>
+                                    <version>${pmd-version}</version>
+                                    <classifier>sources</classifier>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>net.sourceforge.pmd</groupId>
                                     <artifactId>pmd-java</artifactId>
                                     <version>${pmd-version}</version>
                                 </artifactItem>
@@ -209,6 +220,12 @@
                                     <groupId>org.antlr</groupId>
                                     <artifactId>antlr-runtime</artifactId>
                                     <version>3.5.2</version>
+                                </artifactItem>
+                                <!-- pmd-html's dependencies -->
+                                <artifactItem>
+                                    <groupId>org.jsoup</groupId>
+                                    <artifactId>jsoup</artifactId>
+                                    <version>1.14.3</version>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
