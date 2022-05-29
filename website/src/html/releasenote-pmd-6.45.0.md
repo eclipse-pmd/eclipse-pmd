@@ -1,33 +1,3 @@
-# New and noteworthy️
-
-## apex
-- #3817: [apex] Add designer bindings to display main attributes
-## apex-performance
-- #3773: [apex] EagerlyLoadedDescribeSObjectResult false positives with SObjectField.getDescribe()
-## core
-- #2693: [ci] Add integration tests with real open-source projects
-- #3299: [core] Deprecate system properties of PMDCommandLineInterface
-## java
-- #3809: [java] Support JDK 18
-## doc
-- #2504: [doc] Improve “Edit me on github” button
-- #3812: [doc] Documentation website table of contents broken on pages with many subheadings
-## java-design
-- #3850: [java] ImmutableField - false negative when field assigned in constructor conditionally
-- #3851: [java] ClassWithOnlyPrivateConstructorsShouldBeFinal - false negative when a compilation unit contains two class declarations
-## xml
-- #2766: [xml] XMLNS prefix is not pre-declared in xpath query
-- #3863: [xml] Make XPath rules work exactly as in the XPath spec
-
-# External Contributions
-
-- #3773: [apex] EagerlyLoadedDescribeSObjectResult false positives with SObjectField.getDescribe() - @filiprafalowicz
-- #3811: [doc] Improve “Edit me on github” button - @btjiong
-- #3836: [doc] Make TOC scrollable when too many subheadings - @JerritEic
-
-
-
-
 # New and noteworthy
 
 ## Support for HTML
