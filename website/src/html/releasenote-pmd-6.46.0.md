@@ -1,4 +1,4 @@
-# New Rules ✏️️
+# New Rules
 
 This release ships with 2 new Java rules.
 
@@ -21,7 +21,7 @@ This new rule replaces the rule EmptyStatementNotInLoop.
 
 The rule is part of the quickstart.xml ruleset.
 
-# Deprecated Rules ✏️️
+# Deprecated Rules
 
 The following Java rules are deprecated and removed from the quickstart ruleset, as the new rule EmptyControlStatement merges their functionality:
 
@@ -36,7 +36,7 @@ The following Java rules are deprecated and removed from the quickstart ruleset,
 
 The Java rule EmptyStatementNotInLoop is deprecated and removed from the quickstart ruleset. Use the new rule UnnecessarySemicolon instead.
 
-# Fixed Issues ✏️️
+# Fixed Issues
 
 ## cli
 - #1445: [core] Allow CLI to take globs as parameters
@@ -80,7 +80,7 @@ The Java rule EmptyStatementNotInLoop is deprecated and removed from the quickst
 ## python
 - #2604: [python] Support unicode identifiers
 
-# External Contributions ✏️️
+# External Contributions
 
 - #3961: [java] Fix #3954 - NPE in UseCollectionIsEmptyRule with record - @flyhard
 - #3964: [java] Fix #3874 - ImmutableField: fix mockito/spring false positives - @lukelukes

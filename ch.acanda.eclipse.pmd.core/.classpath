@@ -6,18 +6,18 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-apex-6.46.0.jar" sourcepath="lib/pmd-apex-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-apex-jorje-6.46.0-lib.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-core-6.46.0.jar" sourcepath="lib/pmd-core-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-html-6.46.0.jar" sourcepath="lib/pmd-html-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-java-6.46.0.jar" sourcepath="lib/pmd-java-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-javascript-6.46.0.jar" sourcepath="lib/pmd-javascript-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-jsp-6.46.0.jar" sourcepath="lib/pmd-jsp-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-modelica-6.46.0.jar" sourcepath="lib/pmd-modelica-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-plsql-6.46.0.jar" sourcepath="lib/pmd-plsql-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-visualforce-6.46.0.jar" sourcepath="lib/pmd-visualforce-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-vm-6.46.0.jar" sourcepath="lib/pmd-vm-6.46.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-xml-6.46.0.jar" sourcepath="lib/pmd-xml-6.46.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-apex-6.47.0.jar" sourcepath="lib/pmd-apex-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-apex-jorje-6.47.0-lib.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-core-6.47.0.jar" sourcepath="lib/pmd-core-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-html-6.47.0.jar" sourcepath="lib/pmd-html-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-java-6.47.0.jar" sourcepath="lib/pmd-java-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-javascript-6.47.0.jar" sourcepath="lib/pmd-javascript-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-jsp-6.47.0.jar" sourcepath="lib/pmd-jsp-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-modelica-6.47.0.jar" sourcepath="lib/pmd-modelica-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-plsql-6.47.0.jar" sourcepath="lib/pmd-plsql-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-visualforce-6.47.0.jar" sourcepath="lib/pmd-visualforce-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-vm-6.47.0.jar" sourcepath="lib/pmd-vm-6.47.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-xml-6.47.0.jar" sourcepath="lib/pmd-xml-6.47.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.12.0.jar"/>
 	<classpathentry kind="lib" path="lib/asm-9.2.jar"/>
