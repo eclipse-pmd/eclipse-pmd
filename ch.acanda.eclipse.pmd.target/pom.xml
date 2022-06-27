@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -25,19 +22,7 @@
                 </property>
             </activation>
             <modules>
-                <module>2021-06</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>eclipse-2021-06</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2021-06</value>
-                </property>
-            </activation>
-            <modules>
-                <module>2021-06</module>
+                <module>2021-09</module>
             </modules>
         </profile>
         <profile>
@@ -74,6 +59,18 @@
             </activation>
             <modules>
                 <module>2022-03</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>eclipse-2022-06</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2022-06</value>
+                </property>
+            </activation>
+            <modules>
+                <module>2022-06</module>
             </modules>
         </profile>
     </profiles>

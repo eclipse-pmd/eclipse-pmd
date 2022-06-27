@@ -225,36 +225,14 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2021-06</id>
+                    <id>2021-09</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2021-06/</url>
+                    <url>http://download.eclipse.org/releases/2021-09/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/3.1.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2021-06</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2021-06</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2021-06</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2021-06/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/3.1.0/</url>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
                 </repository>
             </repositories>
         </profile>
@@ -276,7 +254,7 @@
                 <repository>
                     <id>swtbot</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/3.1.0/</url>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
                 </repository>
             </repositories>
         </profile>
@@ -298,7 +276,7 @@
                 <repository>
                     <id>swtbot</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/3.1.0/</url>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
                 </repository>
             </repositories>
         </profile>
@@ -320,7 +298,29 @@
                 <repository>
                     <id>swtbot</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/3.1.0/</url>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>eclipse-2022-06</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2022-06</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2022-06</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2022-06/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
                 </repository>
             </repositories>
         </profile>
