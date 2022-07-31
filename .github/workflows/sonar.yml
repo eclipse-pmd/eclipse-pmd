@@ -5,6 +5,7 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   build:
     name: Sonar
@@ -36,3 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' mvn -f eclipse-pmd/pom.xml -B -Pjacoco verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar
+      - name: Summary
+        run: |
+          echo "# Sonar" >> $GITHUB_STEP_SUMMARY
+          echo "You can find the results at: https://sonarcloud.io/dashboard?id=eclipse-pmd_eclipse-pmd&branch=$GITHUB_REF_NAME" >> $GITHUB_STEP_SUMMARY
