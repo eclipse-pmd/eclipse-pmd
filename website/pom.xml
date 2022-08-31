@@ -25,14 +25,14 @@
 
         <resources>
             <resource>
-                <directory>src/html</directory>
+                <directory>src/main/html</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.html</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/html</directory>
+                <directory>src/main/html</directory>
                 <filtering>false</filtering>
                 <excludes>
                     <exclude>**/*.html</exclude>
