@@ -29,7 +29,7 @@ public class PMDPropertyPage extends PropertyPage {
         unsupportedLayoutData.widthHint = MIN_WIDTH;
         unsupported.setLayoutData(unsupportedLayoutData);
         unsupported.setText(
-                "eclipse-pmd requires that Eclipse runs on a JVM with version 11 or later but it"
+                "eclipse-pmd requires that Eclipse runs on a JVM with version 17 or later but it"
                 + " currently runs on a JVM with version " + System.getProperty("java.version", "[unknown]") + ".");
 
         final Link link = new Link(contents, SWT.WRAP);

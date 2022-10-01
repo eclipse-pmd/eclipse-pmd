@@ -14,7 +14,7 @@
     <properties>
         <pmd-version>6.50.0</pmd-version>
         <eclipse-release>2021-09</eclipse-release>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <sonar.projectKey>eclipse-pmd_eclipse-pmd</sonar.projectKey>
         <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
