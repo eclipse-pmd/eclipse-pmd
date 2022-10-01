@@ -113,7 +113,7 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         astParser.setEnvironment(new String[0], new String[0], new String[0], true);
         final String name = last(params.pmdReferenceId.orElse("QuickFixTest").split("/"));
         astParser.setUnitName(format("{0}.java", name));
-        final String version = last(params.language.orElse("java 11").split("\\s+"));
+        final String version = last(params.language.orElse("java 17").split("\\s+"));
         astParser.setCompilerOptions(Map.of(
                 JavaCore.COMPILER_SOURCE, version,
                 JavaCore.COMPILER_COMPLIANCE, version,
