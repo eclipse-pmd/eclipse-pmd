@@ -2,9 +2,9 @@ package ch.acanda.eclipse.pmd.java.resolution;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.mock;
@@ -40,8 +40,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 
 /**
  * Base class for testing quick fix tests based on {@link ASTQuickFix}. An extending class must provide a static method
- * with the annotation {@link org.junit.runners.Parameterized.Parameters} that returns the parameters for the test case,
- * e.g:
+ * with the annotation {@link org.junit.jupiter.params.Parameters} that returns the parameters for the test case, e.g:
  *
  * <pre>
  * &#064;Parameters
@@ -54,6 +53,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * an {@code InputStream} to an XML file containing all the test data. See {@link QuickFixTestData} for the format of
  * the XML file. See {@link ch.acanda.eclipse.pmd.java.resolution.codestyle.ExtendsObjectQuickFixTest
  * ExtendsObjectQuickFixTest} for a complete example.
+ *
  * @param <T> The type of the quick fix.
  */
 @SuppressWarnings({ "PMD.AbstractClassWithoutAbstractMethod", "PMD.ExcessiveImports" })
@@ -91,22 +91,23 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         quickFix.apply(node);
 
         final String actual = rewriteAST(document, ast);
-        assertEquals("Result of applying the quick fix " + quickFix.getClass().getSimpleName() + " to the test " + params.name,
-                params.expectedSource, actual);
+        assertEquals(params.expectedSource, actual,
+                () -> "Result of applying the quick fix " + quickFix.getClass().getSimpleName() + " to the test " + params.name);
     }
 
     private ASTNode findNode(final TestParameters params, final CompilationUnit ast, final ASTQuickFix<ASTNode> quickFix) {
         final Class<? extends ASTNode> nodeType = quickFix.getNodeType();
         final NodeFinder<CompilationUnit, ASTNode> finder = quickFix.getNodeFinder(new Position(params.offset, params.length));
         final Optional<ASTNode> node = finder.findNode(ast);
-        assertTrue("Couldn't find node of type " + nodeType.getSimpleName() + "."
-                + " Check the position of the marker in test " + params.name + ".", node.isPresent());
+        assertTrue(node.isPresent(),
+                () -> "Couldn't find node of type " + nodeType.getSimpleName() + "."
+                        + " Check the position of the marker in test " + params.name + ".");
         return node.get();
     }
 
     private CompilationUnit createAST(final org.eclipse.jface.text.Document document, final ASTQuickFix<ASTNode> quickFix,
             final TestParameters params) {
-        final ASTParser astParser = ASTParser.newParser(AST.JLS15);
+        final ASTParser astParser = ASTParser.newParser(AST.getJLSLatest());
         astParser.setSource(document.get().toCharArray());
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);
         astParser.setResolveBindings(quickFix.needsTypeResolution());
@@ -154,9 +155,9 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
         final ImageDescriptor imageDescriptor = getQuickFix(params).getImageDescriptor();
         if (params.expectedImage.isPresent()) {
             final Field field = PMDPluginImages.class.getDeclaredField(params.expectedImage.get());
-            assertEquals("Quick fix image descriptor in test " + params.name, field.get(null), imageDescriptor);
+            assertEquals(field.get(null), imageDescriptor, () -> "Quick fix image descriptor in test " + params.name);
         } else {
-            assertNotNull("Quick fix image descriptor must not be null (test " + params.name + ")", imageDescriptor);
+            assertNotNull(imageDescriptor, () -> "Quick fix image descriptor must not be null (test " + params.name + ")");
         }
     }
 
@@ -165,9 +166,9 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
     public void shouldReturnExpectedLabel(final TestParameters params) {
         final String label = getQuickFix(params).getLabel();
         if (params.expectedLabel.isPresent()) {
-            assertEquals("Quick fix label in test " + params.name, params.expectedLabel.get(), label);
+            assertEquals(params.expectedLabel.get(), label, () -> "Quick fix label in test " + params.name);
         } else {
-            assertNotNull("Quick fix label must not be null (test " + params.name + ")", label);
+            assertNotNull(label, () -> "Quick fix label must not be null (test " + params.name + ")");
         }
     }
 
@@ -176,9 +177,9 @@ public abstract class ASTQuickFixTestCase<T extends ASTQuickFix<? extends ASTNod
     public void shouldReturnExpectedDescription(final TestParameters params) {
         final String description = getQuickFix(params).getDescription();
         if (params.expectedDescription.isPresent()) {
-            assertEquals("Quick fix description in test " + params.name, params.expectedDescription.get(), description);
+            assertEquals(params.expectedDescription.get(), description, () -> "Quick fix description in test " + params.name);
         } else {
-            assertNotNull("Quick fix description must not be null (test " + params.name + ")", description);
+            assertNotNull(description, () -> "Quick fix description must not be null (test " + params.name + ")");
         }
     }
 

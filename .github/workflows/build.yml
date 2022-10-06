@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        release: [2021-09, 2021-12, 2022-03, 2022-06]
+        release: [2021-12, 2022-03, 2022-06, 2022-09]
     steps:
       - uses: actions/checkout@v2
         with:

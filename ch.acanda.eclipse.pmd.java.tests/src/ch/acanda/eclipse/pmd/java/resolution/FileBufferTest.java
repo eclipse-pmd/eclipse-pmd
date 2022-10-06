@@ -1,6 +1,6 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -33,8 +33,8 @@ public class FileBufferTest {
         final ResourceMarkerAnnotationModel annotationModel = new ResourceMarkerAnnotationModel(file);
 
         try (FileBuffer fileBuffer = createFileBuffer(document, buffer, file, annotationModel, false)) {
-            assertEquals("File buffer document", document, fileBuffer.getDocument());
-            assertEquals("File buffer annotation model", annotationModel, fileBuffer.getAnnotationModel());
+            assertEquals(document, fileBuffer.getDocument(), "File buffer document");
+            assertEquals(annotationModel, fileBuffer.getAnnotationModel(), "File buffer annotation model");
         }
         verify(buffer).commit(null, false);
     }
@@ -47,8 +47,8 @@ public class FileBufferTest {
         final ResourceMarkerAnnotationModel annotationModel = new ResourceMarkerAnnotationModel(file);
 
         try (FileBuffer fileBuffer = createFileBuffer(document, buffer, file, annotationModel, true)) {
-            assertEquals("File buffer document", document, fileBuffer.getDocument());
-            assertEquals("File buffer annotation model", annotationModel, fileBuffer.getAnnotationModel());
+            assertEquals(document, fileBuffer.getDocument(), "File buffer document");
+            assertEquals(annotationModel, fileBuffer.getAnnotationModel(), "File buffer annotation model");
         }
         verify(buffer, never()).commit(null, false);
     }

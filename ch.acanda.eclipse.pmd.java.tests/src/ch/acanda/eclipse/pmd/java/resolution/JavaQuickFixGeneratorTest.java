@@ -1,7 +1,7 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,8 +23,9 @@ public class JavaQuickFixGeneratorTest {
 
         final boolean hasQuickFixes = new JavaQuickFixGenerator().hasQuickFixes(marker, context);
 
-        assertTrue("hasQuickFixes should return whether the generator has quick fixes for the rule " + ruleId + " and java version "
-                + javaVersion, hasQuickFixes);
+        assertTrue(hasQuickFixes,
+                () -> "hasQuickFixes should return whether the generator has quick fixes for the rule " + ruleId + " and java version "
+                        + javaVersion);
     }
 
     @Test
@@ -39,8 +40,8 @@ public class JavaQuickFixGeneratorTest {
         final Class<?>[] actualQuickFixClasses =
                 new JavaQuickFixGenerator().getQuickFixes(marker, context).stream().map(IMarkerResolution::getClass).toArray(Class[]::new);
 
-        assertArrayEquals("Quick fixes for rule " + ruleId + " and java version " + javaVersion, expectedQuickFixClasses,
-                actualQuickFixClasses);
+        assertArrayEquals(expectedQuickFixClasses, actualQuickFixClasses,
+                () -> "Quick fixes for rule " + ruleId + " and java version " + javaVersion);
     }
 
 }

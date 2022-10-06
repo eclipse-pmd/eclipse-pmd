@@ -5,9 +5,6 @@ Bundle-SymbolicName: ch.acanda.eclipse.pmd.java.tests;singleton:=true
 Bundle-Version: 2.25.0.qualifier
 Bundle-Vendor: Philip Graf
 Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="2.25.0"
-Require-Bundle: org.junit;bundle-version="4.13.0",
- org.junit.jupiter.api;bundle-version="5.7.1",
- org.junit.jupiter.params;bundle-version="5.7.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ClassPath: .,
  lib/mockito-core-4.2.0.jar,
@@ -15,3 +12,6 @@ Bundle-ClassPath: .,
  lib/byte-buddy-agent-1.12.5.jar,
  lib/objenesis-3.2.jar
 Automatic-Module-Name: ch.acanda.eclipse.pmd.java.tests
+Import-Package: org.junit.jupiter.api;version="5.8.1",
+ org.junit.jupiter.params;version="5.8.1",
+ org.junit.jupiter.params.provider;version="5.8.1"
