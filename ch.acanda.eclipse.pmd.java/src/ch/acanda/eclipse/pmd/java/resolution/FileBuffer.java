@@ -1,7 +1,5 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import java.lang.reflect.Field;
-
 import org.eclipse.core.filebuffers.FileBuffers;
 import org.eclipse.core.filebuffers.ITextFileBuffer;
 import org.eclipse.core.filebuffers.ITextFileBufferManager;
@@ -62,7 +60,6 @@ class FileBuffer implements AutoCloseable {
         return (CompilationUnit) astParser.createAST(monitor);
     }
 
-    @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     private int getApiLevel(final IFile file) {
         // try to infer API level from compiler source settings in project
         final IProject project = file.getProject();
@@ -73,18 +70,8 @@ class FileBuffer implements AutoCloseable {
             }
         }
 
-        // try to read the private field AST.JLS_Latest which holds the latest API level supported by the current
-        // Eclipse release
-        try {
-            final Field jlsLatest = AST.class.getDeclaredField("JLS_Latest");
-            jlsLatest.setAccessible(true);
-            return jlsLatest.getInt(null);
-        } catch (final NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-            // failed to read the field
-        }
-
-        // use the latest API level supported by the oldest supported Eclipse release
-        return AST.JLS15;
+        // use the latest API level supported by the oldest current Eclipse release
+        return AST.getJLSLatest();
     }
 
     @Override

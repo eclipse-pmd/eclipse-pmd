@@ -1,6 +1,6 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -11,6 +11,6 @@ Bundle-ClassPath: .,
  lib/byte-buddy-1.12.5.jar,
  lib/byte-buddy-agent-1.12.5.jar,
  lib/objenesis-3.2.jar
-Require-Bundle: org.junit;bundle-version="4.13.0",
- org.junit.jupiter.api;bundle-version="5.7.1"
 Automatic-Module-Name: ch.acanda.eclipse.pmd.core.tests
+Import-Package: org.junit.jupiter.api;version="5.8.1",
+ org.junit.jupiter.api.io;version="5.8.1"

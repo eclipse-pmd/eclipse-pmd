@@ -17,7 +17,7 @@
     <url>https://eclipse-pmd.github.io</url>
 
     <properties>
-        <tycho-version>2.7.0</tycho-version>
+        <tycho-version>3.0.0</tycho-version>
         <tycho-extras-version>${tycho-version}</tycho-extras-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
@@ -225,31 +225,9 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2021-09</id>
+                    <id>2021-12</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2021-09/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2021-09</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2021-09</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2021-09</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2021-09/</url>
+                    <url>http://download.eclipse.org/releases/2021-12/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
@@ -316,6 +294,28 @@
                     <id>2022-06</id>
                     <layout>p2</layout>
                     <url>http://download.eclipse.org/releases/2022-06/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>eclipse-2022-09</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2022-09</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2022-09</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2022-09/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
