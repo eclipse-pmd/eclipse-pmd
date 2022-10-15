@@ -58,11 +58,6 @@
       An alternative way to install the plugin on Eclipse ${eclipse-release} (and later) is via the plugin update site <a
         href="http://www.acanda.ch/eclipse-pmd/release/latest">http://www.acanda.ch/eclipse-pmd/release/latest</a>.
     </p>
-    <p>
-      If you cannot use Java 17 or later for some reason you can use the latest 1.x version of eclipse-pmd which requires Java 7 or later
-      by using the update site <a href="http://www.acanda.ch/eclipse-pmd/release/1/latest">http://www.acanda.ch/eclipse-pmd/release/1/latest</a>.
-      The 1.x versions are not under development anymore and you will not get the latest features if you use this update site.
-    </p>
     <ol>
       <li>In Eclipse go to <strong>Help</strong> > <strong>Install new software...</strong>
       </li>
@@ -72,6 +67,38 @@
       </li>
       <li>Finish the installation by accepting the license and restarting Eclipse.</li>
     </ol>
+    <p>If you cannot use Java 17 or later for some reason, you can use an older version of eclipse-pmd. Those versions are not
+      maintained anymore and you will not get the latest features if you use their update site.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Java Version</th>
+          <th>eclipse-pmd Version</th>
+          <th>Update Site</th>
+          <th>Updates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Java 17</td>
+          <td>eclipse-pmd 3.x</td>
+          <td>http://www.acanda.ch/eclipse-pmd/release/latest</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Java 11</td>
+          <td>eclipse-pmd 2.25</td>
+          <td>http://www.acanda.ch/eclipse-pmd/release/2.25</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Java 7</td>
+          <td>eclipse-pmd 1.28</td>
+          <td>http://www.acanda.ch/eclipse-pmd/release/1.28</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3>Offline Installation</h3>
     <p>If you do not have access to the internet you can download the plugin as a zip file and install it manually.</p>
