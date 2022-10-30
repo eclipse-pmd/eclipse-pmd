@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
 
-    <!-- last updated for PMD 6.50.0 -->
+    <!-- last updated for PMD 6.51.0 -->
 
     <description>PMD rules for eclipse-pmd</description>
 
@@ -58,6 +58,7 @@
         <exclude name="AvoidLiteralsInIfCondition" />
         <exclude name="BeanMembersShouldSerialize" />
         <exclude name="EmptyCatchBlock" />
+        <exclude name="TestClassWithoutTestCases" />
     </rule>
     <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
         <properties>
