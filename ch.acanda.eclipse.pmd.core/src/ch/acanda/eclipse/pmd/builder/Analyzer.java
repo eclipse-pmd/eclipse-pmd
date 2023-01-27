@@ -6,14 +6,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.ISafeRunnableWithResult;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.SafeRunner;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
+import ch.acanda.eclipse.pmd.extension.ExtensionPoints;
+import ch.acanda.eclipse.pmd.extension.PMDClassLoaderProvider;
 import net.sourceforge.pmd.PMDConfiguration;
 import net.sourceforge.pmd.PmdAnalysis;
 import net.sourceforge.pmd.RuleSet;
@@ -42,7 +49,7 @@ public final class Analyzer {
         annotateFile(file, violationProcessor, violations);
     }
 
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+    @SuppressWarnings({ "PMD.AvoidCatchingGenericException", "PMD.UseProperClassLoader" })
     private List<RuleViolation> runPMD(final IFile file, final List<RuleSet> ruleSets) {
         try {
             if (isValidFile(file, ruleSets)) {
@@ -51,6 +58,7 @@ public final class Analyzer {
                     final PMDConfiguration configuration = new PMDConfiguration();
                     configuration.setDefaultLanguageVersion(language.getDefaultVersion());
                     configuration.setIgnoreIncrementalAnalysis(true);
+                    configuration.setClassLoader(getClassLoader(file, language));
                     try (PmdAnalysis analysis = PmdAnalysis.create(configuration); InputStream in = file.getContents()) {
                         analysis.addRuleSets(ruleSets);
                         analysis.files().addSourceFile(IOUtils.toString(in, file.getCharset()), file.getProjectRelativePath().toOSString());
@@ -62,6 +70,38 @@ public final class Analyzer {
             PMDPlugin.getDefault().warn("Could not run PMD on file " + file.getRawLocation(), e);
         }
         return List.of();
+    }
+
+    private ClassLoader getClassLoader(final IFile file, final Language language) {
+        final IConfigurationElement[] providers = Platform.getExtensionRegistry()
+                .getConfigurationElementsFor(ExtensionPoints.PMD_CLASS_LOADER_PROVIDER_ID);
+        for (final IConfigurationElement provider : providers) {
+            try {
+                final Object obj = provider.createExecutableExtension("class");
+                if (obj instanceof PMDClassLoaderProvider) {
+                    final ISafeRunnableWithResult<Optional<ClassLoader>> runnable = new ISafeRunnableWithResult<>() {
+                        @Override
+                        public void handleException(final Throwable e) {
+                            PMDPlugin.getDefault().error("Unable to execute class loader provider", e);
+                        }
+
+                        @Override
+                        @SuppressWarnings("PMD.UseProperClassLoader")
+                        public Optional<ClassLoader> runWithResult() throws Exception {
+                            return ((PMDClassLoaderProvider) obj).getClassLoader(file, language);
+                        }
+                    };
+                    final Optional<ClassLoader> cl = SafeRunner.run(runnable);
+                    if (cl.isPresent()) {
+                        return cl.get();
+                    }
+                }
+            } catch (final CoreException e) {
+                final String name = provider.getAttribute("class");
+                PMDPlugin.getDefault().error("Unable to create class loader provider " + name, e);
+            }
+        }
+        return null;
     }
 
     private void annotateFile(final IFile file, final ViolationProcessor violationProcessor, final List<RuleViolation> violations) {

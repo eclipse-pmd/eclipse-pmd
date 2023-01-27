@@ -20,5 +20,11 @@
          </attribute>
       </markerResolutionGenerator>
    </extension>
+   <extension
+         point="ch.acanda.eclipse.pmd.core.classloader">
+      <provider
+            class="ch.acanda.eclipse.pmd.java.classloader.JavaClassLoaderProvider">
+      </provider>
+   </extension>
 
 </plugin>

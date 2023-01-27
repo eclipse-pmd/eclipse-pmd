@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="ch.acanda.eclipse.pmd.core.classloader" name="PMD ClassLoader Provider" schema="schema/ch.acanda.eclipse.pmd.core.classloader.exsd"/>
 
    <extension
          id="ch.acanda.eclipse.pmd.builder.PMDBuilder"

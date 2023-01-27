@@ -39,6 +39,7 @@ Bundle-Activator: ch.acanda.eclipse.pmd.PMDPlugin
 Bundle-ActivationPolicy: lazy
 Export-Package: ch.acanda.eclipse.pmd.domain,
  ch.acanda.eclipse.pmd.exception,
+ ch.acanda.eclipse.pmd.extension,
  ch.acanda.eclipse.pmd.marker,
  ch.acanda.eclipse.pmd.ui.util,
  net.sourceforge.pmd,
