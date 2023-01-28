@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -67,11 +68,22 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
         private List<URL> getClasspathEntryOutputLocations(final IJavaProject project)
                 throws JavaModelException, MalformedURLException {
             return Stream.of(project.getResolvedClasspath(true))
-                    .map(entry -> entry.getOutputLocation())
+                    .map(entry -> getClassesLocation(entry))
                     .filter(Objects::nonNull)
                     .map(loc -> toURL(loc))
                     .filter(Objects::nonNull)
                     .toList();
+        }
+
+        private IPath getClassesLocation(final IClasspathEntry entry) {
+            final int kind = entry.getEntryKind();
+            if (kind == IClasspathEntry.CPE_SOURCE) {
+                return entry.getOutputLocation();
+            }
+            if (kind == IClasspathEntry.CPE_LIBRARY) {
+                return entry.getPath();
+            }
+            return null;
         }
 
         private URL toURL(final IPath path) {
