@@ -22,7 +22,6 @@
 	<classpathentry kind="lib" path="lib/xercesImpl-2.12.2.jar"/>
 	<classpathentry kind="lib" path="lib/asm-9.2.jar"/>
 	<classpathentry kind="lib" path="lib/rhino-1.7.14.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/saxon-9.1.0.8-dom.jar"/>
 	<classpathentry kind="lib" path="lib/saxon-9.1.0.8.jar"/>

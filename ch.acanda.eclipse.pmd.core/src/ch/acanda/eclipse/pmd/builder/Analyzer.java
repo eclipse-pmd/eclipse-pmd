@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.commons.io.IOUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -61,7 +60,8 @@ public final class Analyzer {
                     configuration.setClassLoader(getClassLoader(file, language));
                     try (PmdAnalysis analysis = PmdAnalysis.create(configuration); InputStream in = file.getContents()) {
                         analysis.addRuleSets(ruleSets);
-                        analysis.files().addSourceFile(IOUtils.toString(in, file.getCharset()), file.getProjectRelativePath().toOSString());
+                        final String source = new String(in.readAllBytes(), file.getCharset());
+                        analysis.files().addSourceFile(source, file.getProjectRelativePath().toOSString());
                         return analysis.performAnalysisAndCollectReport().getViolations();
                     }
                 }
