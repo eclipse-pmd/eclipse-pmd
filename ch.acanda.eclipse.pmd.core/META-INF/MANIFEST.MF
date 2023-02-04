@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="3.16.0",
  org.eclipse.core.databinding.property;bundle-version="1.9.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ClassPath: .,
- lib/asm-9.2.jar,
+ lib/asm-9.3.jar,
  lib/rhino-1.7.14.jar,
  lib/commons-lang3-3.8.1.jar,
  lib/xercesImpl-2.12.2.jar,
