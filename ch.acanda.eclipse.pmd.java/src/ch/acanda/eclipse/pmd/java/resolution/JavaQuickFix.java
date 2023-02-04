@@ -32,6 +32,7 @@ import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.views.markers.WorkbenchMarkerResolution;
 
+import ch.acanda.eclipse.pmd.java.PMDJavaPlugin;
 import ch.acanda.eclipse.pmd.marker.PMDMarker;
 import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 
@@ -135,8 +136,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
             fixMarkers(markers, subMonitor.split(95), compilationUnit, buffer, ast);
 
         } catch (CoreException | MalformedTreeException | BadLocationException e) {
-            // TODO: log error
-            // PMDPlugin.getDefault().error("Error processing quickfix", e);
+            PMDJavaPlugin.getDefault().error("Error processing quickfix", e);
 
         } finally {
             subMonitor.setWorkRemaining(0);
