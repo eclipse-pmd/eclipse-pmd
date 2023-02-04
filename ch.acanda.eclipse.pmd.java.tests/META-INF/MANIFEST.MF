@@ -8,8 +8,8 @@ Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="3.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ClassPath: .,
  lib/mockito-core-4.2.0.jar,
- lib/byte-buddy-1.12.5.jar,
- lib/byte-buddy-agent-1.12.5.jar,
+ lib/byte-buddy-1.12.22.jar,
+ lib/byte-buddy-agent-1.12.22.jar,
  lib/objenesis-3.2.jar
 Automatic-Module-Name: ch.acanda.eclipse.pmd.java.tests
 Import-Package: org.junit.jupiter.api;version="5.8.1",
