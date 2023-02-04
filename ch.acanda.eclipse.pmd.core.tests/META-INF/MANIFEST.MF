@@ -10,7 +10,7 @@ Bundle-ClassPath: .,
  lib/mockito-core-5.1.1.jar,
  lib/byte-buddy-1.12.22.jar,
  lib/byte-buddy-agent-1.12.22.jar,
- lib/objenesis-3.2.jar
+ lib/objenesis-3.3.jar
 Automatic-Module-Name: ch.acanda.eclipse.pmd.core.tests
 Import-Package: org.junit.jupiter.api;version="5.8.1",
  org.junit.jupiter.api.io;version="5.8.1"
