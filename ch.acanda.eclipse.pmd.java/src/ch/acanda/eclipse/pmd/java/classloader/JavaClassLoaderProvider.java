@@ -39,7 +39,6 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
 
         private final Map<String, CachedClassLoader> cache = new HashMap<>();
 
-        @SuppressWarnings("PMD.UseProperClassLoader")
         ClassLoader get(final IFile file) {
             final String key = file.getProject().getFullPath().toString();
             final CachedClassLoader value = cache.get(key);
@@ -51,7 +50,6 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
             return value.getClassLoader();
         }
 
-        @SuppressWarnings("PMD.UseProperClassLoader")
         private ClassLoader getClassLoader(final IFile file) {
             final IProject project = file.getProject();
             final Collection<IPath> projects = new ArrayList<>();

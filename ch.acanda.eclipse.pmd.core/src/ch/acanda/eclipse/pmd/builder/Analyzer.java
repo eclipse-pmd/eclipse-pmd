@@ -48,7 +48,7 @@ public final class Analyzer {
         annotateFile(file, violationProcessor, violations);
     }
 
-    @SuppressWarnings({ "PMD.AvoidCatchingGenericException", "PMD.UseProperClassLoader" })
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private List<RuleViolation> runPMD(final IFile file, final List<RuleSet> ruleSets) {
         try {
             if (isValidFile(file, ruleSets)) {
@@ -86,7 +86,6 @@ public final class Analyzer {
                         }
 
                         @Override
-                        @SuppressWarnings("PMD.UseProperClassLoader")
                         public Optional<ClassLoader> runWithResult() throws Exception {
                             return ((PMDClassLoaderProvider) obj).getClassLoader(file, language);
                         }

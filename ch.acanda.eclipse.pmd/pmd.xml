@@ -59,6 +59,7 @@
         <exclude name="BeanMembersShouldSerialize" />
         <exclude name="EmptyCatchBlock" />
         <exclude name="TestClassWithoutTestCases" />
+        <exclude name="UseProperClassLoader" />
     </rule>
     <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
         <properties>
