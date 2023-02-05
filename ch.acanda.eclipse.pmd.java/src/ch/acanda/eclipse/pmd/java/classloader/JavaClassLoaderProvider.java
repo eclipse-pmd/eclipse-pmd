@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.JavaModelException;
 
 import ch.acanda.eclipse.pmd.extension.PMDClassLoaderProvider;
 import ch.acanda.eclipse.pmd.java.PMDJavaPlugin;
+import net.sourceforge.pmd.PmdAnalysis;
 import net.sourceforge.pmd.lang.Language;
 
 public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
@@ -50,12 +51,13 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
             return value.getClassLoader();
         }
 
+        @SuppressWarnings("PMD.UseProperClassLoader")
         private ClassLoader getClassLoader(final IFile file) {
             final IProject project = file.getProject();
             final Collection<IPath> projects = new ArrayList<>();
             projects.add(project.getFullPath());
             final URL[] classpath = getClasspath(project, projects).toArray(URL[]::new);
-            return classpath.length == 0 ? null : new URLClassLoader(classpath);
+            return classpath.length == 0 ? null : new URLClassLoader(classpath, PmdAnalysis.class.getClassLoader());
         }
 
         private Stream<URL> getClasspath(final IProject project, final Collection<IPath> projects) {
