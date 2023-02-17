@@ -17,7 +17,7 @@
     <url>https://eclipse-pmd.github.io</url>
 
     <properties>
-        <tycho-version>3.0.2</tycho-version>
+        <tycho-version>3.0.3</tycho-version>
         <tycho-extras-version>${tycho-version}</tycho-extras-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
