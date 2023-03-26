@@ -1,8 +1,8 @@
 package ch.acanda.eclipse.pmd.cache;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ import net.sourceforge.pmd.RuleSet;
 import net.sourceforge.pmd.lang.apex.rule.design.ExcessiveClassLengthRule;
 import net.sourceforge.pmd.lang.apex.rule.design.ExcessivePublicCountRule;
 import net.sourceforge.pmd.lang.java.rule.design.ExcessiveImportsRule;
-import net.sourceforge.pmd.lang.java.rule.design.ExcessiveMethodLengthRule;
+import net.sourceforge.pmd.lang.java.rule.design.ExcessiveParameterListRule;
 
 /**
  * Unit tests for {@link RuleSetsCache}.
@@ -33,7 +33,7 @@ public final class RuleSetsCacheTest {
     private static final String PROJECT_NAME_2 = "Bar";
 
     private static final List<RuleSet> RULE_SETS_FOO_1 = createRuleSets(new ExcessiveClassLengthRule());
-    private static final List<RuleSet> RULE_SETS_FOO_2 = createRuleSets(new ExcessiveMethodLengthRule());
+    private static final List<RuleSet> RULE_SETS_FOO_2 = createRuleSets(new ExcessiveParameterListRule());
     private static final List<RuleSet> RULE_SETS_BAR_1 = createRuleSets(new ExcessiveImportsRule());
     private static final List<RuleSet> RULE_SETS_BAR_2 = createRuleSets(new ExcessivePublicCountRule());
 
@@ -118,8 +118,8 @@ public final class RuleSetsCacheTest {
     private CacheLoader<String, List<RuleSet>> getCacheLoaderMock() throws Exception {
         @SuppressWarnings("unchecked")
         final CacheLoader<String, List<RuleSet>> loader = mock(CacheLoader.class);
-        when(loader.load(PROJECT_NAME_1)).thenReturn(RULE_SETS_FOO_1, RULE_SETS_FOO_2);
-        when(loader.load(PROJECT_NAME_2)).thenReturn(RULE_SETS_BAR_1, RULE_SETS_BAR_2);
+        doReturn(RULE_SETS_FOO_1, RULE_SETS_FOO_2).when(loader.load(PROJECT_NAME_1));
+        doReturn(RULE_SETS_BAR_1, RULE_SETS_BAR_2).when(loader.load(PROJECT_NAME_2));
         return loader;
     }
 

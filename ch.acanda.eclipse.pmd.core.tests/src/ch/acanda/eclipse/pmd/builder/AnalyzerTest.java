@@ -29,7 +29,7 @@ import org.eclipse.core.runtime.IPath;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatcher;
 
-import net.sourceforge.pmd.PMD;
+import net.sourceforge.pmd.PmdAnalysis;
 import net.sourceforge.pmd.Rule;
 import net.sourceforge.pmd.RuleContext;
 import net.sourceforge.pmd.RuleSet;
@@ -347,7 +347,7 @@ public class AnalyzerTest {
 
     private String getAllRuleSetRefIds(final String language) throws IOException {
         final String categories = "/category/" + language + "/categories.properties";
-        try (InputStream in = PMD.class.getResourceAsStream(categories)) {
+        try (InputStream in = PmdAnalysis.class.getResourceAsStream(categories)) {
             assertNotNull(in, "Resource " + categories + " not found");
             final Properties properties = new Properties();
             properties.load(in);

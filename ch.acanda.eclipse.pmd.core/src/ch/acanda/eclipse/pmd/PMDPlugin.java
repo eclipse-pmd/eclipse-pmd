@@ -50,7 +50,7 @@ public final class PMDPlugin extends AbstractUIPlugin {
         // The PMD languages are made available as services using the java.util.ServiceLoader facility. The following
         // line ensures the services are loaded using a class loader with access to the different service
         // implementations (i.e. languages).
-        LanguageRegistry.getLanguages();
+        LanguageRegistry.PMD.getLanguages();
     }
 
     private void initWorkspaceModel() {

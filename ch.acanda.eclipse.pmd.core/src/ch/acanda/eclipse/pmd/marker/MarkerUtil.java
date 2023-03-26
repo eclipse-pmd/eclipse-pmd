@@ -1,6 +1,7 @@
 package ch.acanda.eclipse.pmd.marker;
 
 import java.util.Locale;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -65,10 +66,11 @@ public final class MarkerUtil {
         if (!isLongMarker) {
             pmdMarker.setMarkerText(content.substring(start, end));
         }
+        final Map<String, String> info = violation.getAdditionalInfo();
         final Rule rule = violation.getRule();
         pmdMarker.setRuleId(createRuleId(rule));
-        pmdMarker.setViolationClassName(violation.getClassName());
-        pmdMarker.setVariableName(violation.getVariableName());
+        pmdMarker.setViolationClassName(info.get(RuleViolation.CLASS_NAME));
+        pmdMarker.setVariableName(info.get(RuleViolation.VARIABLE_NAME));
         pmdMarker.setRuleName(rule.getName());
         pmdMarker.setLanguage(violation.getRule().getLanguage().getTerseName());
         return marker;

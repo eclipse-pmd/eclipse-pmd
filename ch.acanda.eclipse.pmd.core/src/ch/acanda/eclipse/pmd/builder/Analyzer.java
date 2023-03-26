@@ -32,7 +32,7 @@ import net.sourceforge.pmd.lang.LanguageRegistry;
  */
 public final class Analyzer {
 
-    private static final Map<String, Language> LANGUAGES = LanguageRegistry.getLanguages().stream()
+    private static final Map<String, Language> LANGUAGES = LanguageRegistry.PMD.getLanguages().stream()
             .flatMap(language -> language.getExtensions().stream().map(extension -> Map.entry(extension, language)))
             .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 
@@ -119,13 +119,11 @@ public final class Analyzer {
                 // the file must have an extension so we can determine the language
                 && file.getFileExtension() != null
                 // the file must not be excluded in the pmd configuration
-                && ruleSets.stream().anyMatch(rs -> rs.applies(file.getRawLocation().toFile()));
+                && ruleSets.stream().anyMatch(rs -> rs.applies(file.getRawLocation().toString()));
     }
 
     private boolean isValidLanguage(final Language language) {
-        return language != null
-                && language.getDefaultVersion() != null
-                && language.getDefaultVersion().getLanguageVersionHandler() != null;
+        return language != null && language.getDefaultVersion() != null;
     }
 
 }

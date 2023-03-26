@@ -8,6 +8,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Map;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -61,7 +63,7 @@ public class MarkerUtilTest {
         when(violation.getBeginColumn()).thenReturn(17);
         when(violation.getEndLine()).thenReturn(1);
         when(violation.getEndColumn()).thenReturn(22);
-        when(violation.getClassName()).thenReturn("ClassName");
+        when(violation.getAdditionalInfo()).thenReturn(Map.of(RuleViolation.CLASS_NAME, "ClassName"));
         final Rule rule = mock(Rule.class);
         when(rule.getLanguage()).thenReturn(new JavaLanguageModule());
         when(rule.getRuleSetName()).thenReturn("basic");
@@ -97,7 +99,7 @@ public class MarkerUtilTest {
         when(violation.getBeginColumn()).thenReturn(19);
         when(violation.getEndLine()).thenReturn(1);
         when(violation.getEndColumn()).thenReturn(24);
-        when(violation.getClassName()).thenReturn("ClassName");
+        when(violation.getAdditionalInfo()).thenReturn(Map.of(RuleViolation.CLASS_NAME, "ClassName"));
         final Rule rule = mock(Rule.class);
         when(rule.getLanguage()).thenReturn(new JavaLanguageModule());
         when(rule.getRuleSetName()).thenReturn("basic");
@@ -133,7 +135,7 @@ public class MarkerUtilTest {
         when(violation.getBeginColumn()).thenReturn(-18);
         when(violation.getEndLine()).thenReturn(-1);
         when(violation.getEndColumn()).thenReturn(-24);
-        when(violation.getClassName()).thenReturn("ClassName");
+        when(violation.getAdditionalInfo()).thenReturn(Map.of(RuleViolation.CLASS_NAME, "ClassName"));
         final Rule rule = mock(Rule.class);
         when(rule.getLanguage()).thenReturn(new JavaLanguageModule());
         when(rule.getRuleSetName()).thenReturn("basic");
@@ -170,7 +172,7 @@ public class MarkerUtilTest {
         when(violation.getBeginColumn()).thenReturn(24);
         when(violation.getEndLine()).thenReturn(2);
         when(violation.getEndColumn()).thenReturn(1);
-        when(violation.getClassName()).thenReturn("ClassName");
+        when(violation.getAdditionalInfo()).thenReturn(Map.of(RuleViolation.CLASS_NAME, "ClassName"));
         final Rule rule = mock(Rule.class);
         when(rule.getLanguage()).thenReturn(new JavaLanguageModule());
         when(rule.getRuleSetName()).thenReturn("basic");
@@ -207,7 +209,7 @@ public class MarkerUtilTest {
         when(violation.getBeginColumn()).thenReturn(22);
         when(violation.getEndLine()).thenReturn(1);
         when(violation.getEndColumn()).thenReturn(17);
-        when(violation.getClassName()).thenReturn("ClassName");
+        when(violation.getAdditionalInfo()).thenReturn(Map.of(RuleViolation.CLASS_NAME, "ClassName"));
         final Rule rule = mock(Rule.class);
         when(rule.getLanguage()).thenReturn(new JavaLanguageModule());
         when(rule.getRuleSetName()).thenReturn("basic");
