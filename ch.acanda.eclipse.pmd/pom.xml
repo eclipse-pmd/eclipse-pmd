@@ -225,31 +225,9 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2022-03</id>
+                    <id>2022-06</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2022-03/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2022-03</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2022-03</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2022-03</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2022-03/</url>
+                    <url>http://download.eclipse.org/releases/2022-06/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
@@ -316,6 +294,28 @@
                     <id>2022-12</id>
                     <layout>p2</layout>
                     <url>http://download.eclipse.org/releases/2022-12/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.0.0/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>eclipse-2023-03</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2023-03</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2023-03</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2023-03/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>

@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        release: [2022-03, 2022-06, 2022-09, 2022-12]
+        release: [2022-06, 2022-09, 2022-12, 2023-03]
     steps:
       - uses: actions/checkout@v3
         with:
