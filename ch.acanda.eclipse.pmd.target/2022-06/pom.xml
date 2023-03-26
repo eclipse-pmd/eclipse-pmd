@@ -11,7 +11,7 @@
     <groupId>ch.acanda.eclipse.pmd</groupId>
     <artifactId>2022-06</artifactId>
     <packaging>eclipse-target-definition</packaging>
-    <name>eclipse-pmd target definition for Eclipse 2021-06</name>
+    <name>eclipse-pmd target definition for Eclipse 2022-06</name>
 
     <properties>
         <root-dir>${project.basedir}/../..</root-dir>
