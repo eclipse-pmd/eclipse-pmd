@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.ISafeRunnableWithResult;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
@@ -22,6 +23,8 @@ import ch.acanda.eclipse.pmd.extension.ExtensionPoints;
 import ch.acanda.eclipse.pmd.extension.PMDClassLoaderProvider;
 import net.sourceforge.pmd.PMDConfiguration;
 import net.sourceforge.pmd.PmdAnalysis;
+import net.sourceforge.pmd.Report;
+import net.sourceforge.pmd.Report.ProcessingError;
 import net.sourceforge.pmd.RuleSet;
 import net.sourceforge.pmd.RuleViolation;
 import net.sourceforge.pmd.lang.Language;
@@ -62,7 +65,9 @@ public final class Analyzer {
                         analysis.addRuleSets(ruleSets);
                         final String source = new String(in.readAllBytes(), file.getCharset());
                         analysis.files().addSourceFile(source, file.getProjectRelativePath().toOSString());
-                        return analysis.performAnalysisAndCollectReport().getViolations();
+                        final Report report = analysis.performAnalysisAndCollectReport();
+                        logErrors(report.getProcessingErrors());
+                        return report.getViolations();
                     }
                 }
             }
@@ -73,9 +78,7 @@ public final class Analyzer {
     }
 
     private ClassLoader getClassLoader(final IFile file, final Language language) {
-        final IConfigurationElement[] providers = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(ExtensionPoints.PMD_CLASS_LOADER_PROVIDER_ID);
-        for (final IConfigurationElement provider : providers) {
+        for (final IConfigurationElement provider : getClassLoaderProviders()) {
             try {
                 final Object obj = provider.createExecutableExtension("class");
                 if (obj instanceof PMDClassLoaderProvider) {
@@ -103,12 +106,27 @@ public final class Analyzer {
         return null;
     }
 
+    private IConfigurationElement[] getClassLoaderProviders() {
+        final IExtensionRegistry registry = Platform.getExtensionRegistry();
+        if (registry == null) {
+            return new IConfigurationElement[0];
+        }
+        return registry.getConfigurationElementsFor(ExtensionPoints.PMD_CLASS_LOADER_PROVIDER_ID);
+    }
+
     private void annotateFile(final IFile file, final ViolationProcessor violationProcessor, final List<RuleViolation> violations) {
         try {
             violationProcessor.annotate(file, violations);
         } catch (CoreException | IOException e) {
             PMDPlugin.getDefault().error("Could not annotate the file " + file.getRawLocation(), e);
         }
+    }
+
+    private void logErrors(final List<ProcessingError> errors) {
+        if (errors.isEmpty()) {
+            return;
+        }
+        PMDPlugin.getDefault().getLog().log(new ProcessingErrorsStatus(errors));
     }
 
     private boolean isValidFile(final IFile file, final List<RuleSet> ruleSets) {

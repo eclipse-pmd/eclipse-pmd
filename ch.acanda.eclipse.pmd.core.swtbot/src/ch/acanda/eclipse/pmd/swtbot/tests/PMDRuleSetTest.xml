@@ -6,5 +6,5 @@
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
     <description>PMD rules!</description>
     <rule ref="category/java/codestyle.xml/ExtendsObject" />
-    <rule ref="category/java/performance.xml/BooleanInstantiation" />
+    <rule ref="category/java/bestpractices.xml/PrimitiveWrapperInstantiation" />
 </ruleset>

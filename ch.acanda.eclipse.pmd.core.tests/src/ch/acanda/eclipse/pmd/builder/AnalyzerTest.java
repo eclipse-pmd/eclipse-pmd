@@ -228,8 +228,8 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeHtml() {
-        analyze("<img src=\"house.jpeg\">", UTF_8, "html", "category/html/bestpractices.xml/UseAltAttributeForImages",
-                "UseAltAttributeForImages");
+        analyze("<html><body><img src=\"house.jpeg\"></body></html>", UTF_8, "html",
+                "category/html/bestpractices.xml/UseAltAttributeForImages", "UseAltAttributeForImages");
     }
 
     /**
@@ -288,7 +288,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzePMDBug1076() throws UnsupportedEncodingException, CoreException {
-        final IFile file = mockFile("class Foo { void bar(int a, int b) { } }", UTF_8, "java", false, true);
+        final IFile file = mockFile("class Foo { void bar(int a, int b) { int x = a + b; } }", UTF_8, "java", false, true);
         analyze(file, "category/java/codestyle.xml/MethodArgumentCouldBeFinal",
                 "MethodArgumentCouldBeFinal", "MethodArgumentCouldBeFinal");
     }

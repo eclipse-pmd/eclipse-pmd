@@ -149,7 +149,7 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
         final Enumeration<URL> entries = PMDPlugin.getDefault().getBundle().findEntries("lib", "pmd-core-*.jar", false);
         while (entries.hasMoreElements()) {
             final String path = entries.nextElement().getPath();
-            final Pattern pattern = Pattern.compile("pmd-core-(\\d+[\\.\\d]{0,10})\\.jar$");
+            final Pattern pattern = Pattern.compile("pmd-core-(\\d+[\\.\\d]{0,10}(?:-rc\\d+))\\.jar$");
             final Matcher matcher = pattern.matcher(path);
             if (matcher.find()) {
                 return matcher.group(1);

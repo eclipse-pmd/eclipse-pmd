@@ -102,7 +102,7 @@ public final class RuleSetsCacheTest {
      * the first access.
      */
     @Test
-    public void secondGetLoadsWhenProjectWasREmovedAndAddedAfterFirstGet() throws Exception {
+    public void secondGetLoadsWhenProjectWasRemovedAndAddedAfterFirstGet() throws Exception {
         final WorkspaceModel workspaceModel = getWorkspaceModel();
         final RuleSetsCache cache = new RuleSetsCache(getCacheLoaderMock(), workspaceModel);
         cache.getRuleSets(PROJECT_NAME_1);
@@ -118,8 +118,8 @@ public final class RuleSetsCacheTest {
     private CacheLoader<String, List<RuleSet>> getCacheLoaderMock() throws Exception {
         @SuppressWarnings("unchecked")
         final CacheLoader<String, List<RuleSet>> loader = mock(CacheLoader.class);
-        doReturn(RULE_SETS_FOO_1, RULE_SETS_FOO_2).when(loader.load(PROJECT_NAME_1));
-        doReturn(RULE_SETS_BAR_1, RULE_SETS_BAR_2).when(loader.load(PROJECT_NAME_2));
+        doReturn(RULE_SETS_FOO_1, RULE_SETS_FOO_2).when(loader).load(PROJECT_NAME_1);
+        doReturn(RULE_SETS_BAR_1, RULE_SETS_BAR_2).when(loader).load(PROJECT_NAME_2);
         return loader;
     }
 

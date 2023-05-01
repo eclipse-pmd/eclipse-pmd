@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
 
-    <!-- last updated for PMD 7.0.0-rc1 -->
+    <!-- last updated for PMD 7.0.0-rc2 -->
 
     <description>PMD rules for eclipse-pmd</description>
 
@@ -34,6 +34,7 @@
     <rule ref="category/java/design.xml">
         <exclude name="CyclomaticComplexity" />
         <exclude name="LawOfDemeter" />
+        <exclude name="LoosePackageCoupling" />
         <exclude name="TooManyMethods" />
     </rule>
     <rule ref="category/java/design.xml/CyclomaticComplexity">
@@ -56,7 +57,6 @@
         <exclude name="AvoidDuplicateLiterals" />
         <exclude name="AvoidFieldNameMatchingMethodName" />
         <exclude name="AvoidLiteralsInIfCondition" />
-        <exclude name="BeanMembersShouldSerialize" />
         <exclude name="EmptyCatchBlock" />
         <exclude name="TestClassWithoutTestCases" />
         <exclude name="UseProperClassLoader" />
