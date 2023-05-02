@@ -13,6 +13,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/pmd-java-7.0.0-rc2.jar" sourcepath="lib/pmd-java-7.0.0-rc2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pmd-javascript-7.0.0-rc2.jar" sourcepath="lib/pmd-javascript-7.0.0-rc2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pmd-jsp-7.0.0-rc2.jar" sourcepath="lib/pmd-jsp-7.0.0-rc2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-kotlin-7.0.0-rc2.jar" sourcepath="lib/pmd-kotlin-7.0.0-rc2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pmd-modelica-7.0.0-rc2.jar" sourcepath="lib/pmd-modelica-7.0.0-rc2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pmd-plsql-7.0.0-rc2.jar" sourcepath="lib/pmd-plsql-7.0.0-rc2-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pmd-visualforce-7.0.0-rc2.jar" sourcepath="lib/pmd-visualforce-7.0.0-rc2-sources.jar"/>
