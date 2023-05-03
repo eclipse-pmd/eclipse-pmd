@@ -174,6 +174,22 @@ public class AnalyzerTest {
     }
 
     /**
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze Swift files.
+     */
+    @Test
+    public void analyzeSwift() {
+        analyze("NSNumber() as! Int", UTF_8, "swift", "category/swift/errorprone.xml/ForceCast", "ForceCast");
+    }
+
+    /**
+     * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can run all Swift rules.
+     */
+    @Test
+    public void analyzeSwiftAllRules() throws IOException {
+        analyze("class A { }", UTF_8, "swift", getAllRuleSetRefIds("swift"));
+    }
+
+    /**
      * Verifies that {@link Analyzer#analyze(IFile, List<RuleSet>, ViolationProcessor)} can analyze VisualForce files.
      */
     @Test
