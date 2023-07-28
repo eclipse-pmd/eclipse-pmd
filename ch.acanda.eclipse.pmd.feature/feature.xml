@@ -12,11 +12,11 @@
    </description>
 
    <copyright url="">
-      Copyright (C) 2012 - 2021, Philip Graf
+      Copyright (C) 2012 - 2023, Philip Graf
    </copyright>
 
    <url>
-      <update label="Latest stable release" url="http://www.acanda.ch/eclipse-pmd/release/latest/"/>
+      <update label="Latest stable release" url="https://eclipse-pmd.acanda.ch/release/latest"/>
    </url>
 
    <includes

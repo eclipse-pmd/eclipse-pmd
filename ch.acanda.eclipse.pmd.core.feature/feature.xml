@@ -320,8 +320,8 @@ You may add additional accurate notices of copyright ownership.]]>
    </url>
 
    <requires>
-      <import feature="org.eclipse.platform" version="4.24.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.rcp" version="4.24.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.platform" version="4.25.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.rcp" version="4.25.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

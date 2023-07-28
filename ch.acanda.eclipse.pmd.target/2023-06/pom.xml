@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>ch.acanda.eclipse.pmd</groupId>
-    <artifactId>2022-06</artifactId>
+    <artifactId>2023-06</artifactId>
     <packaging>eclipse-target-definition</packaging>
-    <name>eclipse-pmd target definition for Eclipse 2022-06</name>
+    <name>eclipse-pmd target definition for Eclipse 2023-06</name>
 
     <properties>
         <root-dir>${project.basedir}/../..</root-dir>
@@ -31,7 +31,7 @@
                         </goals>
                         <configuration>
                             <targetFiles>
-                                <param>2022-06.target</param>
+                                <param>2023-06.target</param>
                             </targetFiles>
                             <failOnError>true</failOnError>
                         </configuration>
