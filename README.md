@@ -15,7 +15,7 @@ Building eclipse-pmd is fairly easy. Please note, however, that building eclipse
 You need the following tools:
 
 * JDK 17
-* Maven 3
+* Maven 3.9
 * Git
 
 ### Build instructions
