@@ -122,7 +122,6 @@
                             <version>${project.version}</version>
                         </artifact>
                     </target>
-                    <ignoreTychoRepositories>true</ignoreTychoRepositories>
                 </configuration>
             </plugin>
 
