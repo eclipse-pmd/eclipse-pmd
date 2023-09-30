@@ -182,7 +182,7 @@
                                 <artifactItem>
                                     <groupId>org.ow2.asm</groupId>
                                     <artifactId>asm</artifactId>
-                                    <version>9.5</version>
+                                    <version>9.6</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>xerces</groupId>
