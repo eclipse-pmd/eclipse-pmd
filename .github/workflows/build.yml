@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
-      matrix:
-        release: [2022-09, 2022-12, 2023-03, 2023-06]
+      matrix: [2022-09, 2022-12, 2023-03, 2023-06, 2023-09, 2023-12]
     steps:
       - name: Setup Maven
         uses: s4u/setup-maven-action@v1.10.0
