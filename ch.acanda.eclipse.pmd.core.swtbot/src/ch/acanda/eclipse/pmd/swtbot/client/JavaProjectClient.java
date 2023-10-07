@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.swt.finder.SWTBot;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
@@ -35,11 +34,6 @@ public final class JavaProjectClient {
         newProjectDialogBot.button("Next >").click();
         newProjectDialogBot.textWithLabel("Project name:").setText(name);
         newProjectDialogBot.button("Finish").click();
-        try {
-            bot.shell("New module-info.java").bot().button("Don't Create").click();
-        } catch (final WidgetNotFoundException e) {
-            // Eclipse 2022-09 does not use this dialog anymore.
-        }
         bot.waitUntil(Conditions.shellCloses(dialog));
     }
 
