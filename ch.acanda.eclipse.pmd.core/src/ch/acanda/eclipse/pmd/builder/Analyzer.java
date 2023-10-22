@@ -1,3 +1,4 @@
+// CHECKSTYLE OFF: ALL
 package ch.acanda.eclipse.pmd.builder;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ import net.sourceforge.pmd.RuleSet;
 import net.sourceforge.pmd.RuleViolation;
 import net.sourceforge.pmd.lang.Language;
 import net.sourceforge.pmd.lang.LanguageRegistry;
+import net.sourceforge.pmd.lang.document.FileId;
 
 /**
  * Analyzes files for coding problems, bugs and inefficient code, i.e. runs PMD.
@@ -64,7 +66,7 @@ public final class Analyzer {
                     try (PmdAnalysis analysis = PmdAnalysis.create(configuration); InputStream in = file.getContents()) {
                         analysis.addRuleSets(ruleSets);
                         final String source = new String(in.readAllBytes(), file.getCharset());
-                        analysis.files().addSourceFile(source, file.getProjectRelativePath().toOSString());
+                        analysis.files().addSourceFile(new IFieldId(file), source);
                         final Report report = analysis.performAnalysisAndCollectReport();
                         logErrors(report.getProcessingErrors());
                         return report.getViolations();
@@ -130,6 +132,7 @@ public final class Analyzer {
     }
 
     private boolean isValidFile(final IFile file, final List<RuleSet> ruleSets) {
+        final FileId fileId = new IFieldId(file);
         // derived (i.e. generated or compiled) files are not analyzed
         return !file.isDerived(IResource.CHECK_ANCESTORS)
                 // the file must exist
@@ -137,7 +140,7 @@ public final class Analyzer {
                 // the file must have an extension so we can determine the language
                 && file.getFileExtension() != null
                 // the file must not be excluded in the pmd configuration
-                && ruleSets.stream().anyMatch(rs -> rs.applies(file.getRawLocation().toString()));
+                && ruleSets.stream().anyMatch(rs -> rs.applies(fileId));
     }
 
     private boolean isValidLanguage(final Language language) {

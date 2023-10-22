@@ -14,7 +14,7 @@ public class ProcessingErrorsStatus extends MultiStatus {
     public ProcessingErrorsStatus(final List<ProcessingError> errors) {
         super(PMDPlugin.ID, IStatus.WARNING, "Failed to run PMD.");
         errors.forEach(error -> {
-            final String msg = error.getFile() + ": " + error.getMsg();
+            final String msg = error.getFileId().getAbsolutePath() + ": " + error.getMsg();
             final IStatus childStatus = new Status(IStatus.WARNING, PMDPlugin.ID, msg, error.getError());
             add(childStatus);
         });

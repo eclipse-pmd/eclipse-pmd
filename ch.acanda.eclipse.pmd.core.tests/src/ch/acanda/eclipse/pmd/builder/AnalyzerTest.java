@@ -371,8 +371,10 @@ public class AnalyzerTest {
         when(file.getCharset()).thenReturn(charset.name());
         when(file.getContents()).thenReturn(new ByteArrayInputStream(content.getBytes(charset)));
         final IPath rlPath = mock(IPath.class);
-        when(file.getRawLocation()).thenReturn(rlPath);
+        when(file.getLocation()).thenReturn(rlPath);
         when(rlPath.toFile()).thenReturn(new File("test." + fileExtension));
+        when(rlPath.makeAbsolute()).thenReturn(rlPath);
+        when(rlPath.toOSString()).thenReturn("/test." + fileExtension);
         final IPath prPath = mock(IPath.class);
         when(file.getProjectRelativePath()).thenReturn(prPath);
         when(prPath.toOSString()).thenReturn("/test." + fileExtension);
