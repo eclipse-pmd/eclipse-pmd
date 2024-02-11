@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Setup Maven
-        uses: s4u/setup-maven-action@v1.11.0
+        uses: s4u/setup-maven-action@v1.12.0
         with:
           checkout-fetch-depth: 0
           java-version: 17
