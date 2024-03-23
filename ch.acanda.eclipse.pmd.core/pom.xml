@@ -339,7 +339,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>com.google.guava</groupId>
                                     <artifactId>failureaccess</artifactId>
-                                    <version>1.0.1</version>
+                                    <version>1.0.2</version>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
