@@ -30,11 +30,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatcher;
 
 import net.sourceforge.pmd.PmdAnalysis;
-import net.sourceforge.pmd.Rule;
-import net.sourceforge.pmd.RuleContext;
-import net.sourceforge.pmd.RuleSet;
-import net.sourceforge.pmd.RuleSetLoader;
-import net.sourceforge.pmd.RuleViolation;
+import net.sourceforge.pmd.lang.rule.Rule;
+import net.sourceforge.pmd.lang.rule.RuleSet;
+import net.sourceforge.pmd.lang.rule.RuleSetLoader;
+import net.sourceforge.pmd.reporting.RuleContext;
+import net.sourceforge.pmd.reporting.RuleViolation;
 
 /**
  * Unit tests for {@link Analyzer}.
@@ -84,7 +84,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeXMLAllRules() throws IOException {
-        analyze("<a/>", UTF_8, "xml", getAllRuleSetRefIds("xml"));
+        analyze("<?xml version = \"1.0\" encoding = \"UTF-8\" ?><a/>", UTF_8, "xml", getAllRuleSetRefIds("xml"));
     }
 
     /**
@@ -195,7 +195,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeVisualForce() {
         analyze("<apex:outputText value=\"Potential XSS is {! here }\" escape=\"false\" />", UTF_8, "page",
-                "category/vf/security.xml/VfUnescapeEl", "VfUnescapeEl");
+                "category/visualforce/security.xml/VfUnescapeEl", "VfUnescapeEl");
     }
 
     /**
@@ -203,7 +203,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeVisualForceAllRules() throws IOException {
-        analyze("<a/>", UTF_8, "page", getAllRuleSetRefIds("vf"));
+        analyze("<a/>", UTF_8, "page", getAllRuleSetRefIds("visualforce"));
     }
 
     /**
@@ -211,7 +211,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeVelocity() {
-        analyze("<script type=\"text/javascript\">$s</script>", UTF_8, "vm", "category/vm/design.xml/NoInlineJavaScript",
+        analyze("<script type=\"text/javascript\">$s</script>", UTF_8, "vm", "category/velocity/design.xml/NoInlineJavaScript",
                 "NoInlineJavaScript");
     }
 
@@ -220,7 +220,7 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeVelocityAllRules() throws IOException {
-        analyze("<a/>", UTF_8, "vm", getAllRuleSetRefIds("vm"));
+        analyze("<a/>", UTF_8, "vm", getAllRuleSetRefIds("velocity"));
     }
 
     /**
@@ -271,11 +271,13 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeHtmlAllRules() throws IOException {
-        final String content = "<html>\n"
-                + "<body>\n"
-                + "  <h1>Hi</h1>\n"
-                + "</body>\n"
-                + "</html>\n";
+        final String content = """
+                <html>
+                <body>
+                  <h1>Hi</h1>
+                </body>
+                </html>
+                """;
         analyze(content, UTF_8, "html", getAllRuleSetRefIds("html"));
     }
 
@@ -364,15 +366,18 @@ public class AnalyzerTest {
 
     private IFile mockFile(final String content, final Charset charset, final String fileExtension, final boolean isDerived,
             final boolean isAccessible) throws CoreException, UnsupportedEncodingException {
+        final File ioFile = new File("test." + fileExtension);
         final IFile file = mock(IFile.class);
         when(file.isDerived(IResource.CHECK_ANCESTORS)).thenReturn(isDerived);
         when(file.isAccessible()).thenReturn(isAccessible);
         when(file.getFileExtension()).thenReturn(fileExtension);
+        when(file.getName()).thenReturn("test." + fileExtension);
+        when(file.getLocationURI()).thenReturn(ioFile.toURI());
         when(file.getCharset()).thenReturn(charset.name());
         when(file.getContents()).thenReturn(new ByteArrayInputStream(content.getBytes(charset)));
         final IPath rlPath = mock(IPath.class);
         when(file.getLocation()).thenReturn(rlPath);
-        when(rlPath.toFile()).thenReturn(new File("test." + fileExtension));
+        when(rlPath.toFile()).thenReturn(ioFile);
         when(rlPath.makeAbsolute()).thenReturn(rlPath);
         when(rlPath.toOSString()).thenReturn("/test." + fileExtension);
         final IPath prPath = mock(IPath.class);

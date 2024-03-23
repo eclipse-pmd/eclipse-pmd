@@ -18,8 +18,8 @@ import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.ui.dialog.FileSelectionDialog;
-import net.sourceforge.pmd.RuleSetLoadException;
-import net.sourceforge.pmd.RuleSetLoader;
+import net.sourceforge.pmd.lang.rule.RuleSetLoadException;
+import net.sourceforge.pmd.lang.rule.RuleSetLoader;
 
 /**
  * Controller for the wizard to add a new rule set configuration.

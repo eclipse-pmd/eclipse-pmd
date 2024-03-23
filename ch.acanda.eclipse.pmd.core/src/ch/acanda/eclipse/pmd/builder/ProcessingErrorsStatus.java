@@ -7,7 +7,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
-import net.sourceforge.pmd.Report.ProcessingError;
+import net.sourceforge.pmd.reporting.Report.ProcessingError;
 
 public class ProcessingErrorsStatus extends MultiStatus {
 

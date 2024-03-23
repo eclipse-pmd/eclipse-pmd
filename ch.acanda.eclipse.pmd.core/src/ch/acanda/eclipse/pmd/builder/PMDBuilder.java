@@ -21,7 +21,7 @@ import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCache;
 import ch.acanda.eclipse.pmd.cache.RuleSetsCacheLoader;
 import ch.acanda.eclipse.pmd.marker.MarkerUtil;
-import net.sourceforge.pmd.RuleSet;
+import net.sourceforge.pmd.lang.rule.RuleSet;
 
 /**
  * Builder for PMD enabled projects.

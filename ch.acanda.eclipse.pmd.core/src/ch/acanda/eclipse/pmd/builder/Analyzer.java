@@ -24,13 +24,12 @@ import ch.acanda.eclipse.pmd.extension.ExtensionPoints;
 import ch.acanda.eclipse.pmd.extension.PMDClassLoaderProvider;
 import net.sourceforge.pmd.PMDConfiguration;
 import net.sourceforge.pmd.PmdAnalysis;
-import net.sourceforge.pmd.Report;
-import net.sourceforge.pmd.Report.ProcessingError;
-import net.sourceforge.pmd.RuleSet;
-import net.sourceforge.pmd.RuleViolation;
 import net.sourceforge.pmd.lang.Language;
 import net.sourceforge.pmd.lang.LanguageRegistry;
-import net.sourceforge.pmd.lang.document.FileId;
+import net.sourceforge.pmd.lang.rule.RuleSet;
+import net.sourceforge.pmd.reporting.Report;
+import net.sourceforge.pmd.reporting.Report.ProcessingError;
+import net.sourceforge.pmd.reporting.RuleViolation;
 
 /**
  * Analyzes files for coding problems, bugs and inefficient code, i.e. runs PMD.
@@ -131,16 +130,17 @@ public final class Analyzer {
         PMDPlugin.getDefault().getLog().log(new ProcessingErrorsStatus(errors));
     }
 
-    private boolean isValidFile(final IFile file, final List<RuleSet> ruleSets) {
-        final FileId fileId = new IFieldId(file);
+    private boolean isValidFile(final IFile file, @SuppressWarnings("PMD.UnusedFormalParameter") final List<RuleSet> ruleSets) {
+        // final FileId fileId = new IFieldId(file);
         // derived (i.e. generated or compiled) files are not analyzed
         return !file.isDerived(IResource.CHECK_ANCESTORS)
                 // the file must exist
                 && file.isAccessible()
                 // the file must have an extension so we can determine the language
-                && file.getFileExtension() != null
+                && file.getFileExtension() != null;
                 // the file must not be excluded in the pmd configuration
-                && ruleSets.stream().anyMatch(rs -> rs.applies(fileId));
+                // (Rulset.applies(FileId) is package private sind PMD 7.0.0)
+                // && ruleSets.stream().anyMatch(rs -> rs.applies(fileId));
     }
 
     private boolean isValidLanguage(final Language language) {

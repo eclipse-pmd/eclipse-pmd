@@ -34,7 +34,7 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.swtbot.SWTBotID;
 import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 import ch.acanda.eclipse.pmd.ui.util.SelectionAdapter;
-import net.sourceforge.pmd.Rule;
+import net.sourceforge.pmd.lang.rule.Rule;
 
 @SuppressWarnings("PMD.ExcessiveImports")
 public class AddRuleSetConfigurationWizardPage extends WizardPage implements RuleSetWizardPage {
