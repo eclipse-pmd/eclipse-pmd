@@ -260,7 +260,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>com.google.flogger</groupId>
                                     <artifactId>flogger-system-backend</artifactId>
-                                    <version>0.7.4</version>
+                                    <version>0.8</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.scala-lang</groupId>
