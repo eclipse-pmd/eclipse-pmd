@@ -27,9 +27,9 @@ import ch.acanda.eclipse.pmd.ui.model.ValidationProblem;
 import ch.acanda.eclipse.pmd.ui.model.ValidationProblem.Severity;
 import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 import ch.acanda.eclipse.pmd.ui.model.ViewModel;
-import net.sourceforge.pmd.Rule;
-import net.sourceforge.pmd.RuleSet;
-import net.sourceforge.pmd.RuleSetLoader;
+import net.sourceforge.pmd.lang.rule.Rule;
+import net.sourceforge.pmd.lang.rule.RuleSet;
+import net.sourceforge.pmd.lang.rule.RuleSetLoader;
 
 /**
  * View model for the wizard page to add a new file system rule set configuration.

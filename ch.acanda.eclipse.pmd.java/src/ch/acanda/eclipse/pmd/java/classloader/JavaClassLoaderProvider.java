@@ -29,7 +29,7 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
 
     @Override
     public Optional<ClassLoader> getClassLoader(final IFile file, final Language language) {
-        if ("java".equals(language.getTerseName())) {
+        if ("java".equals(language.getId())) {
             return Optional.ofNullable(CACHE.get(file));
         }
         return Optional.empty();

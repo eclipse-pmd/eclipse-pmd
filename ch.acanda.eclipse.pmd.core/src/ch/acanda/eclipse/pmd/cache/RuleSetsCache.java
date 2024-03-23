@@ -32,7 +32,7 @@ import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
 import ch.acanda.eclipse.pmd.file.FileChangedListener;
 import ch.acanda.eclipse.pmd.file.FileWatcher;
 import ch.acanda.eclipse.pmd.file.Subscription;
-import net.sourceforge.pmd.RuleSet;
+import net.sourceforge.pmd.lang.rule.RuleSet;
 
 /**
  * The rule set cache caches the PMD rule sets so they do not have to be rebuilt every time PMD is invoked.

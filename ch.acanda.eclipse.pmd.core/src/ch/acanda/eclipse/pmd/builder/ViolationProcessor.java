@@ -9,7 +9,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 
 import ch.acanda.eclipse.pmd.marker.MarkerUtil;
-import net.sourceforge.pmd.RuleViolation;
+import net.sourceforge.pmd.reporting.RuleViolation;
 
 /**
  * Processes the rule violations found by a PMD analysis.

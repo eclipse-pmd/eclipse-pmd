@@ -16,12 +16,12 @@ import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
-import net.sourceforge.pmd.Rule;
-import net.sourceforge.pmd.RuleSet;
 import net.sourceforge.pmd.lang.apex.rule.design.ExcessiveClassLengthRule;
 import net.sourceforge.pmd.lang.apex.rule.design.ExcessivePublicCountRule;
 import net.sourceforge.pmd.lang.java.rule.design.ExcessiveImportsRule;
 import net.sourceforge.pmd.lang.java.rule.design.ExcessiveParameterListRule;
+import net.sourceforge.pmd.lang.rule.Rule;
+import net.sourceforge.pmd.lang.rule.RuleSet;
 
 /**
  * Unit tests for {@link RuleSetsCache}.

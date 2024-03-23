@@ -11,8 +11,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 
-import net.sourceforge.pmd.Rule;
-import net.sourceforge.pmd.RuleViolation;
+import net.sourceforge.pmd.lang.rule.Rule;
+import net.sourceforge.pmd.reporting.RuleViolation;
 
 /**
  * Utility for creating, adding and removing PMD markers.
@@ -72,12 +72,12 @@ public final class MarkerUtil {
         pmdMarker.setViolationClassName(info.get(RuleViolation.CLASS_NAME));
         pmdMarker.setVariableName(info.get(RuleViolation.VARIABLE_NAME));
         pmdMarker.setRuleName(rule.getName());
-        pmdMarker.setLanguage(violation.getRule().getLanguage().getTerseName());
+        pmdMarker.setLanguage(violation.getRule().getLanguage().getId());
         return marker;
     }
 
     public static String createRuleId(final Rule rule) {
-        return rule.getLanguage().getTerseName() + "." + rule.getRuleSetName().toLowerCase(Locale.ROOT) + "." + rule.getName();
+        return rule.getLanguage().getId() + "." + rule.getRuleSetName().toLowerCase(Locale.ROOT) + "." + rule.getName();
     }
 
     public static Range getAbsoluteRange(final String content, final RuleViolation violation) {
