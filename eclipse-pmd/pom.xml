@@ -13,7 +13,7 @@
 
     <properties>
         <pmd-version>7.0.0</pmd-version>
-        <eclipse-release>2022-12</eclipse-release>
+        <eclipse-release>2023-06</eclipse-release>
         <java.version>17</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <sonar.projectKey>eclipse-pmd_eclipse-pmd</sonar.projectKey>
