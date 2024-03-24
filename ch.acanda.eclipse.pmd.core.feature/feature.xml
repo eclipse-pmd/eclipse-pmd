@@ -2,7 +2,7 @@
 <feature
       id="ch.acanda.eclipse.pmd.core.feature"
       label="eclipse-pmd Core (Mandatory)"
-      version="3.5.0.qualifier"
+      version="3.6.0.qualifier"
       provider-name="Philip Graf">
 
    <description url="https://eclipse-pmd.github.io">
@@ -12,7 +12,7 @@
    </description>
 
    <copyright>
-      Copyright (C) 2012 - 2021, Philip Graf
+      Copyright (C) 2012 - 2024, Philip Graf
    </copyright>
 
    <license url="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">
@@ -320,22 +320,16 @@ You may add additional accurate notices of copyright ownership.]]>
    </url>
 
    <requires>
-      <import feature="org.eclipse.platform" version="4.25.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.rcp" version="4.25.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.platform" version="4.28.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.rcp" version="4.28.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="ch.acanda.eclipse.pmd.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="ch.acanda.eclipse.pmd.unsupported"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

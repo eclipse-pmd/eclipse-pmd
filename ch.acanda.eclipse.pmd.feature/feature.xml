@@ -2,17 +2,17 @@
 <feature
       id="ch.acanda.eclipse.pmd.feature"
       label="Eclipse PMD Plug-in"
-      version="3.5.0.qualifier"
+      version="3.6.0.qualifier"
       provider-name="Philip Graf"
       license-feature="ch.acanda.eclipse.pmd.core.feature"
-      license-feature-version="3.5.0.qualifier">
+      license-feature-version="3.6.0.qualifier">
 
    <description url="https://eclipse-pmd.github.io">
       The eclipse-pmd plug-in integrates PMD into the Eclipse IDE.
    </description>
 
    <copyright url="">
-      Copyright (C) 2012 - 2023, Philip Graf
+      Copyright (C) 2012 - 2024, Philip Graf
    </copyright>
 
    <url>
@@ -21,12 +21,12 @@
 
    <includes
          id="ch.acanda.eclipse.pmd.core.feature"
-         version="3.5.0.qualifier"
+         version="3.6.0.qualifier"
          name="eclipse-pmd core funtionality"/>
 
    <includes
          id="ch.acanda.eclipse.pmd.java.feature"
-         version="3.5.0.qualifier"
+         version="3.6.0.qualifier"
          name="eclipse-pmd support for java"/>
 
 </feature>
