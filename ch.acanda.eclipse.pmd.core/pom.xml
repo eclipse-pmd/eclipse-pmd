@@ -250,7 +250,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>apex-parser</artifactId>
-                                    <version>3.6.0</version>
+                                    <version>4.0.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.google.flogger</groupId>
