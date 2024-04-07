@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
 import org.eclipse.core.resources.IProject;
 
 import ch.acanda.eclipse.pmd.builder.LocationResolver;
+import ch.acanda.eclipse.pmd.cache.RuleSetsCacheLoader;
 import ch.acanda.eclipse.pmd.domain.Location;
 import ch.acanda.eclipse.pmd.domain.LocationContext;
 import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewModel;
+import net.sourceforge.pmd.lang.rule.RuleSetLoadException;
 
 /**
  * Transforms the domain model to and from the PMD property page's view model.
@@ -54,7 +56,17 @@ public final class PMDPropertyPageModelTransformer {
         final String location = ruleSetModel.getLocation().getPath();
         final boolean isValidLocation = LocationResolver.resolveIfExists(ruleSetModel.getLocation(), project).isPresent();
         final String resolvedLocation = LocationResolver.resolve(ruleSetModel.getLocation(), project);
-        return new RuleSetViewModel(name, type, location, isValidLocation, resolvedLocation);
+        final String ruleSetErrorMessage = getRuleSetErrorMessage(resolvedLocation);
+        return new RuleSetViewModel(name, type, location, isValidLocation, resolvedLocation, ruleSetErrorMessage);
+    }
+
+    private static String getRuleSetErrorMessage(final String resolvedLocation) {
+        try {
+            RuleSetsCacheLoader.loadRuleSet(resolvedLocation);
+            return null;
+        } catch (final RuleSetLoadException e) {
+            return e.getMessage();
+        }
     }
 
     @SuppressWarnings("java:S1452")

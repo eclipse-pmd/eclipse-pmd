@@ -41,4 +41,8 @@ public class RuleSetsCacheLoader extends CacheLoader<String, List<RuleSet>> {
         }
     }
 
+    public static RuleSet loadRuleSet(final String resolvedLocation) {
+        final RuleSetLoader loader = new RuleSetLoader();
+        return loader.loadFromResource(resolvedLocation);
+    }
 }

@@ -112,14 +112,16 @@ final class PMDPropertyPageViewModel extends ViewModel {
         private final String location;
         private final boolean isLocationValid;
         private final String resolvedPath;
+        private final String ruleSetErrorMessage;
 
         public RuleSetViewModel(final String name, final String type, final String location, final boolean isLocationValid,
-                final String resolvedPath) {
+                final String resolvedPath, final String ruleSetErrorMessage) {
             this.name = name;
             this.type = type;
             this.location = location;
             this.isLocationValid = isLocationValid;
             this.resolvedPath = resolvedPath;
+            this.ruleSetErrorMessage = ruleSetErrorMessage;
         }
 
         public String getName() {
@@ -140,6 +142,14 @@ final class PMDPropertyPageViewModel extends ViewModel {
 
         public String getResolvedPath() {
             return resolvedPath;
+        }
+
+        public String getRuleSetErrorMessage() {
+            return ruleSetErrorMessage;
+        }
+
+        public boolean isValid() {
+            return isLocationValid && ruleSetErrorMessage == null;
         }
 
         @Override

@@ -23,18 +23,4 @@ final class NameLabelProvider extends RuleSetConfigurationLabelProvider {
         return getImage(toRuleSet(element));
     }
 
-    @Override
-    public String getToolTipText(final Object element) {
-        final RuleSetViewModel ruleSet = toRuleSet(element);
-        if (!ruleSet.isLocationValid()) {
-            return getErrorMessage(ruleSet);
-        }
-        return null;
-    }
-
-    @Override
-    public Image getToolTipImage(final Object element) {
-        return getImage(element);
-    }
-
 }

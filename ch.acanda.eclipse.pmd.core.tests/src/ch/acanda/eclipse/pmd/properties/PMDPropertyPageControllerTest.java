@@ -69,10 +69,10 @@ public class PMDPropertyPageControllerTest {
     }
 
     private static List<? extends RuleSetViewModel> createRuleSets() {
-        return List.of(new RuleSetViewModel("A", "A-Type", "A-Location", true, "A-LocationToolTip"),
-                new RuleSetViewModel("B", "B-Type", "B-Location", false, "B-LocationToolTip"),
-                new RuleSetViewModel("C", "C-Type", "C-Location", true, "C-LocationToolTip"),
-                new RuleSetViewModel("D", "D-Type", "D-Location", false, "D-LocationToolTip"));
+        return List.of(new RuleSetViewModel("A", "A-Type", "A-Location", true, "A-LocationToolTip", null),
+                new RuleSetViewModel("B", "B-Type", "B-Location", false, "B-LocationToolTip", "B-Error"),
+                new RuleSetViewModel("C", "C-Type", "C-Location", true, "C-LocationToolTip", "C-Error"),
+                new RuleSetViewModel("D", "D-Type", "D-Location", false, "D-LocationToolTip", null));
     }
 
 }

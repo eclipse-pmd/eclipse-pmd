@@ -25,6 +25,20 @@ abstract class RuleSetConfigurationLabelProvider extends ColumnLabelProvider {
         return getText(toRuleSet(element));
     }
 
+    @Override
+    public String getToolTipText(final Object element) {
+        final RuleSetViewModel ruleSet = toRuleSet(element);
+        if (!ruleSet.isValid()) {
+            return getErrorMessage(ruleSet);
+        }
+        return null;
+    }
+
+    @Override
+    public Image getToolTipImage(final Object element) {
+        return getImage(element);
+    }
+
     protected abstract String getText(RuleSetViewModel ruleSet);
 
     protected RuleSetViewModel toRuleSet(final Object element) {
@@ -32,7 +46,7 @@ abstract class RuleSetConfigurationLabelProvider extends ColumnLabelProvider {
     }
 
     protected Image getImage(final RuleSetViewModel ruleSet) {
-        if (!ruleSet.isLocationValid()) {
+        if (!ruleSet.isLocationValid() || ruleSet.getRuleSetErrorMessage() != null) {
             final String key = isActive(ruleSet) ? ISharedImages.IMG_OBJS_ERROR_TSK : ISharedImages.IMG_OBJS_WARN_TSK;
             return PlatformUI.getWorkbench().getSharedImages().getImage(key);
         }
@@ -44,6 +58,10 @@ abstract class RuleSetConfigurationLabelProvider extends ColumnLabelProvider {
     }
 
     protected String getErrorMessage(final RuleSetViewModel ruleSet) {
+        final String errorMessage = ruleSet.getRuleSetErrorMessage();
+        if (errorMessage != null) {
+            return errorMessage;
+        }
         final String resolvedPath = ruleSet.getResolvedPath();
         if (resolvedPath != null) {
             final String template = "The file {0} does not exist";

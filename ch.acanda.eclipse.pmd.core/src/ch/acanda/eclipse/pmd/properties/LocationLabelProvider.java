@@ -1,7 +1,5 @@
 package ch.acanda.eclipse.pmd.properties;
 
-import org.eclipse.swt.graphics.Image;
-
 import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewModel;
 
 /**
@@ -21,15 +19,10 @@ final class LocationLabelProvider extends RuleSetConfigurationLabelProvider {
     @Override
     public String getToolTipText(final Object element) {
         final RuleSetViewModel ruleSet = toRuleSet(element);
-        if (ruleSet.isLocationValid()) {
+        if (ruleSet.isValid()) {
             return ruleSet.getResolvedPath();
         }
         return getErrorMessage(ruleSet);
-    }
-
-    @Override
-    public Image getToolTipImage(final Object element) {
-        return getImage(toRuleSet(element));
     }
 
 }
