@@ -50,9 +50,9 @@ Bundle-ClassPath: .,
  lib/upack_2.13-1.2.0.jar,
  lib/geny_2.13-0.6.2.jar,
  lib/antlr4-runtime-4.9.3.jar,
- lib/slf4j-api-2.0.12.jar,
- lib/slf4j-simple-2.0.12.jar,
- lib/jul-to-slf4j-2.0.12.jar,
+ lib/slf4j-api-2.0.13.jar,
+ lib/slf4j-simple-2.0.13.jar,
+ lib/jul-to-slf4j-2.0.13.jar,
  lib/guava-33.1.0-jre.jar,
  lib/failureaccess-1.0.2.jar
 Bundle-Activator: ch.acanda.eclipse.pmd.PMDPlugin
