@@ -15,6 +15,7 @@ class PositionWithinNodeNodeFinder<R extends ASTNode, N extends ASTNode> extends
     private final int start;
     private final int end;
     private final Class<? extends N>[] nodeTypes;
+    @SuppressWarnings("PMD.SingularField")
     private N node;
 
     @SafeVarargs

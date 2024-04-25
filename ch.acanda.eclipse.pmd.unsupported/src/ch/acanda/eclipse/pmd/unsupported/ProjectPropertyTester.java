@@ -18,7 +18,7 @@ public class ProjectPropertyTester extends PropertyTester {
     private static final Pattern JAVA_VERSION_SEPARATORS = Pattern.compile("[_-]");
 
     @Override
-    @SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
+    @SuppressWarnings({ "PMD.JUnit4TestShouldUseTestAnnotation", "PMD.AvoidLiteralsInIfCondition" })
     public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue) {
         if ("javaVersionLessThan".equals(property)) {
             return isJavaVersionLessThan(args[0].toString());

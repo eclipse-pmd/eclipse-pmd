@@ -30,6 +30,7 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
 /**
  * Unit tests for {@link ProjectModelSerializer}.
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ProjectModelSerializerTest {
 
     /**

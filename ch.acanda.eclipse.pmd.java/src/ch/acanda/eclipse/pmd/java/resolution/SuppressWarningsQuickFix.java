@@ -1,5 +1,7 @@
 package ch.acanda.eclipse.pmd.java.resolution;
 
+import static org.eclipse.jdt.core.dom.SingleMemberAnnotation.VALUE_PROPERTY;
+
 import java.util.List;
 
 import org.eclipse.jdt.core.dom.AST;
@@ -36,7 +38,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for all PMD rule violations in Java 5 and later. It adds a {@code @SuppressWarnings} annotation for the
  * respective rule to the enclosing class, method, field or parameter.
  */
-@SuppressWarnings({ "PMD.CouplingBetweenObjects", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.CouplingBetweenObjects", "PMD.TooManyMethods" })
 public final class SuppressWarningsQuickFix extends ASTQuickFix<ASTNode> {
 
     public SuppressWarningsQuickFix(final PMDMarker marker) {
@@ -193,7 +195,7 @@ public final class SuppressWarningsQuickFix extends ASTQuickFix<ASTNode> {
         final List<MemberValuePair> values = annotation.values();
         final List<MemberValuePair> existingValues = existingAnnotation.values();
         for (final MemberValuePair existingPair : existingValues) {
-            if ("value".equals(existingPair.getName().getFullyQualifiedName())) {
+            if (VALUE_PROPERTY.getId().equals(existingPair.getName().getFullyQualifiedName())) {
                 final MemberValuePair pair = (MemberValuePair) ast.createInstance(MemberValuePair.class);
                 pair.setName(ASTUtil.copy(existingPair.getName()));
                 pair.setValue(createArrayInitializer(existingPair.getValue()));

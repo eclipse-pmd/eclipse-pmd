@@ -12,13 +12,13 @@
         <exclude name="JUnitTestContainsTooManyAsserts" />
         <exclude name="JUnitTestsShouldIncludeAssert" />
         <exclude name="JUnit5TestShouldBePackagePrivate" />
+        <exclude name="GuardLogStatement" />
     </rule>
 
     <rule ref="category/java/codestyle.xml">
         <exclude name="AtLeastOneConstructor" />
         <exclude name="CallSuperInConstructor" />
         <exclude name="CommentDefaultAccessModifier" />
-        <exclude name="DefaultPackage" />
         <exclude name="LongVariable" />
         <exclude name="OnlyOneReturn" />
         <exclude name="ShortMethodName" />
@@ -58,6 +58,7 @@
         <exclude name="AvoidFieldNameMatchingMethodName" />
         <exclude name="AvoidLiteralsInIfCondition" />
         <exclude name="EmptyCatchBlock" />
+        <exclude name="NullAssignment" />
         <exclude name="TestClassWithoutTestCases" />
         <exclude name="UseProperClassLoader" />
     </rule>

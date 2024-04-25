@@ -24,6 +24,7 @@ public class SelectConfigurationTypeWizardPage extends WizardPage {
     private Button fileSystemRadioButton;
     private Button remoteRadioButton;
 
+    @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
     public SelectConfigurationTypeWizardPage(final AddRuleSetConfigurationController controller) {
         super("selectConfigurationType");
         this.controller = controller;

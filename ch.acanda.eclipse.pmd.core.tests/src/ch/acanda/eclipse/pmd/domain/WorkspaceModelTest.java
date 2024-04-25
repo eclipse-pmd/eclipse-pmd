@@ -20,6 +20,7 @@ import ch.acanda.eclipse.pmd.domain.DomainModel.RemoveElementPropertyChangeEvent
 /**
  * Unit tests for {@link WorkspaceModel}.
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class WorkspaceModelTest {
 
     /**

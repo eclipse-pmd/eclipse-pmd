@@ -11,6 +11,7 @@ public class AddRuleSetConfigurationWizard extends Wizard {
     private RuleSetModel ruleSetModel;
     RuleSetWizardPage ruleSetConfigurationWizardPage;
 
+    @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
     public AddRuleSetConfigurationWizard(final IProject project) {
         controller = new AddRuleSetConfigurationController(project);
         setWindowTitle("Add Rule Set Configuration");

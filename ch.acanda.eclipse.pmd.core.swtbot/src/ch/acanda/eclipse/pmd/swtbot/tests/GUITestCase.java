@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class GUITestCase {
 
+    private static final String INTRO_VIEW_ID = "org.eclipse.ui.internal.introview";
+
     private final SWTWorkbenchBot bot;
 
     protected GUITestCase() {
@@ -39,7 +41,7 @@ public class GUITestCase {
 
     private static void closeWelcomeView(final SWTWorkbenchBot workbenchBot) {
         for (final SWTBotView view : workbenchBot.views()) {
-            if ("org.eclipse.ui.internal.introview".equals(view.getReference().getId())) {
+            if (INTRO_VIEW_ID.equals(view.getReference().getId())) {
                 view.close();
             }
         }

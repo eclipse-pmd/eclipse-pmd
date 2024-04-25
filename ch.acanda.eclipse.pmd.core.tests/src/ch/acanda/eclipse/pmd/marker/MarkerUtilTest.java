@@ -24,6 +24,7 @@ import net.sourceforge.pmd.reporting.RuleViolation;
 /**
  * Unit tests for {@link MarkerUtil}.
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class MarkerUtilTest {
 
     private static final String MARKER_TYPE = "ch.acanda.eclipse.pmd.core.pmdMarker";
