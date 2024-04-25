@@ -39,7 +39,7 @@ import net.sourceforge.pmd.reporting.RuleViolation;
 /**
  * Unit tests for {@link Analyzer}.
  */
-@SuppressWarnings("PMD.ExcessiveImports")
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.AvoidDuplicateLiterals" })
 public class AnalyzerTest {
 
     /**

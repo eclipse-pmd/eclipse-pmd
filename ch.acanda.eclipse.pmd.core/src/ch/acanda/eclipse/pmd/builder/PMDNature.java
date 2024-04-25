@@ -1,5 +1,6 @@
 package ch.acanda.eclipse.pmd.builder;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.eclipse.core.resources.ICommand;
@@ -25,7 +26,7 @@ public class PMDNature implements IProjectNature {
         final ICommand[] commands = desc.getBuildSpec();
 
         for (final ICommand command : commands) {
-            if (command.getBuilderName().equals(PMDBuilder.ID)) {
+            if (Objects.equals(command.getBuilderName(), PMDBuilder.ID)) {
                 return;
             }
         }
@@ -44,7 +45,7 @@ public class PMDNature implements IProjectNature {
         final IProjectDescription description = getProject().getDescription();
         final ICommand[] commands = description.getBuildSpec();
         for (int i = 0; i < commands.length; ++i) {
-            if (commands[i].getBuilderName().equals(PMDBuilder.ID)) {
+            if (Objects.equals(commands[i].getBuilderName(), PMDBuilder.ID)) {
                 final ICommand[] newCommands = new ICommand[commands.length - 1];
                 System.arraycopy(commands, 0, newCommands, 0, i);
                 System.arraycopy(commands, i + 1, newCommands, i,

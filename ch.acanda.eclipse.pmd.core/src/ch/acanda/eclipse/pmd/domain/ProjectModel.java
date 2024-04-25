@@ -46,7 +46,7 @@ public class ProjectModel extends DomainModel {
 
     @SuppressWarnings("java:S1121")
     public void setRuleSets(final Iterable<? extends RuleSetModel> ruleSets) {
-        final TreeSet<RuleSetModel> set = new TreeSet<>(RULE_SET_COMPARATOR);
+        final SortedSet<RuleSetModel> set = new TreeSet<>(RULE_SET_COMPARATOR);
         ruleSets.forEach(set::add);
         setProperty(RULESETS_PROPERTY, this.ruleSets, this.ruleSets = set);
     }

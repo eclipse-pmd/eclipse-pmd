@@ -25,18 +25,18 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
 
     public FileSelectionDialog(final Shell parent) {
         super(parent, WorkbenchLabelProvider.getDecoratingWorkbenchLabelProvider(), new FileContentProvider());
-        setValidator(new FileSelectionValidator());
-        setComparator(new FileViewerComparator());
-        setShellStyle(getShellStyle() | SWT.SHEET);
     }
 
     @Override
     protected void configureShell(final Shell shell) {
         super.configureShell(shell);
+        setValidator(new FileSelectionValidator());
+        setComparator(new FileViewerComparator());
+        setShellStyle(getShellStyle() | SWT.SHEET);
         SWTBotID.set(shell, SWTBotID.FILE_SELECTION_DIALOG);
     }
 
-    private static class FileContentProvider implements ITreeContentProvider {
+    private static final class FileContentProvider implements ITreeContentProvider {
         private static final Object[] NO_CHILDREN = new Object[0];
 
         @Override
@@ -84,7 +84,7 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
     /**
      * Validates the selection. A selection is valid if it contains a single file.
      */
-    private static class FileSelectionValidator implements ISelectionStatusValidator {
+    private static final class FileSelectionValidator implements ISelectionStatusValidator {
         @Override
         public IStatus validate(final Object[] selection) {
             if (selection.length == 1 && !(selection[0] instanceof IContainer)) {
@@ -97,7 +97,7 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
     /**
      * Sorts the resources alphabetically, folders before files.
      */
-    private static class FileViewerComparator extends ViewerComparator {
+    private static final class FileViewerComparator extends ViewerComparator {
 
         @Override
         public int category(final Object element) {

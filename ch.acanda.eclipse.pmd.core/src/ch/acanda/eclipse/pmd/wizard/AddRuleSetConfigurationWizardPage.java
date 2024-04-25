@@ -36,7 +36,7 @@ import ch.acanda.eclipse.pmd.ui.model.ValidationResult;
 import ch.acanda.eclipse.pmd.ui.util.SelectionAdapter;
 import net.sourceforge.pmd.lang.rule.Rule;
 
-@SuppressWarnings("PMD.ExcessiveImports")
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.CouplingBetweenObjects" })
 public class AddRuleSetConfigurationWizardPage extends WizardPage implements RuleSetWizardPage {
 
     private final AddRuleSetConfigurationController controller;
@@ -46,6 +46,7 @@ public class AddRuleSetConfigurationWizardPage extends WizardPage implements Rul
     private Text name;
     private Button browse;
 
+    @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
     public AddRuleSetConfigurationWizardPage(final AddRuleSetConfigurationController controller) {
         super("addFileSystemRuleSetConfigurationWizardPage");
         this.controller = controller;

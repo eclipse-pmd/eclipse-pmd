@@ -79,7 +79,7 @@ final class RuleSetConfigurationTable extends Composite {
 
     private void initDataBindings() {
         final DataBindingContext bindingContext = new DataBindingContext();
-        tableViewer.setContentProvider(new ObservableListContentProvider<PMDPropertyPageViewModel>());
+        tableViewer.setContentProvider(new ObservableListContentProvider<>());
         tableViewer.setInput(BeanProperties.list(PMDPropertyPageViewModel.class, "ruleSets", RuleSetViewModel.class).observe(model));
 
         final ISWTObservableValue<Boolean> enabledView = WidgetProperties.enabled().observe(table);

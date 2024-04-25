@@ -41,7 +41,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  *
  * @param <T> The type of AST node that will be passed to {@link #apply(ASTNode)}.
  */
-@SuppressWarnings("PMD.ExcessiveImports")
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.CouplingBetweenObjects" })
 public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerResolution {
 
     private static final IMarker[] NO_OTHER_MARKERS = new IMarker[0];

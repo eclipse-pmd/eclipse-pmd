@@ -20,7 +20,7 @@ public final class Finders {
      */
     public static <R extends ASTNode, N extends ASTNode> NodeFinder<R, N> nodeWithinPosition(final Class<? extends N> nodeType,
             final Position position) {
-        return new NodeWithinPositionNodeFinder<R, N>(position, nodeType);
+        return new NodeWithinPositionNodeFinder<>(position, nodeType);
     }
 
     /**
@@ -32,7 +32,7 @@ public final class Finders {
     @SafeVarargs
     public static <R extends ASTNode, N extends ASTNode> NodeFinder<R, N> positionWithinNode(final Position position,
             final Class<? extends N>... nodeTypes) {
-        return new PositionWithinNodeNodeFinder<R, N>(position, nodeTypes);
+        return new PositionWithinNodeNodeFinder<>(position, nodeTypes);
     }
 
 }

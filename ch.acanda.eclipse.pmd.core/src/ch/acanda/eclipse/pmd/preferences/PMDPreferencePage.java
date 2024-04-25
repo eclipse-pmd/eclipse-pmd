@@ -30,13 +30,9 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
     private static final int WRAP_TO_PARENT_WITH = 0;
     private static final int VERTICAL_IDENT = 20;
 
-    public PMDPreferencePage() {
-        noDefaultAndApplyButton();
-    }
-
     @Override
     public void init(final IWorkbench workbench) {
-        // nothing to do
+        noDefaultAndApplyButton();
     }
 
     @Override

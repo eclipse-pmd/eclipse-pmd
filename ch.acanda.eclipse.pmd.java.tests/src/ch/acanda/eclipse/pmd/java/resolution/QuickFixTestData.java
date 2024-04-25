@@ -163,6 +163,7 @@ public final class QuickFixTestData {
         return s.substring(0, pos + 1);
     }
 
+    @SuppressWarnings("PMD.DataClass")
     public static final class TestParameters {
         public Optional<String> pmdReferenceId;
         public Optional<String> language;

@@ -28,6 +28,7 @@ import ch.acanda.eclipse.pmd.swtbot.client.JavaProjectClient;
 /**
  * Tests the PMD rule set functionality of the PMD property dialog.
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class PMDPropertyDialogTest extends GUITestCase {
 
     private static final String PROJECT_NAME_1 = PMDPropertyDialogTest.class.getSimpleName() + "1";

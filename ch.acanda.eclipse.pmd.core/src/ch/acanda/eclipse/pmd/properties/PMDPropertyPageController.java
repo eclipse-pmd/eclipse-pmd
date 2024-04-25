@@ -9,6 +9,7 @@ import static java.util.stream.Collectors.toSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 
@@ -51,7 +52,7 @@ final class PMDPropertyPageController {
 
         projectModel = workspaceModel.getOrCreateProject(project.getName());
         model.setInitialState(projectModel.isPMDEnabled(), projectModel.getRuleSets(), project);
-        final TreeSet<RuleSetModel> ruleSetBuilder = new TreeSet<>(ProjectModel.RULE_SET_COMPARATOR);
+        final SortedSet<RuleSetModel> ruleSetBuilder = new TreeSet<>(ProjectModel.RULE_SET_COMPARATOR);
         for (final ProjectModel projectModel : workspaceModel.getProjects()) {
             ruleSetBuilder.addAll(projectModel.getRuleSets());
         }
@@ -95,7 +96,7 @@ final class PMDPropertyPageController {
         if (result == Window.OK && wizard.getRuleSetModel() != null) {
             final RuleSetViewModel viewModel = toViewModel(wizard.getRuleSetModel(), project);
             model.addRuleSet(viewModel);
-            final HashSet<RuleSetViewModel> activeConfigs = new HashSet<>(model.getActiveRuleSets());
+            final Set<RuleSetViewModel> activeConfigs = new HashSet<>(model.getActiveRuleSets());
             activeConfigs.add(viewModel);
             model.setActiveRuleSets(activeConfigs);
         }

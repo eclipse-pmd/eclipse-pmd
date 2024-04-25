@@ -53,7 +53,7 @@ final class ProjectConfigurationContentHandler extends DefaultHandler {
     }
 
     private boolean isPMDEnabled(final Attributes attributes) {
-        return Boolean.valueOf(attributes.getValue(ProjectModelSerializer.ATTRIBUTE_NAME_ENABLED));
+        return Boolean.parseBoolean(attributes.getValue(ProjectModelSerializer.ATTRIBUTE_NAME_ENABLED));
     }
 
     private RuleSetModel createRuleSet(final Attributes attributes) {

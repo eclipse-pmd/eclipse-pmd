@@ -25,17 +25,18 @@ import net.sourceforge.pmd.lang.Language;
 
 public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
 
+    private static final String JAVA_LANGUAGE_ID = "java";
     private static final ClassLoaderCache CACHE = new ClassLoaderCache();
 
     @Override
     public Optional<ClassLoader> getClassLoader(final IFile file, final Language language) {
-        if ("java".equals(language.getId())) {
+        if (JAVA_LANGUAGE_ID.equals(language.getId())) {
             return Optional.ofNullable(CACHE.get(file));
         }
         return Optional.empty();
     }
 
-    private static class ClassLoaderCache {
+    private static final class ClassLoaderCache {
 
         private final Map<String, CachedClassLoader> cache = new HashMap<>();
 

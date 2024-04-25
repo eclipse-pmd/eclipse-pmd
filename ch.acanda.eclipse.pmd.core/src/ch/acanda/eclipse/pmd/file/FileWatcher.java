@@ -123,7 +123,7 @@ public final class FileWatcher {
                 PMDPlugin.getDefault().info(getName() + " stopped");
             } catch (final InterruptedException e) {
                 PMDPlugin.getDefault().info(getName() + " interrupted");
-                Thread.currentThread().interrupt();
+                currentThread().interrupt();
             }
         }
 
