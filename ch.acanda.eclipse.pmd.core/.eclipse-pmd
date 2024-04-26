@@ -3,5 +3,6 @@
   <analysis enabled="true" />
   <rulesets>
     <ruleset name="eclipse-pmd rules" ref="ch.acanda.eclipse.pmd/pmd.xml" refcontext="workspace" />
+    <ruleset name="jgrapes rules" ref="ch.acanda.eclipse.pmdx/jgrapes.xml" refcontext="workspace" />
   </rulesets>
 </eclipse-pmd>

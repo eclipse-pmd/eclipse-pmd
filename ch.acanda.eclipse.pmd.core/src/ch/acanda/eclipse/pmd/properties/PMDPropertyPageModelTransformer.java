@@ -58,7 +58,7 @@ public final class PMDPropertyPageModelTransformer {
         final Optional<String> locationOption = LocationResolver.resolveIfExists(ruleSetModel.getLocation(), project);
         final boolean isValidLocation = locationOption.isPresent();
         final String resolvedLocation = locationOption.orElse(null);
-        final String ruleSetErrorMessage = locationOption.map(loc -> getRuleSetErrorMessage(loc)).orElse(null);
+        final String ruleSetErrorMessage = locationOption.map(PMDPropertyPageModelTransformer::getRuleSetErrorMessage).orElse(null);
         return new RuleSetViewModel(name, type, location, isValidLocation, resolvedLocation, ruleSetErrorMessage);
     }
 
