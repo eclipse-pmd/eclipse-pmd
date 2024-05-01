@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
@@ -54,9 +55,10 @@ public final class PMDPropertyPageModelTransformer {
         final String name = ruleSetModel.getName();
         final String type = CONTEXT_TYPE_MAP.get(ruleSetModel.getLocation().getContext());
         final String location = ruleSetModel.getLocation().getPath();
-        final boolean isValidLocation = LocationResolver.resolveIfExists(ruleSetModel.getLocation(), project).isPresent();
-        final String resolvedLocation = LocationResolver.resolve(ruleSetModel.getLocation(), project);
-        final String ruleSetErrorMessage = getRuleSetErrorMessage(resolvedLocation);
+        final Optional<String> locationOption = LocationResolver.resolveIfExists(ruleSetModel.getLocation(), project);
+        final boolean isValidLocation = locationOption.isPresent();
+        final String resolvedLocation = locationOption.orElse(null);
+        final String ruleSetErrorMessage = locationOption.map(loc -> getRuleSetErrorMessage(loc)).orElse(null);
         return new RuleSetViewModel(name, type, location, isValidLocation, resolvedLocation, ruleSetErrorMessage);
     }
 
@@ -64,7 +66,7 @@ public final class PMDPropertyPageModelTransformer {
         try {
             RuleSetsCacheLoader.loadRuleSet(resolvedLocation);
             return null;
-        } catch (final RuleSetLoadException e) {
+        } catch (final RuleSetLoadException | IllegalArgumentException e) {
             return e.getMessage();
         }
     }
