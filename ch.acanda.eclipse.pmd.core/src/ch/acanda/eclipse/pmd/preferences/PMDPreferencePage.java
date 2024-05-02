@@ -159,7 +159,7 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
             final IWebBrowser browser = PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser();
             browser.openURL(new URL(url));
         } catch (PartInitException | MalformedURLException e) {
-            PMDPlugin.getDefault().error("Failed to open sponsor url in browser", e);
+            PMDPlugin.getLogger().error("Failed to open sponsor URL in browser: " + url, e);
         }
     }
 

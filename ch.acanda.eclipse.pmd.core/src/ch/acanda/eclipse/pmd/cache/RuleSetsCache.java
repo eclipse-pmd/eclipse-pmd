@@ -80,7 +80,7 @@ public final class RuleSetsCache {
             subscriptions.computeIfAbsent(projectName, name -> new ArrayList<>()).add(subscription);
         } catch (final IOException e) {
             final String msg = "Cannot watch rule set file %s. Changes to this file will not be picked up for up to an hour.";
-            PMDPlugin.getDefault().warn(String.format(msg, file.toAbsolutePath()), e);
+            PMDPlugin.getLogger().warn(String.format(msg, file.toAbsolutePath()), e);
         }
     }
 
@@ -119,7 +119,7 @@ public final class RuleSetsCache {
      * @param projectName The name of the project.
      */
     private void invalidate(final String projectName) {
-        PMDPlugin.getDefault().info("Invalidating cache for " + projectName);
+        PMDPlugin.getLogger().info("Invalidating cache for " + projectName);
         cache.invalidate(projectName);
     }
 

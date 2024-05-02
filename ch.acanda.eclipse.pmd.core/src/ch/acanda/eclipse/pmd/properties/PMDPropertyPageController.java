@@ -80,7 +80,7 @@ final class PMDPropertyPageController {
                 PMDNature.removeFrom(project);
             }
         } catch (final CoreException e) {
-            PMDPlugin.getDefault().error("Cannot change PMD nature of project " + project.getName(), e);
+            PMDPlugin.getLogger().error("Cannot change PMD nature of project " + project.getName(), e);
         }
     }
 

@@ -136,7 +136,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
             fixMarkers(markers, subMonitor.split(95), compilationUnit, buffer, ast);
 
         } catch (CoreException | MalformedTreeException | BadLocationException e) {
-            PMDJavaPlugin.getDefault().error("Error processing quickfix", e);
+            PMDJavaPlugin.getLogger().error("Error processing quickfix", e);
 
         } finally {
             subMonitor.setWorkRemaining(0);

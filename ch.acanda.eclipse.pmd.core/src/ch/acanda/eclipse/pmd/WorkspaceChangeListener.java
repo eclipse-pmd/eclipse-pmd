@@ -16,7 +16,6 @@ import ch.acanda.eclipse.pmd.repository.ProjectModelRepository;
 /**
  * This listener watches the workspace for changes and updates the eclipse-pmd workspace model accordingly.
  */
-
 final class WorkspaceChangeListener implements IResourceChangeListener {
 
     private final ProjectModelRepository projectModelRepository;
@@ -35,7 +34,7 @@ final class WorkspaceChangeListener implements IResourceChangeListener {
                 delta.accept(new WorkspaceDeltaVisitor());
             }
         } catch (final CoreException e) {
-            PMDPlugin.getDefault().error("Couldn't react to change in workspace resource '" + event.getResource().getName() + "'.", e);
+            PMDPlugin.getLogger().error("Couldn't react to change in workspace resource '" + event.getResource().getName() + "'.", e);
         }
     }
 

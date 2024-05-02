@@ -37,7 +37,7 @@ public class ProjectModelRepository {
                 configFile.create(source, true, null);
             }
         } catch (final CoreException e) {
-            PMDPlugin.getDefault().error("Cannot save " + PMD_CONFIG_FILENAME + " in project " + model.getProjectName(), e);
+            PMDPlugin.getLogger().error("Cannot save " + PMD_CONFIG_FILENAME + " in project " + model.getProjectName(), e);
         }
     }
 
@@ -53,7 +53,7 @@ public class ProjectModelRepository {
             try {
                 result = Optional.of(new ProjectModelSerializer().deserialize(configFile.getContents(true), projectName));
             } catch (IOException | CoreException e) {
-                PMDPlugin.getDefault().error("Cannot load " + PMD_CONFIG_FILENAME + " in project " + projectName, e);
+                PMDPlugin.getLogger().error("Cannot load " + PMD_CONFIG_FILENAME + " in project " + projectName, e);
             }
         }
         return result;

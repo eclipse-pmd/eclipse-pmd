@@ -120,9 +120,9 @@ public final class FileWatcher {
                     watchKey.reset();
                 }
             } catch (final ClosedWatchServiceException e) {
-                PMDPlugin.getDefault().info(getName() + " stopped");
+                PMDPlugin.getLogger().info(getName() + " stopped");
             } catch (final InterruptedException e) {
-                PMDPlugin.getDefault().info(getName() + " interrupted");
+                PMDPlugin.getLogger().info(getName() + " interrupted");
                 currentThread().interrupt();
             }
         }

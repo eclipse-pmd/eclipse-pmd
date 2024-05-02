@@ -67,7 +67,7 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
                     final Stream<URL> entries = getClasspathEntries(javaProject, projects);
                     return Stream.concat(defaultOutput, entries);
                 } catch (final JavaModelException | MalformedURLException e) {
-                    PMDJavaPlugin.getDefault().warn("Failed to create classpath for project " + project.getName(), e);
+                    PMDJavaPlugin.getLogger().warn("Failed to create classpath for project " + project.getName(), e);
                 }
             }
             return Stream.empty();
@@ -102,7 +102,7 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
                 try {
                     return Stream.of(path.toFile().getAbsoluteFile().toURI().toURL());
                 } catch (final MalformedURLException e) {
-                    PMDJavaPlugin.getDefault().warn("Failed to create URL for path " + path, e);
+                    PMDJavaPlugin.getLogger().warn("Failed to create URL for path " + path, e);
                 }
             }
             return Stream.empty();

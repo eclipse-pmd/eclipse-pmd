@@ -4,8 +4,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ResourceLocator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -13,6 +11,7 @@ import org.osgi.framework.BundleContext;
 
 import ch.acanda.eclipse.pmd.domain.ProjectModel;
 import ch.acanda.eclipse.pmd.domain.WorkspaceModel;
+import ch.acanda.eclipse.pmd.logging.Logger;
 import ch.acanda.eclipse.pmd.repository.ProjectModelRepository;
 import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
 import net.sourceforge.pmd.lang.LanguageRegistry;
@@ -20,6 +19,8 @@ import net.sourceforge.pmd.lang.LanguageRegistry;
 public final class PMDPlugin extends AbstractUIPlugin {
 
     public static final String ID = "ch.acanda.eclipse.pmd.core";
+
+    private static Logger logger = Logger.forInactivePlugin(ID);
 
     private static PMDPlugin plugin;
 
@@ -30,6 +31,7 @@ public final class PMDPlugin extends AbstractUIPlugin {
     public void start(final BundleContext context) throws Exception {
         super.start(context);
         plugin = this;
+        logger = Logger.forActivePlugin(plugin, ID);
         initWorkspaceModel();
         initPMD();
     }
@@ -38,12 +40,17 @@ public final class PMDPlugin extends AbstractUIPlugin {
     @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "PMD.NullAssignment", "java:S2696" })
     public void stop(final BundleContext context) throws Exception {
         PMDPluginImages.dispose();
+        logger = Logger.forInactivePlugin(ID);
         plugin = null;
         super.stop(context);
     }
 
     public static PMDPlugin getDefault() {
         return plugin;
+    }
+
+    public static Logger getLogger() {
+        return logger;
     }
 
     private void initPMD() {
@@ -66,62 +73,6 @@ public final class PMDPlugin extends AbstractUIPlugin {
 
     public WorkspaceModel getWorkspaceModel() {
         return workspaceModel;
-    }
-
-    /**
-     * Logs an error message to the platform, i.e. it will be visible in the Error Log view and distributed to the log
-     * listeners.
-     *
-     * @return An error status containing the error message.
-     */
-    public IStatus error(final String message) {
-        return log(IStatus.ERROR, message, null);
-    }
-
-    /**
-     * Logs an error message and a {@code Throwable} to the platform, i.e. it will be visible in the Error Log view and
-     * distributed to the log listeners.
-     *
-     * @return An error status containing the error message and throwable.
-     */
-    public IStatus error(final String message, final Throwable throwable) {
-        return log(IStatus.ERROR, message, throwable);
-    }
-
-    /**
-     * Logs a warning message and a {@code Throwable} to the platform, i.e. it will be visible in the Error Log view and
-     * distributed to the log listeners.
-     *
-     * @return A warning status containing the warning message and throwable.
-     */
-    public IStatus warn(final String message, final Throwable throwable) {
-        return log(IStatus.WARNING, message, throwable);
-    }
-
-    /**
-     * Logs an info message to the platform, i.e. it will be visible in the Error Log view and distributed to the log
-     * listeners.
-     *
-     * @return An info status containing the message.
-     */
-    public IStatus info(final String message) {
-        return log(IStatus.INFO, message, null);
-    }
-
-    /**
-     * Logs an info message and a {@code Throwable} to the platform, i.e. it will be visible in the Error Log view and
-     * distributed to the log listeners.
-     *
-     * @return An info status containing the message and throwable.
-     */
-    public IStatus info(final String message, final Throwable throwable) {
-        return log(IStatus.INFO, message, throwable);
-    }
-
-    private IStatus log(final int severity, final String message, final Throwable throwable) {
-        final IStatus status = new Status(severity, ID, message, throwable);
-        getLog().log(status);
-        return status;
     }
 
     /**

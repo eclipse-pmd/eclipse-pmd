@@ -46,7 +46,7 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
                 try {
                     return ((IContainer) parentElement).members();
                 } catch (final CoreException e) {
-                    PMDPlugin.getDefault().warn("Couldn't fetch members of " + parentElement, e);
+                    PMDPlugin.getLogger().warn("Couldn't fetch members of " + parentElement, e);
                 }
             }
             return NO_CHILDREN;

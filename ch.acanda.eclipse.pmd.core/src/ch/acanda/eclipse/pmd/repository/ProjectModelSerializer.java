@@ -90,7 +90,7 @@ public class ProjectModelSerializer {
             reader.setContentHandler(contentHandler);
             reader.parse(new InputSource(configurationStream));
         } catch (final SAXException | ParserConfigurationException e) {
-            PMDPlugin.getDefault().error("Cannot read eclipse-pmd project configuration", e);
+            PMDPlugin.getLogger().error("Cannot read eclipse-pmd project configuration", e);
         }
 
         return contentHandler.getProjectModel(projectName);

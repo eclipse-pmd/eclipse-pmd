@@ -73,7 +73,7 @@ public final class Analyzer {
                 }
             }
         } catch (final RuntimeException | CoreException | IOException e) {
-            PMDPlugin.getDefault().warn("Could not run PMD on file " + file.getRawLocation(), e);
+            PMDPlugin.getLogger().warn("Could not run PMD on file " + file.getRawLocation(), e);
         }
         return List.of();
     }
@@ -86,7 +86,7 @@ public final class Analyzer {
                     final ISafeRunnableWithResult<Optional<ClassLoader>> runnable = new ISafeRunnableWithResult<>() {
                         @Override
                         public void handleException(final Throwable e) {
-                            PMDPlugin.getDefault().error("Unable to execute class loader provider", e);
+                            PMDPlugin.getLogger().error("Unable to execute class loader provider", e);
                         }
 
                         @Override
@@ -101,7 +101,7 @@ public final class Analyzer {
                 }
             } catch (final CoreException e) {
                 final String name = provider.getAttribute("class");
-                PMDPlugin.getDefault().error("Unable to create class loader provider " + name, e);
+                PMDPlugin.getLogger().error("Unable to create class loader provider " + name, e);
             }
         }
         return null;
@@ -119,7 +119,7 @@ public final class Analyzer {
         try {
             violationProcessor.annotate(file, violations);
         } catch (CoreException | IOException e) {
-            PMDPlugin.getDefault().error("Could not annotate the file " + file.getRawLocation(), e);
+            PMDPlugin.getLogger().error("Could not annotate the file " + file.getRawLocation(), e);
         }
     }
 
@@ -127,7 +127,7 @@ public final class Analyzer {
         if (errors.isEmpty()) {
             return;
         }
-        PMDPlugin.getDefault().getLog().log(new ProcessingErrorsStatus(errors));
+        PMDPlugin.getLogger().log(new ProcessingErrorsStatus(errors));
     }
 
     private boolean isValidFile(final IFile file, @SuppressWarnings("PMD.UnusedFormalParameter") final List<RuleSet> ruleSets) {

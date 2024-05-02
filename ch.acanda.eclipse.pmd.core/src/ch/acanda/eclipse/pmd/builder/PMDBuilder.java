@@ -61,7 +61,7 @@ public class PMDBuilder extends IncrementalProjectBuilder {
         try {
             getProject().accept(new ResourceVisitor(monitor));
         } catch (final CoreException e) {
-            PMDPlugin.getDefault().error("Could not run a full PMD build", e);
+            PMDPlugin.getLogger().error("Could not run a full PMD build", e);
         }
     }
 
