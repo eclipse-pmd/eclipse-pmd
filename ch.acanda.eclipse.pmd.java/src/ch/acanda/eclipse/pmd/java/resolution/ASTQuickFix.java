@@ -16,7 +16,7 @@ import ch.acanda.eclipse.pmd.marker.PMDMarker;
  */
 public abstract class ASTQuickFix<T extends ASTNode> extends JavaQuickFix<T> {
 
-    public ASTQuickFix(final PMDMarker marker) {
+    protected ASTQuickFix(final PMDMarker marker) {
         super(marker);
     }
 

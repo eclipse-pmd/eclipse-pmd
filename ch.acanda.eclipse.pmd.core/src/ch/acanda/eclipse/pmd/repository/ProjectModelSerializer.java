@@ -40,6 +40,7 @@ import ch.acanda.eclipse.pmd.domain.RuleSetModel;
  * }
  * </pre>
  */
+@SuppressWarnings("java:S3457")
 public class ProjectModelSerializer {
 
     static final String TAG_NAME_ECLIPSE_PMD = "eclipse-pmd";

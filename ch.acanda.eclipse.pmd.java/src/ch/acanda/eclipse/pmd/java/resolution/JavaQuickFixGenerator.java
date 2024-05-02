@@ -13,12 +13,12 @@ public final class JavaQuickFixGenerator {
 
     @SuppressWarnings("PMD.LiteralsFirstInComparisons")
     public boolean hasQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
-        return context.getCompilerCompliance().compareTo(JAVA_5) >= 0;
+        return context.compilerCompliance().compareTo(JAVA_5) >= 0;
     }
 
-    @SuppressWarnings("PMD.LiteralsFirstInComparisons")
+    @SuppressWarnings({ "PMD.LiteralsFirstInComparisons", "java:S1452" })
     public List<? extends IMarkerResolution> getQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
-        if (context.getCompilerCompliance().compareTo(JAVA_5) < 0) {
+        if (context.compilerCompliance().compareTo(JAVA_5) < 0) {
             return List.of();
         }
         return List.of(new SuppressWarningsQuickFix(marker));

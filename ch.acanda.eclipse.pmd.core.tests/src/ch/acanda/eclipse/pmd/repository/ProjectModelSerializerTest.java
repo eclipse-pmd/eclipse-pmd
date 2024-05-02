@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
@@ -204,7 +203,7 @@ public final class ProjectModelSerializerTest {
         final List<RuleSetModel> models =
                 model.getRuleSets().stream()
                         .filter(rs -> rs.getLocation().getContext() == context)
-                        .collect(Collectors.toList());
+                        .toList();
         assertEquals(1, models.size(), "There should be exactly one model matching the context " + context);
         return models.get(0);
     }

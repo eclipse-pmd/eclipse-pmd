@@ -2,7 +2,6 @@ package ch.acanda.eclipse.pmd.cache;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -34,7 +33,7 @@ public class RuleSetsCacheLoader extends CacheLoader<String, List<RuleSet>> {
                     .map(model -> LocationResolver.resolveIfExists(model.getLocation(), project))
                     .flatMap(Optional::stream)
                     .map(loader::loadFromResource)
-                    .collect(Collectors.toList());
+                    .toList();
         } catch (final RuleSetLoadException e) {
             PMDPlugin.getLogger().error("Cannot load rule sets for project " + projectName, e);
             return List.of();

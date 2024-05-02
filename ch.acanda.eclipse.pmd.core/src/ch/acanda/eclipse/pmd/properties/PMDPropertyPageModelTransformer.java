@@ -73,7 +73,7 @@ public final class PMDPropertyPageModelTransformer {
 
     @SuppressWarnings("java:S1452")
     public static List<? extends RuleSetModel> toDomainModels(final Collection<? extends RuleSetViewModel> viewModels) {
-        return viewModels.stream().map(PMDPropertyPageModelTransformer::toDomainModel).collect(Collectors.toList());
+        return viewModels.stream().map(PMDPropertyPageModelTransformer::toDomainModel).toList();
     }
 
     public static RuleSetModel toDomainModel(final RuleSetViewModel viewModel) {

@@ -3,7 +3,6 @@ package ch.acanda.eclipse.pmd.properties;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toDomainModels;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toViewModel;
 import static ch.acanda.eclipse.pmd.properties.PMDPropertyPageModelTransformer.toViewModels;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 import java.util.HashSet;
@@ -12,6 +11,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -52,10 +52,9 @@ final class PMDPropertyPageController {
 
         projectModel = workspaceModel.getOrCreateProject(project.getName());
         model.setInitialState(projectModel.isPMDEnabled(), projectModel.getRuleSets(), project);
-        final SortedSet<RuleSetModel> ruleSetBuilder = new TreeSet<>(ProjectModel.RULE_SET_COMPARATOR);
-        for (final ProjectModel projectModel : workspaceModel.getProjects()) {
-            ruleSetBuilder.addAll(projectModel.getRuleSets());
-        }
+        final SortedSet<RuleSetModel> ruleSetBuilder = workspaceModel.getProjects().stream()
+                .flatMap(pm -> pm.getRuleSets().stream())
+                .collect(Collectors.toCollection(() -> new TreeSet<>(ProjectModel.RULE_SET_COMPARATOR)));
         model.setRuleSets(List.copyOf(toViewModels(ruleSetBuilder, project)));
         reset();
     }
@@ -104,7 +103,7 @@ final class PMDPropertyPageController {
 
     public void removeSelectedConfigurations() {
         final Predicate<RuleSetViewModel> notInSelection = m -> !model.getSelectedRuleSets().contains(m);
-        model.setRuleSets(model.getRuleSets().stream().filter(notInSelection).collect(toList()));
+        model.setRuleSets(model.getRuleSets().stream().filter(notInSelection).toList());
         model.setActiveRuleSets(model.getActiveRuleSets().stream().filter(notInSelection).collect(toSet()));
         model.setSelectedRuleSets(List.of());
     }

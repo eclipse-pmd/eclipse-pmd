@@ -19,7 +19,6 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.eclipse.core.resources.IFile;
@@ -353,7 +352,7 @@ public class AnalyzerTest {
             final ViolationProcessor violationProcessor = mock(ViolationProcessor.class);
             final List<RuleSet> ruleSets = Stream.of(ruleSetRefId.split(","))
                     .map(id -> new RuleSetLoader().loadFromResource(id))
-                    .collect(Collectors.toList());
+                    .toList();
             assertFalse(ruleSets.stream().flatMap(rs -> rs.getRules().stream()).findAny().isEmpty(), "There should be rules");
 
             new Analyzer().analyze(file, ruleSets, violationProcessor);
@@ -415,7 +414,7 @@ public class AnalyzerTest {
         public boolean matches(final List<RuleViolation> violations) {
             return violations.stream()
                     .flatMap(violation -> Optional.ofNullable(violation.getRule()).map(Rule::getName).stream())
-                    .collect(Collectors.toList())
+                    .toList()
                     .equals(expectedRuleNames);
         }
 

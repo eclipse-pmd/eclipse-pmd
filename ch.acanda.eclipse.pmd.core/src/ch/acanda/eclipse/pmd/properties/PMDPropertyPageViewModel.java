@@ -25,17 +25,17 @@ final class PMDPropertyPageViewModel extends ViewModel {
     /**
      * All available rule sets of the entire workspace.
      */
-    private List<? extends RuleSetViewModel> ruleSets = List.of();
+    private List<RuleSetViewModel> ruleSets = List.of();
 
     /**
      * The rule sets currently selected.
      */
-    private List<? extends RuleSetViewModel> selectedRuleSets = List.of();
+    private List<RuleSetViewModel> selectedRuleSets = List.of();
 
     /**
      * The rule sets currently activated, i.e. with a checked checkbox.
      */
-    private Set<? extends RuleSetViewModel> activeRuleSets = Set.of();
+    private Set<RuleSetViewModel> activeRuleSets = Set.of();
 
     private boolean isPMDEnabled;
     private boolean initialIsPMDEnabled;
@@ -53,6 +53,7 @@ final class PMDPropertyPageViewModel extends ViewModel {
         return ruleSets;
     }
 
+    @SuppressWarnings("java:S1452")
     public void setRuleSets(final List<? extends RuleSetViewModel> ruleSets) {
         setProperty(RULE_SETS, this.ruleSets, this.ruleSets = List.copyOf(ruleSets));
     }
@@ -61,7 +62,7 @@ final class PMDPropertyPageViewModel extends ViewModel {
      * Sets the initial state, i.e. the state of the view model before any changes were made. This state is used by
      * {@link #updateDirty()} so it must be set before any properties of the view model are changed.
      */
-    public void setInitialState(final boolean isPmdEnabled, final SortedSet<RuleSetModel> ruleSets, final IProject project) {
+    public void setInitialState(final boolean isPMDEnabled, final SortedSet<RuleSetModel> ruleSets, final IProject project) {
         initialIsPMDEnabled = isPMDEnabled;
         initialActiveRuleSets = toViewModels(ruleSets, project);
     }
@@ -93,6 +94,7 @@ final class PMDPropertyPageViewModel extends ViewModel {
         setProperty("selectedRuleSets", selectedRuleSets, selectedRuleSets = List.copyOf(ruleSets));
     }
 
+    @SuppressWarnings("java:S1452")
     public List<? extends RuleSetViewModel> getSelectedRuleSets() {
         return selectedRuleSets;
     }
@@ -101,6 +103,7 @@ final class PMDPropertyPageViewModel extends ViewModel {
         setProperty(ACTIVE_RULE_SETS, activeRuleSets, activeRuleSets = Set.copyOf(ruleSets));
     }
 
+    @SuppressWarnings("java:S1452")
     public Set<? extends RuleSetViewModel> getActiveRuleSets() {
         return activeRuleSets;
     }

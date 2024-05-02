@@ -59,9 +59,9 @@ public final class MarkerUtil {
         marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
         marker.setAttribute(IMarker.LINE_NUMBER, Math.max(violation.getBeginLine(), 0));
         final Range range = getAbsoluteRange(content, violation);
-        final int start = Math.max(range.getStart(), 0);
+        final int start = Math.max(range.start(), 0);
         marker.setAttribute(IMarker.CHAR_START, start);
-        final int end = Math.max(range.getEnd(), 0);
+        final int end = Math.max(range.end(), 0);
         marker.setAttribute(IMarker.CHAR_END, end);
         if (!isLongMarker) {
             pmdMarker.setMarkerText(content.substring(start, end));
@@ -122,22 +122,7 @@ public final class MarkerUtil {
         return absoluteOffset;
     }
 
-    public static final class Range {
-        private final int start;
-        private final int end;
-
-        public Range(final int start, final int end) {
-            this.start = start;
-            this.end = end;
-        }
-
-        public int getStart() {
-            return start;
-        }
-
-        public int getEnd() {
-            return end;
-        }
+    public record Range(int start, int end) {
     }
 
 }

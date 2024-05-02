@@ -1,8 +1,5 @@
 package ch.acanda.eclipse.pmd.properties;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.typed.BeanProperties;
 import org.eclipse.core.databinding.observable.list.IObservableList;
@@ -101,13 +98,7 @@ final class RuleSetConfigurationTable extends Composite {
     }
 
     private void initListeners() {
-        model.addPropertyChangeListener(PMDPropertyPageViewModel.ACTIVE_RULE_SETS, new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                // this updates the column image of invalid configurations when their checked state changes
-                tableViewer.refresh(true);
-            }
-        });
+        model.addPropertyChangeListener(PMDPropertyPageViewModel.ACTIVE_RULE_SETS, evt -> tableViewer.refresh(true));
     }
 
 }
