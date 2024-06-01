@@ -92,6 +92,8 @@ public final class RuleSetsCache {
     }
 
     private Optional<FileWatcher> createFileWatcher() {
+        // false positive in PMD 7.2.0
+        @SuppressWarnings("PMD.LocalVariableCouldBeFinal")
         Optional<FileWatcher> optionalFileWatcher;
         try {
             optionalFileWatcher = Optional.of(new FileWatcher());

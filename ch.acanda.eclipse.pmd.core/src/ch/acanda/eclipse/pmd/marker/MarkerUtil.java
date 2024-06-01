@@ -81,6 +81,8 @@ public final class MarkerUtil {
     }
 
     public static Range getAbsoluteRange(final String content, final RuleViolation violation) {
+        // false positive in PMD 7.2.0
+        @SuppressWarnings("PMD.LocalVariableCouldBeFinal")
         Range range;
         try {
             range = calculateAbsoluteRange(content, violation);
