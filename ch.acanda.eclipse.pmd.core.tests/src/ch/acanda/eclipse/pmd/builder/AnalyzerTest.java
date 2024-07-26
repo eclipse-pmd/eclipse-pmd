@@ -161,7 +161,7 @@ public class AnalyzerTest {
     @Test
     public void analyzeEcmascript() {
         analyze("var z = 1.12345678901234567", UTF_8, "js",
-                "category/ecmascript/errorprone.xml/InnaccurateNumericLiteral", "InnaccurateNumericLiteral");
+                "category/ecmascript/errorprone.xml/InaccurateNumericLiteral", "InaccurateNumericLiteral");
     }
 
     /**
