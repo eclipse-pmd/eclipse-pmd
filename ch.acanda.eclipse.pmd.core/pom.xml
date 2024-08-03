@@ -301,7 +301,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.antlr</groupId>
                                     <artifactId>antlr4-runtime</artifactId>
-                                    <version>4.9.3</version>
+                                    <version>4.13.2</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.slf4j</groupId>
