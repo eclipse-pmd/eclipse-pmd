@@ -23,7 +23,7 @@
 	<classpathentry kind="lib" path="lib/xercesImpl-2.12.2.jar"/>
 	<classpathentry kind="lib" path="lib/asm-9.6.jar"/>
 	<classpathentry kind="lib" path="lib/rhino-1.7.14.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang3-3.15.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.16.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsoup-1.17.2.jar"/>
 	<classpathentry kind="lib" path="lib/nice-xml-messages-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/pcollections-3.2.0.jar"/>
