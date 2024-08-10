@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 
 import ch.acanda.eclipse.pmd.PMDPlugin;
 import ch.acanda.eclipse.pmd.domain.Location;
@@ -61,25 +60,22 @@ final class AddRuleSetConfigurationController {
     private Optional<IResource> browseContainer(final Shell shell, final IContainer container) {
         final FileSelectionDialog dialog = new FileSelectionDialog(shell);
         dialog.setMessage("Choose a PMD rule set configuration:");
-        dialog.setValidator(new ISelectionStatusValidator() {
-            @Override
-            public IStatus validate(final Object[] selection) {
-                IStatus result = new Status(IStatus.OK, PMDPlugin.ID, "");
-                if (selection.length == 1 && !(selection[0] instanceof IContainer)) {
-                    final IResource resource = (IResource) selection[0];
-                    final String configuration = resource.getLocation().toOSString();
-                    try {
-                        new RuleSetLoader().loadFromResource(configuration);
-                    } catch (final RuleSetLoadException | IllegalArgumentException e) {
-                        // the rule set location is invalid
-                        result = new Status(IStatus.WARNING, PMDPlugin.ID, resource.getName()
-                                + " is not a valid PMD rule set configuration");
-                    }
-                } else {
-                    result = new Status(IStatus.WARNING, PMDPlugin.ID, "");
+        dialog.setValidator(selection -> {
+            IStatus result = new Status(IStatus.OK, PMDPlugin.ID, "");
+            if (selection.length == 1 && !(selection[0] instanceof IContainer)) {
+                final IResource resource = (IResource) selection[0];
+                final String configuration = resource.getLocation().toOSString();
+                try {
+                    new RuleSetLoader().loadFromResource(configuration);
+                } catch (final RuleSetLoadException | IllegalArgumentException e) {
+                    // the rule set location is invalid
+                    result = new Status(IStatus.WARNING, PMDPlugin.ID, resource.getName()
+                            + " is not a valid PMD rule set configuration");
                 }
-                return result;
+            } else {
+                result = new Status(IStatus.WARNING, PMDPlugin.ID, "");
             }
+            return result;
         });
         dialog.setInput(container);
         if (dialog.open() == Window.OK) {

@@ -61,7 +61,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
      *
      * @return The image descriptor for the image to be shown. Must not return <code>null</code>.
      */
-    abstract protected ImageDescriptor getImageDescriptor();
+    protected abstract ImageDescriptor getImageDescriptor();
 
     /**
      * Returns other markers with the same rule id as the marker of this quick fix. This allows to fix multiple PMD
@@ -108,8 +108,8 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
     @Override
     public void run(final IMarker marker) {
         final IResource resource = marker.getResource();
-        if (resource instanceof IFile && resource.isAccessible()) {
-            fixMarkersInFile((IFile) resource, Arrays.asList(marker), null);
+        if (resource instanceof final IFile file && resource.isAccessible()) {
+            fixMarkersInFile(file, Arrays.asList(marker), null);
         }
     }
 
@@ -239,17 +239,17 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
 
     private Optional<ICompilationUnit> getCompilationUnit(final IFile file) {
         final IJavaElement element = JavaCore.create(file);
-        return element instanceof ICompilationUnit ? Optional.of((ICompilationUnit) element) : Optional.<ICompilationUnit>empty();
+        return element instanceof final ICompilationUnit cu ? Optional.of(cu) : Optional.<ICompilationUnit>empty();
     }
 
     private MarkerAnnotation getMarkerAnnotation(final IAnnotationModel annotationModel, final IMarker marker) {
         final Iterator<Annotation> annotations = annotationModel.getAnnotationIterator();
         while (annotations.hasNext()) {
             final Annotation annotation = annotations.next();
-            if (annotation instanceof MarkerAnnotation) {
-                final IMarker annotationMarker = ((MarkerAnnotation) annotation).getMarker();
+            if (annotation instanceof final MarkerAnnotation markerAnnotation) {
+                final IMarker annotationMarker = markerAnnotation.getMarker();
                 if (annotationMarker.equals(marker)) {
-                    return (MarkerAnnotation) annotation;
+                    return markerAnnotation;
                 }
             }
         }

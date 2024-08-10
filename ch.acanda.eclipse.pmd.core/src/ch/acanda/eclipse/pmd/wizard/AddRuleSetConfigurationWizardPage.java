@@ -1,8 +1,5 @@
 package ch.acanda.eclipse.pmd.wizard;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.typed.BeanProperties;
 import org.eclipse.core.databinding.beans.typed.PojoProperties;
@@ -53,13 +50,10 @@ public class AddRuleSetConfigurationWizardPage extends WizardPage implements Rul
         setTitle("Add Rule Set Configuration");
         setDescription("Click 'Finish' to add the rule set configuration");
         setPageComplete(false);
-        controller.getModel().addValidationChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(final PropertyChangeEvent evt) {
-                final ValidationResult validationResult = (ValidationResult) evt.getNewValue();
-                setErrorMessage(validationResult.getFirstErrorMessage());
-                setPageComplete(!validationResult.hasErrors());
-            }
+        controller.getModel().addValidationChangeListener(evt -> {
+            final ValidationResult validationResult = (ValidationResult) evt.getNewValue();
+            setErrorMessage(validationResult.getFirstErrorMessage());
+            setPageComplete(!validationResult.hasErrors());
         });
         controller.getModel().reset();
     }

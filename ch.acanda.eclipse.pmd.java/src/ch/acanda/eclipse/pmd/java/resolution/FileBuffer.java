@@ -63,11 +63,8 @@ class FileBuffer implements AutoCloseable {
     private int getApiLevel(final IFile file) {
         // try to infer API level from compiler source settings in project
         final IProject project = file.getProject();
-        if (project instanceof IJavaProject) {
-            final IJavaProject javaProject = (IJavaProject) project;
-            if (javaProject.getOption(JavaCore.COMPILER_SOURCE, false) != null) {
-                return AST.newAST(javaProject.getOptions(false)).apiLevel();
-            }
+        if (project instanceof final IJavaProject javaProject && javaProject.getOption(JavaCore.COMPILER_SOURCE, false) != null) {
+            return AST.newAST(javaProject.getOptions(false)).apiLevel();
         }
 
         // use the latest API level supported by the oldest current Eclipse release
@@ -90,7 +87,7 @@ class FileBuffer implements AutoCloseable {
                 for (final IEditorReference reference : page.getEditorReferences()) {
                     try {
                         final IEditorInput input = reference.getEditorInput();
-                        if (input instanceof IFileEditorInput && file.equals(((IFileEditorInput) input).getFile())) {
+                        if (input instanceof final IFileEditorInput i && file.equals(i.getFile())) {
                             return true;
                         }
                     } catch (final PartInitException e) {

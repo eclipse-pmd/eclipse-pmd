@@ -77,13 +77,12 @@ public class PMDBuilder extends IncrementalProjectBuilder {
     }
 
     void analyze(final IResource resource, final boolean includeMembers, final IProgressMonitor monitor) throws CoreException {
-        if (resource instanceof IFile) {
-            monitor.setTaskName("PMD analyzing file: " + ((IFile) resource).getProjectRelativePath().toOSString());
+        if (resource instanceof final IFile file) {
+            monitor.setTaskName("PMD analyzing file: " + file.getProjectRelativePath().toOSString());
             final List<RuleSet> ruleSets = CACHE.getRuleSets(resource.getProject().getName());
-            new Analyzer().analyze((IFile) resource, ruleSets, new ViolationProcessor());
+            new Analyzer().analyze(file, ruleSets, new ViolationProcessor());
 
-        } else if (resource instanceof IFolder && includeMembers) {
-            final IFolder folder = (IFolder) resource;
+        } else if (resource instanceof final IFolder folder && includeMembers) {
             for (final IResource member : folder.members()) {
                 analyze(member, includeMembers, monitor);
             }
@@ -101,14 +100,9 @@ public class PMDBuilder extends IncrementalProjectBuilder {
         @Override
         public boolean visit(final IResourceDelta delta) throws CoreException {
             final IResource resource = delta.getResource();
-            switch (delta.getKind()) {
-                case IResourceDelta.ADDED:
-                case IResourceDelta.CHANGED:
-                    analyze(resource, (delta.getFlags() & IResourceDelta.DERIVED_CHANGED) != 0, monitor);
-                    break;
-
-                default:
-                    break;
+            final int kind = delta.getKind();
+            if (kind == IResourceDelta.ADDED || kind == IResourceDelta.CHANGED) {
+                analyze(resource, (delta.getFlags() & IResourceDelta.DERIVED_CHANGED) != 0, monitor);
             }
             if (monitor.isCanceled()) {
                 throw new OperationCanceledException();

@@ -26,6 +26,8 @@ import net.sourceforge.pmd.PMDConfiguration;
 import net.sourceforge.pmd.PmdAnalysis;
 import net.sourceforge.pmd.lang.Language;
 import net.sourceforge.pmd.lang.LanguageRegistry;
+import net.sourceforge.pmd.lang.document.FileId;
+import net.sourceforge.pmd.lang.rule.InternalApiBridge;
 import net.sourceforge.pmd.lang.rule.RuleSet;
 import net.sourceforge.pmd.reporting.Report;
 import net.sourceforge.pmd.reporting.Report.ProcessingError;
@@ -82,7 +84,7 @@ public final class Analyzer {
         for (final IConfigurationElement provider : getClassLoaderProviders()) {
             try {
                 final Object obj = provider.createExecutableExtension("class");
-                if (obj instanceof PMDClassLoaderProvider) {
+                if (obj instanceof final PMDClassLoaderProvider classLoaderProvider) {
                     final ISafeRunnableWithResult<Optional<ClassLoader>> runnable = new ISafeRunnableWithResult<>() {
                         @Override
                         public void handleException(final Throwable e) {
@@ -91,7 +93,7 @@ public final class Analyzer {
 
                         @Override
                         public Optional<ClassLoader> runWithResult() throws Exception {
-                            return ((PMDClassLoaderProvider) obj).getClassLoader(file, language);
+                            return classLoaderProvider.getClassLoader(file, language);
                         }
                     };
                     final Optional<ClassLoader> cl = SafeRunner.run(runnable);
@@ -130,17 +132,16 @@ public final class Analyzer {
         PMDPlugin.getLogger().log(new ProcessingErrorsStatus(errors));
     }
 
-    private boolean isValidFile(final IFile file, @SuppressWarnings("PMD.UnusedFormalParameter") final List<RuleSet> ruleSets) {
-        // final FileId fileId = new IFieldId(file);
+    private boolean isValidFile(final IFile file, final List<RuleSet> ruleSets) {
+        final FileId fileId = new IFieldId(file);
         // derived (i.e. generated or compiled) files are not analyzed
         return !file.isDerived(IResource.CHECK_ANCESTORS)
                 // the file must exist
                 && file.isAccessible()
                 // the file must have an extension so we can determine the language
-                && file.getFileExtension() != null;
-                // the file must not be excluded in the pmd configuration
-                // (Rulset.applies(FileId) is package private sind PMD 7.0.0)
-                // && ruleSets.stream().anyMatch(rs -> rs.applies(fileId));
+                && file.getFileExtension() != null
+                // the file must not be excluded in the PMD configuration
+                && ruleSets.stream().anyMatch(rs -> InternalApiBridge.ruleSetApplies(rs, fileId));
     }
 
     private boolean isValidLanguage(final Language language) {

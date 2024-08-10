@@ -83,6 +83,7 @@ final class PMDPropertyPageController {
         }
     }
 
+    @SuppressWarnings("java:S3400")
     public boolean isValid() {
         return true;
     }

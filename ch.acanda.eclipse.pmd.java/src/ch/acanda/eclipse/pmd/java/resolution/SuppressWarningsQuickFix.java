@@ -95,8 +95,8 @@ public final class SuppressWarningsQuickFix extends ASTQuickFix<ASTNode> {
 
     @SuppressWarnings("unchecked")
     private List<IExtendedModifier> getModifiers(final ASTNode node) {
-        if (node instanceof VariableDeclarationStatement) {
-            return ((VariableDeclarationStatement) node).modifiers();
+        if (node instanceof final VariableDeclarationStatement statement) {
+            return statement.modifiers();
         }
         return ((BodyDeclaration) node).modifiers();
     }
@@ -210,8 +210,8 @@ public final class SuppressWarningsQuickFix extends ASTQuickFix<ASTNode> {
     private ArrayInitializer createArrayInitializer(final Expression value) {
         final AST ast = value.getAST();
         final ArrayInitializer array;
-        if (value instanceof ArrayInitializer) {
-            array = createArrayInitializerAndCopyExpressions(ast, (ArrayInitializer) value);
+        if (value instanceof final ArrayInitializer initializer) {
+            array = createArrayInitializerAndCopyExpressions(ast, initializer);
 
         } else {
             array = (ArrayInitializer) ast.createInstance(ArrayInitializer.class);

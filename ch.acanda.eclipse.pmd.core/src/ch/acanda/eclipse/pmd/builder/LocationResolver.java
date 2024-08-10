@@ -73,8 +73,7 @@ public final class LocationResolver {
                 resolvedLocation = path.normalize().toString();
                 break;
 
-            case FILE_SYSTEM:
-            case REMOTE:
+            case FILE_SYSTEM, REMOTE:
                 resolvedLocation = location.getPath();
                 break;
 

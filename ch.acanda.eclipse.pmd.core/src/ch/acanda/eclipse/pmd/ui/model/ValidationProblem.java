@@ -40,7 +40,7 @@ public class ValidationProblem {
     }
 
     @Override
-    @SuppressWarnings("PMD.SimplifyBooleanReturns")
+    @SuppressWarnings({ "PMD.SimplifyBooleanReturns", "java:S1126" })
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;

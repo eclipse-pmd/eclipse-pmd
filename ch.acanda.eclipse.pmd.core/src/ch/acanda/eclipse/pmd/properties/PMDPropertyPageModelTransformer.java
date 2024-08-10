@@ -46,7 +46,7 @@ public final class PMDPropertyPageModelTransformer {
         // hide constructor of utility class
     }
 
-    @SuppressWarnings("java:S1452")
+    @SuppressWarnings({ "java:S1452", "java:S4968" })
     public static Set<? extends RuleSetViewModel> toViewModels(final SortedSet<RuleSetModel> domainModels, final IProject project) {
         return domainModels.stream().map(model -> toViewModel(model, project)).collect(Collectors.toSet());
     }
@@ -71,7 +71,7 @@ public final class PMDPropertyPageModelTransformer {
         }
     }
 
-    @SuppressWarnings("java:S1452")
+    @SuppressWarnings({ "java:S1452", "java:S4968" })
     public static List<? extends RuleSetModel> toDomainModels(final Collection<? extends RuleSetViewModel> viewModels) {
         return viewModels.stream().map(PMDPropertyPageModelTransformer::toDomainModel).toList();
     }

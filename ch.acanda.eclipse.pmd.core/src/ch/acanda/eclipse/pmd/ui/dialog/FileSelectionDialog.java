@@ -42,9 +42,9 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
         @Override
         @SuppressWarnings("PMD.MethodReturnsInternalArray")
         public Object[] getChildren(final Object parentElement) {
-            if (parentElement instanceof IContainer) {
+            if (parentElement instanceof final IContainer container) {
                 try {
-                    return ((IContainer) parentElement).members();
+                    return container.members();
                 } catch (final CoreException e) {
                     PMDPlugin.getLogger().warn("Couldn't fetch members of " + parentElement, e);
                 }
@@ -54,8 +54,8 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
 
         @Override
         public Object getParent(final Object element) {
-            if (element instanceof IResource) {
-                return ((IResource) element).getParent();
+            if (element instanceof final IResource resource) {
+                return resource.getParent();
             }
             return null;
         }

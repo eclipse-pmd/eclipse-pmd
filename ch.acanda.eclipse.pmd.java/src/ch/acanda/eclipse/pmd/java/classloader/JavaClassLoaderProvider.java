@@ -74,7 +74,7 @@ public class JavaClassLoaderProvider implements PMDClassLoaderProvider {
         }
 
         private Stream<URL> getClasspathEntries(final IJavaProject project, final Collection<IPath> projects)
-                throws JavaModelException, MalformedURLException {
+                throws JavaModelException {
             return Stream.of(project.getResolvedClasspath(true)).flatMap(entry -> getClassesLocation(entry, project, projects));
         }
 
