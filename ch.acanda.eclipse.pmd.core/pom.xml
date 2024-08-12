@@ -236,7 +236,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>apex-ls_2.13</artifactId>
-                                    <version>5.2.0</version>
+                                    <version>5.4.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.jetbrains.kotlin</groupId>
