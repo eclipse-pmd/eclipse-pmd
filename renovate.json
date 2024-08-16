@@ -5,5 +5,25 @@
   ],
   "ignoreDeps": [
     "io.github.apex-dev-tools:apex-ls_2.13"
+  ],
+  "customManagers": [
+    {
+        "customType": "regex",
+        "fileMatch": ["pom.xml"],
+        "matchStrings": [
+            "<mockito-byte-buddy-version>(?<currentValue>\\d+(\\.\\d+)*?)</mockito-byte-buddy-version>"
+        ],
+        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
+        "datasourceTemplate": "maven"
+    },
+    {
+        "customType": "regex",
+        "fileMatch": ["(.classpath|MANIFEST.MF|build.properties)"],
+        "matchStrings": [
+            "lib/byte-buddy(-agent)?-(?<currentValue>\\d+(\\.\\d+)*?).jar"
+        ],
+        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
+        "datasourceTemplate": "maven"
+    }
   ]
 }
