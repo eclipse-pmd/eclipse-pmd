@@ -24,6 +24,15 @@
         ],
         "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
         "datasourceTemplate": "maven"
+    },
+    {
+        "customType": "regex",
+        "fileMatch": ["(.classpath|MANIFEST.MF|build.properties)"],
+        "matchStrings": [
+            "lib/guava-(?<currentValue>\\d+(\\.\\d+)*-jre(-sources)??).jar"
+        ],
+        "depNameTemplate": "com.google.guava:guava",
+        "datasourceTemplate": "maven"
     }
   ]
 }
