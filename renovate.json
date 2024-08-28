@@ -13,7 +13,7 @@
         "matchStrings": [
             "<mockito-byte-buddy-version>(?<currentValue>\\d+(\\.\\d+)*?)</mockito-byte-buddy-version>"
         ],
-        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
+        "depNameTemplate": "mockito-byte-buddy-version",
         "datasourceTemplate": "maven"
     },
     {
@@ -22,7 +22,7 @@
         "matchStrings": [
             "lib/byte-buddy(-agent)?-(?<currentValue>\\d+(\\.\\d+)*?).jar"
         ],
-        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
+        "depNameTemplate": "mockito-byte-buddy-version",
         "datasourceTemplate": "maven"
     },
     {
