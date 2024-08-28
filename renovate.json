@@ -6,42 +6,48 @@
   "ignoreDeps": [
     "io.github.apex-dev-tools:apex-ls_2.13"
   ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "net.bytebuddy:byte-buddy",
+        "net.bytebuddy:byte-buddy-agent"
+      ],
+      "groupName": "Byte Buddy dependencies"
+    }
+  ],
   "customManagers": [
     {
-        "customType": "regex",
-        "fileMatch": ["pom.xml"],
-        "matchStrings": [
-            "<mockito-byte-buddy-version>(?<currentValue>\\d+(\\.\\d+)*?)</mockito-byte-buddy-version>"
-        ],
-        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
-        "datasourceTemplate": "maven"
+      "customType": "regex",
+      "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/(?<artifact>byte-buddy(-agent)?)-(?<currentValue>\\d+(\\.\\d+)*?).jar"
+      ],
+      "depNameTemplate": "net.bytebuddy:{{{artifact}}}",
+      "datasourceTemplate": "maven"
     },
     {
-        "customType": "regex",
-        "fileMatch": ["(.classpath|MANIFEST.MF|build.properties)"],
-        "matchStrings": [
-            "lib/byte-buddy(-agent)?-(?<currentValue>\\d+(\\.\\d+)*?).jar"
-        ],
-        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
-        "datasourceTemplate": "maven"
+      "customType": "regex",
+      "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/mockito-core-(?<currentValue>\\d+(\\.\\d+)*)(-sources)?.jar"
+      ],
+      "depNameTemplate": "org.mockito:mockito-core",
+      "datasourceTemplate": "maven"
     },
     {
-        "customType": "regex",
-        "fileMatch": ["(.classpath|MANIFEST.MF|build.properties)"],
-        "matchStrings": [
-            "lib/mockito-core-(?<currentValue>\\d+(\\.\\d+)*)(-sources)?.jar"
-        ],
-        "depNameTemplate": "org.mockito:mockito-core",
-        "datasourceTemplate": "maven"
-    },
-    {
-        "customType": "regex",
-        "fileMatch": ["(.classpath|MANIFEST.MF|build.properties)"],
-        "matchStrings": [
-            "lib/guava-(?<currentValue>\\d+(\\.\\d+)*-jre(-sources)?).jar"
-        ],
-        "depNameTemplate": "com.google.guava:guava",
-        "datasourceTemplate": "maven"
+      "customType": "regex",
+      "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/guava-(?<currentValue>\\d+(\\.\\d+)*-jre(-sources)?).jar"
+      ],
+      "depNameTemplate": "com.google.guava:guava",
+      "datasourceTemplate": "maven"
     }
   ]
 }
