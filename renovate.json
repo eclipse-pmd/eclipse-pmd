@@ -6,23 +6,20 @@
   "ignoreDeps": [
     "io.github.apex-dev-tools:apex-ls_2.13"
   ],
-  "customManagers": [
+  "packageRules": [
     {
-        "customType": "regex",
-        "fileMatch": ["pom.xml"],
-        "matchStrings": [
-            "<mockito-byte-buddy-version>(?<currentValue>\\d+(\\.\\d+)*?)</mockito-byte-buddy-version>"
-        ],
-        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
-        "datasourceTemplate": "maven"
-    },
+      "matchDepNames": ["^net.bytebuddy:.*"],
+      "groupName": "Byte Buddy dependencies"
+    }
+  ],
+  "customManagers": [
     {
         "customType": "regex",
         "fileMatch": ["(.classpath|MANIFEST.MF|build.properties)"],
         "matchStrings": [
-            "lib/byte-buddy(-agent)?-(?<currentValue>\\d+(\\.\\d+)*?).jar"
+            "lib/(?<artifact>byte-buddy(-agent)?)-(?<currentValue>\\d+(\\.\\d+)*?).jar"
         ],
-        "depNameTemplate": "net.bytebuddy:byte-buddy-agent",
+        "depNameTemplate": "net.bytebuddy:{{{artifact}}}",
         "datasourceTemplate": "maven"
     },
     {

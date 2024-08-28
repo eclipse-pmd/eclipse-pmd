@@ -61,7 +61,7 @@
                                 <artifactItem>
                                     <groupId>net.bytebuddy</groupId>
                                     <artifactId>byte-buddy-agent</artifactId>
-                                    <version>${mockito-byte-buddy-version}</version>
+                                    <version>${mockito-byte-buddy-agent-version}</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.objenesis</groupId>
