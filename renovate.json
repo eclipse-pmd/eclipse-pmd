@@ -24,7 +24,7 @@
       "matchStrings": [
         "lib/(?<artifact>byte-buddy(-agent)?)-(?<currentValue>\\d+(\\.\\d+)*?).jar"
       ],
-      "depNameTemplate": "net.bytebuddy:{{{artifact}}}",
+      "packageNameTemplate": "net.bytebuddy:{{{artifact}}}",
       "datasourceTemplate": "maven"
     },
     {
@@ -35,7 +35,7 @@
       "matchStrings": [
         "lib/mockito-core-(?<currentValue>\\d+(\\.\\d+)*)(-sources)?.jar"
       ],
-      "depNameTemplate": "org.mockito:mockito-core",
+      "packageNameTemplate": "org.mockito:mockito-core",
       "datasourceTemplate": "maven"
     },
     {
@@ -46,7 +46,18 @@
       "matchStrings": [
         "lib/guava-(?<currentValue>\\d+(\\.\\d+)*-jre(-sources)?).jar"
       ],
-      "depNameTemplate": "com.google.guava:guava",
+      "packageNameTemplate": "com.google.guava:guava",
+      "datasourceTemplate": "maven"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/commons-lang3-(?<currentValue>\\d+(\\.\\d+)*?).jar"
+      ],
+      "packageNameTemplate": "org.apache.commons:commons-lang3",
       "datasourceTemplate": "maven"
     }
   ]
