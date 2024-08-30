@@ -10,14 +10,43 @@
   ],
   "packageRules": [
     {
+      "groupName": "PMD dependencies",
+      "matchPackageNames": [
+        "net.sourceforge.pmd:pmd-xml",
+        "net.sourceforge.pmd:pmd-java",
+        "net.sourceforge.pmd:pmd-core",
+        "net.sourceforge.pmd:pmd-visualforce",
+        "net.sourceforge.pmd:pmd-velocity",
+        "net.sourceforge.pmd:pmd-swift",
+        "net.sourceforge.pmd:pmd-plsql",
+        "net.sourceforge.pmd:pmd-modelica",
+        "net.sourceforge.pmd:pmd-kotlin",
+        "net.sourceforge.pmd:pmd-jsp",
+        "net.sourceforge.pmd:pmd-javascript",
+        "net.sourceforge.pmd:pmd-html",
+        "net.sourceforge.pmd:pmd-apex"
+      ]
+    },
+    {
+      "groupName": "Byte Buddy dependencies",
       "matchPackageNames": [
         "net.bytebuddy:byte-buddy",
         "net.bytebuddy:byte-buddy-agent"
-      ],
-      "groupName": "Byte Buddy dependencies"
+      ]
     }
   ],
   "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/(?<artifact>pmd-[^-]+)-(?<currentValue>\\d+(\\.\\d+)*?)(-sources)?.jar"
+      ],
+      "packageNameTemplate": "net.sourceforge.pmd:{{{artifact}}}",
+      "datasourceTemplate": "maven"
+    },
     {
       "customType": "regex",
       "fileMatch": [
