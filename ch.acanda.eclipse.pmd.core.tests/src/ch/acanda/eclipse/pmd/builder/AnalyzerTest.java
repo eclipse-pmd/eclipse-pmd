@@ -253,7 +253,8 @@ public class AnalyzerTest {
      */
     @Test
     public void analyzeApexAllRules() throws IOException {
-        analyze("/** @description Hello Apex */ public class Apex { }", UTF_8, "cls", getAllRuleSetRefIds("apex"));
+        // ApexDoc is a false positive in PMD 7.6.0 and should be removed from the expected rules once it is fixed.
+        analyze("/** @description Hello Apex */ public class Apex { }", UTF_8, "cls", getAllRuleSetRefIds("apex"), "ApexDoc");
     }
 
     /**
