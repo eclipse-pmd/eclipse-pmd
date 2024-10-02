@@ -17,7 +17,7 @@ jobs:
         with:
           checkout-fetch-depth: 0
           java-version: 21
-          maven-version: 3.9.6
+          maven-version: 3.9.9
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
         with:

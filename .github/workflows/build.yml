@@ -21,6 +21,6 @@ jobs:
         with:
           checkout-fetch-depth: 0
           java-version: 21
-          maven-version: 3.9.6
+          maven-version: 3.9.9
       - name: Build ${{ matrix.release }}
         run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' mvn -f eclipse-pmd/pom.xml -B verify -Declipse-release=${{ matrix.release }}
