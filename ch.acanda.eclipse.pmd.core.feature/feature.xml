@@ -16,15 +16,15 @@
    </copyright>
 
    <license url="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">
-<![CDATA[Eclipse Public License - v 2.0
+      Eclipse Public License - v 2.0
 
     THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE
-    PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION
+    PUBLIC LICENSE (&quot;AGREEMENT&quot;). ANY USE, REPRODUCTION OR DISTRIBUTION
     OF THE PROGRAM CONSTITUTES RECIPIENT’S ACCEPTANCE OF THIS AGREEMENT.
 
 1. DEFINITIONS
 
-"Contribution" means:
+&quot;Contribution&quot; means:
 
   a) in the case of the initial Contributor, the initial content
      Distributed under this Agreement, and
@@ -34,29 +34,29 @@
      ii) additions to the Program;
   where such changes and/or additions to the Program originate from
   and are Distributed by that particular Contributor. A Contribution
-  "originates" from a Contributor if it was added to the Program by
+  &quot;originates&quot; from a Contributor if it was added to the Program by
   such Contributor itself or anyone acting on such Contributor’s behalf.
   Contributions do not include changes or additions to the Program that
   are not Modified Works.
 
-"Contributor" means any person or entity that Distributes the Program.
+&quot;Contributor&quot; means any person or entity that Distributes the Program.
 
-"Licensed Patents" mean patent claims licensable by a Contributor which
+&quot;Licensed Patents&quot; mean patent claims licensable by a Contributor which
 are necessarily infringed by the use or sale of its Contribution alone
 or when combined with the Program.
 
-"Program" means the Contributions Distributed in accordance with this
+&quot;Program&quot; means the Contributions Distributed in accordance with this
 Agreement.
 
-"Recipient" means anyone who receives the Program under this Agreement
+&quot;Recipient&quot; means anyone who receives the Program under this Agreement
 or any Secondary License (as applicable), including Contributors.
 
-"Derivative Works" shall mean any work, whether in Source Code or other
+&quot;Derivative Works&quot; shall mean any work, whether in Source Code or other
 form, that is based on (or derived from) the Program and for which the
 editorial revisions, annotations, elaborations, or other modifications
 represent, as a whole, an original work of authorship.
 
-"Modified Works" shall mean any work in Source Code or other form that
+&quot;Modified Works&quot; shall mean any work in Source Code or other form that
 results from an addition to, deletion from, or modification of the
 contents of the Program, including, for purposes of clarity any new file
 in Source Code form that contains any contents of the Program. Modified
@@ -65,14 +65,14 @@ interfaces, types, classes, structures, or files of the Program solely
 in each case in order to link to, bind by name, or subclass the Program
 or Modified Works thereof.
 
-"Distribute" means the acts of a) distributing or b) making available
+&quot;Distribute&quot; means the acts of a) distributing or b) making available
 in any manner that enables the transfer of a copy.
 
-"Source Code" means the form of a Program preferred for making
+&quot;Source Code&quot; means the form of a Program preferred for making
 modifications, including but not limited to software source code,
 documentation source, and configuration files.
 
-"Secondary License" means either the GNU General Public License,
+&quot;Secondary License&quot; means either the GNU General Public License,
 Version 2.0, or any later versions of that license, including any
 exceptions or additional permissions as identified by the initial
 Contributor.
@@ -165,7 +165,7 @@ Contributor.
 
 3.3 Contributors may not remove or alter any copyright, patent,
 trademark, attribution notices, disclaimers of warranty, or limitations
-of liability ("notices") contained within the Program from any copy of
+of liability (&quot;notices&quot;) contained within the Program from any copy of
 the Program which they Distribute, provided that Contributors may add
 their own appropriate notices.
 
@@ -178,9 +178,9 @@ the Contributor who includes the Program in a commercial product
 offering should do so in a manner which does not create potential
 liability for other Contributors. Therefore, if a Contributor includes
 the Program in a commercial product offering, such Contributor
-("Commercial Contributor") hereby agrees to defend and indemnify every
-other Contributor ("Indemnified Contributor") against any losses,
-damages and costs (collectively "Losses") arising from claims, lawsuits
+(&quot;Commercial Contributor&quot;) hereby agrees to defend and indemnify every
+other Contributor (&quot;Indemnified Contributor&quot;) against any losses,
+damages and costs (collectively &quot;Losses&quot;) arising from claims, lawsuits
 and other legal actions brought by a third party against the Indemnified
 Contributor to the extent caused by the acts or omissions of such
 Commercial Contributor in connection with its distribution of the Program
@@ -207,7 +207,7 @@ those damages.
 5. NO WARRANTY
 
 EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, AND TO THE EXTENT
-PERMITTED BY APPLICABLE LAW, THE PROGRAM IS PROVIDED ON AN "AS IS"
+PERMITTED BY APPLICABLE LAW, THE PROGRAM IS PROVIDED ON AN &quot;AS IS&quot;
 BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR
 IMPLIED INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF
 TITLE, NON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR
@@ -279,15 +279,15 @@ No third-party beneficiary rights are created under this Agreement.
 
 Exhibit A - Form of Secondary Licenses Notice
 
-"This Source Code may also be made available under the following
+&quot;This Source Code may also be made available under the following
 Secondary Licenses when the conditions for such availability set forth
 in the Eclipse Public License, v. 2.0 are satisfied:
     Apache Software License 1.0
     Apache Software License 1.1
     Apache Software License 2.0
-    BSD 2-Clause "Simplified" License
-    BSD 3-Clause "New" or "Revised" License
-    BSD 4-Clause "Original" or "Old" License
+    BSD 2-Clause &quot;Simplified&quot; License
+    BSD 3-Clause &quot;New&quot; or &quot;Revised&quot; License
+    BSD 4-Clause &quot;Original&quot; or &quot;Old&quot; License
     Creative Commons Attribution License 2.5
     Creative Commons Attribution 3.0 (Unported) License
     Creative Commons Attribution 4.0 International
@@ -302,7 +302,7 @@ in the Eclipse Public License, v. 2.0 are satisfied:
     Mozilla Public License Version 2.0
     W3C Software and Notice License (2002-12-31)
     W3C Software Notice and License (1998-07-20)
-    W3C Software Notice and Document License (2015-05-13)"
+    W3C Software Notice and Document License (2015-05-13)&quot;
 
 Simply including a copy of this Agreement, including this Exhibit A
 is not sufficient to license the Source Code under Secondary Licenses.
@@ -312,7 +312,7 @@ file, then You may include the notice in a location (such as a LICENSE
 file in a relevant directory) where a recipient would be likely to
 look for such a notice.
 
-You may add additional accurate notices of copyright ownership.]]>
+You may add additional accurate notices of copyright ownership.
    </license>
 
    <url>
@@ -320,8 +320,8 @@ You may add additional accurate notices of copyright ownership.]]>
    </url>
 
    <requires>
-      <import feature="org.eclipse.platform" version="4.28.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.rcp" version="4.28.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.platform" version="4.30.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.rcp" version="4.30.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
