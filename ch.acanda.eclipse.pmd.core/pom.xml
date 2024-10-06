@@ -199,7 +199,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.ow2.asm</groupId>
                                     <artifactId>asm</artifactId>
-                                    <version>9.6</version>
+                                    <version>9.7</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>xerces</groupId>
@@ -225,7 +225,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>net.sf.saxon</groupId>
                                     <artifactId>Saxon-HE</artifactId>
-                                    <version>12.4</version>
+                                    <version>12.5</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId> org.xmlresolver</groupId>
