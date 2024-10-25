@@ -4,13 +4,13 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
     xmlns="http://pmd.sourceforge.net/ruleset/2.0.0">
 
-    <!-- last updated for PMD 7.5.0 -->
+    <!-- last updated for PMD 7.7.0 -->
 
     <description>PMD rules for eclipse-pmd</description>
 
     <rule ref="category/java/bestpractices.xml">
-        <exclude name="JUnitTestContainsTooManyAsserts" />
-        <exclude name="JUnitTestsShouldIncludeAssert" />
+        <exclude name="UnitTestContainsTooManyAsserts" />
+        <exclude name="UnitTestShouldIncludeAssert" />
         <exclude name="JUnit5TestShouldBePackagePrivate" />
         <exclude name="GuardLogStatement" />
     </rule>
