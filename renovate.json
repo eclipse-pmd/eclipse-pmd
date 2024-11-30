@@ -9,7 +9,8 @@
     "io.github.apex-dev-tools:apex-ls_2.13",
     "io.github.apex-dev-tools:apex-parser",
     "org.scala-lang:scala-library",
-    "org.ow2.asm:asm"
+    "org.ow2.asm:asm",
+    "org.jsoup:jsoup"
   ],
   "packageRules": [
     {
