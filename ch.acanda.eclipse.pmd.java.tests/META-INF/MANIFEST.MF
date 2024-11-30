@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eclipse-pmd Java Tests
 Bundle-SymbolicName: ch.acanda.eclipse.pmd.java.tests;singleton:=true
-Bundle-Version: 4.1.0.qualifier
+Bundle-Version: 4.2.0.qualifier
 Bundle-Vendor: Philip Graf
-Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="4.1.0"
+Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="4.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ClassPath: .,
  lib/mockito-core-5.14.2.jar,
