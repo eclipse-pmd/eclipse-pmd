@@ -25,19 +25,7 @@
                 </property>
             </activation>
             <modules>
-                <module>2023-12</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>eclipse-2023-12</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2023-12</value>
-                </property>
-            </activation>
-            <modules>
-                <module>2023-12</module>
+                <module>2024-03</module>
             </modules>
         </profile>
         <profile>
@@ -74,6 +62,18 @@
             </activation>
             <modules>
                 <module>2024-09</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>eclipse-2024-12</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2024-12</value>
+                </property>
+            </activation>
+            <modules>
+                <module>2024-12</module>
             </modules>
         </profile>
 
