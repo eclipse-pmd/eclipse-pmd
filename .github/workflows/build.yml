@@ -17,7 +17,7 @@ jobs:
         release: [2024-03, 2024-06, 2024-09, 2024-12]
     steps:
       - name: Setup Maven
-        uses: s4u/setup-maven-action@v1.17.0
+        uses: s4u/setup-maven-action@v1.18.0
         with:
           checkout-fetch-depth: 0
           java-version: 21
