@@ -10,7 +10,8 @@
     "io.github.apex-dev-tools:apex-parser",
     "org.scala-lang:scala-library",
     "org.ow2.asm:asm",
-    "org.jsoup:jsoup"
+    "org.jsoup:jsoup",
+    "org.mozilla:rhino"
   ],
   "packageRules": [
     {
