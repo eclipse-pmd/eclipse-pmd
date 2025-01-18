@@ -8,8 +8,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
     <classpathentry kind="lib" path="lib/mockito-core-5.15.2.jar" sourcepath="lib/mockito-core-5.15.2-sources.jar"/>
-	<classpathentry kind="lib" path="lib/byte-buddy-1.15.11.jar"/>
-	<classpathentry kind="lib" path="lib/byte-buddy-agent-1.15.11.jar"/>
+	<classpathentry kind="lib" path="lib/byte-buddy-1.16.0.jar"/>
+	<classpathentry kind="lib" path="lib/byte-buddy-agent-1.16.0.jar"/>
 	<classpathentry kind="lib" path="lib/objenesis-3.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
