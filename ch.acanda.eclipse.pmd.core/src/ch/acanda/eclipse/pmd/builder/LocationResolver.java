@@ -30,28 +30,12 @@ public final class LocationResolver {
      * @return The absolute location if it exist or {@code Optional#absent()} if it doesn't.
      */
     public static Optional<String> resolveIfExists(final Location location, final IProject project) {
-        final Optional<String> path;
-        switch (location.getContext()) {
-            case WORKSPACE:
-                path = resolveWorkspaceLocationIfExists(location, project);
-                break;
-
-            case PROJECT:
-                path = resolveProjectLocationIfExists(location, project);
-                break;
-
-            case FILE_SYSTEM:
-                path = resolveFileSystemLocationIfExists(location);
-                break;
-
-            case REMOTE:
-                path = resolveRemoteLocationIfExists(location);
-                break;
-
-            default:
-                throw new IllegalStateException("Unknown location context: " + location.getContext());
-        }
-        return path;
+        return switch (location.getContext()) {
+            case WORKSPACE -> resolveWorkspaceLocationIfExists(location, project);
+            case PROJECT -> resolveProjectLocationIfExists(location, project);
+            case FILE_SYSTEM -> resolveFileSystemLocationIfExists(location);
+            case REMOTE -> resolveRemoteLocationIfExists(location);
+        };
     }
 
     /**
@@ -61,26 +45,17 @@ public final class LocationResolver {
      * @return The absolute location or {@code null} if it cannot be resolved.
      */
     public static String resolve(final Location location, final IProject project) {
-        final String resolvedLocation;
-        switch (location.getContext()) {
-            case WORKSPACE:
+        return switch (location.getContext()) {
+            case WORKSPACE -> {
                 final Path workspacePath = resolveWorkspaceLocation(location, project);
-                resolvedLocation = workspacePath == null ? null : workspacePath.toString();
-                break;
-
-            case PROJECT:
+                yield workspacePath == null ? null : workspacePath.toString();
+            }
+            case PROJECT -> {
                 final Path path = Paths.get(project.getLocationURI()).resolve(toOSPath(location.getPath()));
-                resolvedLocation = path.normalize().toString();
-                break;
-
-            case FILE_SYSTEM, REMOTE:
-                resolvedLocation = location.getPath();
-                break;
-
-            default:
-                throw new IllegalStateException("Unknown location context: " + location.getContext());
-        }
-        return resolvedLocation;
+                yield path.normalize().toString();
+            }
+            case FILE_SYSTEM, REMOTE -> location.getPath();
+        };
     }
 
     private static Optional<String> resolveWorkspaceLocationIfExists(final Location location, final IProject project) {
