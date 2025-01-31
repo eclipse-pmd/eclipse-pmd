@@ -36,24 +36,12 @@ final class RuleSetConfigurationToXMLTag implements Function<RuleSetModel, Strin
     }
 
     private String getContext(final RuleSetModel ruleSet) {
-        final String value;
-        switch (ruleSet.getLocation().getContext()) {
-            case WORKSPACE:
-                value = ATTRIBUTE_VALUE_WORKSPACE;
-                break;
-            case PROJECT:
-                value = ATTRIBUTE_VALUE_PROJECT;
-                break;
-            case FILE_SYSTEM:
-                value = ATTRIBUTE_VALUE_FILESYSTEM;
-                break;
-            case REMOTE:
-                value = ATTRIBUTE_VALUE_REMOTE;
-                break;
-            default:
-                throw new IllegalArgumentException("Unexpected location context: " + ruleSet.getLocation().getContext());
-        }
-        return value;
+        return switch (ruleSet.getLocation().getContext()) {
+            case WORKSPACE -> ATTRIBUTE_VALUE_WORKSPACE;
+            case PROJECT -> ATTRIBUTE_VALUE_PROJECT;
+            case FILE_SYSTEM -> ATTRIBUTE_VALUE_FILESYSTEM;
+            case REMOTE -> ATTRIBUTE_VALUE_REMOTE;
+        };
     }
 
 }
