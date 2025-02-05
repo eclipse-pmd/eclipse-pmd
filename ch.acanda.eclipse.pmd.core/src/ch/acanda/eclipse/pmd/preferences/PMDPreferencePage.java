@@ -1,6 +1,8 @@
 package ch.acanda.eclipse.pmd.preferences;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
@@ -157,8 +159,8 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
     private void openInBrowser(final String url) {
         try {
             final IWebBrowser browser = PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser();
-            browser.openURL(new URL(url));
-        } catch (PartInitException | MalformedURLException e) {
+            browser.openURL(new URI(url).toURL());
+        } catch (final PartInitException | MalformedURLException | URISyntaxException e) {
             PMDPlugin.getLogger().error("Failed to open sponsor URL in browser: " + url, e);
         }
     }
