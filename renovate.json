@@ -96,6 +96,17 @@
       ],
       "packageNameTemplate": "org.apache.commons:commons-lang3",
       "datasourceTemplate": "maven"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/(?<artifact>slf4j-[^-]+|jul-to-slf4j)-(?<currentValue>\\d+(\\.\\d+)*?).jar"
+      ],
+      "packageNameTemplate": "org.slf4j:{{{artifact}}}",
+      "datasourceTemplate": "maven"
     }
   ]
 }
