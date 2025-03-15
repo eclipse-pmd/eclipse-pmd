@@ -24,7 +24,7 @@
         <tycho.testArgLine /> <!-- JaCoCo sets this property when its profile is enabled -->
         <lib-path>${project.basedir}/lib</lib-path>
         <root-dir>${project.basedir}/..</root-dir>
-        <mockito-version>5.16.0</mockito-version>
+        <mockito-version>5.16.1</mockito-version>
         <mockito-byte-buddy-version>1.17.2</mockito-byte-buddy-version>
         <mockito-objenesis-version>3.4</mockito-objenesis-version>
         <guava-version>31.0.1-jre</guava-version>
