@@ -53,8 +53,8 @@ Bundle-ClassPath: .,
  lib/slf4j-api-2.0.17.jar,
  lib/slf4j-simple-2.0.17.jar,
  lib/jul-to-slf4j-2.0.17.jar,
- lib/guava-33.4.0-jre.jar,
- lib/failureaccess-1.0.2.jar
+ lib/guava-33.4.5-jre.jar,
+ lib/failureaccess-1.0.3.jar
 Bundle-Activator: ch.acanda.eclipse.pmd.PMDPlugin
 Bundle-ActivationPolicy: lazy
 Export-Package: ch.acanda.eclipse.pmd.domain,
