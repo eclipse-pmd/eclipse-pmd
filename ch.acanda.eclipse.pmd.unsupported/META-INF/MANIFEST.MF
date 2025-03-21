@@ -4,11 +4,11 @@ Bundle-Name: eclipse-pmd Unsupported JRE
 Bundle-SymbolicName: ch.acanda.eclipse.pmd.unsupported;singleton:=true
 Bundle-Version: 4.5.0.qualifier
 Bundle-Vendor: Philip Graf
-Require-Bundle: org.eclipse.core.resources;bundle-version="3.20.100",
- org.eclipse.core.runtime;bundle-version="3.31.0",
- org.eclipse.ui;bundle-version="3.205.100",
- org.eclipse.core.expressions;bundle-version="3.9.300",
- org.eclipse.swt;bundle-version="3.125.0"
+Require-Bundle: org.eclipse.core.resources;bundle-version="3.20.200",
+ org.eclipse.core.runtime;bundle-version="3.31.100",
+ org.eclipse.ui;bundle-version="3.206.0",
+ org.eclipse.core.expressions;bundle-version="3.9.400",
+ org.eclipse.swt;bundle-version="3.126.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Import-Package: org.osgi.framework
 Automatic-Module-Name: ch.acanda.eclipse.pmd.unsupported
