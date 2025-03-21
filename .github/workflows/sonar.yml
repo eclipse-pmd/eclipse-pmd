@@ -28,7 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' mvn -f eclipse-pmd/pom.xml -B -Pjacoco verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar
+        run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' mvn -f eclipse-pmd/pom.xml -B -Pjacoco verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.0.0.4389:sonar
       - name: Summary
         run: |
           echo "# Sonar" >> $GITHUB_STEP_SUMMARY
