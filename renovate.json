@@ -108,6 +108,17 @@
       ],
       "packageNameTemplate": "org.slf4j:{{{artifact}}}",
       "datasourceTemplate": "maven"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        ".github/workflows/sonar.yml"
+      ],
+      "matchStrings": [
+        "org.sonarsource.scanner.maven:sonar-maven-plugin:(?<currentValue>\\d+(\\.\\d+)*?):sonar"
+      ],
+      "packageNameTemplate": "org.sonarsource.scanner.maven:sonar-maven-plugin",
+      "datasourceTemplate": "maven"
     }
   ]
 }
