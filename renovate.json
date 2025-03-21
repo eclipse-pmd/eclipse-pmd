@@ -81,9 +81,9 @@
         "(.classpath|MANIFEST.MF|build.properties)"
       ],
       "matchStrings": [
-        "lib/guava-(?<currentValue>\\d+(\\.\\d+)*-jre(-sources)?).jar"
+        "lib/(?<artifact>guava|failureaccess)-(?<currentValue>\\d+(\\.\\d+)*?(-jre)?)(-sources)?.jar"
       ],
-      "packageNameTemplate": "com.google.guava:guava",
+      "packageNameTemplate": "com.google.guava:{{{artifact}}}",
       "datasourceTemplate": "maven"
     },
     {
