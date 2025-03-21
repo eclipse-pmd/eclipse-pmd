@@ -230,7 +230,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId> org.xmlresolver</groupId>
                                     <artifactId>xmlresolver</artifactId>
-                                    <version>5.2.2</version>
+                                    <version>5.3.0</version>
                                 </artifactItem>
                                 <!-- Apex's dependencies -->
                                 <artifactItem>
