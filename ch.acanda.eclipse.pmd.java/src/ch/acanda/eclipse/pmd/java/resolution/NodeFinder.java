@@ -9,6 +9,7 @@ import org.eclipse.jdt.core.dom.ASTNode;
  * @param R The type of the root node from which the AST will be traversed.
  * @param N The type of the node for which this finder is looking.
  */
+@FunctionalInterface
 public interface NodeFinder<R extends ASTNode, N extends ASTNode> {
 
     /**
