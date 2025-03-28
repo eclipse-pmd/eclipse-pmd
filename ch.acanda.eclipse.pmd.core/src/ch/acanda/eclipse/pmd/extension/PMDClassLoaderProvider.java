@@ -6,6 +6,7 @@ import org.eclipse.core.resources.IFile;
 
 import net.sourceforge.pmd.lang.Language;
 
+@FunctionalInterface
 public interface PMDClassLoaderProvider {
 
     /**
