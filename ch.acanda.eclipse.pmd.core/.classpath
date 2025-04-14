@@ -46,7 +46,7 @@
     <classpathentry kind="lib" path="lib/slf4j-api-2.0.17.jar"/>
     <classpathentry kind="lib" path="lib/slf4j-simple-2.0.17.jar"/>
     <classpathentry kind="lib" path="lib/jul-to-slf4j-2.0.17.jar"/>
-    <classpathentry exported="true" kind="lib" path="lib/guava-33.4.7-jre.jar" sourcePath="lib/guava-33.4.7-jre.jar"/>
+    <classpathentry exported="true" kind="lib" path="lib/guava-33.4.8-jre.jar" sourcePath="lib/guava-33.4.8-jre.jar"/>
     <classpathentry kind="lib" path="lib/failureaccess-1.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
