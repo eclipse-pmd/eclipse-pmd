@@ -3,10 +3,10 @@
 <schema targetNamespace="ch.acanda.eclipse.pmd.core" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="ch.acanda.eclipse.pmd.core" id="ch.acanda.eclipse.pmd.core.classloader" name="PMD ClassLoader Provider"/>
+         <meta.schema plugin="ch.acanda.eclipse.pmd.core" id="ch.acanda.eclipse.pmd.core.auxclasspath" name="PMD Auxiliary Classpath Provider"/>
       </appinfo>
       <documentation>
-         Allows extensions to provide their own class loaders for PMD&apos;s type resolution.
+         Allows extensions to provide their own auxiliary classpaths for PMD&apos;s type resolution.
       </documentation>
    </annotation>
 
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":ch.acanda.eclipse.pmd.extension.PMDClassLoaderProvider"/>
+                  <meta.attribute kind="java" basedOn=":ch.acanda.eclipse.pmd.extension.PMDAuxClasspathProvider"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -67,7 +67,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         3.4.0
+         4.7.0
       </documentation>
    </annotation>
 
