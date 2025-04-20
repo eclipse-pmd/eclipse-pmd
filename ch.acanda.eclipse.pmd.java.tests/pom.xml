@@ -43,6 +43,17 @@
                             <outputDirectory>${lib-path}</outputDirectory>
                             <artifactItems>
                                 <artifactItem>
+                                    <groupId>org.assertj</groupId>
+                                    <artifactId>assertj-core</artifactId>
+                                    <version>${assertj.version}</version>                                
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.assertj</groupId>
+                                    <artifactId>assertj-core</artifactId>
+                                    <version>${assertj.version}</version>
+                                    <classifier>sources</classifier>                                
+                                </artifactItem>
+                                <artifactItem>
                                     <groupId>org.mockito</groupId>
                                     <artifactId>mockito-core</artifactId>
                                     <version>${mockito-version}</version>

@@ -22,7 +22,6 @@ public class RuleSetsCacheLoader extends CacheLoader<String, List<RuleSet>> {
 
     @Override
     public List<RuleSet> load(final String projectName) {
-        PMDPlugin.getLogger().info("RuleSetsCache: loading rule sets for project " + projectName);
         try {
             final RuleSetLoader loader = new RuleSetLoader();
             final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);

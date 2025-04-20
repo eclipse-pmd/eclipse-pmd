@@ -121,7 +121,6 @@ public final class RuleSetsCache {
      * @param projectName The name of the project.
      */
     private void invalidate(final String projectName) {
-        PMDPlugin.getLogger().info("Invalidating cache for " + projectName);
         cache.invalidate(projectName);
     }
 
