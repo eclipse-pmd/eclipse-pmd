@@ -24,7 +24,7 @@
         <tycho.testArgLine /> <!-- JaCoCo sets this property when its profile is enabled -->
         <lib-path>${project.basedir}/lib</lib-path>
         <root-dir>${project.basedir}/..</root-dir>
-        <assertj-version>3.27.2</assertj-version>
+        <assertj-version>3.27.3</assertj-version>
         <mockito-version>5.17.0</mockito-version>
         <mockito-byte-buddy-version>1.17.5</mockito-byte-buddy-version>
         <mockito-objenesis-version>3.4</mockito-objenesis-version>
