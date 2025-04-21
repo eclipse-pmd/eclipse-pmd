@@ -45,12 +45,12 @@
                                 <artifactItem>
                                     <groupId>org.assertj</groupId>
                                     <artifactId>assertj-core</artifactId>
-                                    <version>3.27.2</version>                                
+                                    <version>3.27.3</version>                                
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.assertj</groupId>
                                     <artifactId>assertj-core</artifactId>
-                                    <version>3.27.2</version>
+                                    <version>3.27.3</version>
                                     <classifier>sources</classifier>                                
                                 </artifactItem>
                                 <artifactItem>
