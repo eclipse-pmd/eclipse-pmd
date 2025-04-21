@@ -112,6 +112,17 @@
     {
       "customType": "regex",
       "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties)"
+      ],
+      "matchStrings": [
+        "lib/assertj-core-(?<currentValue>\\d+(\\.\\d+)*?)(-sources)?.jar"
+      ],
+      "packageNameTemplate": "org.assertj:assertj-core",
+      "datasourceTemplate": "maven"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
         ".github/workflows/sonar.yml"
       ],
       "matchStrings": [
