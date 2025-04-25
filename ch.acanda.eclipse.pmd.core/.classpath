@@ -6,22 +6,22 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-apex-7.12.0.jar" sourcepath="lib/pmd-apex-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-core-7.12.0.jar" sourcepath="lib/pmd-core-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-html-7.12.0.jar" sourcepath="lib/pmd-html-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-java-7.12.0.jar" sourcepath="lib/pmd-java-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-javascript-7.12.0.jar" sourcepath="lib/pmd-javascript-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-jsp-7.12.0.jar" sourcepath="lib/pmd-jsp-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-kotlin-7.12.0.jar" sourcepath="lib/pmd-kotlin-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-modelica-7.12.0.jar" sourcepath="lib/pmd-modelica-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-plsql-7.12.0.jar" sourcepath="lib/pmd-plsql-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-swift-7.12.0.jar" sourcepath="lib/pmd-swift-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-velocity-7.12.0.jar" sourcepath="lib/pmd-velocity-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-visualforce-7.12.0.jar" sourcepath="lib/pmd-visualforce-7.12.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/pmd-xml-7.12.0.jar" sourcepath="lib/pmd-xml-7.12.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-apex-7.13.0.jar" sourcepath="lib/pmd-apex-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-core-7.13.0.jar" sourcepath="lib/pmd-core-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-html-7.13.0.jar" sourcepath="lib/pmd-html-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-java-7.13.0.jar" sourcepath="lib/pmd-java-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-javascript-7.13.0.jar" sourcepath="lib/pmd-javascript-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-jsp-7.13.0.jar" sourcepath="lib/pmd-jsp-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-kotlin-7.13.0.jar" sourcepath="lib/pmd-kotlin-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-modelica-7.13.0.jar" sourcepath="lib/pmd-modelica-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-plsql-7.13.0.jar" sourcepath="lib/pmd-plsql-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-swift-7.13.0.jar" sourcepath="lib/pmd-swift-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-velocity-7.13.0.jar" sourcepath="lib/pmd-velocity-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-visualforce-7.13.0.jar" sourcepath="lib/pmd-visualforce-7.13.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/pmd-xml-7.13.0.jar" sourcepath="lib/pmd-xml-7.13.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.12.2.jar"/>
-	<classpathentry kind="lib" path="lib/asm-9.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/asm-9.8.jar"/>
 	<classpathentry kind="lib" path="lib/rhino-1.7.14.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.17.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsoup-1.18.3.jar"/>
@@ -29,24 +29,25 @@
 	<classpathentry kind="lib" path="lib/pcollections-3.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/Saxon-HE-12.5.jar"/>
 	<classpathentry kind="lib" path="lib/xmlresolver-5.2.2.jar"/>
-	<classpathentry kind="lib" path="lib/apex-ls_2.13-5.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/apex-ls_2.13-5.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/standard-types-63.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/kotlin-stdlib-1.9.24.jar"/>
-	<classpathentry kind="lib" path="lib/summit-ast-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/summit-ast-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/flogger-0.8.jar"/>
 	<classpathentry kind="lib" path="lib/flogger-system-backend-0.8.jar"/>
-	<classpathentry kind="lib" path="lib/apex-parser-4.1.0.jar"/>
-	<classpathentry kind="lib" path="lib/scala-library-2.13.13.jar"/>
+	<classpathentry kind="lib" path="lib/apex-parser-4.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/scala-library-2.13.16.jar"/>
 	<classpathentry kind="lib" path="lib/upickle_2.13-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/upickle-core_2.13-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/upickle-implicits_2.13-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/ujson_2.13-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/upack_2.13-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/geny_2.13-0.6.2.jar"/>
-    <classpathentry kind="lib" path="lib/antlr4-runtime-4.9.3.jar"/>
-    <classpathentry kind="lib" path="lib/slf4j-api-2.0.17.jar"/>
-    <classpathentry kind="lib" path="lib/slf4j-simple-2.0.17.jar"/>
-    <classpathentry kind="lib" path="lib/jul-to-slf4j-2.0.17.jar"/>
-    <classpathentry exported="true" kind="lib" path="lib/guava-33.4.8-jre.jar" sourcePath="lib/guava-33.4.8-jre.jar"/>
-    <classpathentry kind="lib" path="lib/failureaccess-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/antlr4-runtime-4.9.3.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-2.0.17.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-simple-2.0.17.jar"/>
+	<classpathentry kind="lib" path="lib/jul-to-slf4j-2.0.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/guava-33.4.8-jre.jar" sourcePath="lib/guava-33.4.8-jre.jar"/>
+	<classpathentry kind="lib" path="lib/failureaccess-1.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
