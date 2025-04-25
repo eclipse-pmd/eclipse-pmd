@@ -8,6 +8,7 @@
     "ch.acanda.eclipse.pmd:ch.acanda.eclipse.pmd.target",
     "io.github.apex-dev-tools:apex-ls_2.13",
     "io.github.apex-dev-tools:apex-parser",
+    "io.github.apex-dev-tools:standard-types",
     "com.google.summit:summit-ast",
     "org.scala-lang:scala-library",
     "org.ow2.asm:asm",
