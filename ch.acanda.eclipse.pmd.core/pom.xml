@@ -225,7 +225,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>net.sf.saxon</groupId>
                                     <artifactId>Saxon-HE</artifactId>
-                                    <version>12.5</version>
+                                    <version>12.6</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId> org.xmlresolver</groupId>
