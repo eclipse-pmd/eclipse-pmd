@@ -14,6 +14,7 @@
     "org.ow2.asm:asm",
     "org.jsoup:jsoup",
     "org.mozilla:rhino",
+    "net.sf.saxon:Saxon-HE",
     "org.xmlresolver:xmlresolver"
   ],
   "packageRules": [
