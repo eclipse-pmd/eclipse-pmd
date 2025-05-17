@@ -10,6 +10,8 @@
     "io.github.apex-dev-tools:apex-parser",
     "io.github.apex-dev-tools:standard-types",
     "com.google.summit:summit-ast",
+    "com.google.flogger:flogger",
+    "com.google.flogger:flogger-system-backend",
     "org.scala-lang:scala-library",
     "org.ow2.asm:asm",
     "org.jsoup:jsoup",
