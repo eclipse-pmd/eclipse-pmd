@@ -15,7 +15,6 @@ public class IsChecked extends DefaultCondition {
     }
 
     @Override
-    @SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
     public boolean test() throws Exception {
         return tableItem.isChecked();
     }

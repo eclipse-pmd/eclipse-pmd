@@ -14,7 +14,7 @@ public final class PMDJavaPlugin extends Plugin {
     private static PMDJavaPlugin plugin;
 
     @Override
-    @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "java:S2696" })
+    @SuppressWarnings("java:S2696")
     public void start(final BundleContext context) throws Exception {
         super.start(context);
         plugin = this;
@@ -22,7 +22,7 @@ public final class PMDJavaPlugin extends Plugin {
     }
 
     @Override
-    @SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "PMD.NullAssignment", "java:S2696" })
+    @SuppressWarnings("java:S2696")
     public void stop(final BundleContext context) throws Exception {
         logger = Logger.forInactivePlugin(ID);
         plugin = null;

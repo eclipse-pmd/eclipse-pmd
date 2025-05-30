@@ -88,8 +88,7 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         dialog.bot().waitUntil(shellCloses(dialog));
     }
 
-    @SuppressWarnings("PMD.DetachedTestCase")
-    public void addFileSystemRuleSetInFirstProject() {
+    private void addFileSystemRuleSetInFirstProject() {
         final PMDPropertyDialogBot dialog = JavaProjectClient.openPMDPropertyDialog(PROJECT_NAME_1);
         assertTrue(dialog.enablePMD().isChecked(), "PMD should be enabled");
         assertTrue(dialog.addRuleSet().isEnabled(), "The button to add a new rule set should be enabled when PMD is enabled");
@@ -223,7 +222,6 @@ public final class PMDPropertyDialogTest extends GUITestCase {
         wizard.location().setText(projectRelativePath);
         wizard.bot().waitUntil(tableHasRows(wizard.rules(), 2));
         assertEquals(TEST_RULE_SET_NAME, wizard.name().getText(), "The name of the ruleset should be loaded into the name text field");
-        @SuppressWarnings("PMD.UseShortArrayInitializer")
         final String[] expectedNames = { "ExtendsObject", "PrimitiveWrapperInstantiation" };
         final String[] actualNames = wizard.ruleNames();
         assertArrayEquals(expectedNames, actualNames, "Rules of the PMD rule set");

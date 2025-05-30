@@ -7,7 +7,6 @@ import java.util.Set;
 /**
  * Base class for a view model.
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public abstract class ViewModel {
 
     public static final String DIRTY_PROPERTY = "dirty";
