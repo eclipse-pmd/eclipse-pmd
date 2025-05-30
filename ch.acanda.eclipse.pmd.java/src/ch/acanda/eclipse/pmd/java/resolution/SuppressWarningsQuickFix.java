@@ -38,7 +38,7 @@ import ch.acanda.eclipse.pmd.ui.util.PMDPluginImages;
  * Quick fix for all PMD rule violations in Java 5 and later. It adds a {@code @SuppressWarnings} annotation for the
  * respective rule to the enclosing class, method, field or parameter.
  */
-@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.CouplingBetweenObjects", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.ExcessiveImports", "PMD.CouplingBetweenObjects" })
 public final class SuppressWarningsQuickFix extends ASTQuickFix<ASTNode> {
 
     public SuppressWarningsQuickFix(final PMDMarker marker) {

@@ -15,7 +15,6 @@ public final class IsPerspectiveActive extends DefaultCondition {
     }
 
     @Override
-    @SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
     public boolean test() throws Exception {
         return perspective.isActive();
     }

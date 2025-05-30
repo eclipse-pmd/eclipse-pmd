@@ -259,6 +259,11 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                     <version>4.4.0</version>
                                 </artifactItem>
                                 <artifactItem>
+                                  <groupId>io.github.apex-dev-tools</groupId>
+                                  <artifactId>sobject-types</artifactId>
+                                  <version>63.0.0</version>
+                                </artifactItem>                             
+                                <artifactItem>
                                     <groupId>com.google.flogger</groupId>
                                     <artifactId>flogger</artifactId>
                                     <version>0.8</version>
@@ -327,7 +332,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.jsoup</groupId>
                                     <artifactId>jsoup</artifactId>
-                                    <version>1.18.3</version>
+                                    <version>1.20.1</version>
                                 </artifactItem>
                                 <!-- pmd-javascript's dependencies -->
                                 <artifactItem>

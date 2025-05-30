@@ -23,7 +23,6 @@ public final class PMDPluginImages {
         // hide constructor of utility class
     }
 
-    @SuppressWarnings({ "PMD.UnnecessaryCast", "java:S1905" }) // false positive
     public static Image get(final ImageDescriptor descriptor) {
         return getResourceManager().get(descriptor);
     }

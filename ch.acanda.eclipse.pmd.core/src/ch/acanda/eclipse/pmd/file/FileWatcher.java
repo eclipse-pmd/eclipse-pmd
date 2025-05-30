@@ -92,7 +92,6 @@ public final class FileWatcher {
         watcherThread.start();
     }
 
-    @SuppressWarnings("PMD.NullAssignment")
     private void stopWatcher() {
         if (watcherThread != null) {
             watcherThread.interrupt();

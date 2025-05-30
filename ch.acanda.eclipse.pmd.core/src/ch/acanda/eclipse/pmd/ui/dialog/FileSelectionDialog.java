@@ -40,7 +40,6 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
         private static final Object[] NO_CHILDREN = new Object[0];
 
         @Override
-        @SuppressWarnings("PMD.MethodReturnsInternalArray")
         public Object[] getChildren(final Object parentElement) {
             if (parentElement instanceof final IContainer container) {
                 try {

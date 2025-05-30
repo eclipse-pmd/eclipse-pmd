@@ -11,12 +11,10 @@ public final class JavaQuickFixGenerator {
 
     private static final Version JAVA_5 = new Version(1, 5, 0);
 
-    @SuppressWarnings("PMD.LiteralsFirstInComparisons")
     public boolean hasQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
         return context.compilerCompliance().compareTo(JAVA_5) >= 0;
     }
 
-    @SuppressWarnings({ "PMD.LiteralsFirstInComparisons", "java:S1452" })
     public List<? extends IMarkerResolution> getQuickFixes(final PMDMarker marker, final JavaQuickFixContext context) {
         if (context.compilerCompliance().compareTo(JAVA_5) < 0) {
             return List.of();

@@ -38,7 +38,7 @@ public class PMDPreferencePage extends PreferencePage implements IWorkbenchPrefe
     }
 
     @Override
-    @SuppressWarnings({ "PMD.NcssCount", "PMD.ExcessiveMethodLength" })
+    @SuppressWarnings("PMD.NcssCount")
     protected Control createContents(final Composite parent) {
         final Composite composite = new Composite(parent, SWT.NONE);
         final GridLayout layout = new GridLayout(2, false);

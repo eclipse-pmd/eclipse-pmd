@@ -69,7 +69,6 @@ public final class AddRuleSetConfigurationWizardBot extends SWTBotShell {
     private ICondition isFinishEnabled(final String failureMessage) {
         return new DefaultCondition() {
             @Override
-            @SuppressWarnings("PMD.JUnit4TestShouldUseTestAnnotation")
             public boolean test() throws Exception {
                 return finish().isEnabled();
             }
