@@ -9,6 +9,7 @@
     "io.github.apex-dev-tools:apex-ls_2.13",
     "io.github.apex-dev-tools:apex-parser",
     "io.github.apex-dev-tools:standard-types",
+    "io.github.apex-dev-tools:sobject-types",
     "com.google.summit:summit-ast",
     "com.google.flogger:flogger",
     "com.google.flogger:flogger-system-backend",
