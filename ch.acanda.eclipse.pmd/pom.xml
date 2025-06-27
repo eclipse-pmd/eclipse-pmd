@@ -221,31 +221,9 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2024-06</id>
+                    <id>2024-09</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2024-06/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/4.1.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2024-06</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2024-06</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2024-06</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2024-06/</url>
+                    <url>http://download.eclipse.org/releases/2024-09/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
@@ -312,6 +290,28 @@
                     <id>2025-03</id>
                     <layout>p2</layout>
                     <url>http://download.eclipse.org/releases/2025-03/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.2.0/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>eclipse-2025-06</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2025-06</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2025-06</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2025-06/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>

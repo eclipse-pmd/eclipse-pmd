@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+<target name="2025-06">
+    <locations>
+      <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+        <repository location="http://download.eclipse.org/technology/swtbot/releases/4.2.0/"/>
+        <unit id="org.eclipse.swtbot.eclipse.feature.group" version="4.2.0.202405291350"/>
+        <unit id="org.slf4j.api" version="1.7.30.v20221112-0806"/>
+      </location>
+      <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+        <repository location="https://download.eclipse.org/releases/2025-06"/>
+        <unit id="org.eclipse.jdt.feature.group" version="3.20.200.v20250528-1830"/>
+        <unit id="org.eclipse.platform.feature.group" version="4.36.0.v20250528-2229"/>
+        <unit id="org.eclipse.rcp.feature.group" version="4.36.0.v20250528-1830"/>
+      </location>
+    </locations>
+  <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
+</target>
