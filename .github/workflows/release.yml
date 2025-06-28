@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'test/**'
+
+jobs:
+  
+  publish-website:
+    name: Publish Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: eclipse-pmd
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build Website
+        run: mvn -f eclipse-pmd/eclipse-pmd/pom.xml -DskipTests -B -pl :website -am process-resources 
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: eclipse-pmd/eclipse-pmd.github.io
+          path: eclipse-pmd.github.io
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            release
+            CNAME
+            renovate.json
+            
+      - name: List eclipse-pmd.github.io
+        run: ls -R eclipse-pmd.github.io
