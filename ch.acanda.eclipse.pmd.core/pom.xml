@@ -219,7 +219,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.pcollections</groupId>
                                     <artifactId>pcollections</artifactId>
-                                    <version>3.2.0</version>
+                                    <version>4.0.2</version>
                                 </artifactItem>
                                 <!-- Saxons's dependencies -->
                                 <artifactItem>
@@ -256,7 +256,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>apex-parser</artifactId>
-                                    <version>4.4.0</version>
+                                    <version>4.4.1</version>
                                 </artifactItem>
                                 <artifactItem>
                                   <groupId>io.github.apex-dev-tools</groupId>
@@ -332,7 +332,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.jsoup</groupId>
                                     <artifactId>jsoup</artifactId>
-                                    <version>1.20.1</version>
+                                    <version>1.21.1</version>
                                 </artifactItem>
                                 <!-- pmd-javascript's dependencies -->
                                 <artifactItem>
