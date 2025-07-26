@@ -219,7 +219,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.pcollections</groupId>
                                     <artifactId>pcollections</artifactId>
-                                    <version>4.0.2</version>
+                                    <version>5.0.0</version>
                                 </artifactItem>
                                 <!-- Saxons's dependencies -->
                                 <artifactItem>
