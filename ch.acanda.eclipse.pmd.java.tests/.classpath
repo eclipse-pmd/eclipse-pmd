@@ -8,7 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/assertj-core-3.27.4.jar" sourcepath="lib/assertj-core-3.27.4-sources.jar"/>
-	<classpathentry kind="lib" path="lib/mockito-core-5.18.0.jar" sourcepath="lib/mockito-core-5.18.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-core-5.19.0.jar" sourcepath="lib/mockito-core-5.19.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/byte-buddy-1.17.6.jar"/>
 	<classpathentry kind="lib" path="lib/byte-buddy-agent-1.17.6.jar"/>
 	<classpathentry kind="lib" path="lib/objenesis-3.4.jar"/>
