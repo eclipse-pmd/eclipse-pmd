@@ -46,7 +46,7 @@ public class LoggerTest {
         assertEquals("[8] A: B", logger.getEntry(), "info without exception");
     }
 
-    private final static class TestLogger extends Logger {
+    private static final class TestLogger extends Logger {
 
         private String entry;
 
