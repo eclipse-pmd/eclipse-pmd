@@ -19,7 +19,8 @@
     "org.mozilla:rhino",
     "net.sf.saxon:Saxon-HE",
     "org.xmlresolver:xmlresolver",
-    "org.pcollections:pcollections"
+    "org.pcollections:pcollections",
+    "org.jetbrains.kotlin:kotlin-stdlib"
   ],
   "packageRules": [
     {
