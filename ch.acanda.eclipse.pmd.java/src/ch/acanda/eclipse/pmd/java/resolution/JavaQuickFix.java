@@ -143,8 +143,10 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
         }
     }
 
-    private void fixMarkers(final List<IMarker> markers, final IProgressMonitor monitor, final ICompilationUnit compilationUnit,
-            final FileBuffer buffer, final CompilationUnit ast)
+    private void fixMarkers(
+            final List<IMarker> markers, final IProgressMonitor monitor, final ICompilationUnit compilationUnit,
+            final FileBuffer buffer, final CompilationUnit ast
+    )
             throws CoreException, BadLocationException {
         startFixingMarkers(ast);
 
@@ -157,13 +159,7 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
                 final MarkerAnnotation annotation = getMarkerAnnotation(annotationModel, marker);
                 // if the annotation is null it means that is was deleted by a previous quick fix
                 if (annotation != null) {
-                    final Optional<T> node = getNodeFinder(annotationModel.getPosition(annotation)).findNode(ast);
-                    if (node.isPresent()) {
-                        final boolean isSuccessful = fixMarker(node.get(), document, options);
-                        if (isSuccessful) {
-                            marker.delete();
-                        }
-                    }
+                    fixMarker(annotation, annotationModel, ast, document, options);
                 }
             } finally {
                 markerMonitor.worked(1);
@@ -171,6 +167,22 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
         }
 
         finishFixingMarkers(ast, document, options);
+    }
+
+    private void fixMarker(
+            final MarkerAnnotation annotation,
+            final IAnnotationModel annotationModel,
+            final CompilationUnit ast,
+            final IDocument document,
+            final Map<?, ?> options
+    ) throws CoreException {
+        final Optional<T> node = getNodeFinder(annotationModel.getPosition(annotation)).findNode(ast);
+        if (node.isPresent()) {
+            final boolean isSuccessful = fixMarker(node.get(), document, options);
+            if (isSuccessful) {
+                annotation.getMarker().delete();
+            }
+        }
     }
 
     /**
