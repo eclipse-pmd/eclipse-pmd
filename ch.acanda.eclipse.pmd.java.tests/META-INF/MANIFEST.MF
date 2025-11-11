@@ -9,8 +9,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ClassPath: .,
  lib/assertj-core-3.27.6.jar,
  lib/mockito-core-5.20.0.jar,
- lib/byte-buddy-1.17.8.jar,
- lib/byte-buddy-agent-1.17.8.jar,
+ lib/byte-buddy-1.18.0.jar,
+ lib/byte-buddy-agent-1.18.0.jar,
  lib/objenesis-3.4.jar
 Automatic-Module-Name: ch.acanda.eclipse.pmd.java.tests
 Require-Bundle: junit-jupiter-api;bundle-version="5.11.3",
