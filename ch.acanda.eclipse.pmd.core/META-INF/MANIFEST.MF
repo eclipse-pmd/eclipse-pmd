@@ -16,7 +16,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ClassPath: .,
  lib/asm-9.8.jar,
  lib/rhino-1.7.15.jar,
- lib/commons-lang3-3.19.0.jar,
+ lib/commons-lang3-3.20.0.jar,
  lib/xercesImpl-2.12.2.jar,
  lib/pmd-apex-7.18.0.jar,
  lib/pmd-core-7.18.0.jar,
