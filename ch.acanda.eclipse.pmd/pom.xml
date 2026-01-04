@@ -22,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os-jvm-flags /> <!-- see <profiles> for os specific flags -->
         <tycho.testArgLine /> <!-- JaCoCo sets this property when its profile is enabled -->
+        <tycho-surfire-provider>junit5</tycho-surfire-provider>
         <lib-path>${project.basedir}/lib</lib-path>
         <root-dir>${project.basedir}/..</root-dir>
         <mockito-version>5.21.0</mockito-version>
@@ -221,31 +222,9 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2024-12</id>
+                    <id>2025-03</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2024-12/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/4.2.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2024-12</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2024-12</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2023-12</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2024-12/</url>
+                    <url>http://download.eclipse.org/releases/2025-03/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
@@ -317,6 +296,28 @@
                     <id>swtbot</id>
                     <layout>p2</layout>
                     <url>http://download.eclipse.org/technology/swtbot/releases/4.2.0/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+        <profile>
+            <id>eclipse-2025-12</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2025-12</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2025-12</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2025-12/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.3.0/</url>
                 </repository>
             </repositories>
         </profile>

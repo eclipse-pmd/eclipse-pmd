@@ -7,4 +7,4 @@ Bundle-Vendor: Philip Graf
 Fragment-Host: ch.acanda.eclipse.pmd.unsupported
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: ch.acanda.eclipse.pmd.unsupported.tests
-Require-Bundle: junit-jupiter-api;bundle-version="5.11.3"
+Require-Bundle: junit-jupiter-api;bundle-version="[5.11.4,6.0.0)"

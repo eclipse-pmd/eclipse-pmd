@@ -39,6 +39,7 @@
                     <useUIHarness>true</useUIHarness>
                     <useUIThread>false</useUIThread>
                     <argLine>${os-jvm-flags} ${tycho.testArgLine}</argLine>
+                    <providerHint>${tycho-surfire-provider}</providerHint>
                     <product>org.eclipse.sdk.ide</product>
                     <application>org.eclipse.ui.ide.workbench</application>
                     <dependencies>

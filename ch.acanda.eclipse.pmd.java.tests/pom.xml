@@ -91,6 +91,7 @@
                 <version>${tycho-version}</version>
                 <configuration>
                     <argLine>${os-jvm-flags} ${tycho.testArgLine}</argLine>
+                    <providerHint>${tycho-surfire-provider}</providerHint>
                 </configuration>
             </plugin>
 
