@@ -5,6 +5,7 @@ bin/
 
 ### Maven ###
 target/
+.tycho-consumer-pom.xml
 
 ### MacOS ###
 **/.DS_Store
