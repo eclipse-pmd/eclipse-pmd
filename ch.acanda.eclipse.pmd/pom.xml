@@ -27,7 +27,7 @@
         <root-dir>${project.basedir}/..</root-dir>
         <mockito-version>5.21.0</mockito-version>
         <mockito-byte-buddy-version>1.18.4</mockito-byte-buddy-version>
-        <mockito-objenesis-version>3.4</mockito-objenesis-version>
+        <mockito-objenesis-version>3.5</mockito-objenesis-version>
     </properties>
 
     <modules>
