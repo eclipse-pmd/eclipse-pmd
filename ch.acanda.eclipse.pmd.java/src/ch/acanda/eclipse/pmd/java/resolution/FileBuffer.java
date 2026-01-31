@@ -32,11 +32,11 @@ class FileBuffer implements AutoCloseable {
     private final ITextFileBuffer textFileBuffer;
     private final IWorkbench workbench;
 
-    public FileBuffer(final IFile file) throws CoreException {
+    FileBuffer(final IFile file) throws CoreException {
         this(file, FileBuffers.getTextFileBufferManager(), PlatformUI.getWorkbench());
     }
 
-    public FileBuffer(final IFile file, final ITextFileBufferManager bufferManager, final IWorkbench workbench) throws CoreException {
+    FileBuffer(final IFile file, final ITextFileBufferManager bufferManager, final IWorkbench workbench) throws CoreException {
         this.file = file;
         this.bufferManager = bufferManager;
         this.workbench = workbench;
@@ -44,15 +44,15 @@ class FileBuffer implements AutoCloseable {
         textFileBuffer = bufferManager.getTextFileBuffer(file.getFullPath(), LocationKind.IFILE);
     }
 
-    public IDocument getDocument() {
+    IDocument getDocument() {
         return textFileBuffer.getDocument();
     }
 
-    public IAnnotationModel getAnnotationModel() {
+    IAnnotationModel getAnnotationModel() {
         return textFileBuffer.getAnnotationModel();
     }
 
-    public CompilationUnit getAst(final boolean needsTypeResolution, final ICompilationUnit source, final IProgressMonitor monitor) {
+    CompilationUnit getAst(final boolean needsTypeResolution, final ICompilationUnit source, final IProgressMonitor monitor) {
         final ASTParser astParser = ASTParser.newParser(getApiLevel(file));
         astParser.setKind(ASTParser.K_COMPILATION_UNIT);
         astParser.setResolveBindings(needsTypeResolution);

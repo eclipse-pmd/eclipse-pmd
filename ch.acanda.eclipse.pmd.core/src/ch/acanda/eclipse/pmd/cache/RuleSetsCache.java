@@ -172,7 +172,7 @@ public final class RuleSetsCache {
 
         private final String projectName;
 
-        public RuleSetFileListener(final ProjectModel projectModel) {
+        RuleSetFileListener(final ProjectModel projectModel) {
             projectName = projectModel.getProjectName();
         }
 

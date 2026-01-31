@@ -37,7 +37,7 @@ final class RuleSetConfigurationTable extends Composite {
     private final Table table;
     private final PMDPropertyPageViewModel model;
 
-    public RuleSetConfigurationTable(final Composite parent, final PMDPropertyPageViewModel model) {
+    RuleSetConfigurationTable(final Composite parent, final PMDPropertyPageViewModel model) {
         super(parent, SWT.NONE);
         this.model = model;
 

@@ -28,16 +28,16 @@ final class AddRuleSetConfigurationController {
     private final AddRuleSetConfigurationModel model;
     private final IProject project;
 
-    public AddRuleSetConfigurationController(final IProject project) {
+    AddRuleSetConfigurationController(final IProject project) {
         model = new AddRuleSetConfigurationModel(project);
         this.project = project;
     }
 
-    public AddRuleSetConfigurationModel getModel() {
+    AddRuleSetConfigurationModel getModel() {
         return model;
     }
 
-    public void browse(final Shell shell) {
+    void browse(final Shell shell) {
         if (model.isFileSystemTypeSelected()) {
             final FileDialog fileDialog = new FileDialog(shell);
             final String file = fileDialog.open();
@@ -88,7 +88,7 @@ final class AddRuleSetConfigurationController {
         return Paths.get(container.getLocationURI()).relativize(Paths.get(resource.getLocationURI())).toString().replace('\\', '/');
     }
 
-    public RuleSetModel createRuleSetModel() {
+    RuleSetModel createRuleSetModel() {
         if (model.isValid()) {
             return new RuleSetModel(model.getName(), new Location(model.getLocation(), getLocationContext()));
         }

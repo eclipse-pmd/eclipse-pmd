@@ -21,7 +21,7 @@ final class WorkspaceChangeListener implements IResourceChangeListener {
     private final ProjectModelRepository projectModelRepository;
     private final WorkspaceModel workspaceModel;
 
-    public WorkspaceChangeListener(final WorkspaceModel workspaceModel, final ProjectModelRepository projectModelRepository) {
+    WorkspaceChangeListener(final WorkspaceModel workspaceModel, final ProjectModelRepository projectModelRepository) {
         this.workspaceModel = workspaceModel;
         this.projectModelRepository = projectModelRepository;
     }
