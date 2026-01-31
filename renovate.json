@@ -75,6 +75,18 @@
     {
       "customType": "regex",
       "fileMatch": [
+        "(.classpath|MANIFEST.MF|build.properties|pom.xml)"
+      ],
+      "matchStrings": [
+        "lib/objenesis-(?<currentValue>\\d+(\\.\\d+)*?).jar",
+        "<mockito-objenesis-version>(?<currentValue>\\d+(\\.\\d+)*?)</mockito-objenesis-version>"
+      ],
+      "packageNameTemplate": "org.objenesis:objenesis",
+      "datasourceTemplate": "maven"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
         "(.classpath|MANIFEST.MF|build.properties)"
       ],
       "matchStrings": [
