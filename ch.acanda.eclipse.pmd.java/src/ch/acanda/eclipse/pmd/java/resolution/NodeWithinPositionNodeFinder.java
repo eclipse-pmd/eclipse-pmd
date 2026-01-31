@@ -17,7 +17,7 @@ class NodeWithinPositionNodeFinder<R extends ASTNode, N extends ASTNode> extends
     private final Class<? extends N> nodeType;
     private N node;
 
-    public NodeWithinPositionNodeFinder(final Position position, final Class<? extends N> nodeType) {
+    NodeWithinPositionNodeFinder(final Position position, final Class<? extends N> nodeType) {
         start = position.getOffset();
         end = start + position.getLength();
         this.nodeType = nodeType;

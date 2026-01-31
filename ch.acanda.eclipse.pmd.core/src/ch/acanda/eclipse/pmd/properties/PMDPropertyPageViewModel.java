@@ -17,10 +17,11 @@ import ch.acanda.eclipse.pmd.ui.model.ViewModel;
 /**
  * View model for the {@link PMDPropertyPage}.
  */
+@SuppressWarnings("PMD.PublicMemberInNonPublicType")
 final class PMDPropertyPageViewModel extends ViewModel {
 
-    public static final String RULE_SETS = "ruleSets";
-    public static final String ACTIVE_RULE_SETS = "activeRuleSets";
+    static final String RULE_SETS = "ruleSets";
+    static final String ACTIVE_RULE_SETS = "activeRuleSets";
 
     /**
      * All available rule sets of the entire workspace.
@@ -117,7 +118,8 @@ final class PMDPropertyPageViewModel extends ViewModel {
         private final String resolvedPath;
         private final String ruleSetErrorMessage;
 
-        public RuleSetViewModel(final String name, final String type, final String location, final boolean isLocationValid,
+        RuleSetViewModel(
+                final String name, final String type, final String location, final boolean isLocationValid,
                 final String resolvedPath, final String ruleSetErrorMessage) {
             this.name = name;
             this.type = type;

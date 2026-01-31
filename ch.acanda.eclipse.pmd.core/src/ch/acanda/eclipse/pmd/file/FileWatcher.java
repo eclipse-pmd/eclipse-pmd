@@ -101,7 +101,7 @@ public final class FileWatcher {
 
     private final class WatcherThread extends Thread {
 
-        public WatcherThread() {
+        WatcherThread() {
             super("eclipse-pmd RuleSetWatcher");
         }
 

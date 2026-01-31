@@ -38,15 +38,15 @@ final class PMDPropertyPageController {
     private ProjectModel projectModel;
     private IProject project;
 
-    public PMDPropertyPageController() {
+    PMDPropertyPageController() {
         model = new PMDPropertyPageViewModel();
     }
 
-    public PMDPropertyPageViewModel getModel() {
+    PMDPropertyPageViewModel getModel() {
         return model;
     }
 
-    public void init(final IProject project) {
+    void init(final IProject project) {
         this.project = project;
         final WorkspaceModel workspaceModel = PMDPlugin.getDefault().getWorkspaceModel();
 
@@ -59,13 +59,13 @@ final class PMDPropertyPageController {
         reset();
     }
 
-    public void reset() {
+    void reset() {
         model.setActiveRuleSets(Set.copyOf(toViewModels(projectModel.getRuleSets(), project)));
         model.setSelectedRuleSets(List.of());
         model.setPMDEnabled(projectModel.isPMDEnabled());
     }
 
-    public void save() {
+    void save() {
         projectModel.setPMDEnabled(model.isPMDEnabled());
         projectModel.setRuleSets(toDomainModels(model.getActiveRuleSets()));
 
@@ -84,11 +84,11 @@ final class PMDPropertyPageController {
     }
 
     @SuppressWarnings("java:S3400")
-    public boolean isValid() {
+    boolean isValid() {
         return true;
     }
 
-    public void addRuleSetConfiguration(final Shell shell) {
+    void addRuleSetConfiguration(final Shell shell) {
         final AddRuleSetConfigurationWizard wizard = new AddRuleSetConfigurationWizard(project);
         final WizardDialog dialog = new WizardDialog(shell, wizard);
         dialog.setPageSize(300, SWT.DEFAULT);
@@ -102,7 +102,7 @@ final class PMDPropertyPageController {
         }
     }
 
-    public void removeSelectedConfigurations() {
+    void removeSelectedConfigurations() {
         final Predicate<RuleSetViewModel> notInSelection = m -> !model.getSelectedRuleSets().contains(m);
         model.setRuleSets(model.getRuleSets().stream().filter(notInSelection).toList());
         model.setActiveRuleSets(model.getActiveRuleSets().stream().filter(notInSelection).collect(toSet()));

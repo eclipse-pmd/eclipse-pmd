@@ -44,7 +44,7 @@ public class JulLoggerTest {
             // nothing to do
         }
 
-        public LogRecord getRecord() {
+        private LogRecord getRecord() {
             return record;
         }
 

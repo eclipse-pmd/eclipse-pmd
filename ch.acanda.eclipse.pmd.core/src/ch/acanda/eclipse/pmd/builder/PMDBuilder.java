@@ -93,7 +93,7 @@ public class PMDBuilder extends IncrementalProjectBuilder {
 
         private final IProgressMonitor monitor;
 
-        public DeltaVisitor(final IProgressMonitor monitor) {
+        DeltaVisitor(final IProgressMonitor monitor) {
             this.monitor = monitor;
         }
 
@@ -109,13 +109,14 @@ public class PMDBuilder extends IncrementalProjectBuilder {
             }
             return true;
         }
+
     }
 
     class ResourceVisitor implements IResourceVisitor {
 
         private final IProgressMonitor monitor;
 
-        public ResourceVisitor(final IProgressMonitor monitor) {
+        ResourceVisitor(final IProgressMonitor monitor) {
             this.monitor = monitor;
         }
 
@@ -127,6 +128,7 @@ public class PMDBuilder extends IncrementalProjectBuilder {
             }
             return true;
         }
+
     }
 
 }

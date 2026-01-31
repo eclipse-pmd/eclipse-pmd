@@ -61,7 +61,7 @@ public class LoggerTest {
             return null;
         }
 
-        public String getEntry() {
+        private String getEntry() {
             return entry;
         }
 

@@ -34,16 +34,17 @@ import net.sourceforge.pmd.lang.rule.RuleSetLoader;
 /**
  * View model for the wizard page to add a new file system rule set configuration.
  */
+@SuppressWarnings("PMD.PublicMemberInNonPublicType")
 class AddRuleSetConfigurationModel extends ViewModel {
 
-    public static final String FILE_SYSTEM_TYPE_SELECTED = "fileSystemTypeSelected";
-    public static final String WORKSPACE_TYPE_SELECTED = "workspaceTypeSelected";
-    public static final String PROJECT_TYPE_SELECTED = "projectTypeSelected";
-    public static final String REMOTE_TYPE_SELECTED = "remoteTypeSelected";
-    public static final String BROWSE_ENABLED = "browseEnabled";
-    public static final String LOCATION = "location";
-    public static final String NAME = "name";
-    public static final String RULES = "rules";
+    static final String FILE_SYSTEM_TYPE_SELECTED = "fileSystemTypeSelected";
+    static final String WORKSPACE_TYPE_SELECTED = "workspaceTypeSelected";
+    static final String PROJECT_TYPE_SELECTED = "projectTypeSelected";
+    static final String REMOTE_TYPE_SELECTED = "remoteTypeSelected";
+    static final String BROWSE_ENABLED = "browseEnabled";
+    static final String LOCATION = "location";
+    static final String NAME = "name";
+    static final String RULES = "rules";
 
     private final IProject project;
 
@@ -61,7 +62,7 @@ class AddRuleSetConfigurationModel extends ViewModel {
      */
     private List<Rule> rules = List.of();
 
-    public AddRuleSetConfigurationModel(final IProject project) {
+    AddRuleSetConfigurationModel(final IProject project) {
         this.project = project;
     }
 

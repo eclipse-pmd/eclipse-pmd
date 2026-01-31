@@ -28,7 +28,7 @@ final class ProjectConfigurationContentHandler extends DefaultHandler {
     private boolean isPMDEnabled;
     private final Set<RuleSetModel> ruleSets = new HashSet<>();
 
-    public ProjectModel getProjectModel(final String projectName) {
+    ProjectModel getProjectModel(final String projectName) {
         final ProjectModel model = new ProjectModel(projectName);
         model.setPMDEnabled(isPMDEnabled);
         model.setRuleSets(ruleSets);

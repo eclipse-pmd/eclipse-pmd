@@ -402,11 +402,11 @@ public class AnalyzerTest {
         return argThat(new RuleViolationIteratorMatcher(ruleNames));
     }
 
-    private static class RuleViolationIteratorMatcher implements ArgumentMatcher<List<RuleViolation>> {
+    private static final class RuleViolationIteratorMatcher implements ArgumentMatcher<List<RuleViolation>> {
 
         private final List<String> expectedRuleNames;
 
-        public RuleViolationIteratorMatcher(final String... ruleNames) {
+        private RuleViolationIteratorMatcher(final String... ruleNames) {
             expectedRuleNames = List.of(ruleNames);
         }
 
