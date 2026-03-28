@@ -222,31 +222,9 @@
             </activation>
             <repositories>
                 <repository>
-                    <id>2025-03</id>
+                    <id>2025-06</id>
                     <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2025-03/</url>
-                </repository>
-                <repository>
-                    <id>swtbot</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/technology/swtbot/releases/4.2.0/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-        <profile>
-            <id>eclipse-2025-03</id>
-            <activation>
-                <property>
-                    <name>eclipse-release</name>
-                    <value>2025-03</value>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>2025-03</id>
-                    <layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/2025-03/</url>
+                    <url>http://download.eclipse.org/releases/2025-06/</url>
                 </repository>
                 <repository>
                     <id>swtbot</id>
@@ -344,6 +322,28 @@
                     </plugins>
                 </pluginManagement>
             </build>
+        </profile>
+        
+        <profile>
+            <id>eclipse-2026-03</id>
+            <activation>
+                <property>
+                    <name>eclipse-release</name>
+                    <value>2026-03</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>2026-03</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/releases/2026-03/</url>
+                </repository>
+                <repository>
+                    <id>swtbot</id>
+                    <layout>p2</layout>
+                    <url>http://download.eclipse.org/technology/swtbot/releases/4.3.0/</url>
+                </repository>
+            </repositories>
         </profile>
 
     </profiles>
