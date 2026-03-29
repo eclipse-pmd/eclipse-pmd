@@ -14,7 +14,8 @@ public interface PMDAuxClasspathProvider {
      *
      * @param file The file that is about to be processed. Never null.
      * @param language The language of the file that is about to be processed. Never null.
-     * @see https://pmd.github.io/pmd/pmd_languages_java.html#providing-the-auxiliary-classpath
+     * @see <a href="https://pmd.github.io/pmd/pmd_languages_java.html#providing-the-auxiliary-classpath">Providing the
+     * auxiliary classpath</a>
      */
     Stream<String> getAuxClasspath(IFile file, Language language);
 

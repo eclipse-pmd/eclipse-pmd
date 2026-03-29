@@ -199,13 +199,13 @@ public abstract class JavaQuickFix<T extends ASTNode> extends WorkbenchMarkerRes
 
     /**
      * Prepares the quick fix for fixing the markers. This method is guaranteed to be invoked before
-     * {@link #fixMarker(ASTNode, IDocument, Map)} and {@link #finishFixingMarkers(CompilationUnit, IDocument, Map).
+     * {@link #fixMarker(ASTNode, IDocument, Map)} and {@link #finishFixingMarkers(CompilationUnit, IDocument, Map)}.
      */
     protected abstract void startFixingMarkers(CompilationUnit ast);
 
     /**
      * Fixes a single marker. The marker is already resolve to its corresponding node in the AST. This method is
-     * guaranteed to be invoked before {@link #finishFixingMarkers(CompilationUnit, IDocument, Map).
+     * guaranteed to be invoked before {@link #finishFixingMarkers(CompilationUnit, IDocument, Map)}.
      *
      * @param node The marker's corresponding node in the AST.
      * @param document The document representing the Java file.
