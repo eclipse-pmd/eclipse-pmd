@@ -199,7 +199,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.ow2.asm</groupId>
                                     <artifactId>asm</artifactId>
-                                    <version>9.8</version>
+                                    <version>9.9.1</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>xerces</groupId>
@@ -225,7 +225,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>net.sf.saxon</groupId>
                                     <artifactId>Saxon-HE</artifactId>
-                                    <version>12.8</version>
+                                    <version>12.9</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId> org.xmlresolver</groupId>
@@ -236,12 +236,12 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>apex-ls_2.13</artifactId>
-                                    <version>5.10.0</version>
+                                    <version>6.0.2</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>standard-types</artifactId>
-                                    <version>64.0.0</version>
+                                    <version>65.0.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.jetbrains.kotlin</groupId>
@@ -261,7 +261,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                   <groupId>io.github.apex-dev-tools</groupId>
                                   <artifactId>sobject-types</artifactId>
-                                  <version>64.0.0</version>
+                                  <version>65.0.0</version>
                                 </artifactItem>                             
                                 <artifactItem>
                                     <groupId>com.google.flogger</groupId>
@@ -304,11 +304,6 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                     <version>1.2.0</version>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.lihaoyi</groupId>
-                                    <artifactId>geny_2.13</artifactId>
-                                    <version>0.6.2</version>
-                                </artifactItem>
-                                <artifactItem>
                                     <groupId>org.antlr</groupId>
                                     <artifactId>antlr4-runtime</artifactId>
                                     <version>4.9.3</version>
@@ -332,13 +327,13 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>org.jsoup</groupId>
                                     <artifactId>jsoup</artifactId>
-                                    <version>1.22.1</version>
+                                    <version>1.22.2</version>
                                 </artifactItem>
                                 <!-- pmd-javascript's dependencies -->
                                 <artifactItem>
                                     <groupId>org.mozilla</groupId>
                                     <artifactId>rhino</artifactId>
-                                    <version>1.7.15</version>
+                                    <version>1.7.15.1</version>
                                 </artifactItem>
                                 <!-- eclipse-pmd's dependencies -->
                                 <artifactItem>
