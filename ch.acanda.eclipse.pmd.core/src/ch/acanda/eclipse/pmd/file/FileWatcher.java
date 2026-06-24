@@ -40,7 +40,7 @@ public final class FileWatcher {
      */
     private final Map<Path, List<Path>> watchedFiles = new HashMap<>();
 
-    private WatcherThread watcherThread;
+    private Thread watcherThread;
 
     public FileWatcher() throws IOException {
         watchService = FileSystems.getDefault().newWatchService();
@@ -88,7 +88,7 @@ public final class FileWatcher {
     }
 
     private void startWatcher() {
-        watcherThread = new WatcherThread();
+        watcherThread = new Thread(new WatcherThread(), "eclipse-pmd RuleSetWatcher");
         watcherThread.start();
     }
 
@@ -99,11 +99,7 @@ public final class FileWatcher {
         }
     }
 
-    private final class WatcherThread extends Thread {
-
-        WatcherThread() {
-            super("eclipse-pmd RuleSetWatcher");
-        }
+    private final class WatcherThread implements Runnable {
 
         @Override
         public void run() {
@@ -119,10 +115,10 @@ public final class FileWatcher {
                     watchKey.reset();
                 }
             } catch (final ClosedWatchServiceException e) {
-                PMDPlugin.getLogger().info(getName() + " stopped");
+                PMDPlugin.getLogger().info(Thread.currentThread().getName() + " stopped");
             } catch (final InterruptedException e) {
-                PMDPlugin.getLogger().info(getName() + " interrupted");
-                currentThread().interrupt();
+                PMDPlugin.getLogger().info(Thread.currentThread().getName() + " interrupted");
+                Thread.currentThread().interrupt();
             }
         }
 
