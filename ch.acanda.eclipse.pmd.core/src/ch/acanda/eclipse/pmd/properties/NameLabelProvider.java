@@ -9,7 +9,7 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
  */
 final class NameLabelProvider extends RuleSetConfigurationLabelProvider {
 
-    protected NameLabelProvider(final PMDPropertyPageViewModel model) {
+    NameLabelProvider(final PMDPropertyPageViewModel model) {
         super(model);
     }
 
