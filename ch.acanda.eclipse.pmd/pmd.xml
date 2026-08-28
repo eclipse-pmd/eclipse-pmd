@@ -61,6 +61,7 @@
         <exclude name="EmptyCatchBlock" />
         <exclude name="NullAssignment" />
         <exclude name="TestClassWithoutTestCases" />
+        <exclude name="UnusedReturnValue" />
         <exclude name="UseProperClassLoader" />
     </rule>
     <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">

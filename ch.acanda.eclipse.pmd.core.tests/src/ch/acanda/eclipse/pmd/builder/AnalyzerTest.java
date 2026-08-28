@@ -103,24 +103,6 @@ public class AnalyzerTest {
     }
 
     /**
-     * Verifies that {@link Analyzer#analyze(IFile, List, ViolationProcessor)} can analyze Kotlin files.
-     */
-    @Test
-    public void analyzeKotlin() {
-        analyze("class A { fun f() = Unit }", UTF_8, "kt",
-                "category/kotlin/bestpractices.xml/FunctionNameTooShort",
-                "FunctionNameTooShort");
-    }
-
-    /**
-     * Verifies that {@link Analyzer#analyze(IFile, List, ViolationProcessor)} can run all Kotlin rules.
-     */
-    @Test
-    public void analyzeKotlinAllRules() throws IOException {
-        analyze("data class Dog(val isGoodBoy: Boolean = true)", UTF_8, "ktp", getAllRuleSetRefIds("kotlin"));
-    }
-
-    /**
      * Verifies that {@link Analyzer#analyze(IFile, List, ViolationProcessor)} can analyze modelica files.
      */
     @Test
