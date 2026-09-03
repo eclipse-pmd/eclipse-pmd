@@ -225,7 +225,7 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>net.sf.saxon</groupId>
                                     <artifactId>Saxon-HE</artifactId>
-                                    <version>12.9</version>
+                                    <version>12.10</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId> org.xmlresolver</groupId>
@@ -236,12 +236,12 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>apex-ls_2.13</artifactId>
-                                    <version>6.0.2</version>
+                                    <version>6.2.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>standard-types</artifactId>
-                                    <version>65.0.0</version>
+                                    <version>67.0.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.jetbrains.kotlin</groupId>
@@ -249,19 +249,19 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                     <version>2.2.10</version>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.google.summit</groupId>
+                                    <groupId>com.github.adangel</groupId>
                                     <artifactId>summit-ast</artifactId>
-                                    <version>2.4.0</version>
+                                    <version>3.1.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>io.github.apex-dev-tools</groupId>
                                     <artifactId>apex-parser</artifactId>
-                                    <version>5.0.0</version>
+                                    <version>5.2.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                   <groupId>io.github.apex-dev-tools</groupId>
                                   <artifactId>sobject-types</artifactId>
-                                  <version>65.0.0</version>
+                                  <version>67.0.0</version>
                                 </artifactItem>                             
                                 <artifactItem>
                                     <groupId>com.google.flogger</groupId>
@@ -334,6 +334,32 @@ http://www.eclipse.org/legal/epl-v10.html -->
                                     <groupId>org.mozilla</groupId>
                                     <artifactId>rhino</artifactId>
                                     <version>1.7.15.1</version>
+                                </artifactItem>
+                                <!-- pmd-kotlins's dependencies -->
+                                <artifactItem>
+                                    <groupId>nl.stokpop.typemapper</groupId>
+                                    <artifactId>kotlin-type-mapper-model</artifactId>
+                                    <version>0.6.1</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>nl.stokpop.typemapper</groupId>
+                                    <artifactId>kotlin-type-mapper-analyzer</artifactId>
+                                    <version>0.6.1</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jetbrains.kotlin</groupId>
+                                    <artifactId>kotlin-compiler-embeddable</artifactId>
+                                    <version>2.4.0</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jetbrains.kotlinx</groupId>
+                                    <artifactId>kotlinx-coroutines-core-jvm</artifactId>
+                                    <version>1.8.0</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jetbrains.kotlinx</groupId>
+                                    <artifactId>kotlinx-serialization-core-jvm</artifactId>
+                                    <version>1.11.0</version>
                                 </artifactItem>
                                 <!-- eclipse-pmd's dependencies -->
                                 <artifactItem>

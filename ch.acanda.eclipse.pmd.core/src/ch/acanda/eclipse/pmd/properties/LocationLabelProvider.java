@@ -7,7 +7,7 @@ import ch.acanda.eclipse.pmd.properties.PMDPropertyPageViewModel.RuleSetViewMode
  */
 final class LocationLabelProvider extends RuleSetConfigurationLabelProvider {
 
-    protected LocationLabelProvider(final PMDPropertyPageViewModel model) {
+    LocationLabelProvider(final PMDPropertyPageViewModel model) {
         super(model);
     }
 
