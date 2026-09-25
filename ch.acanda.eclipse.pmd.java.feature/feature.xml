@@ -21,9 +21,9 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.jdt" version="3.20.200" match="greaterOrEqual"/>
-      <import feature="org.eclipse.rcp" version="4.36.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.platform" version="4.36.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.jdt" version="3.20.400" match="greaterOrEqual"/>
+      <import feature="org.eclipse.rcp" version="4.38.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.platform" version="4.38.0" match="greaterOrEqual"/>
       <import feature="ch.acanda.eclipse.pmd.core.feature" version="4.22.0.qualifier"/>
    </requires>
 
