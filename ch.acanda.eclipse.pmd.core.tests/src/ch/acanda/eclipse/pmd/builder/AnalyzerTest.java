@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -66,7 +67,7 @@ public class AnalyzerTest {
                 + "    /* */\n"
                 + "  }\n"
                 + "}\n";
-        analyze(content, UTF_8, "java", getAllRuleSetRefIds("java"));
+        analyze(content, UTF_8, "a/FooBar.java", getAllRuleSetRefIds("java"));
     }
 
     /**
@@ -313,10 +314,14 @@ public class AnalyzerTest {
      * Prepares the arguments, calls {@link Analyzer#analyze(IFile, List, ViolationProcessor)}, and verifies that it
      * invokes {@link ViolationProcessor#annotate(IFile, Iterable)} with the correct rule violations.
      */
-    private void analyze(final String content, final Charset charset, final String fileExtension, final String ruleSetRefId,
+    private void analyze(
+            final String content,
+            final Charset charset,
+            final String fileExtensionOrName,
+            final String ruleSetRefId,
             final String... violatedRules) {
         try {
-            final IFile file = mockFile(content, charset, fileExtension, false, true);
+            final IFile file = mockFile(content, charset, fileExtensionOrName, false, true);
             analyze(file, ruleSetRefId, violatedRules);
         } catch (CoreException | IOException e) {
             throw new AssertionError("Failed to mock file", e);
@@ -344,14 +349,24 @@ public class AnalyzerTest {
         }
     }
 
-    private IFile mockFile(final String content, final Charset charset, final String fileExtension, final boolean isDerived,
+    private IFile mockFile(
+            final String content, final Charset charset, final String fileExtensionOrName, final boolean isDerived,
             final boolean isAccessible) throws CoreException, UnsupportedEncodingException {
-        final File ioFile = new File("test." + fileExtension);
+        final Path path;
+        if (fileExtensionOrName == null) {
+            path = Path.of("/Test");
+        } else if (fileExtensionOrName.contains(".")) {
+            path = Path.of("/" + fileExtensionOrName);
+        } else {
+            path = Path.of("/Test." + fileExtensionOrName);
+        }
+        final File ioFile = path.toFile();
         final IFile file = mock(IFile.class);
         when(file.isDerived(IResource.CHECK_ANCESTORS)).thenReturn(isDerived);
         when(file.isAccessible()).thenReturn(isAccessible);
-        when(file.getFileExtension()).thenReturn(fileExtension);
-        when(file.getName()).thenReturn("test." + fileExtension);
+        final String fileName = path.getFileName().toString();
+        when(file.getFileExtension()).thenReturn(fileName.contains(".") ? fileName.substring(fileName.lastIndexOf('.') + 1) : null);
+        when(file.getName()).thenReturn(fileName);
         when(file.getLocationURI()).thenReturn(ioFile.toURI());
         when(file.getCharset()).thenReturn(charset.name());
         when(file.getContents()).thenReturn(new ByteArrayInputStream(content.getBytes(charset)));
@@ -359,10 +374,10 @@ public class AnalyzerTest {
         when(file.getLocation()).thenReturn(rlPath);
         when(rlPath.toFile()).thenReturn(ioFile);
         when(rlPath.makeAbsolute()).thenReturn(rlPath);
-        when(rlPath.toOSString()).thenReturn("/test." + fileExtension);
+        when(rlPath.toOSString()).thenReturn(path.toAbsolutePath().toString());
         final IPath prPath = mock(IPath.class);
         when(file.getProjectRelativePath()).thenReturn(prPath);
-        when(prPath.toOSString()).thenReturn("/test." + fileExtension);
+        when(prPath.toOSString()).thenReturn(path.toAbsolutePath().toString());
         return file;
     }
 
