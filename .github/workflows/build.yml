@@ -20,7 +20,7 @@ jobs:
         uses: s4u/setup-maven-action@v1.21.0
         with:
           checkout-fetch-depth: 0
-          java-version: 21
-          maven-version: 3.9.9
+          java-version: 25
+          maven-version: 3.9.16
       - name: Build ${{ matrix.release }}
         run: DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' mvn -f eclipse-pmd/pom.xml -B verify -Declipse-release=${{ matrix.release }}

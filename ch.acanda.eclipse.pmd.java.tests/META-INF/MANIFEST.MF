@@ -5,7 +5,7 @@ Bundle-SymbolicName: ch.acanda.eclipse.pmd.java.tests;singleton:=true
 Bundle-Version: 4.22.0.qualifier
 Bundle-Vendor: Philip Graf
 Fragment-Host: ch.acanda.eclipse.pmd.java;bundle-version="4.22.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-RequiredExecutionEnvironment: JavaSE-25
 Bundle-ClassPath: .,
  lib/assertj-core-3.27.7.jar,
  lib/mockito-core-5.23.0.jar,
