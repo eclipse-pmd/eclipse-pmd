@@ -93,14 +93,14 @@
     </developers>
 
     <scm>
-        <url>https://github.com/acanda/eclipse-pmd</url>
-        <connection>scm:git:git://github.com/acanda/eclipse-pmd.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/acanda/eclipse-pmd.git</developerConnection>
+        <url>https://github.com/eclipse-pmd/eclipse-pmd</url>
+        <connection>scm:git:git://github.com/eclipse-pmd/eclipse-pmd.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/eclipse-pmd/eclipse-pmd.git</developerConnection>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/acanda/eclipse-pmd/issues/</url>
+        <url>https://github.com/eclipse-pmd/eclipse-pmd/issues/</url>
     </issueManagement>
 
     <licenses>
