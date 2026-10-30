@@ -3,6 +3,7 @@ package ch.acanda.eclipse.pmd.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -45,7 +46,7 @@ public class WorkspaceModelTest {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 eventFired[0] = true;
-                assertTrue(event instanceof AddElementPropertyChangeEvent, "The event should be an AddElementPropertyChangeEvent");
+                assertInstanceOf(AddElementPropertyChangeEvent.class, event, "The event should be an AddElementPropertyChangeEvent");
                 assertSame(element, ((AddElementPropertyChangeEvent) event).getAddedElement(), "Event's added element");
                 assertNull(event.getOldValue(), "Event's old value should be null");
                 assertSame(element, event.getNewValue(), "Event's new value should be the added element");
@@ -70,7 +71,7 @@ public class WorkspaceModelTest {
             @Override
             public void propertyChange(final PropertyChangeEvent event) {
                 eventFired[0] = true;
-                assertTrue(event instanceof RemoveElementPropertyChangeEvent, "The event should be an RemoveElementPropertyChangeEvent");
+                assertInstanceOf(RemoveElementPropertyChangeEvent.class, event, "The event should be an RemoveElementPropertyChangeEvent");
                 assertSame(element, ((RemoveElementPropertyChangeEvent) event).getRemovedElement(), "Event's added element");
                 assertSame(element, event.getOldValue(), "Event's old value should be the removed element");
                 assertNull(event.getNewValue(), "Event's new value should be null");
