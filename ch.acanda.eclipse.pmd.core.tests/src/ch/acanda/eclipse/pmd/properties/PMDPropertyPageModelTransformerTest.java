@@ -1,6 +1,9 @@
 package ch.acanda.eclipse.pmd.properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -53,9 +56,9 @@ public class PMDPropertyPageModelTransformerTest {
         assertEquals("A", viewModel.getName(), "name");
         assertEquals("Workspace", viewModel.getType(), "type");
         assertEquals("Foo/rs.xml", viewModel.getLocation(), "location");
-        assertEquals(true, viewModel.isLocationValid(), "isLlocationValid");
+        assertTrue(viewModel.isLocationValid(), "isLocationValid");
         assertEquals(ruleSet.toAbsolutePath().toString(), viewModel.getResolvedPath(), "resolvedPath");
-        assertEquals(null, viewModel.getRuleSetErrorMessage(), "ruleSetErrorMessage");
+        assertNull(viewModel.getRuleSetErrorMessage(), "ruleSetErrorMessage");
     }
 
     /**
@@ -79,9 +82,9 @@ public class PMDPropertyPageModelTransformerTest {
         assertEquals("A", viewModel.getName(), "name");
         assertEquals("Workspace", viewModel.getType(), "type");
         assertEquals("InvalidFoo/rs.xml", viewModel.getLocation(), "location");
-        assertEquals(false, viewModel.isLocationValid(), "isLlocationValid");
-        assertEquals(null, viewModel.getResolvedPath(), "resolvedPath");
-        assertEquals(null, viewModel.getRuleSetErrorMessage(), "ruleSetErrorMessage");
+        assertFalse(viewModel.isLocationValid(), "isLlocationValid");
+        assertNull(viewModel.getResolvedPath(), "resolvedPath");
+        assertNull(viewModel.getRuleSetErrorMessage(), "ruleSetErrorMessage");
     }
 
 }
